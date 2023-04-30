@@ -3,7 +3,7 @@ import React from "react";
 export default function Transcations() {
   return (
     <div>
-      <h2 className="text-2xl p-4 font-semibold">Transcantion</h2>
+      <h2 className="text-2xl p-4 font-semibold">Transaction</h2>
       <div
         className="flex justify-around text-center p-3 gap-20 border-dashed "
         style={{
