@@ -13,7 +13,25 @@ export default function Profile() {
           <h2 className="w-1/4 bg-[#2827CC] p-4 m-4 rounded-full text-4xl text-center text-white ">P</h2>
         </div>
 
-        <button>Edit</button>
+        <div
+  className="flex "
+  style={{
+    background: "#03203C",
+    margin: 10,
+    border: "none",
+    borderRadius: 3,
+    color: "wheat",
+    textAlign: "center",
+    display: "flex"
+  }}
+>
+  <button
+    style={{ textAlign: "center", width: "100%", padding: 9, borderRadius: 30 }}
+  >
+    Edit
+  </button>
+</div>
+
       </div>
     </>
   );
