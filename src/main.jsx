@@ -7,10 +7,12 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import OtpVerification from "./pages/OtpVerification.jsx";
 import Home from "./pages/Home.jsx";
 import LayoutHome from "./layout/layout";
+import Transcations from "./pages/Transcations.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/user",
+    path: "/home",
     element: <LayoutHome></LayoutHome>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
         path: "home/user",
         element: <Home></Home>,
       },
+      {
+        path: "home/transactions",
+        element: <Transcations></Transcations>,
+      }
+      ,{
+        path: "home/profile",
+        element:<Profile></Profile>
+      }
     ],
   },
   {

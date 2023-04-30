@@ -69,7 +69,7 @@ export default function LayoutHome() {
               </svg>
               <span className="tab tab-home block text-xs">Home</span>
             </Link>
-            <a
+            <Link to={"home/transactions"} 
               href="#"
               className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
             >
@@ -105,10 +105,10 @@ export default function LayoutHome() {
               <span className="tab tab-kategori block text-xs">
                 Transcations
               </span>
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link to={"home/profile"}
+            
               className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
             >
               <svg
@@ -138,7 +138,7 @@ export default function LayoutHome() {
               </svg>
 
               <span className="tab tab-account block text-xs">Profile</span>
-            </a>
+            </Link>
           </div>
         </section>
       </div>
