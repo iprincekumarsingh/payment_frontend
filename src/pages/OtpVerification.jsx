@@ -1,11 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import Cookie from "js-cookie";
+import axios from "../api/axios";
+
 export default function OtpVerification() {
+  useEffect(() => {
+    document.title = "Phone Login";
+
+    // if (Cookie.get("token") ) {
+    //   window.location.href = "/home";
+    // }
+  });
   const location = useLocation();
   const phoneNumber = new URLSearchParams(location.search).get("phone");
 
+  const [o1, setO1] = useState("");
+  const [o2, setO2] = useState("");
+  const [o3, setO3] = useState("");
+  const [o4, setO4] = useState("");
+
+  const [otp, setOtp] = useState("");
+  // setOtp(o1 + o2 + o3 + o4);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setOtp(o1 + o2 + o3 + o4);
+
+    if (!otp) {
+      return toast.error("Please enter a OTP");
+    }
+    if (otp.length < 4 || otp.length > 4) {
+      return toast.error("Please enter a valid OTP");
+    }
+    // regex to check phone number is 4 digit or not
+    if (!otp.match(/^[0-9]{4}$/)) {
+      return toast.error("Please enter a valid OTP");
+    }
+
+    axios
+      .post("/auth/verify/phone", {
+        phone: phoneNumber,
+        code: otp,
+      })
+      .then((res) => {
+        if (res.data.success === true) {
+          toast.success("OTP verified successfully");
+          const token = res.data.token;
+          console.log(res);
+          Cookie.set("token", token);
+          Cookie.set("role", res.data.user.role);
+          window.location.href = "/home";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("OTP verification failed");
+      });
+  };
+
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
+      <Toaster />
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
         <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
           <div className="flex flex-col items-center justify-center text-center space-y-2">
@@ -17,39 +74,41 @@ export default function OtpVerification() {
             </div>
           </div>
           <div>
-            <form action method="post">
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+            >
               <div className="flex flex-col space-y-16">
                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                   <div className="w-16 h-16 ">
                     <input
+                      maxLength={1}
+                      minLength={1}
                       className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="text"
-                      name
-                      id
+                      onChange={(e) => setO1(e.target.value)}
                     />
                   </div>
                   <div className="w-16 h-16 ">
                     <input
                       className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="text"
-                      name
-                      id
+                      onChange={(e) => setO2(e.target.value)}
                     />
                   </div>
                   <div className="w-16 h-16 ">
                     <input
                       className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="text"
-                      name
-                      id
+                      onChange={(e) => setO3(e.target.value)}
                     />
                   </div>
                   <div className="w-16 h-16 ">
                     <input
                       className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="text"
-                      name
-                      id
+                      onChange={(e) => setO4(e.target.value)}
                     />
                   </div>
                 </div>

@@ -5,19 +5,29 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import OtpVerification from "./pages/OtpVerification.jsx";
+import Home from "./pages/Home.jsx";
+import LayoutHome from "./layout/layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <LayoutHome></LayoutHome>,
     errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/home",
+        element: <Home></Home>,
+      },
+    ],
   },
   {
     path: "/auth/login",
     element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
   },
+ 
   {
-    path: "/auth/login/verify",
+    path: "/login/verify",
     element: <OtpVerification></OtpVerification>,
   },
 ]);
