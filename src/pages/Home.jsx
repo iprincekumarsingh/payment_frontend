@@ -96,7 +96,7 @@ export default function Home() {
                 </div>
 
                 <a className="mt-8 font-sans text-center inline-block w-full rounded-lg bg-[#2827CC] py-4 text-sm font-bold text-white shadow-xl">
-                  Track Order
+                  Add Amount
                 </a>
               </div>
             </section>

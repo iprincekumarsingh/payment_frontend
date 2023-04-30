@@ -21,7 +21,7 @@ export default function LayoutHome() {
         >
           <div id="tabs" className="flex justify-between">
             <Link
-              to={"home"}
+              to={"home/user"}
               className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
             >
               <svg

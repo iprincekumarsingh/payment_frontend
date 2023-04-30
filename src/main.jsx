@@ -10,12 +10,12 @@ import LayoutHome from "./layout/layout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/user",
     element: <LayoutHome></LayoutHome>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "/home",
+        path: "home/user",
         element: <Home></Home>,
       },
     ],
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
   },
- 
+
   {
     path: "/login/verify",
     element: <OtpVerification></OtpVerification>,
