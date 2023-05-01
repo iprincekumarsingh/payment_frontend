@@ -121,9 +121,9 @@ export default function Profile() {
         setWallet(res.data.data.wallet_no);
 
         // put space after every 4 digit wallet 
-        let wallet = res.data.data.wallet_no;
-        let newWallet = wallet.match(/.{1,4}/g).join(" ");
-        setWallet(newWallet);
+        // let wallet = res.data.data.wallet_no;
+        // let newWallet = wallet.match(/.{1,4}/g).join(" ");
+        setWallet(res.data.data.wallet_no);
 
       })
       .catch((err) => {
