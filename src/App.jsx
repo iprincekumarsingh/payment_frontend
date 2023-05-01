@@ -20,6 +20,7 @@ function App() {
 
   const [phone, setPhone] = useState("");
   const [phone_number, setPhone_number] = useState("");
+  const [progress, setProgress] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,6 +43,7 @@ function App() {
     axios.post("/auth/login", { phone_number: phone }).then((res) => {
       console.log(res.data);
       if (res.data.success === true) {
+        setProgress("Loggin in...")
         toast.success("OTP sent successfully");
         const randomq = Math.floor(100000 + Math.random() * 900000);
         window.location.href = "/auth/login/verify?phone=" + phone + "&rand=" + randomq;
@@ -50,12 +52,14 @@ function App() {
         // how to mount the otp component
       } else {
         toast.error("OTP sent failed");
+        setProgress("Login")
 
       }
     })
       .catch((err) => {
         console.log(err);
         toast.error("Something went wrong");
+        setProgress("Login")
       }
       );
 
@@ -104,7 +108,7 @@ function App() {
                   <div className="flex flex-col space-y-5">
                     <div>
                       <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
-                        Login
+                      {progress}
                       </button>
                     </div>
                     <a className="text-[12px] text-center text-blue-600" href="">By Login you accept the TERMS & CONDITIONS </a>
