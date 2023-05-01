@@ -10,9 +10,7 @@ function App() {
     if (Cookie.get("token")) {
       window.location.href = "/home";
     }
-
-  }
-  );
+  });
 
   const [count, setCount] = useState(0);
 
@@ -36,27 +34,26 @@ function App() {
 
     setPhone_number("91" + phone);
 
+    axios
+      .post("/auth/login", { phone_number: phone })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.success === true) {
+          toast.success("OTP sent successfully");
+          const randomq = Math.floor(100000 + Math.random() * 900000);
+          window.location.href =
+            "/auth/login/verify?phone=" + phone + "&rand=" + randomq;
+          // console.log(res.data);
 
-    axios.post("/auth/login", { phone_number: phone }).then((res) => {
-      console.log(res.data);
-      if (res.data.success === true) {
-        toast.success("OTP sent successfully");
-        const randomq = Math.floor(100000 + Math.random() * 900000);
-        window.location.href ="/auth/login/verify?phone=" + phone + "&rand=" + randomq;
-        // console.log(res.data);
-
-        // how to mount the otp component
-      } else {
-        toast.error("OTP sent failed");
-
-      }
-    })
+          // how to mount the otp component
+        } else {
+          toast.error("OTP sent failed");
+        }
+      })
       .catch((err) => {
         console.log(err);
         toast.error("Something went wrong");
-      }
-      );
-
+      });
   };
 
   return (

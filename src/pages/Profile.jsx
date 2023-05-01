@@ -150,7 +150,7 @@ export default function Profile() {
       .then((res) => {
         console.log(res.data);
         // setWallet(res.data.data.wallet_id);
-        toast.error(res.data.message);
+        toast.success(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -201,9 +201,9 @@ export default function Profile() {
         <div
           className="flex "
           style={{
-            background: "",
+
             margin: 10,
-            border: "none",
+           
             borderRadius: 3,
             color: "black",
             border: "1px solid #1C8D73",
@@ -218,7 +218,9 @@ export default function Profile() {
               padding: 9,
               borderRadius: 30,
             }}
-            onClick={logout()}
+            onClick={()=>{
+              logout()
+            }}
           >
             Logout
           </button>
