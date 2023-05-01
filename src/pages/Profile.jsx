@@ -47,6 +47,7 @@ export default function Profile() {
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -121,6 +122,8 @@ export default function Profile() {
         setaddhar(res.data.data.aadhaar_number);
         setWallet(res.data.data.wallet_no);
         setName(res.data.data.fullname);
+
+        console.log(res.data.data.wallet_no);
       })
       .catch((err) => {
         console.log(err);
@@ -128,8 +131,8 @@ export default function Profile() {
       });
   }, []);
 
-  const createWallet = async () => {
-    await axios
+  const createWallet = () => {
+   axios
       .post(
         "user/create/wallet",
         {},
@@ -191,7 +194,7 @@ export default function Profile() {
             Edit
           </button>
         </div>
-        {wallet == "" ? (
+        {wallet == undefined ? (
           <div
             className="flex "
             style={{
@@ -224,7 +227,7 @@ export default function Profile() {
         )}
       </div>{" "}
       {/* check if data is wpty or not */}
-      {wallet == "" ? (
+      {wallet == undefined || wallet=="" ? (
         ""
       ) : (
         <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform hover:scale-110">
