@@ -130,9 +130,13 @@ export default function Profile() {
         toast.error("Something went wrong");
       });
   }, []);
+  const logout = () => {
+    Cookie.remove("token");
+    window.location.href = "/";
+  };
 
   const createWallet = () => {
-   axios
+    axios
       .post(
         "user/create/wallet",
         {},
@@ -194,6 +198,31 @@ export default function Profile() {
             Edit
           </button>
         </div>
+        <div
+          className="flex "
+          style={{
+            background: "",
+            margin: 10,
+            border: "none",
+            borderRadius: 3,
+            color: "black",
+            border: "1px solid #1C8D73",
+            textAlign: "center",
+            display: "flex",
+          }}
+        >
+          <button
+            style={{
+              textAlign: "center",
+              width: "100%",
+              padding: 9,
+              borderRadius: 30,
+            }}
+            onClick={logout()}
+          >
+            Logout
+          </button>
+        </div>
         {wallet == undefined ? (
           <div
             className="flex "
@@ -227,7 +256,7 @@ export default function Profile() {
         )}
       </div>{" "}
       {/* check if data is wpty or not */}
-      {wallet == undefined || wallet=="" ? (
+      {wallet == undefined || wallet == "" ? (
         ""
       ) : (
         <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform hover:scale-110">
