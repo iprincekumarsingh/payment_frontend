@@ -20,7 +20,7 @@ function App() {
 
   const [phone, setPhone] = useState("");
   const [phone_number, setPhone_number] = useState("");
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState("Login");
 
   const handleSubmit = (e) => {
     e.preventDefault();
