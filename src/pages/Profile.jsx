@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "../api/axios";
+import logo from "../img/sxbank.jpg";
 import Cookie from "js-cookie";
 export default function Profile() {
   const customStyles = {
@@ -261,7 +262,7 @@ export default function Profile() {
       {wallet == undefined || wallet == "" ? (
         ""
       ) : (
-        <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform hover:scale-110">
+        <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
           <img
             className="relative object-cover w-full h-full rounded-xl"
             src="https://i.imgur.com/kGkSg1v.png"
@@ -274,7 +275,7 @@ export default function Profile() {
               </div>
               <img
                 className="w-14 h-14"
-                src="https://i.imgur.com/bbPHJVe.png"
+                src={logo}
               />
             </div>
             <div className="pt-1">
