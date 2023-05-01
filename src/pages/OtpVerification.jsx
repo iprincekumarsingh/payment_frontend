@@ -8,9 +8,9 @@ export default function OtpVerification() {
   useEffect(() => {
     document.title = "Phone Login";
 
-    // if (Cookie.get("token") ) {
-    //   window.location.href = "/home";
-    // }
+    if (Cookie.get("token")) {
+      window.location.href = "/home/home/user";
+    }
   });
   const location = useLocation();
   const phoneNumber = new URLSearchParams(location.search).get("phone");

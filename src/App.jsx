@@ -10,7 +10,7 @@ function App() {
     document.title = "Phone Login";
 
     if (Cookie.get("token")) {
-      window.location.href = "/home";
+      window.location.href = "/home/home/user";
     }
 
   }
