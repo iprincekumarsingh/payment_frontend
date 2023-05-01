@@ -12,14 +12,14 @@ export default function LayoutHome() {
   return (
     <>
 
-      <div
+      {/* <div
         class="p-4 text-sm text-red-800  bg-[#CAD5E2] dark:bg-gray-800 dark:text-red-400"
         role="alert"
       >
         <span class="font-medium">
           To start using the app, please update your profile.
         </span>
-      </div>
+      </div> */}
       <Outlet />
       <div className="w-full">
         {/* <section id="bottom-navigation" class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile*/}

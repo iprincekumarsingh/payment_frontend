@@ -38,6 +38,7 @@ export default function Profile() {
   }
 
   const [fullname, setfullname] = useState("");
+  const [name, setName] = useState("");
   const [alertnativephone, setalertnativephone] = useState("");
   const [accountnumber, setaccountnumber] = useState("");
   const [ifsc, setifsc] = useState("");
@@ -119,12 +120,7 @@ export default function Profile() {
         setPhone(res.data.data.phone);
         setaddhar(res.data.data.aadhaar_number);
         setWallet(res.data.data.wallet_no);
-
-        // put space after every 4 digit wallet 
-        // let wallet = res.data.data.wallet_no;
-        // let newWallet = wallet.match(/.{1,4}/g).join(" ");
-        setWallet(res.data.data.wallet_no);
-
+        setName(res.data.data.fullname);
       })
       .catch((err) => {
         console.log(err);
@@ -132,8 +128,8 @@ export default function Profile() {
       });
   }, []);
 
-  const createWallet = () => {
-    axios
+  const createWallet = async () => {
+    await axios
       .post(
         "user/create/wallet",
         {},
@@ -146,7 +142,7 @@ export default function Profile() {
       )
       .then((res) => {
         console.log(res.data);
-        setWallet(res.data.data.wallet_id);
+        // setWallet(res.data.data.wallet_id);
         toast.error(res.data.message);
       })
       .catch((err) => {
@@ -161,14 +157,13 @@ export default function Profile() {
       <div className="flex-col">
         <div className="flex justify-around    items-center">
           <div className="flex-col p-4 mt-3">
-            <h2 className="text-2xl font-semibold">{fullname}</h2>
+            <h2 className="text-2xl font-semibold">{name}</h2>
             <h2 className="text-2xl font-semibold">{phone}</h2>
             <h2 className="text-2xl font-semibold">test@gmail.com</h2>
           </div>
           <h2 className="w-1/4 bg-[#2827CC] p-4 m-4 rounded-full text-4xl text-center text-white ">
             {/* first letter of full name */}
             {fullname.charAt(0)}
-            
           </h2>
         </div>
 
@@ -232,7 +227,7 @@ export default function Profile() {
       {wallet == "" ? (
         ""
       ) : (
-        <div className="w-full p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform hover:scale-110">
+        <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform hover:scale-110">
           <img
             className="relative object-cover w-full h-full rounded-xl"
             src="https://i.imgur.com/kGkSg1v.png"
@@ -250,11 +245,8 @@ export default function Profile() {
             </div>
             <div className="pt-1">
               <p className="font-light">Wallet Number</p>
-              <p className="font-medium tracking-more-wider">
-                {wallet}
-              </p>
+              <p className="font-medium tracking-more-wider">{wallet}</p>
             </div>
-
           </div>
         </div>
       )}
