@@ -51,7 +51,7 @@ export default function OtpVerification() {
           console.log(res);
           Cookie.set("token", token);
           Cookie.set("role", res.data.user.role);
-          window.location.href = "/home";
+          window.location.href = "/home/home/user";
         }
       })
       .catch((err) => {

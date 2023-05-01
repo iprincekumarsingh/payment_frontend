@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
+import Cookie from "js-cookie";
 export default function LayoutHome() {
+
+  useEffect(() => {
+    if(!Cookie.get("token")){
+      window.location.href = "/auth/login";
+    }
+  }, []);
+
   return (
     <>
 

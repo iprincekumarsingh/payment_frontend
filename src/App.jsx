@@ -7,8 +7,8 @@ function App() {
   useEffect(() => {
     document.title = "Phone Login";
 
-    if(Cookie.get("token")){
-      window.location.href="/home";
+    if (Cookie.get("token")) {
+      window.location.href = "/home";
     }
 
   }
@@ -37,13 +37,13 @@ function App() {
     setPhone_number("91" + phone);
 
 
-    axios.post("/auth/login", { phone_number: phone_number }).then((res) => {
+    axios.post("/auth/login", { phone_number: phone }).then((res) => {
       console.log(res.data);
       if (res.data.success === true) {
         toast.success("OTP sent successfully");
         const randomq = Math.floor(100000 + Math.random() * 900000);
-        window.location.href =
-          "/auth/login/verify?phone=" + phone + "&rand=" + randomq;
+        window.location.href ="/auth/login/verify?phone=" + phone + "&rand=" + randomq;
+        // console.log(res.data);
 
         // how to mount the otp component
       } else {
@@ -95,7 +95,7 @@ function App() {
                   <div className="flex flex-col space-y-5">
                     <div>
                       <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
-                        Verify Account
+                        Login
                       </button>
                     </div>
                   </div>

@@ -12,6 +12,11 @@ import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
     path: "/home",
     element: <LayoutHome></LayoutHome>,
     errorElement: <ErrorPage></ErrorPage>,
@@ -24,9 +29,9 @@ const router = createBrowserRouter([
         path: "home/transactions",
         element: <Transcations></Transcations>,
       }
-      ,{
+      , {
         path: "home/profile",
-        element:<Profile></Profile>
+        element: <Profile></Profile>
       }
     ],
   },
@@ -37,12 +42,12 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/login/verify",
+    path: "auth/login/verify",
     element: <OtpVerification></OtpVerification>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RouterProvider router={router} />
+  // </React.StrictMode>/
 );
