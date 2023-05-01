@@ -26,8 +26,6 @@ export default function OtpVerification() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setOtp(o1 + o2 + o3 + o4);
-
     if (!otp) {
       return toast.error("Please enter a OTP");
     }
@@ -56,7 +54,9 @@ export default function OtpVerification() {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("OTP verification failed");
+        toast.error(res.data.message);
+
+        console.log(res.data.message);
       });
   };
 
@@ -81,34 +81,17 @@ export default function OtpVerification() {
             >
               <div className="flex flex-col space-y-16">
                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
-                  <div className="w-16 h-16 ">
+                  <div className="w-full h-16 border-black border-solid border-1 ">
                     <input
-                      maxLength={1}
-                      minLength={1}
+                      maxLength={4}
                       className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="text"
-                      onChange={(e) => setO1(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-16 h-16 ">
-                    <input
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                      type="text"
-                      onChange={(e) => setO2(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-16 h-16 ">
-                    <input
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                      type="text"
-                      onChange={(e) => setO3(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-16 h-16 ">
-                    <input
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                      type="text"
-                      onChange={(e) => setO4(e.target.value)}
+                      placeholder="Enter OTP"
+                      onChange={(e) => {
+                        setOtp(e.target.value);
+                        console.log(otp);
+                      }}
+                      value={otp}
                     />
                   </div>
                 </div>
