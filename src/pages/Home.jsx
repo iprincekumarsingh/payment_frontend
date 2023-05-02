@@ -73,7 +73,7 @@ export default function Home() {
               >
                 <img
                   className="vertical-0"
-                  src="/src/img/add_money.png"
+                  src={add_money}
                   alt=""
                   width={50}
                 />
@@ -94,7 +94,7 @@ export default function Home() {
               >
                 <img
                   className="vertical-0"
-                  src="/src/img/receive_money.png"
+                  src={receive_money}
                   alt=""
                   width={50}
                 />
