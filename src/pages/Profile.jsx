@@ -163,6 +163,7 @@ export default function Profile() {
     <>
       <Toaster />
       <div className="flex-col">
+        <h1>Account Balance</h1>
         <div className="flex justify-around    items-center">
           <div className="flex-col p-4 mt-3">
             <h2 className="text-2xl font-semibold">{name}</h2>
@@ -298,11 +299,11 @@ export default function Profile() {
               <h1 className="text-[14px] text-start font-bold sm:text-3xl">
                 Update Profile
               </h1>
-              <button onClick={()=>{
+              <button onClick={() => {
                 ProfilecloseModal()
               }}>X</button>
             </div>
-            
+
             <form
               onSubmit={(e) => handleSubmit(e)}
               className="mx-auto mb-0 mt-8 max-w-md space-y-4"
