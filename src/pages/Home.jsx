@@ -6,6 +6,7 @@ import add_money from "../img/add_money.svg";
 import receive_money from "../img/receive_money.svg";
 import Modal from "react-modal";
 import wallet from "../img/wallet.png";
+import qrcode from "../img/qrcode.jpg";
 export default function Home() {
   const customStyles = {
     content: {
@@ -48,7 +49,7 @@ export default function Home() {
         <span className="text-3xl text-black font-bold ">Prince </span>
       </div>
       <div>
-        <section className="container  mt-10 border-[black]-100 h-3/4">
+        {/* <section className="container  mt-10 border-[black]-100 h-3/4">
           <div className="  ">
             <div className="flex justify-center gap-[6rem]" onClick={openModal}>
               <div>
@@ -101,7 +102,18 @@ export default function Home() {
               </div>
             </section>
           </Modal>
-        </section>
+        </section> */}
+
+        <div className="flex-col justify-center items-center ">
+
+          <hr />
+          <h1 className="text-3xl font-bold text-center">Send Money</h1>
+          <img className="ite" src={qrcode} alt="" srcset="" />
+          <p className="p-2 text-start mr-4 ml-4">
+            Your Money will be updated in 5 to 10 min in your wallet
+          </p>
+        </div>
+        <hr />
       </div>
     </>
   );
