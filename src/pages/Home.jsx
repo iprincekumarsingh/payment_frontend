@@ -61,7 +61,7 @@ export default function Home() {
             <div className="flex justify-around items-center m-4 gap-4 rounded-md shadow-2xl shadow-black-500/40 p-10 h-2/4 ">
               <div
                 onClick={openModal}
-                className="flex-col  justify-center items-center text-center  w-[200px] "
+                className="flex-col  justify-center items-center text-center  w-[100px] "
                 style={{
                   background: "rgb(202, 213, 226)",
                   padding: "10px",
@@ -82,7 +82,7 @@ export default function Home() {
 
               <div
                 onClick={requestMoneyModal}
-                className="flex-col  justify-center items-center text-center w-[200px] "
+                className="flex-col  justify-center items-center text-center w-[100px] "
                 style={{
                   background: "rgb(202, 213, 226)",
                   padding: "10px",
