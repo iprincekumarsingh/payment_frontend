@@ -26,6 +26,7 @@ export default function Home() {
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [requestMoney, setRequestMoney] = useState(false);
   let subtitle;
   function openModal() {
     setIsOpen(true);
@@ -39,6 +40,13 @@ export default function Home() {
   function closeModal() {
     setIsOpen(false);
   }
+
+  function requestMoneyModal() {
+    setRequestMoney(true);
+  }
+  function closeRequestMoneyModal() {
+    setRequestMoney(false);
+  }
   useEffect(() => {
     document.title = "Home";
   }, []);
@@ -49,10 +57,10 @@ export default function Home() {
         <span className="text-3xl text-black font-bold ">Prince </span>
       </div>
       <div>
-        {/* <section className="container  mt-10 border-[black]-100 h-3/4">
+        <section className="container  mt-10 border-[black]-100 h-3/4">
           <div className="  ">
-            <div className="flex justify-center gap-[6rem]" onClick={openModal}>
-              <div>
+            <div className="flex justify-center gap-[6rem]">
+              <div onClick={openModal}>
                 <div className="flex items-center justify-center w-10 h-5 mx-auto  rounded-full">
                   <img src={add_money} alt="" />
                 </div>
@@ -60,7 +68,7 @@ export default function Home() {
                   Add Money
                 </h3>
               </div>
-              <div>
+              <div onClick={requestMoneyModal}>
                 <div className="flex items-center justify-center w-10 h-5 mx-auto  rounded-full">
                   <img src={receive_money} alt="" />
                 </div>
@@ -77,43 +85,48 @@ export default function Home() {
             style={customStyles}
             contentLabel="Example Modal"
           >
-            <section className="rounded-3xl border-[1px] border-black border-solid">
-              <div className="p-8 text-start sm:p-12">
-                <p className="text-sm font-semibold uppercase tracking-widest ">
-                  <h1 className="text-[20px]">Wallet Balance - 400</h1>
+            <section className="rounded-1xl p-4 border-[1px] border-black border-solid">
+              <div className="flex-col justify-center items-center ">
+                <hr />
+                <h1 className="text-3xl font-bold text-center">Send Money</h1>
+                <img
+                  className="justify-center items-center"
+                  src={qrcode}
+                  alt=""
+                  srcset=""
+                />
+                <p className="p-2 text-start mr-4 ml-4 text-red-500">
+                  send money on QR and Share the ss on Whatsapp no
                 </p>
-                <div className="mb-10">
-                  <h2 className="mt-10 text-2xl font-sans">
-                    Add money to wallet
-                  </h2>
-                  <div className=" border-[1px] border-black border-solid rounded-lg  mt-2">
-                    <input
-                      className=" font-sans w-full text-3xl rounded-lg border-black-200 p-4 pe-12  shadow-sm"
-                      placeholder="Enter password"
-                      type="number"
-                      value={1000}
-                    />
-                  </div>
-                </div>
-
-                <a className="mt-8 font-sans text-center inline-block w-full rounded-lg bg-[#2827CC] py-4 text-sm font-bold text-white shadow-xl">
-                  Add Amount
-                </a>
               </div>
+              <hr />
             </section>
           </Modal>
-        </section> */}
-
-        <div className="flex-col justify-center items-center ">
-
-          <hr />
-          <h1 className="text-3xl font-bold text-center">Send Money</h1>
-          <img className="ite" src={qrcode} alt="" srcset="" />
-          <p className="p-2 text-start mr-4 ml-4">
-            Your Money will be updated in 5 to 10 min in your wallet
-          </p>
-        </div>
-        <hr />
+          <Modal
+            isOpen={requestMoney}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeRequestMoneyModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <section className="rounded-1xl p-4 border-[1px] border-black border-solid">
+              <div className="flex-col justify-center items-center ">
+                <hr />
+                <h1 className="text-3xl font-bold text-center">Request Money</h1>
+                <img
+                  className="justify-center items-center"
+                  src={qrcode}
+                  alt=""
+                  srcset=""
+                />
+                <p className="p-2 text-start mr-4 ml-4 text-red-500">
+                  send money on QR and Share the ss on Whatsapp no
+                </p>
+              </div>
+              <hr />
+            </section>
+          </Modal>
+        </section>
       </div>
     </>
   );

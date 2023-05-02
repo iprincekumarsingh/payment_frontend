@@ -62,7 +62,7 @@ function App() {
       .then((res) => {
         console.log(res.data);
         if (res.data.success === true) {
-          setProgress("Loggin in...");
+          // setProgress("Loggin in...");
           toast.success("OTP sent successfully");
           const randomq = Math.floor(100000 + Math.random() * 900000);
           window.location.href =
