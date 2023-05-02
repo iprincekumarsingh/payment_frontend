@@ -204,7 +204,7 @@ export default function Profile() {
           style={{
 
             margin: 10,
-           
+
             borderRadius: 3,
             color: "black",
             border: "1px solid #1C8D73",
@@ -219,7 +219,7 @@ export default function Profile() {
               padding: 9,
               borderRadius: 30,
             }}
-            onClick={()=>{
+            onClick={() => {
               logout()
             }}
           >
@@ -293,12 +293,16 @@ export default function Profile() {
         contentLabel="Example Modal"
       >
         <section className="rounded-3xl border-[1px] border-black border-solid">
-          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-lg text-center">
+          <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
+            <div className="mx-auto flex items-center justify-around max-w-lg text-center">
               <h1 className="text-[14px] text-start font-bold sm:text-3xl">
                 Update Profile
               </h1>
+              <button onClick={()=>{
+                ProfilecloseModal()
+              }}>X</button>
             </div>
+            
             <form
               onSubmit={(e) => handleSubmit(e)}
               className="mx-auto mb-0 mt-8 max-w-md space-y-4"

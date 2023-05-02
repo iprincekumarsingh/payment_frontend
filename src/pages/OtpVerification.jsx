@@ -3,8 +3,18 @@ import { useLocation } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Cookie from "js-cookie";
 import axios from "../api/axios";
+import BeatLoader from "react-spinners/BeatLoader"
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
 
 export default function OtpVerification() {
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffffff");
   useEffect(() => {
     document.title = "Phone Login";
 
@@ -19,21 +29,28 @@ export default function OtpVerification() {
   const [o2, setO2] = useState("");
   const [o3, setO3] = useState("");
   const [o4, setO4] = useState("");
+  const [progress, setProgress] = useState("Verify OTP");
 
   const [otp, setOtp] = useState("");
   // setOtp(o1 + o2 + o3 + o4);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (!otp) {
+      setLoading(false);
+      setProgress("Verify OTP");
       return toast.error("Please enter a OTP");
     }
     if (otp.length < 4 || otp.length > 4) {
+      setLoading(false);
+      setProgress("Verify OTP");
       return toast.error("Please enter a valid OTP");
     }
     // regex to check phone number is 4 digit or not
     if (!otp.match(/^[0-9]{4}$/)) {
+      setLoading(false);
+      setProgress("Verify OTP");
       return toast.error("Please enter a valid OTP");
     }
 
@@ -53,10 +70,10 @@ export default function OtpVerification() {
         }
       })
       .catch((err) => {
-        console.log(err);
-        toast.error(res.data.message);
-
-        console.log(res.data.message);
+        setLoading(false);
+        setProgress("Verify OTP");
+        console.log(err.response.data.message);
+        toast.error(err.response.data.message);
       });
   };
 
@@ -97,9 +114,20 @@ export default function OtpVerification() {
                 </div>
                 <div className="flex flex-col space-y-5">
                   <div>
-                    <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
-                      Verify Account
+                    <button onClick={() => {
+                      setProgress("")
+                    }} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                      {progress}
+                      <BeatLoader
+
+                        color={color}
+                        loading={loading}
+                        cssOverride={override}
+
+                        aria-label="Loading Spinner"
+                        data-testid="loader" />
                     </button>
+
                   </div>
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                     <p>Didn't recieve code?</p>{" "}
