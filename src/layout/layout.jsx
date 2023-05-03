@@ -9,6 +9,7 @@ export default function LayoutHome() {
     }
   }, []);
 
+
   return (
     <>
       {/* <div
@@ -109,9 +110,9 @@ export default function LayoutHome() {
 
               <span className="tab tab-account block text-xs">Profile</span>
             </Link>
-            {Cookie.get("role") === "admin" ? (
-              <Link
-                to={"home/transactions"}
+        {Cookie.get("role") === "admin" ? (
+                <Link
+                to={"home/admin"}
                 href="#"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
               >
@@ -143,14 +144,14 @@ export default function LayoutHome() {
                     />
                   </g>
                 </svg>
-
+  
                 <span className="tab tab-kategori block text-xs">
                   Admin Panel
                 </span>
               </Link>
-            ) : (
-              <></>
-            )}
+              ) : (
+                <></>
+              )}
           </div>
         </section>
       </div>

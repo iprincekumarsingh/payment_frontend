@@ -47,6 +47,7 @@ export default function Profile() {
   const [addhar, setaddhar] = useState("");
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");
+  const [counter,setCounter] = useState(0);
 
 
   const handleSubmit = (e) => {
@@ -104,6 +105,22 @@ export default function Profile() {
       });
   };
   useEffect(() => {
+
+    if(localStorage.getItem("PROFILE_DATA") != null){
+      const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
+      setfullname(data.fullname);
+      setalertnativephone(data.alt_phone);
+      setaccountnumber(data.account_number);
+      setifsc(data.ifsc_code);
+      setbankname(data.bank_name);
+      setPhone(data.phone);
+      setaddhar(data.aadhaar_number);
+      setWallet(data.wallet_no);
+      setName(data.fullname);
+      // setCounter(counter+1);
+    }
+
+
     axios
       .get("user/profile", {
         headers: {
@@ -113,7 +130,7 @@ export default function Profile() {
       })
 
       .then((res) => {
-        console.log(res.data);
+        localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
         setfullname(res.data.data.fullname);
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
@@ -125,6 +142,7 @@ export default function Profile() {
         setName(res.data.data.fullname);
 
         console.log(res.data.data.wallet_no);
+        setCounter(counter+1);
       })
       .catch((err) => {
         console.log(err);
@@ -163,6 +181,8 @@ export default function Profile() {
     <>
       <Toaster />
       <div className="flex-col">
+
+        <div>{counter}</div>
         
         <div className="flex justify-around    items-center">
           <div className="flex-col p-4 mt-3">

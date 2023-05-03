@@ -9,6 +9,8 @@ import Home from "./pages/Home.jsx";
 import LayoutHome from "./layout/layout";
 import Transcations from "./pages/Transcations.jsx";
 import Profile from "./pages/Profile.jsx";
+import Admin from "./admin/Admin.jsx";
+import RMoney from "./admin/RMoney.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,23 +30,32 @@ const router = createBrowserRouter([
       {
         path: "home/transactions",
         element: <Transcations></Transcations>,
-      }
-      , {
+      },
+      {
         path: "home/profile",
-        element: <Profile></Profile>
-      }
+        element: <Profile></Profile>,
+      },
+      {
+        path: "home/admin",
+        element: <Admin />,
+      },
     ],
   },
+
   {
     path: "/auth/login",
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
   },
-
+  
   {
     path: "auth/login/verify",
     element: <OtpVerification></OtpVerification>,
   },
+  {
+    path: "admin/notification",
+    element:<RMoney></RMoney>
+  }
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

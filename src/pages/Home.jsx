@@ -66,8 +66,11 @@ export default function Home() {
         })
         .then((res) => {
           console.log(res.data);
+
           //
           setMoney(res.data);
+
+
         })
         .catch((err) => {
           console.log(err);
@@ -238,6 +241,7 @@ export default function Home() {
         <div className="shadow p-2">
           <h2 className="text-2xl p-4 font-semibold">Transactions</h2>
           {/* {DataTable} */}
+          {/* {JSON.stringify(money)} */}
         </div>
       </div>
     </>
