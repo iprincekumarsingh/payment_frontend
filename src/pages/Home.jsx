@@ -30,6 +30,9 @@ export default function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [requestMoney, setRequestMoney] = useState(false);
   const [money, setMoney] = useState([]);
+  const [amount, setAmount] = useState(0);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
   let subtitle;
   function openModal() {
     setIsOpen(true);
@@ -63,7 +66,7 @@ export default function Home() {
         })
         .then((res) => {
           console.log(res.data);
-          // 
+          //
           setMoney(res.data);
         })
         .catch((err) => {
@@ -74,6 +77,36 @@ export default function Home() {
   }, []);
 
   //  render all the transcations
+  const requesMoneyFunction = (e) => {
+    e.preventDefault();
+    // requesting money
+    axios
+      .post(
+        "money/",
+        {
+          amount,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        // setMessage(res.data.error)
+        console.log(res.data);
+        setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        // print the error message
+        console.log(err.response.data.message);
+        setMessage(err.response.data.message);
+      });
+
+    // alert("hello");
+  };
 
   return (
     <>
@@ -162,24 +195,34 @@ export default function Home() {
                   Available balance - 3000{" "}
                 </h1>
               </div>
-              <div class="mb-4 mt-10">
-                <label
-                  class="block text-gray-700 text-sm font-bold mb-2"
-                  for="username"
-                ></label>
-                <input
-                  class="shadow appearance-none border-solid  border-black  w-full py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="username"
-                  type="number"
-                  placeholder="Enter Amount to withdraw"
-                />
-              </div>
-              <button
-                class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
+
+              <form
+                onSubmit={(e) => {
+                  requesMoneyFunction(e);
+                }}
               >
-                Request
-              </button>
+                <div class="mb-4 mt-10">
+                  <label
+                    class="block text-gray-700 text-sm font-bold mb-2"
+                    for="username"
+                  ></label>
+                  <input
+                    class=" appearance-none border-solid    w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                    id="username"
+                    type="number"
+                    placeholder="Enter Amount to withdraw"
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                  <p className="text-[#ff0000] mt-3 text-center">{message}</p>
+                  <p className="text-green-700 mt-3 text-center">{success}</p>
+                </div>
+                <button
+                  class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Request
+                </button>
+              </form>
               <hr />
             </section>
           </Modal>
@@ -189,7 +232,6 @@ export default function Home() {
         <div className="shadow p-2">
           <h2 className="text-2xl p-4 font-semibold">Transactions</h2>
           {/* {DataTable} */}
-         
         </div>
       </div>
     </>
