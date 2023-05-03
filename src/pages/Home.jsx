@@ -79,6 +79,12 @@ export default function Home() {
   //  render all the transcations
   const requesMoneyFunction = (e) => {
     e.preventDefault();
+
+    if(amount ===0){
+      setMessage("Please enter the amount");
+      return;
+
+    }
     // requesting money
     axios
       .post(
