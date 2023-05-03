@@ -7,6 +7,9 @@ import receive_money from "../img/receive_money.png";
 import Modal from "react-modal";
 import wallet from "../img/wallet.png";
 import qrcode from "../img/qrcode.jpg";
+import Cookie from "js-cookie";
+import axios from "../api/axios";
+
 export default function Home() {
   const customStyles = {
     content: {
@@ -26,6 +29,7 @@ export default function Home() {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [requestMoney, setRequestMoney] = useState(false);
+  const [money, setMoney] = useState([]);
   let subtitle;
   function openModal() {
     setIsOpen(true);
@@ -46,14 +50,38 @@ export default function Home() {
   function closeRequestMoneyModal() {
     setRequestMoney(false);
   }
+
   useEffect(() => {
     document.title = "Home";
+    async function fetchData() {
+      axios
+        .get("money/user/transcations", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          // 
+          setMoney(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    fetchData();
   }, []);
+
+  //  render all the transcations
+
   return (
     <>
-      <div className=" mb-4  mt-2 ml-4 p-1">
+      <div className=" mb-4 ml-4 p-1 mt-6">
         <h1 className="text-2xl  ">Welcome Back </h1>
-        <span className="text-3xl text-black font-bold ">Prince </span>
+        <span className="text-3xl text-black font-bold ">
+          {Cookie.get("name")}{" "}
+        </span>
       </div>
       <div>
         <section className="container  mt-10 border-[black]-100 h-3/4">
@@ -71,12 +99,7 @@ export default function Home() {
                   alignItems: "center",
                 }}
               >
-                <img
-                  className="vertical-0"
-                  src={add_money}
-                  alt=""
-                  width={50}
-                />
+                <img className="vertical-0" src={add_money} alt="" width={50} />
                 <p>Add Money</p>
               </div>
 
@@ -135,20 +158,19 @@ export default function Home() {
           >
             <section className="rounded-2xl p-4 border-[0.5px] border-black border-solid">
               <div className="flex-col justify-center items-center ">
-                <hr />
-                <h1 className="text-2xl font-bold text-start text-blue-500">
-                  Available balance - 10000{" "}
+                <h1 className="text-1xl font-bold text-start text-blue-500">
+                  Available balance - 3000{" "}
                 </h1>
               </div>
-              <div class="mb-4">
+              <div class="mb-4 mt-10">
                 <label
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="username"
                 ></label>
                 <input
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border-solid  border-black  w-full py-5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="username"
-                  type="text"
+                  type="number"
                   placeholder="Enter Amount to withdraw"
                 />
               </div>
@@ -164,9 +186,11 @@ export default function Home() {
         </section>
       </div>
       <div>
-        <section className="container mt-10 border-[black]-100 h-3/4">
-          <div className="text-center"></div>
-        </section>
+        <div className="shadow p-2">
+          <h2 className="text-2xl p-4 font-semibold">Transactions</h2>
+          {/* {DataTable} */}
+         
+        </div>
       </div>
     </>
   );

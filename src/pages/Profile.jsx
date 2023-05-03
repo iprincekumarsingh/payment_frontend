@@ -163,7 +163,7 @@ export default function Profile() {
     <>
       <Toaster />
       <div className="flex-col">
-        <h1>Account Balance</h1>
+        
         <div className="flex justify-around    items-center">
           <div className="flex-col p-4 mt-3">
             <h2 className="text-2xl font-semibold">{name}</h2>

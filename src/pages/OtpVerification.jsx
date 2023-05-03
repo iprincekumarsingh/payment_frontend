@@ -66,6 +66,7 @@ export default function OtpVerification() {
           console.log(res);
           Cookie.set("token", token);
           Cookie.set("role", res.data.user.role);
+          Cookie.set("name", res.data.user.fullname);
           window.location.href = "/home/home/user";
         }
       })
