@@ -9,6 +9,7 @@ export default function TransferMoney() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [requestMoney, setRequestMoney] = useState(false);
+  const [transferHistory, setTransferHistory] = useState([]);
   const customStyles = {
     content: {
       top: "50%",
@@ -105,10 +106,37 @@ export default function TransferMoney() {
       });
   };
   useEffect(() => {
-
-    // getting all money transfer history
-    
-  }, [errorMessage]);
+    axios
+      .get("transfer/history", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + Cookie.get("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setTransferHistory(res.data.transferHistory);
+      })
+      .catch((err) => {});
+  }, [successMessage, errorMessage]);
+  const notificationListMap = transferHistory.map((item, index) => {
+    return (
+      <tr className=" border-b text-center   " key={index}>
+        <td className="whitespace-nowrap px-4 py-2 text-start font-medium text-gray-900">
+          Transferred to : {item.receiver.phone}
+          <tr>
+            <td>Receiver Name : {item.receiver.name}</td>
+          </tr>
+          <tr>
+            <td>Status :{item.status}</td>
+          </tr>
+        </td>
+        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+          Rs. {item.amount}
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <>
@@ -202,6 +230,23 @@ export default function TransferMoney() {
       </Modal>
       <div>
         <h2 className="text-2xl p-2">Recent Transcations</h2>
+        {/* {JSON.stringify(transferHistory)} */}
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
+          <thead class="ltr:text-left rtl:text-right">
+            <tr>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Transcations Details
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+               Amount
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="divide-y divide-gray-200">{notificationListMap}</tbody>
+        </table>
       </div>
     </>
   );
