@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Cookie from "js-cookie";
+import adminIcon from "../img/icons/admin.png";
 
 export default function LayoutHome() {
   
@@ -20,7 +21,7 @@ export default function LayoutHome() {
         {/* <section id="bottom-navigation" class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile*/}
         <section
           id="bottom-navigation"
-          className="block fixed inset-x-0 bottom-0 z-10 bg-[#eaeaea] shadow"
+          className="block fixed inset-x-0 bottom-0 z-10 bg-[#758283] shadow"
         >
           <div id="tabs" className="flex justify-between">
             <Link
@@ -106,39 +107,19 @@ export default function LayoutHome() {
               <span className="tab tab-account block text-xs">Profile</span>
             </Link>
         {Cookie.get("role") === "admin" ? (
-                <Link
+                <Link style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent:"center",
+                  alignItems:"center"
+                }}
                 to={"home/admin"}
                 href="#"
                 className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1"
               >
-                <svg
-                  width={20}
-                  height={20}
-                  className="inline-block mb-1"
-                  version="1.0"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 50.000000 50.000000"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <g
-                    transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)"
-                    fill="#000000"
-                    stroke="none"
-                  >
-                    <path
-                      d="M70 435 l0 -55 55 0 c30 0 55 5 55 10 0 6 -16 10 -36 10 -44 0 -37
-  15 20 41 107 48 234 -3 280 -113 57 -134 -49 -289 -196 -288 -85 1 -171 64
-  -198 146 -12 35 -9 109 5 147 4 9 3 17 -3 17 -15 0 -32 -57 -32 -104 0 -46 30
-  -119 63 -155 33 -36 115 -71 167 -71 52 0 134 35 167 71 34 37 63 110 63 159
-  0 52 -35 134 -71 167 -72 66 -174 79 -263 35 l-56 -29 0 34 c0 18 -4 33 -10
-  33 -5 0 -10 -25 -10 -55z"
-                    />
-                    <path
-                      d="M240 335 c0 -72 -1 -76 -36 -115 -20 -22 -34 -43 -31 -47 7 -7 93 67
-  91 79 -1 5 -2 42 -2 83 -2 99 -22 99 -22 0z"
-                    />
-                  </g>
-                </svg>
+             <img src={adminIcon} alt="" srcset="" style={{
+              width: "25px"
+             }} />
   
                 <span className="tab tab-kategori block text-xs">
                   Admin Panel

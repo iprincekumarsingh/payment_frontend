@@ -17,7 +17,7 @@ export default function Admin() {
 
   const [notificationList, setNotificationList] = useState([]);
 
-  const fetchAPI = async () => { };
+  const fetchAPI = async () => {};
 
   // getting all notifications money request
   useEffect(() => {
@@ -97,19 +97,27 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex w-full justify-start first-letter: m-0 p-4 bg-slate-500 gap-12">
-        <div className="text-2xl md-w-[60%  ] w-[60%]">Admin Panel</div>
+      <div className="flex w-full justify-start first-letter: m-0 p-4 bg-[#383CC1] gap-12">
+        <div className="text-2xl md-w-[60%] w-[60%] text-white">Admin Panel</div>
       </div>
 
-      <div className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center   ">
+      <div className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center "style={{
+          
+            border: "1px solid",
+            margin: "10px",
+            borderRadius: "10px",
+      }}>
         <div className="mb-4 p-4 text-center flex-col justify-center items-center">
           <img src={user} alt="" srcset="" />
           <h1 className="text-[13px] mt-4 font-bold text-center">Users</h1>
         </div>
         <Link to="../admin/notification">
-          <div className="mb-4 p-4 text-center  flex-col justify-center items-center" style={{
-            display:"flex"
-          }}>
+          <div
+            className="mb-4 p-4 text-center  flex-col justify-center items-center"
+            style={{
+              display: "flex",
+            }}
+          >
             <img src={rmoney} alt="" srcset="" />
             <h1 className="text-[13px] mt-4 font-bold text-center">
               Request Money
@@ -117,10 +125,12 @@ export default function Admin() {
           </div>
         </Link>
         <Link to="../home/transactions">
-
-          <div className="mb-4 p-4 text-center flex-col justify-center items-center"  style={{
-            display:"flex"
-          }}>
+          <div
+            className="mb-4 p-4 text-center flex-col justify-center items-center"
+            style={{
+              display: "flex",
+            }}
+          >
             <img src={transcationspng} alt="" srcset="" />
             <h1 className="text-[13px] mt-4 font-bold text-center">
               Transcations

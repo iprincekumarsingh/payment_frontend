@@ -196,6 +196,9 @@ export default function Home() {
 
   return (
     <>
+     <div className="flex w-full justify-start first-letter: m-0 p-4 bg-[#383CC1] gap-12">
+        <div className="text-2xl md-w-[60%] w-[60%] text-white">Sx Bank</div>
+      </div>
       <div className="overflow-x-auto">
         <div className="flex-col mb-4 ml-4 p-1 mt-6">
           <h1 className="text-2xl  ">Welcome Back </h1>
