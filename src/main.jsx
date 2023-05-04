@@ -11,6 +11,7 @@ import Transcations from "./pages/Transcations.jsx";
 import Profile from "./pages/Profile.jsx";
 import Admin from "./admin/Admin.jsx";
 import RMoney from "./admin/RMoney.jsx";
+import TransferMoney from "./pages/TransferMoney.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,15 +48,19 @@ const router = createBrowserRouter([
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
   },
-  
+  {
+    path: "/transfer/money",
+    element: <TransferMoney></TransferMoney>,
+  },
+
   {
     path: "auth/login/verify",
     element: <OtpVerification></OtpVerification>,
   },
   {
     path: "admin/notification",
-    element:<RMoney></RMoney>
-  }
+    element: <RMoney></RMoney>,
+  },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

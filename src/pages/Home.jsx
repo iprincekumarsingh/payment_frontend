@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-
+import { Link, Outlet } from "react-router-dom";
 // import image from assets folder
 import add_money from "../img/add_money.png";
 import receive_money from "../img/receive_money.png";
@@ -11,6 +11,8 @@ import Cookie from "js-cookie";
 import logo from "../img/sxbank.jpg";
 import axios from "../api/axios";
 import logo2 from "../img/icons/logo2.png";
+
+import money_transfer from "../img/money_transfer.png";
 
 export default function Home() {
   const customStyles = {
@@ -88,8 +90,6 @@ export default function Home() {
         setWallet(res.data.data.wallet_no);
         // split wallet by 4 digit space and set it
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
-
-
 
         setName(res.data.data.fullname);
 
@@ -195,10 +195,8 @@ export default function Home() {
   };
 
   return (
-    < >
-
+    <>
       <div className="overflow-x-auto">
-
         <div className="flex-col mb-4 ml-4 p-1 mt-6">
           <h1 className="text-2xl  ">Welcome Back </h1>
           <span className="text-3xl text-black font-bold ">{name}</span>
@@ -222,7 +220,12 @@ export default function Home() {
                     alignItems: "center",
                   }}
                 >
-                  <img className="vertical-0" src={add_money} alt="" width={50} />
+                  <img
+                    className="vertical-0"
+                    src={add_money}
+                    alt=""
+                    width={50}
+                  />
                   <p>Add Money</p>
                 </div>
 
@@ -246,6 +249,27 @@ export default function Home() {
                   />
                   <p>Request Money</p>
                 </div>
+                <Link
+                  to="/transfer/money"
+                  onClick={requestMoneyModal}
+                  className="flex-col  justify-center items-center text-center w-[100px] "
+                  style={{
+                    background: "rgb(202, 213, 226)",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    className="vertical-0"
+                    src={money_transfer}
+                    alt=""
+                    width={50}
+                  />
+                  <p>Transfer Money</p>
+                </Link>
               </div>
             </div>
             <Modal
@@ -321,36 +345,31 @@ export default function Home() {
         {wallet == undefined || wallet == "" ? (
           ""
         ) : (
-
-       
-            <div className="shadow p-2 mb-20">
-              <h2 className="text-2xl p-4 font-semibold">Card</h2>
-              <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
-                <img
-                  className="relative object-cover w-full h-full rounded-xl"
-                  src="https://i.imgur.com/kGkSg1v.png"
-                />
-                <div className="w-full px-8 absolute top-8">
-                  <div className="flex justify-between items-center">
-                    <div className>
-                      <p className="font-medium">Debit Card</p>
-                      <p className="font-bold">
-                        {split_wallet}
-                      </p>
-                    </div>
-                    <img className="w-14 h-14" src={logo} />
+          <div className="shadow p-2 mb-20">
+            <h2 className="text-2xl p-4 font-semibold">Card</h2>
+            <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
+              <img
+                className="relative object-cover w-full h-full rounded-xl"
+                src="https://i.imgur.com/kGkSg1v.png"
+              />
+              <div className="w-full px-8 absolute top-8">
+                <div className="flex justify-between items-center">
+                  <div className>
+                    <p className="font-medium">Debit Card</p>
+                    <p className="font-bold">{split_wallet}</p>
                   </div>
-                  <div className="pt-1 flex justify-start ">
-                    {/* <p className="text-sm font-medium">Valid Thru</p> */}
-                  </div>
-                  <p className="text-2xl font-medium">{name}</p>
-                  <div className="pt-1  flex justify-end  ">
-                    <img className="w-14 h-14" src={logo2} />
-                  </div>
+                  <img className="w-14 h-14" src={logo} />
+                </div>
+                <div className="pt-1 flex justify-start ">
+                  {/* <p className="text-sm font-medium">Valid Thru</p> */}
+                </div>
+                <p className="text-2xl font-medium">{name}</p>
+                <div className="pt-1  flex justify-end  ">
+                  <img className="w-14 h-14" src={logo2} />
                 </div>
               </div>
             </div>
-         
+          </div>
         )}
       </div>
     </>
