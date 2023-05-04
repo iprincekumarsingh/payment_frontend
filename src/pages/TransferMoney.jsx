@@ -53,19 +53,74 @@ export default function TransferMoney() {
         }
       )
       .then((res) => {
-
         setRequestMoney(true);
-
+        if (!res) {
+          setErrorMessage("User not found");
+          return;
+        }
+        setErrorMessage("");
       })
 
       .catch((err) => {
-        setErrorMessage("User not found");
-        console.log(err);
+        //  check the status code
+        setErrorMessage(err.response.data.message);
       });
   };
+
+  const TransferMoneyFunction = (e) => {
+    e.preventDefault();
+    if (!phone || !amount) {
+      setErrorMessage("Please enter both phone number and amount");
+      return;
+    }
+
+    axios
+      .post(
+        "transfer/transferMoney",
+        {
+          phone: phone,
+          amount: amount,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + Cookie.get("token"),
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setSuccessMessage(res.data.message);
+        closeRequestMoneyModal(false);
+        setErrorMessage("");
+        setPhone("");
+        setAmount("");
+        // reset the form
+        form.reset();
+      })
+      .catch((err) => {
+        //  check the status code
+        console.log(err.response.data);
+        setErrorMessage(err.response.data.message);
+      });
+  };
+  useEffect(() => {
+
+    // getting all money transfer history
+    
+  }, [errorMessage]);
+
   return (
     <>
-      <div className="mt-2 p-2 text-3xl font-medium text-start ">
+      <div
+        style={{
+          margin: "0px",
+          color: "white",
+
+          backgroundColor: "#1E3A8A",
+        }}
+        className="mt-2 p-2 text-3xl font- text-start  "
+      >
         Money Transfer
       </div>
       <form
@@ -74,7 +129,7 @@ export default function TransferMoney() {
         }}
       >
         {/* input form with border 1px */}
-        <div className="flex justify-around">
+        <div className="flex justify-around shadow-lg mt-5">
           {/* <div className="flex flex-col items-center justify-center"> */}
           <input
             style={{ width: "60%", border: "1px solid black" }}
@@ -110,14 +165,12 @@ export default function TransferMoney() {
       >
         <section className="rounded-2xl p-4 border-[0.5px] border-black border-solid">
           <div className="flex-col justify-center items-center ">
-            <h1 className="text-1xl font-bold text-start text-blue-500">
-              Available balance - 3000{" "}
-            </h1>
+            <h1 className="text-1xl font-bold text-start text-blue-500"></h1>
           </div>
 
           <form
             onSubmit={(e) => {
-              requesMoneyFunction(e);
+              TransferMoneyFunction(e);
             }}
           >
             <div class="mb-4 mt-10">
@@ -133,18 +186,23 @@ export default function TransferMoney() {
                 onChange={(e) => setAmount(e.target.value)}
               />
               <p className="text-[#ff0000] mt-3 text-center">{errorMessage}</p>
-              <p className="text-green-700 mt-3 text-center">{successMessage}</p>
+              <p className="text-green-700 mt-3 text-center">
+                {successMessage}
+              </p>
             </div>
             <button
               class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Request
+              Transfer Money
             </button>
           </form>
           <hr />
         </section>
       </Modal>
+      <div>
+        <h2 className="text-2xl p-2">Recent Transcations</h2>
+      </div>
     </>
   );
 }
