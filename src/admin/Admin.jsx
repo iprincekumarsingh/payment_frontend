@@ -107,7 +107,9 @@ export default function Admin() {
           <h1 className="text-[13px] mt-4 font-bold text-center">Users</h1>
         </div>
         <Link to="../admin/notification">
-          <div className="mb-4 p-4 text-center flex-col justify-center items-center">
+          <div className="mb-4 p-4 text-center  flex-col justify-center items-center" style={{
+            display:"flex"
+          }}>
             <img src={rmoney} alt="" srcset="" />
             <h1 className="text-[13px] mt-4 font-bold text-center">
               Request Money
@@ -116,7 +118,9 @@ export default function Admin() {
         </Link>
         <Link to="../home/transactions">
 
-          <div className="mb-4 p-4 text-center flex-col justify-center items-center">
+          <div className="mb-4 p-4 text-center flex-col justify-center items-center"  style={{
+            display:"flex"
+          }}>
             <img src={transcationspng} alt="" srcset="" />
             <h1 className="text-[13px] mt-4 font-bold text-center">
               Transcations
