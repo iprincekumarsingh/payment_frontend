@@ -102,6 +102,7 @@ export default function TransferMoney() {
       .catch((err) => {
         //  check the status code
         console.log(err.response.data);
+        setSuccessMessage("");
         setErrorMessage(err.response.data.message);
       });
   };

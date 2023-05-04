@@ -40,6 +40,10 @@ const router = createBrowserRouter([
         path: "home/admin",
         element: <Admin />,
       },
+      {
+        path: "admin/notification",
+        element: <RMoney></RMoney>,
+      },
     ],
   },
 
@@ -57,10 +61,7 @@ const router = createBrowserRouter([
     path: "auth/login/verify",
     element: <OtpVerification></OtpVerification>,
   },
-  {
-    path: "admin/notification",
-    element: <RMoney></RMoney>,
-  },
+
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

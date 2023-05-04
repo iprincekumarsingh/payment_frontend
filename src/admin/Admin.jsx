@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import user from "../img/icons/user.png";
 import money from "../img/icons/money.png";
 import notification from "../img/icons/notification.png";
+import transcationspng from "../img/icons/transcations.png";
+import rmoney from "../img/icons/rmoney.png";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import Cookie from "js-cookie";
@@ -15,9 +17,7 @@ export default function Admin() {
 
   const [notificationList, setNotificationList] = useState([]);
 
-  const fetchAPI = async () => {
-
-  }
+  const fetchAPI = async () => { };
 
   // getting all notifications money request
   useEffect(() => {
@@ -29,9 +29,8 @@ export default function Admin() {
         },
       })
       .then((res) => {
-        
         console.log(res.data.requests);
-       
+
         setNotificationList(res.data.requests);
         // console.log(notificationList);
       })
@@ -39,7 +38,6 @@ export default function Admin() {
         console.log(err);
       });
   }, []);
-
 
   //  render all the notificationlist with a key
   const notificationListMap = notificationList.map((item, index) => {
@@ -103,19 +101,28 @@ export default function Admin() {
         <div className="text-2xl md-w-[60%  ] w-[60%]">Admin Panel</div>
       </div>
 
-      <div className="flex shadow-lg  mt-4  flex-wrap justify-around items-center text-center   ">
-        <div className="mb-4 ">
+      <div className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center   ">
+        <div className="mb-4 p-4 text-center flex-col justify-center items-center">
           <img src={user} alt="" srcset="" />
           <h1 className="text-[13px] mt-4 font-bold text-center">Users</h1>
         </div>
-        <div className="mb-4 ">
-          <img src={user} alt="" srcset="" />
-          <h1 className="text-[13px] mt-4 font-bold text-center">Users</h1>
-        </div>
-        <div className="mb-4">
-          <img src={user} alt="" srcset="" />
-          <h1 className="text-[13px] mt-4 font-bold text-center">Users</h1>
-        </div>
+        <Link to="../admin/notification">
+          <div className="mb-4 p-4 text-center flex-col justify-center items-center">
+            <img src={rmoney} alt="" srcset="" />
+            <h1 className="text-[13px] mt-4 font-bold text-center">
+              Request Money
+            </h1>
+          </div>
+        </Link>
+        <Link to="../home/transactions">
+
+          <div className="mb-4 p-4 text-center flex-col justify-center items-center">
+            <img src={transcationspng} alt="" srcset="" />
+            <h1 className="text-[13px] mt-4 font-bold text-center">
+              Transcations
+            </h1>
+          </div>
+        </Link>
       </div>
       {/*  */}
       <div className="p-2 text-start flex  text-1xl  justify-around items-center mt-3">
