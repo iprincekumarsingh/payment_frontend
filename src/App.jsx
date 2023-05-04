@@ -79,6 +79,7 @@ function App() {
         console.log(err);
         toast.error("Something went wrong");
         setProgress("Login");
+        setLoading(false);
       });
   };
 

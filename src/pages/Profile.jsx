@@ -286,7 +286,7 @@ export default function Profile() {
         )}
       </div>{" "}
       {/* check if data is wpty or not */}
-      {wallet == undefined || wallet == "" ? (
+      {/* {wallet == undefined || wallet == "" ? (
         ""
       ) : (
         <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
@@ -308,7 +308,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       <Modal
         isOpen={ProfileModal}
         // onAfterOpen={afterOpenModal}

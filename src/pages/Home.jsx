@@ -36,7 +36,7 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [localData, setLocalData] = useState({});
-
+  const [split_wallet, setSplit_wallet] = useState();
   const [fullname, setfullname] = useState("");
   const [name, setName] = useState("");
   const [alertnativephone, setalertnativephone] = useState("");
@@ -86,7 +86,13 @@ export default function Home() {
         setPhone(res.data.data.phone);
         setaddhar(res.data.data.aadhaar_number);
         setWallet(res.data.data.wallet_no);
+        // split wallet by 4 digit space and set it
+        setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
+
+
+
         setName(res.data.data.fullname);
+
         // set first letter of name
         // setLetterFormat(res.data.data.fullname.charAt(0));
 
@@ -136,7 +142,7 @@ export default function Home() {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
 
           //
           setMoney(res.data);
@@ -309,9 +315,13 @@ export default function Home() {
           </Modal>
         </section>
       </div>
+      {wallet == undefined || wallet == "" ? (
+        ""
+      ) : (
+
       <div>
         <div className="shadow p-2">
-          <h2 className="text-2xl p-4 font-semibold">Transactions</h2>
+          <h2 className="text-2xl p-4 font-semibold">Card</h2>
           <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
             <img
               className="relative object-cover w-full h-full rounded-xl"
@@ -322,11 +332,7 @@ export default function Home() {
                 <div className>
                   <p className="font-medium">Debit Card</p>
                   <p className="font-bold">
-                    {wallet
-                      .split("")
-                      .map((char, index) =>
-                        index > 0 && index % 4 === 0 ? " " + char : char
-                      )}
+                    {split_wallet}
                   </p>
                 </div>
                 <img className="w-14 h-14" src={logo} />
@@ -342,6 +348,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 }
