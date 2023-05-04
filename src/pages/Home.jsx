@@ -8,7 +8,9 @@ import Modal from "react-modal";
 import wallet from "../img/wallet.png";
 import qrcode from "../img/qrcode.jpg";
 import Cookie from "js-cookie";
+import logo from "../img/sxbank.jpg";
 import axios from "../api/axios";
+import logo2 from "../img/icons/logo2.png";
 
 export default function Home() {
   const customStyles = {
@@ -33,7 +35,76 @@ export default function Home() {
   const [amount, setAmount] = useState(0);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [localData, setLocalData] = useState({});
+
+  const [fullname, setfullname] = useState("");
+  const [name, setName] = useState("");
+  const [alertnativephone, setalertnativephone] = useState("");
+  const [accountnumber, setaccountnumber] = useState("");
+  const [ifsc, setifsc] = useState("");
+  const [bankname, setbankname] = useState("");
+  const [addhar, setaddhar] = useState("");
+  const [phone, setPhone] = useState("");
+  const [wallet, setWallet] = useState("");
+  const [counter, setCounter] = useState(0);
+  const [letterFormat, setLetterFormat] = useState("");
+
+  // const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
+
+  // setLocalData(data.wallet_no);
+  useEffect(() => {
+    if (localStorage.getItem("PROFILE_DATA") != null) {
+      const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
+      setfullname(data.fullname);
+      setalertnativephone(data.alt_phone);
+      setaccountnumber(data.account_number);
+      setifsc(data.ifsc_code);
+      setbankname(data.bank_name);
+      setPhone(data.phone);
+      setaddhar(data.aadhaar_number);
+      setWallet(data.wallet_no);
+      setName(data.fullname);
+      //  get the fisrt letter of name
+      // setLetterFormat(data.name.charAt(0));
+    }
+
+    axios
+      .get("user/profile", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + Cookie.get("token"),
+        },
+      })
+
+      .then((res) => {
+        localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
+        setfullname(res.data.data.fullname);
+        setalertnativephone(res.data.data.alt_phone);
+        setaccountnumber(res.data.data.account_number);
+        setifsc(res.data.data.ifsc_code);
+        setbankname(res.data.data.bank_name);
+        setPhone(res.data.data.phone);
+        setaddhar(res.data.data.aadhaar_number);
+        setWallet(res.data.data.wallet_no);
+        setName(res.data.data.fullname);
+        // set first letter of name
+        // setLetterFormat(res.data.data.fullname.charAt(0));
+
+        // console.log(res.data.data.wallet_no);
+        // setCounter(counter + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong");
+      });
+  }, []);
   let subtitle;
+  useEffect(() => {
+    //checkk if the user is logged in or not
+    if (!Cookie.get("token")) {
+      window.location.href = "/auth/login";
+    }
+  }, []);
   function openModal() {
     setIsOpen(true);
   }
@@ -69,8 +140,9 @@ export default function Home() {
 
           //
           setMoney(res.data);
-
-
+          if (localStorage.getItem("PROFILE_DATA") == null) {
+            localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -83,10 +155,9 @@ export default function Home() {
   const requesMoneyFunction = (e) => {
     e.preventDefault();
 
-    if(amount ===0){
+    if (amount === 0) {
       setMessage("Please enter the amount");
       return;
-
     }
     // requesting money
     axios
@@ -119,11 +190,12 @@ export default function Home() {
 
   return (
     <>
-      <div className=" mb-4 ml-4 p-1 mt-6">
+      <div className="flex-col mb-4 ml-4 p-1 mt-6">
         <h1 className="text-2xl  ">Welcome Back </h1>
-        <span className="text-3xl text-black font-bold ">
-          {Cookie.get("name")}{" "}
-        </span>
+        <span className="text-3xl text-black font-bold ">{name}</span>
+        <div className="mt-2">Account no - {wallet}</div>
+
+        {/* <h1 className="text-base">Account no - {localStorage.getItem}</h1> */}
       </div>
       <div>
         <section className="container  mt-10 border-[black]-100 h-3/4">
@@ -240,8 +312,34 @@ export default function Home() {
       <div>
         <div className="shadow p-2">
           <h2 className="text-2xl p-4 font-semibold">Transactions</h2>
-          {/* {DataTable} */}
-          {/* {JSON.stringify(money)} */}
+          <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
+            <img
+              className="relative object-cover w-full h-full rounded-xl"
+              src="https://i.imgur.com/kGkSg1v.png"
+            />
+            <div className="w-full px-8 absolute top-8">
+              <div className="flex justify-between items-center">
+                <div className>
+                  <p className="font-medium">Debit Card</p>
+                  <p className="font-bold">
+                    {wallet
+                      .split("")
+                      .map((char, index) =>
+                        index > 0 && index % 4 === 0 ? " " + char : char
+                      )}
+                  </p>
+                </div>
+                <img className="w-14 h-14" src={logo} />
+              </div>
+              <div className="pt-1 flex justify-start ">
+                {/* <p className="text-sm font-medium">Valid Thru</p> */}
+              </div>
+              <p className="text-2xl font-medium">{name}</p>
+              <div className="pt-1  flex justify-end  ">
+                <img className="w-14 h-14" src={logo2} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

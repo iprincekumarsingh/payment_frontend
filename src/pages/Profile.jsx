@@ -6,6 +6,12 @@ import axios from "../api/axios";
 import logo from "../img/sxbank.jpg";
 import Cookie from "js-cookie";
 export default function Profile() {
+  useEffect(() => {
+    //checkk if the user is logged in or not
+    if (!Cookie.get("token")) {
+      window.location.href = "/auth/login";
+    }
+  }, []);
   const customStyles = {
     content: {
       top: "50%",
@@ -47,8 +53,8 @@ export default function Profile() {
   const [addhar, setaddhar] = useState("");
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");
-  const [counter,setCounter] = useState(0);
-
+  const [counter, setCounter] = useState(0);
+  const [letterFormat, setLetterFormat] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,8 +111,7 @@ export default function Profile() {
       });
   };
   useEffect(() => {
-
-    if(localStorage.getItem("PROFILE_DATA") != null){
+    if (localStorage.getItem("PROFILE_DATA") != null) {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
       setfullname(data.fullname);
       setalertnativephone(data.alt_phone);
@@ -117,9 +122,9 @@ export default function Profile() {
       setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
       setName(data.fullname);
-      // setCounter(counter+1);
+      //  get the fisrt letter of name
+      // setLetterFormat(data.name.charAt(0));
     }
-
 
     axios
       .get("user/profile", {
@@ -140,9 +145,11 @@ export default function Profile() {
         setaddhar(res.data.data.aadhaar_number);
         setWallet(res.data.data.wallet_no);
         setName(res.data.data.fullname);
+        // set first letter of name
+        // setLetterFormat(res.data.data.fullname.charAt(0));
 
-        console.log(res.data.data.wallet_no);
-        setCounter(counter+1);
+        // console.log(res.data.data.wallet_no);
+        // setCounter(counter + 1);
       })
       .catch((err) => {
         console.log(err);
@@ -151,6 +158,10 @@ export default function Profile() {
   }, []);
   const logout = () => {
     Cookie.remove("token");
+    Cookie.remove("user");
+    Cookie.remove("role");
+    localStorage.removeItem("PROFILE_DATA");
+
     window.location.href = "/";
   };
 
@@ -181,19 +192,15 @@ export default function Profile() {
     <>
       <Toaster />
       <div className="flex-col">
+        {/* <div>{counter}</div> */}
 
-        <div>{counter}</div>
-        
-        <div className="flex justify-around    items-center">
-          <div className="flex-col p-4 mt-3">
+        <div className="flex justify-start    items-start">
+          <div className="flex-col items-start p-4 mt-3">
             <h2 className="text-2xl font-semibold">{name}</h2>
             <h2 className="text-2xl font-semibold">{phone}</h2>
             <h2 className="text-2xl font-semibold">test@gmail.com</h2>
           </div>
-          <h2 className="w-1/4 bg-[#2827CC] p-4 m-4 rounded-full text-4xl text-center text-white ">
-            {/* first letter of full name */}
-            {fullname.charAt(0)}
-          </h2>
+        
         </div>
 
         <div
@@ -223,7 +230,6 @@ export default function Profile() {
         <div
           className="flex "
           style={{
-
             margin: 10,
 
             borderRadius: 3,
@@ -241,7 +247,7 @@ export default function Profile() {
               borderRadius: 30,
             }}
             onClick={() => {
-              logout()
+              logout();
             }}
           >
             Logout
@@ -294,10 +300,7 @@ export default function Profile() {
                 <p className="font-light">Name</p>
                 <p className="font-medium tracking-widest">{fullname}</p>
               </div>
-              <img
-                className="w-14 h-14"
-                src={logo}
-              />
+              <img className="w-14 h-14" src={logo} />
             </div>
             <div className="pt-1">
               <p className="font-light">Wallet Number</p>
@@ -319,9 +322,13 @@ export default function Profile() {
               <h1 className="text-[14px] text-start font-bold sm:text-3xl">
                 Update Profile
               </h1>
-              <button onClick={() => {
-                ProfilecloseModal()
-              }}>X</button>
+              <button
+                onClick={() => {
+                  ProfilecloseModal();
+                }}
+              >
+                X
+              </button>
             </div>
 
             <form
