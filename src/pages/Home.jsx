@@ -196,11 +196,11 @@ export default function Home() {
 
   return (
     <>
-     <div className="flex w-full justify-start first-letter: m-0 p-4 bg-[#383CC1] gap-12">
-        <div className="text-2xl md-w-[60%] w-[60%] text-white">Sx Bank</div>
+     <div className="flex w-full justify-start h-[60px] first-letter: m-0 p-4 bg-[#CAD5E2] gap-12">
+        <div className="text-2xl md-w-[60%] w-[60%] text-black">Sx Bank</div>
       </div>
       <div className="overflow-x-auto">
-        <div className="flex-col mb-4 ml-4 p-1 mt-6">
+        <div className="flex-col mb-4 ml-4 p-1 mt-2">
           <h1 className="text-2xl  ">Welcome Back </h1>
           <span className="text-3xl text-black font-bold ">{name}</span>
           <div className="mt-2">Account no - {wallet}</div>
@@ -208,14 +208,19 @@ export default function Home() {
           {/* <h1 className="text-base">Account no - {localStorage.getItem}</h1> */}
         </div>
         <div>
-          <section className="container  mt-10 border-[black]-100 h-3/4">
+          <section className="container  mt-4 border-[black]-100 h-1/4">
             <div className="  ">
-              <div className="flex justify-around items-center m-4 gap-4 rounded-md shadow-2xl shadow-black-500/40 p-10 h-2/4 ">
+              <div className="flex justify-around items-center mt-2 gap-4 shadow-2xl shadow-black-500/40 p-2 "style={{
+          
+          border: "1px solid",
+          margin: "10px",
+          borderRadius: "10px",
+    }}>
                 <div
                   onClick={openModal}
                   className="flex-col  justify-center items-center text-center  w-[100px] "
                   style={{
-                    background: "rgb(202, 213, 226)",
+                    // background: "rgb(202, 213, 226)",
                     padding: "10px",
                     borderRadius: "10px",
                     display: "flex",
@@ -236,7 +241,7 @@ export default function Home() {
                   onClick={requestMoneyModal}
                   className="flex-col  justify-center items-center text-center w-[100px] "
                   style={{
-                    background: "rgb(202, 213, 226)",
+                    // background: "rgb(202, 213, 226)",
                     padding: "10px",
                     borderRadius: "10px",
                     display: "flex",
@@ -257,7 +262,7 @@ export default function Home() {
                   onClick={requestMoneyModal}
                   className="flex-col  justify-center items-center text-center w-[100px] "
                   style={{
-                    background: "rgb(202, 213, 226)",
+                    // background: "rgb(202, 213, 226)",
                     padding: "10px",
                     borderRadius: "10px",
                     display: "flex",
@@ -349,8 +354,8 @@ export default function Home() {
           ""
         ) : (
           <div className="shadow p-2 mb-20">
-            <h2 className="text-2xl p-4 font-semibold">Card</h2>
-            <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
+            <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
+            <div className="w-[99%] p-1 h-56   rounded-xl  text-white  transition-transform transform ">
               <img
                 className="relative object-cover w-full h-full rounded-xl"
                 src="https://i.imgur.com/kGkSg1v.png"
