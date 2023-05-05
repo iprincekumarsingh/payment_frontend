@@ -314,8 +314,10 @@ export default function Home() {
               style={customStyles}
               contentLabel="Example Modal"
             >
-              <section className="rounded-2xl p-4 "
-                 style={{border: "1px solid rgba(189, 189, 189, 1)"}}>
+              <section
+                className="rounded-2xl p-4 "
+                style={{ border: "1px solid rgba(189, 189, 189, 1)" }}
+              >
                 <div className="flex-col justify-center items-center ">
                   <h1 className="text-1xl font-bold text-start text-blue-500">
                     Available balance - 3000{" "}
@@ -350,50 +352,58 @@ export default function Home() {
                       placeholder="Enter Amount to withdraw"
                       onChange={(e) => setAmount(e.target.value)}
                     />
-                    <div className="flex justify-around">
+                    <div className="flex justify-even overflow-x-auto w-full text-center ">
                       <div
                         className="flex "
                         style={{
                           border: "1px solid rgba(189, 189, 189, 1)",
                           padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
                           borderRadius: "10px",
                         }}
                         onClick={() => setAmount(Number(amount) + Number(100))}
                       >
-                        +₹100
+                        ₹100
                       </div>
                       <div
                         className="flex "
                         style={{
                           border: "1px solid rgba(189, 189, 189, 1)",
                           padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
                           borderRadius: "10px",
                         }}
                         onClick={() => setAmount(Number(amount) + Number(200))}
                       >
-                        +₹200
+                        ₹200
                       </div>
                       <div
                         className="flex "
                         style={{
                           border: "1px solid rgba(189, 189, 189, 1)",
-                          padding: "8px",
+                          padding: "5px",
+                          margin: "5px",
+                          fontSize: "18px",
                           borderRadius: "10px",
                         }}
                         onClick={() => setAmount(Number(amount) + Number(1000))}
                       >
-                        +₹1000
+                        ₹1000
                       </div>
                       <div
                         className="flex "
                         style={{
                           border: "1px solid rgba(189, 189, 189, 1)",
                           padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
                           borderRadius: "10px",
                         }}
                         onClick={() => setAmount(Number(amount) + Number(2000))}
                       >
-                        +₹2000
+                        ₹2000
                       </div>
                     </div>
                     <p className="text-[#ff0000] mt-3 text-center">{message}</p>
@@ -404,7 +414,7 @@ export default function Home() {
                     type="submit"
                   >
                     Request Money
-                  </button> 
+                  </button>
                 </form>
                 <hr />
               </section>
