@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import user from "../img/icons/user.png";
 import money from "../img/icons/money.png";
@@ -97,9 +98,16 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex w-full justify-start first-letter: m-0 p-4 bg-[#CAD5E2] gap-12">
-        <div className="text-2xl md-w-[60%] w-[60%] text-black">Admin Panel</div>
-      </div>
+     <nav className="bg-white border-gray-200 dark:bg-gray-900">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="#" className="flex items-center item " >
+            {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
+            <span className="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">SX Bank - Admin</span>
+          </a>
+
+
+        </div>
+      </nav>
 
       <div className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center "style={{
           

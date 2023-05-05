@@ -192,7 +192,7 @@ export default function Home() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="#" className="flex items-center item " >
             {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SX Bank</span>
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Home</span>
           </a>
 
 

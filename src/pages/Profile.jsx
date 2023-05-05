@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { useState } from "react";
@@ -192,6 +191,16 @@ export default function Profile() {
   return (
     <>
       <Toaster />
+      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="#" className="flex items-center item ">
+            {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              Profile
+            </span>
+          </a>
+        </div>
+      </nav>
       <div className="flex-col">
         {/* <div>{counter}</div> */}
 
@@ -201,7 +210,6 @@ export default function Profile() {
             <h2 className="text-2xl font-semibold">{phone}</h2>
             <h2 className="text-2xl font-semibold">test@gmail.com</h2>
           </div>
-        
         </div>
 
         <div
