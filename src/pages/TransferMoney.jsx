@@ -4,6 +4,7 @@ import Cookie from "js-cookie";
 import Modal from "react-modal";
 import back_arrow from "../img/icons/back.png";
 import { Link } from "react-router-dom";
+import Topbar from "../components/Topbar";
 
 export default function TransferMoney() {
   const [phone, setPhone] = useState("");
@@ -120,7 +121,7 @@ export default function TransferMoney() {
         console.log(res);
         setTransferHistory(res.data.transferHistory);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   }, [successMessage, errorMessage]);
   const notificationListMap = transferHistory.map((item, index) => {
     return (
@@ -143,16 +144,9 @@ export default function TransferMoney() {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="#" className="flex items-center item " >
-            <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SX Bank</span>
-          </a>
-
-
-        </div>
-      </nav>
+      <Topbar title="Money Transfer" imgLink={back_arrow} imgWidth={30} backLink={"/home/home/user"}>
+     
+      </Topbar>
 
       <form
         onSubmit={(e) => {
@@ -168,7 +162,6 @@ export default function TransferMoney() {
             id="username"
             type="text"
             onChange={(e) => setPhone(e.target.value)}
-
             placeholder="Enter Phone Number"
           />
 
@@ -195,8 +188,10 @@ export default function TransferMoney() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <section className="rounded-2xl p-4 "
-          style={{ border: "1px solid rgba(189, 189, 189, 1)" }}>
+        <section
+          className="rounded-2xl p-4 "
+          style={{ border: "1px solid rgba(189, 189, 189, 1)" }}
+        >
           <div className="flex-col justify-center items-center ">
             <h1 className="text-1xl font-bold text-start text-blue-500"></h1>
           </div>
@@ -218,7 +213,6 @@ export default function TransferMoney() {
                   padding: "10px",
                   marginBottom: "10px",
                   borderRadius: "10px",
-
                 }}
                 class=" appearance-none border-solid    w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
