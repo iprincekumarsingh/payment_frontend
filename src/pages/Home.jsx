@@ -383,7 +383,7 @@ export default function Home() {
                         className="flex "
                         style={{
                           border: "1px solid rgba(189, 189, 189, 1)",
-                          padding: "5px",
+                          padding: "8px",
                           margin: "5px",
                           fontSize: "18px",
                           borderRadius: "10px",
