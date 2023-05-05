@@ -59,8 +59,6 @@ export default function Home() {
     if (localStorage.getItem("PROFILE_DATA") != null) {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
 
-      
-
       setfullname(data.fullname);
       setalertnativephone(data.alt_phone);
       setaccountnumber(data.account_number);
@@ -73,7 +71,6 @@ export default function Home() {
       // if(data.fullname == null||data.wallet_no == null){
       //     window.location.href = "/auth/onboarding";
       //   }
-    
     }
 
     axios
@@ -85,7 +82,6 @@ export default function Home() {
       })
 
       .then((res) => {
-      
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
         setfullname(res.data.data.fullname);
         setalertnativephone(res.data.data.alt_phone);
@@ -99,7 +95,6 @@ export default function Home() {
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
 
         setName(res.data.data.fullname);
-
       })
       .catch((err) => {
         console.log(err);
@@ -319,7 +314,8 @@ export default function Home() {
               style={customStyles}
               contentLabel="Example Modal"
             >
-              <section className="rounded-2xl p-4 border-[0.5px] border-black border-solid">
+              <section className="rounded-2xl p-4 "
+                 style={{border: "1px solid rgba(189, 189, 189, 1)"}}>
                 <div className="flex-col justify-center items-center ">
                   <h1 className="text-1xl font-bold text-start text-blue-500">
                     Available balance - 3000{" "}
@@ -331,18 +327,75 @@ export default function Home() {
                     requesMoneyFunction(e);
                   }}
                 >
-                  <div class="mb-4 mt-10">
+                  <div class="mb-1 mt-4">
+                    <h1>
+                      Request Money to{" "}
+                      <span className="font-bold"> SX Bank</span>
+                    </h1>
                     <label
                       class="block text-gray-700 text-sm font-bold mb-2"
                       for="username"
                     ></label>
                     <input
+                      style={{
+                        border: "1px solid rgba(189, 189, 189, 1)",
+                        padding: "10px",
+                        marginBottom: "10px",
+                        borderRadius: "10px",
+                      }}
+                      value={amount}
                       class=" appearance-none border-solid    w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                       id="username"
                       type="number"
                       placeholder="Enter Amount to withdraw"
                       onChange={(e) => setAmount(e.target.value)}
                     />
+                    <div className="flex justify-around">
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(100))}
+                      >
+                        +₹100
+                      </div>
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(200))}
+                      >
+                        +₹200
+                      </div>
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(1000))}
+                      >
+                        +₹1000
+                      </div>
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(2000))}
+                      >
+                        +₹2000
+                      </div>
+                    </div>
                     <p className="text-[#ff0000] mt-3 text-center">{message}</p>
                     <p className="text-green-700 mt-3 text-center">{success}</p>
                   </div>
@@ -350,8 +403,8 @@ export default function Home() {
                     class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
-                    Request
-                  </button>
+                    Request Money
+                  </button> 
                 </form>
                 <hr />
               </section>

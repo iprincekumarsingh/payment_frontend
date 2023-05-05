@@ -97,8 +97,8 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex w-full justify-start first-letter: m-0 p-4 bg-[#383CC1] gap-12">
-        <div className="text-2xl md-w-[60%] w-[60%] text-white">Admin Panel</div>
+      <div className="flex w-full justify-start first-letter: m-0 p-4 bg-[#CAD5E2] gap-12">
+        <div className="text-2xl md-w-[60%] w-[60%] text-black">Admin Panel</div>
       </div>
 
       <div className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center "style={{

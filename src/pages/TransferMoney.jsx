@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "../api/axios";
 import Cookie from "js-cookie";
 import Modal from "react-modal";
+import back_arrow from "../img/icons/back.png";
+import { Link } from "react-router-dom";
 
 export default function TransferMoney() {
   const [phone, setPhone] = useState("");
@@ -145,11 +147,17 @@ export default function TransferMoney() {
         style={{
           margin: "0px",
           color: "white",
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
 
           backgroundColor: "#1E3A8A",
         }}
         className="mt-2 p-2 text-3xl font- text-start  "
       >
+        <Link to="/home/home/user">
+          <img src={back_arrow} width={20} alt="" />
+        </Link>
         Money Transfer
       </div>
       <form
@@ -192,7 +200,8 @@ export default function TransferMoney() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <section className="rounded-2xl p-4 border-[0.5px] border-black border-solid">
+        <section className="rounded-2xl p-4 "
+        style={{border: "1px solid rgba(189, 189, 189, 1)"}}>
           <div className="flex-col justify-center items-center ">
             <h1 className="text-1xl font-bold text-start text-blue-500"></h1>
           </div>
@@ -202,18 +211,71 @@ export default function TransferMoney() {
               TransferMoneyFunction(e);
             }}
           >
-            <div class="mb-4 mt-10">
+            <div class="mb-4 mt-0">
+            <h1 className="text-2xl p-2 font-semibold">Transfer Money</h1>
               <label
                 class="block text-gray-700 text-sm font-bold mb-2"
                 for="username"
               ></label>
               <input
+                style={{
+                  border: "1px solid rgba(189, 189, 189, 1)",
+                  padding: "10px",
+                  marginBottom: "10px",
+                  borderRadius: "10px",
+                }}
                 class=" appearance-none border-solid    w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="number"
-                placeholder="Enter Amount to withdraw"
+                placeholder="Enter Amount to Transfer"
                 onChange={(e) => setAmount(e.target.value)}
               />
+              <div className="flex justify-around">
+                <div
+                  className="flex "
+                  style={{
+                    border: "1px solid rgba(189, 189, 189, 1)",
+                    padding: "8px",
+                    borderRadius: "10px",
+                  }}
+                  onClick={() => setAmount(Number(amount) + Number(100))}
+                >
+                  +₹100
+                </div>
+                <div
+                  className="flex "
+                  style={{
+                    border: "1px solid rgba(189, 189, 189, 1)",
+                    padding: "8px",
+                    borderRadius: "10px",
+                  }}
+                  onClick={() => setAmount(Number(amount) + Number(200))}
+                >
+                  +₹200
+                </div>
+                <div
+                  className="flex "
+                  style={{
+                    border: "1px solid rgba(189, 189, 189, 1)",
+                    padding: "8px",
+                    borderRadius: "10px",
+                  }}
+                  onClick={() => setAmount(Number(amount) + Number(1000))}
+                >
+                  +₹1000
+                </div>
+                <div
+                  className="flex "
+                  style={{
+                    border: "1px solid rgba(189, 189, 189, 1)",
+                    padding: "8px",
+                    borderRadius: "10px",
+                  }}
+                  onClick={() => setAmount(Number(amount) + Number(2000))}
+                >
+                  +₹2000
+                </div>
+              </div>
               <p className="text-[#ff0000] mt-3 text-center">{errorMessage}</p>
               <p className="text-green-700 mt-3 text-center">
                 {successMessage}
@@ -241,7 +303,7 @@ export default function TransferMoney() {
                 Transcations Details
               </th>
               <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-               Amount
+                Amount
               </th>
             </tr>
           </thead>
