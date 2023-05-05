@@ -11,7 +11,7 @@ import Cookie from "js-cookie";
 import logo from "../img/sxbank.jpg";
 import axios from "../api/axios";
 import logo2 from "../img/icons/logo2.png";
-
+import back_arrow from "../img/icons/back.png";
 import money_transfer from "../img/money_transfer.png";
 
 export default function Home() {
@@ -188,16 +188,16 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex w-full justify-start h-[60px] first-letter: m-0 p-4 bg-[#CAD5E2] gap-12">
-        <div
-          className="text-2xl md-w-[60%] w-[60%] text-black font-medium"
-          style={{
-            fontFamily: "Poppins",
-          }}
-        >
-          Sx Bank
+      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="#" className="flex items-center item " >
+            {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SX Bank</span>
+          </a>
+
+
         </div>
-      </div>
+      </nav>
       <div className="overflow-x-auto">
         <div className="flex-col mb-4  p-1 m-[10px]">
           <h1 className="text-2xl  ">Welcome Back </h1>
