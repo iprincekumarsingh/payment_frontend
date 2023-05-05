@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "../api/axios";
 import logo from "../img/sxbank.jpg";
 import Cookie from "js-cookie";
+import Topbar from "../components/Topbar";
 export default function Profile() {
   useEffect(() => {
     //checkk if the user is logged in or not
@@ -190,17 +191,8 @@ export default function Profile() {
   };
   return (
     <>
-      <Toaster />
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="#" className="flex items-center item ">
-            {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Profile
-            </span>
-          </a>
-        </div>
-      </nav>
+      <Toaster  />
+     <Topbar title="Profile" />
       <div className="flex-col">
         {/* <div>{counter}</div> */}
 

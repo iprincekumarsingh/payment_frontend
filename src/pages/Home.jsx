@@ -13,6 +13,7 @@ import axios from "../api/axios";
 import logo2 from "../img/icons/logo2.png";
 import back_arrow from "../img/icons/back.png";
 import money_transfer from "../img/money_transfer.png";
+import Topbar from "../components/Topbar";
 
 export default function Home() {
   const customStyles = {
@@ -188,16 +189,7 @@ export default function Home() {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="#" className="flex items-center item " >
-            {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Home</span>
-          </a>
-
-
-        </div>
-      </nav>
+      <Topbar title="Home"></Topbar>
       <div className="overflow-x-auto">
         <div className="flex-col mb-4  p-1 m-[10px]">
           <h1 className="text-2xl  ">Welcome Back </h1>

@@ -8,6 +8,7 @@ import rmoney from "../img/icons/rmoney.png";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import Cookie from "js-cookie";
+import Topbar from "../components/Topbar";
 export default function Admin() {
   const approveBtn = (msg) => {
     alert(msg);
@@ -98,16 +99,7 @@ export default function Admin() {
 
   return (
     <>
-     <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="#" className="flex items-center item " >
-            {/* <img src={back_arrow} className="h-8 mr-3" alt="Flowbite Logo" width={30} /> */}
-            <span className="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">SX Bank - Admin</span>
-          </a>
-
-
-        </div>
-      </nav>
+      <Topbar title="SX Bank Admin"></Topbar>
 
       <div className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center "style={{
           
