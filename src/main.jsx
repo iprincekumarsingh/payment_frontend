@@ -13,6 +13,7 @@ import Admin from "./admin/Admin.jsx";
 import RMoney from "./admin/RMoney.jsx";
 
 import TransferMoney from "./pages/TransferMoney.jsx";
+import OnBoarding from "./pages/OnBoarding.jsx";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,12 @@ const router = createBrowserRouter([
     path: "auth/login/verify",
     element: <OtpVerification></OtpVerification>,
   },
-
+  // onboarding the new user
+  {
+    path: "/auth/onboarding",
+    element: <OnBoarding></OnBoarding>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

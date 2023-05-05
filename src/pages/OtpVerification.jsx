@@ -3,14 +3,13 @@ import { useLocation } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Cookie from "js-cookie";
 import axios from "../api/axios";
-import BeatLoader from "react-spinners/BeatLoader"
+import BeatLoader from "react-spinners/BeatLoader";
 
 const override = {
   display: "block",
   margin: "0 auto",
   borderColor: "red",
 };
-
 
 export default function OtpVerification() {
   let [loading, setLoading] = useState(false);
@@ -67,8 +66,16 @@ export default function OtpVerification() {
           Cookie.set("token", token);
           Cookie.set("role", res.data.user.role);
           Cookie.set("name", res.data.user.fullname);
-          localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
-          window.location.href = "/home/home/user";
+          localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
+
+          if (
+            res.data.user.fullname == "" ||
+            res.data.user.wallet_no == ""
+          ) {
+            window.location.href = "/auth/onboarding";
+          } else {
+            window.location.href = "/home/home/user";
+          }
         }
       })
       .catch((err) => {
@@ -116,20 +123,21 @@ export default function OtpVerification() {
                 </div>
                 <div className="flex flex-col space-y-5">
                   <div>
-                    <button onClick={() => {
-                      setProgress("")
-                    }} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                    <button
+                      onClick={() => {
+                        setProgress("");
+                      }}
+                      className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
+                    >
                       {progress}
                       <BeatLoader
-
                         color={color}
                         loading={loading}
                         cssOverride={override}
-
                         aria-label="Loading Spinner"
-                        data-testid="loader" />
+                        data-testid="loader"
+                      />
                     </button>
-
                   </div>
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                     <p>Didn't recieve code?</p>{" "}

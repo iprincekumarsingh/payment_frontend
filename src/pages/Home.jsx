@@ -5,7 +5,7 @@ import { Link, Outlet } from "react-router-dom";
 import add_money from "../img/add_money.png";
 import receive_money from "../img/receive_money.png";
 import Modal from "react-modal";
-import wallet from "../img/wallet.png";
+
 import qrcode from "../img/qrcode.jpg";
 import Cookie from "js-cookie";
 import logo from "../img/sxbank.jpg";
@@ -51,12 +51,16 @@ export default function Home() {
   const [counter, setCounter] = useState(0);
   const [letterFormat, setLetterFormat] = useState("");
 
-  // const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
-
-  // setLocalData(data.wallet_no);
   useEffect(() => {
+    if (Cookie.get("token") == null) {
+      window.location.href = "/auth/login";
+    }
+
     if (localStorage.getItem("PROFILE_DATA") != null) {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
+
+      
+
       setfullname(data.fullname);
       setalertnativephone(data.alt_phone);
       setaccountnumber(data.account_number);
@@ -66,8 +70,10 @@ export default function Home() {
       setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
       setName(data.fullname);
-      //  get the fisrt letter of name
-      // setLetterFormat(data.name.charAt(0));
+      // if(data.fullname == null||data.wallet_no == null){
+      //     window.location.href = "/auth/onboarding";
+      //   }
+    
     }
 
     axios
@@ -79,6 +85,7 @@ export default function Home() {
       })
 
       .then((res) => {
+      
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
         setfullname(res.data.data.fullname);
         setalertnativephone(res.data.data.alt_phone);
@@ -93,11 +100,6 @@ export default function Home() {
 
         setName(res.data.data.fullname);
 
-        // set first letter of name
-        // setLetterFormat(res.data.data.fullname.charAt(0));
-
-        // console.log(res.data.data.wallet_no);
-        // setCounter(counter + 1);
       })
       .catch((err) => {
         console.log(err);
@@ -105,12 +107,7 @@ export default function Home() {
       });
   }, []);
   let subtitle;
-  useEffect(() => {
-    //checkk if the user is logged in or not
-    if (!Cookie.get("token")) {
-      window.location.href = "/auth/login";
-    }
-  }, []);
+
   function openModal() {
     setIsOpen(true);
   }
@@ -196,13 +193,20 @@ export default function Home() {
 
   return (
     <>
-     <div className="flex w-full justify-start h-[60px] first-letter: m-0 p-4 bg-[#CAD5E2] gap-12">
-        <div className="text-2xl md-w-[60%] w-[60%] text-black">Sx Bank</div>
+      <div className="flex w-full justify-start h-[60px] first-letter: m-0 p-4 bg-[#CAD5E2] gap-12">
+        <div
+          className="text-2xl md-w-[60%] w-[60%] text-black font-medium"
+          style={{
+            fontFamily: "Poppins",
+          }}
+        >
+          Sx Bank
+        </div>
       </div>
       <div className="overflow-x-auto">
-        <div className="flex-col mb-4 ml-4 p-1 mt-2">
+        <div className="flex-col mb-4  p-1 m-[10px]">
           <h1 className="text-2xl  ">Welcome Back </h1>
-          <span className="text-3xl text-black font-bold ">{name}</span>
+          <span className="text-2xl text-black font-bold  ">{name}</span>
           <div className="mt-2">Account no - {wallet}</div>
 
           {/* <h1 className="text-base">Account no - {localStorage.getItem}</h1> */}
@@ -210,74 +214,78 @@ export default function Home() {
         <div>
           <section className="container  mt-4 border-[black]-100 h-1/4">
             <div className="  ">
-              <div className="flex justify-around items-center mt-2 gap-4 shadow-2xl shadow-black-500/40 p-2 "style={{
-          
-          border: "1px solid",
-          margin: "10px",
-          borderRadius: "10px",
-    }}>
-                <div
-                  onClick={openModal}
-                  className="flex-col  justify-center items-center text-center  w-[100px] "
-                  style={{
-                    // background: "rgb(202, 213, 226)",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    className="vertical-0"
-                    src={add_money}
-                    alt=""
-                    width={50}
-                  />
-                  <p>Add Money</p>
-                </div>
+              <div
+                className=" "
+                style={{
+                  border: "1px solid",
+                  margin: "10px",
+                  borderRadius: "10px",
+                }}
+              >
+                <div className="flex justify-around items-center mt-2 gap-4 shadow-2xl shadow-black-500/40 p-2">
+                  <div
+                    onClick={openModal}
+                    className="flex-col  justify-center items-center text-center  w-[100px] "
+                    style={{
+                      // background: "rgb(202, 213, 226)",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      className="vertical-0"
+                      src={add_money}
+                      alt=""
+                      width={50}
+                    />
+                    <p>Add Money</p>
+                  </div>
 
-                <div
-                  onClick={requestMoneyModal}
-                  className="flex-col  justify-center items-center text-center w-[100px] "
-                  style={{
-                    // background: "rgb(202, 213, 226)",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    className="vertical-0"
-                    src={receive_money}
-                    alt=""
-                    width={50}
-                  />
-                  <p>Request Money</p>
+                  <div
+                    onClick={requestMoneyModal}
+                    className="flex-col  justify-center items-center text-center w-[100px] "
+                    style={{
+                      // background: "rgb(202, 213, 226)",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      className="vertical-0"
+                      src={receive_money}
+                      alt=""
+                      width={50}
+                    />
+                    <p>Request Money</p>
+                  </div>
+                  <Link
+                    to="/transfer/money"
+                    onClick={requestMoneyModal}
+                    className="flex-col  justify-center items-center text-center w-[100px] "
+                    style={{
+                      // background: "rgb(202, 213, 226)",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      className="vertical-0"
+                      src={money_transfer}
+                      alt=""
+                      width={50}
+                    />
+                    <p>Transfer Money</p>
+                  </Link>
                 </div>
-                <Link
-                  to="/transfer/money"
-                  onClick={requestMoneyModal}
-                  className="flex-col  justify-center items-center text-center w-[100px] "
-                  style={{
-                    // background: "rgb(202, 213, 226)",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    className="vertical-0"
-                    src={money_transfer}
-                    alt=""
-                    width={50}
-                  />
-                  <p>Transfer Money</p>
-                </Link>
               </div>
             </div>
             <Modal
@@ -353,7 +361,12 @@ export default function Home() {
         {wallet == undefined || wallet == "" ? (
           ""
         ) : (
-          <div className="shadow p-2 mb-20">
+          <div
+            className="shadow-2xl  p-2 mb-20"
+            style={{
+              margin: "10px",
+            }}
+          >
             <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
             <div className="w-[99%] p-1 h-56   rounded-xl  text-white  transition-transform transform ">
               <img
