@@ -174,6 +174,7 @@ export default function TransferMoney() {
             id="username"
             type="text"
             onChange={(e) => setPhone(e.target.value)}
+        
             placeholder="Enter Phone Number"
           />
 
@@ -223,59 +224,69 @@ export default function TransferMoney() {
                   padding: "10px",
                   marginBottom: "10px",
                   borderRadius: "10px",
+                  
                 }}
                 class=" appearance-none border-solid    w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="number"
                 placeholder="Enter Amount to Transfer"
+                value={amount}
                 onChange={(e) => setAmount(e.target.value)}
               />
-              <div className="flex justify-around">
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(100))}
-                >
-                  +₹100
-                </div>
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(200))}
-                >
-                  +₹200
-                </div>
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(1000))}
-                >
-                  +₹1000
-                </div>
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(2000))}
-                >
-                  +₹2000
-                </div>
-              </div>
+             <div className="flex justify-even overflow-x-auto w-full text-center ">
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(100))}
+                      >
+                        ₹100
+                      </div>
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(200))}
+                      >
+                        ₹200
+                      </div>
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(1000))}
+                      >
+                        ₹1000
+                      </div>
+                      <div
+                        className="flex "
+                        style={{
+                          border: "1px solid rgba(189, 189, 189, 1)",
+                          padding: "8px",
+                          margin: "5px",
+                          fontSize: "18px",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => setAmount(Number(amount) + Number(2000))}
+                      >
+                        ₹2000
+                      </div>
+                    </div>
               <p className="text-[#ff0000] mt-3 text-center">{errorMessage}</p>
               <p className="text-green-700 mt-3 text-center">
                 {successMessage}
