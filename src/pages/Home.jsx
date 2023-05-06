@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-// import image from assets folder
 import add_money from "../img/add_money.png";
 import receive_money from "../img/receive_money.png";
 import Modal from "react-modal";
@@ -14,6 +13,7 @@ import logo2 from "../img/icons/logo2.png";
 import back_arrow from "../img/icons/back.png";
 import money_transfer from "../img/money_transfer.png";
 import Topbar from "../components/Topbar";
+import HomeIcons from "../components/HomeIcons";
 
 export default function Home() {
   const customStyles = {
@@ -69,9 +69,6 @@ export default function Home() {
       setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
       setName(data.fullname);
-      // if(data.fullname == null||data.wallet_no == null){
-      //     window.location.href = "/auth/onboarding";
-      //   }
     }
 
     axios
@@ -92,7 +89,7 @@ export default function Home() {
         setPhone(res.data.data.phone);
         setaddhar(res.data.data.aadhaar_number);
         setWallet(res.data.data.wallet_no);
-        // split wallet by 4 digit space and set it
+
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
 
         setName(res.data.data.fullname);
@@ -135,9 +132,6 @@ export default function Home() {
           },
         })
         .then((res) => {
-          // console.log(res.data);
-
-          //
           setMoney(res.data);
           if (localStorage.getItem("PROFILE_DATA") == null) {
             localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
@@ -210,50 +204,21 @@ export default function Home() {
                 }}
               >
                 <div className="flex justify-around items-center mt-2 gap-4 shadow-2xl shadow-black-500/40 p-2">
-                  <div
-                    onClick={openModal}
-                    className="flex-col  justify-center items-center text-center  w-[100px] "
-                    style={{
-                      // background: "rgb(202, 213, 226)",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      className="vertical-0"
-                      src={add_money}
-                      alt=""
-                      width={50}
-                    />
-                    <p>Add Money</p>
-                  </div>
 
-                  <div
-                    onClick={requestMoneyModal}
-                    className="flex-col  justify-center items-center text-center w-[100px] "
-                    style={{
-                      // background: "rgb(202, 213, 226)",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      className="vertical-0"
-                      src={receive_money}
-                      alt=""
-                      width={50}
-                    />
-                    <p>Request Money</p>
-                  </div>
+                  <HomeIcons
+                    onclickBtn={openModal}
+                    icon={add_money}
+                    text_p={"Add Money"}
+                  ></HomeIcons>
+                  <HomeIcons
+                    onclickBtn={requestMoneyModal}
+                    icon={receive_money}
+                    text_p={"Request Money"}
+                  ></HomeIcons>
+                  
                   <Link
                     to="/transfer/money"
-                    onClick={requestMoneyModal}
+                    // onClick={requestMoneyModal}
                     className="flex-col  justify-center items-center text-center w-[100px] "
                     style={{
                       // background: "rgb(202, 213, 226)",
@@ -281,6 +246,7 @@ export default function Home() {
               onRequestClose={closeModal}
               style={customStyles}
               contentLabel="Example Modal"
+              W
             >
               <section className="rounded-1xl p-4 border-[1px] border-black border-solid">
                 <div className="flex-col justify-center items-center ">

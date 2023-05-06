@@ -12,7 +12,7 @@ export default function OnBoarding() {
   const [btn, setBtn] = React.useState("Update");
 
   useEffect(() => {
-    document.title = "Onboarding";
+document.title = "Onboarding";
     if (!Cookie.get("token")) {
       window.location.href = "/auth/login";
     }

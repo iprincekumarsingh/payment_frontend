@@ -14,6 +14,8 @@ import RMoney from "./admin/RMoney.jsx";
 
 import TransferMoney from "./pages/TransferMoney.jsx";
 import OnBoarding from "./pages/OnBoarding.jsx";
+import Register from "./auth/Register.jsx";
+import ForgotPassword from "./auth/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,15 @@ const router = createBrowserRouter([
     path: "/auth/login",
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/auth/register",
+    element: <Register></Register>,
+  },
+  {
+
+    path: "/auth/forgotpassword",
+    element: <ForgotPassword></ForgotPassword>
   },
   {
     path: "/transfer/money",

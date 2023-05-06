@@ -5,6 +5,7 @@ import Cookie from "js-cookie";
 
 import logo from "./img/sxbank.jpg";
 import BeatLoader from "react-spinners/BeatLoader";
+import { Link } from "react-router-dom";
 
 const override = {
   display: "block",
@@ -13,9 +14,7 @@ const override = {
 };
 
 function App() {
-
-  if(Cookie.get("token")){
- 
+  if (Cookie.get("token")) {
     window.location.href = "/home/home/user";
   }
   let [loading, setLoading] = useState(false);
@@ -24,12 +23,14 @@ function App() {
   const [count, setCount] = useState(0);
 
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [progress, setProgress] = useState("Login");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setProgress();
 
     if (!phone) {
       setLoading(false);
@@ -49,31 +50,26 @@ function App() {
       return toast.error("Please enter a valid phone number");
     }
 
-    setPhone_number("91" + phone);
-
     axios
-      .post("/auth/login", { phone_number: phone })
+      .post("/auth/login", { phone_number: phone, password: password })
       .then((res) => {
-        console.log(res.data);
-        if (res.data.success === true) {
-          // setProgress("Loggin in...");
-          toast.success("OTP sent successfully");
-          const randomq = Math.floor(100000 + Math.random() * 900000);
-          window.location.href =
-            "/auth/login/verify?phone=" + phone + "&rand=" + randomq;
-          // console.log(res.data);
-
-          // how to mount the otp component
-        } else {
-          toast.error("OTP sent failed");
+        if (res.data.status === "success") {
+          setLoading(false);
           setProgress("Login");
+          toast.success(res.data.message);
+          Cookie.set("token", res.data.token);
+          Cookie.set("user", JSON.stringify(res.data.user));
+          // window.locatio n.href = "/home/home/user";
+        } else {
+          setLoading(false);
+          setProgress("Login");
+          toast.success(res.data.message);
         }
       })
       .catch((err) => {
-        console.log(err);
-        toast.error("Something went wrong");
-        setProgress("Login");
         setLoading(false);
+        setProgress("Login");
+        toast.error("Error logging in");
       });
   };
 
@@ -82,74 +78,107 @@ function App() {
       {/* component */}
       <Toaster />
 
-      <div className="relative flex min-h-screen flex-col justify-center overflow-hidden  py-12">
-        <div className="relative  px-6 pt-10 pb-9  mx-auto w-full max-w-lg rounded-2xl">
-          <div
-            className="mx-auto flex w-full max-w-md flex-col space-y-16 p-3 rounded-lg"
-            style={{
-              border: "1px solid rgb(37, 150, 190)",
-            }}
-          >
-            <div className="flex flex-col items-center justify-center text-center space-y-2">
-              <div className="font-semibold text-3xl flex-col justify-center items-center">
-                <img width={50} src={logo} alt="" />
-              </div>
-              <p className="text-3xl">Sign In To Your Account</p>
-            </div>
-            <div>
-              <form
-                onSubmit={(e) => {
-                  handleSubmit(e);
-                }}
+
+      <div className="flex-col  justify-center items-center h-screen">
+        {/* <img src={logo} width={50} alt="" srcset="" /> */}
+        <div className="flex  justify-center items-center h-screen ">
+          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+            <h2 className="text-3xl flex font-bold leading-tight text-black sm:text-4xl">
+              {/* <img src={logo} width={40} className="flex justify-center items-center" alt="" srcset="" /> */}
+              Sign in
+            </h2>
+            <p className="mt-2 text-base text-gray-600  " style={{}}>
+              Don't have an account?{" "}
+              <Link
+                to={"/auth/register"}
+                title
+                className="font-medium text-indigo-600 transition-all duration-200 hover:text-indigo-700 hover:underline focus:text-indigo-700"
               >
-                <div className="flex flex-col space-y-16">
-                  <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
-                    <div className="w-full h-16 ">
-                      <label htmlFor="" className="p-2 text-[16px]">
-                        Phone Number{" "}
-                      </label>
-                      <input
-                        className="w-full h-full flex flex-col items-center justify-center text-start px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                        type="text"
-                        name=""
-                        id=""
-                        placeholder="Phone Number"
-                        onChange={(e) => {
-                          setPhone(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-5">
-                    <div>
-                      <button
-                        onClick={() => {
-                          setProgress("");
-                        }}
-                        className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
-                      >
-                        {progress}
-
-                        <BeatLoader
-                          color={color}
-                          loading={loading}
-                          cssOverride={override}
-                          aria-label="Loading Spinner"
-                          data-testid="loader"
-                        />
-                      </button>
-                    </div>
-
-                    <a
-                      className="text-[12px] text-center text-blue-600"
-                      href=""
-                    >
-                      By Login you accept the TERMS & CONDITIONS{" "}
-                    </a>
+                Create a free account
+              </Link>
+            </p>
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+              className="mt-8"
+            >
+              <div className="space-y-5">
+                <div>
+                  <label
+                    htmlFor
+                    className="text-base font-medium text-gray-900 dark:text-gray-600"
+                  >
+                    Phone
+                  </label>
+                  <div className="mt-2.5">
+                    <input
+                      className="flex h-10 w-full rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                      type="number"
+                      placeholder="80934XXXX"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
                   </div>
                 </div>
-              </form>
-            </div>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor
+                      className="text-base font-medium text-gray-900 dark:text-gray-600"
+                    >
+                      Password
+                    </label>
+                    <a
+                      href="#"
+                      title
+                      className="text-sm font-medium text-indigo-600 hover:text-indigo-700 hover:underline focus:text-indigo-700"
+                    >
+                      Forgot password?
+                    </a>
+                  </div>
+                  <div className="mt-2.5">
+                    <input
+                      className="flex h-10 w-full rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                      type="password"
+                      placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
+                  >
+                    {progress}{""}
+                    {loading && (
+                      <BeatLoader
+                        type="TailSpin"
+                        color="#fff"
+                        height={20}
+                        width={20}
+                        className="ml-2"
+                      />
+                    )}
+                    {/* <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="ml-2 h-4 w-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                      />
+                    </svg> */}
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -33,6 +33,7 @@ export default function TransferMoney() {
     setRequestMoney(true);
   }
   function closeRequestMoneyModal() {
+    setErrorMessage("");
     setRequestMoney(false);
   }
 
@@ -97,7 +98,7 @@ export default function TransferMoney() {
         setSuccessMessage(res.data.message);
         closeRequestMoneyModal(false);
         setErrorMessage("");
-        setPhone("");
+     
         setAmount("");
         // reset the form
         form.reset();
