@@ -14,11 +14,15 @@ const override = {
 };
 
 function App() {
-  if (Cookie.get("token")) {
-    window.location.href = "/home/home/user";
-  }
+  useEffect(() => {
+    if (Cookie.get("token")) {
+      return (window.location.href = "/home/home/user");
+    }
+  }, []);
+
   let [loading, setLoading] = useState(false);
   let [color, setColor] = useState("#ffffff");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [count, setCount] = useState(0);
 
@@ -31,45 +35,66 @@ function App() {
     e.preventDefault();
     setLoading(true);
     setProgress();
+    setIsSubmitting(true);
 
     if (!phone) {
       setLoading(false);
       setProgress("Login");
+      setIsSubmitting(false);
+
       return toast.error("Please enter a phone number");
     }
 
     if (phone.length < 10 || phone.length > 10) {
       setLoading(false);
       setProgress("Login");
+      setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
     // regex to check phone number is 10 digit or not
     if (!phone.match(/^[0-9]{10}$/)) {
       setLoading(false);
       setProgress("Login");
+      setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
 
     axios
       .post("/auth/login", { phone_number: phone, password: password })
       .then((res) => {
-        if (res.data.status === "success") {
-          setLoading(false);
-          setProgress("Login");
-          toast.success(res.data.message);
-          Cookie.set("token", res.data.token);
-          Cookie.set("user", JSON.stringify(res.data.user));
-          // window.locatio n.href = "/home/home/user";
-        } else {
-          setLoading(false);
-          setProgress("Login");
-          toast.success(res.data.message);
+        // if (res.data.status === "success") {
+        setLoading(false);
+        setProgress("Login");
+        toast.success(res.data.message);
+        Cookie.set("token", res.data.token);
+        Cookie.set("user", JSON.stringify(res.data.user.full_name));
+        Cookie.set("user_id", JSON.stringify(res.data.user.id));
+        Cookie.set("role", JSON.stringify(res.data.user.role));
+        console.log(res.data.user.phone);
+
+
+        if (localStorage.getItem("PROFILE_DATA") != null) {
+          localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         }
+
+
+        if(res.data.user.wallet_no == null){
+          window.location.href = "/auth/onboarding";
+        }else{
+          window.location.href = "/home/home/user";
+        }
+
+
+
+        setIsSubmitting(false);
       })
       .catch((err) => {
         setLoading(false);
+        setIsSubmitting(false);
         setProgress("Login");
-        toast.error("Error logging in");
+        toast.error(err.response.data.message);
+        // toast.error(err.response.data.message);
+        console.log(err);
       });
   };
 
@@ -77,7 +102,6 @@ function App() {
     <>
       {/* component */}
       <Toaster />
-
 
       <div className="flex-col  justify-center items-center h-screen">
         {/* <img src={logo} width={50} alt="" srcset="" /> */}
@@ -150,8 +174,10 @@ function App() {
                   <button
                     type="submit"
                     className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
+                    disabled={isSubmitting}
                   >
-                    {progress}{""}
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                    {""}
                     {loading && (
                       <BeatLoader
                         type="TailSpin"

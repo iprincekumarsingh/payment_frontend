@@ -51,10 +51,9 @@ export default function Home() {
   const [wallet, setWallet] = useState("");
   const [counter, setCounter] = useState(0);
   const [letterFormat, setLetterFormat] = useState("");
-
   useEffect(() => {
-    if (Cookie.get("token") == null) {
-      window.location.href = "/auth/login";
+    if (Cookie.get("token")) {
+      const data = localStorage.getItem("PROFILE_DATA");
     }
 
     if (localStorage.getItem("PROFILE_DATA") != null) {
@@ -81,6 +80,7 @@ export default function Home() {
 
       .then((res) => {
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
+
         setfullname(res.data.data.fullname);
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
@@ -91,6 +91,7 @@ export default function Home() {
         setWallet(res.data.data.wallet_no);
 
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
+
 
         setName(res.data.data.fullname);
       })
@@ -204,7 +205,6 @@ export default function Home() {
                 }}
               >
                 <div className="flex justify-around items-center mt-2 gap-4 shadow-2xl shadow-black-500/40 p-2">
-
                   <HomeIcons
                     onclickBtn={openModal}
                     icon={add_money}
@@ -215,7 +215,7 @@ export default function Home() {
                     icon={receive_money}
                     text_p={"Request Money"}
                   ></HomeIcons>
-                  
+
                   <Link
                     to="/transfer/money"
                     // onClick={requestMoneyModal}

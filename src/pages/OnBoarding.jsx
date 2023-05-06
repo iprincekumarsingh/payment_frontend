@@ -12,15 +12,14 @@ export default function OnBoarding() {
   const [btn, setBtn] = React.useState("Update");
 
   useEffect(() => {
-document.title = "Onboarding";
+    document.title = "Onboarding";
     if (!Cookie.get("token")) {
       window.location.href = "/auth/login";
     }
 
     // get key PROFILE_DATA from localstorage and check that fullname and wallet_no is present or not
-    const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
-    if (data.fullname !== "" && data.wallet_no !== "") {
-      window.location.href = "/home/home/user";
+    if (!localStorage.getItem("PROFILE_DATA")) {
+      const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
     }
   }, []);
 
@@ -67,6 +66,11 @@ document.title = "Onboarding";
         setErrorMsg("");
         console.log(res.data.message);
         console.log(res.data.user);
+        // Cookie.set("token", res.data.token);
+        if (localStorage.getItem("PROFILE_DATA") == null) {
+          localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
+        }
+        
         // localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         window.location.href = "/home/home/user";
       })
@@ -172,7 +176,6 @@ document.title = "Onboarding";
           </div>
         </div>
         <div className="flex justify-center w-full mt-6">
-        
           <button
             style={{
               textAlign: "center",
@@ -182,7 +185,6 @@ document.title = "Onboarding";
               color: "white",
               borderRadius: 10,
             }}
-           
           >
             {btn}
           </button>

@@ -78,7 +78,7 @@ const router = createBrowserRouter([
   {
     path: "/auth/onboarding",
     element: <OnBoarding></OnBoarding>,
-    errorElement: <ErrorPage></ErrorPage>,
+    // errorElement: <ErrorPage></ErrorPage>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
