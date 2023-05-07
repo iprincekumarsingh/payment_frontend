@@ -3,19 +3,17 @@ import React from "react";
 export default function HomeIcons({ onclickBtn, text_p, icon }) {
   return (
     <div
-      onClick={onclickBtn}
-      className="flex-col  justify-center items-center text-center w-[150px]   text-[14px]   "
-      style={{
-        // background: "rgb(202, 213, 226)",
-        padding: "5px",
-        borderRadius: "10px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <img className="vertical-0" src={icon} alt="" width={30} />
-      <p className="text-[14px] w-full">{text_p}</p>
-    </div>
+    onClick={onclickBtn}
+    className="flex flex-col justify-center items-center text-center w-full md:w-48 text-sm md:text-base"
+    style={{
+    
+      padding: "0.5rem",
+      borderRadius: "10px",
+    }}
+  >
+    <img className="h-6 mb-2" src={icon} alt="" width={30} />
+    <p className="w-full text-xs md:text-base">{text_p}</p>
+  </div>
+  
   );
 }

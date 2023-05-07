@@ -194,32 +194,22 @@ export default function Home() {
         </div>
         <div>
           <section className="container">
-            <div
-              className="flex-col    "
-              style={{
-                border: "1px solid black",
-                margin: "5px",
-              }}
-            >
-              <div className="flex justify-around items-centermt-[60px] mb-4">
+            <div class="flex-col border border-gray-300 rounded-lg shadow-md p-4 m-5">
+              <div className="flex justify-center items-center p-4">
                 <HomeIcons
                   onclickBtn={openModal}
                   icon={add_money}
                   text_p={"Add Money"}
-                ></HomeIcons>
+                />
                 <HomeIcons
                   onclickBtn={requestMoneyModal}
                   icon={receive_money}
                   text_p={"Request Money"}
-                ></HomeIcons>
-
+                />
                 <Link
                   to="/transfer/money"
-                  // onClick={requestMoneyModal}
-                  className="flex-col  justify-center items-center text-center w-[150px] text-[14px] "
+                  className="flex flex-col justify-center items-center text-center w-full md:w-48 "
                   style={{
-                    // background: "rgb(202, 213, 226)",
-                    padding: "10px",
                     borderRadius: "10px",
                     display: "flex",
                     justifyContent: "center",
@@ -227,20 +217,20 @@ export default function Home() {
                   }}
                 >
                   <img
-                    className="vertical-0"
+                    className="h-6 mb-2"
                     src={money_transfer}
                     alt=""
                     width={30}
                   />
-                  <p>Transfer Money</p>
+                  <p className="text-xs md:text-base">Transfer Money</p>
                 </Link>
               </div>
-            <div class="flex justify-around overflow-x-auto p-2 gap-1  bg-[#f2faff]">
-              <Widget_card
-                card_text={"Wallet Balance :" + amount}
-              ></Widget_card>
-              <Widget_card card_text={"Wallet ID :" + wallet}></Widget_card>
-            </div>
+              <div class="flex justify-around overflow-x-auto p-2 gap-1  bg-[#f2faff]">
+                <Widget_card
+                  card_text={"Wallet Balance :" + amount}
+                ></Widget_card>
+                <Widget_card card_text={"Wallet ID :" + wallet}></Widget_card>
+              </div>
             </div>
 
             <Modal
