@@ -55,6 +55,7 @@ export default function Home() {
   const [wallet, setWallet] = useState("");
   const [counter, setCounter] = useState(0);
   const [letterFormat, setLetterFormat] = useState("");
+  const [wallet_balance, setWallet_balance] = useState(0);
   useEffect(() => {
     if (Cookie.get("token")) {
       const data = localStorage.getItem("PROFILE_DATA");
@@ -72,6 +73,7 @@ export default function Home() {
       setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
       setName(data.fullname);
+      setWallet_balance(data.wallet_balance);
     }
 
     axios
@@ -97,6 +99,8 @@ export default function Home() {
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
 
         setName(res.data.data.fullname);
+        setWallet_balance(res.data.data.wallet_balance);
+        
       })
       .catch((err) => {
         console.log(err);
@@ -312,7 +316,7 @@ export default function Home() {
               <section className="border ">
                 <div className="flex-col justify-center items-center">
                   <h1 className="text-xl font-bold text-start text-blue-500">
-                    Available balance - 3000{" "}
+                    Available balance -₹ {wallet_balance}
                   </h1>
                 </div>
 

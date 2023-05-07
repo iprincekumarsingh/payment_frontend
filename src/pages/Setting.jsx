@@ -123,7 +123,7 @@ export default function Setting() {
                             if (newPin) {
                               localStorage.setItem("pin", newPin);
                               setPin(newPin);
-                             
+
                             }
                           }}
                         >
@@ -133,10 +133,10 @@ export default function Setting() {
                     </div>
                   </div>
                 </li>
-              
+
               </ul>
             </div>
-            
+
             <div>
               <button className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full">
                 Logout
