@@ -45,7 +45,7 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
           {showDropdown && (
             <div className="absolute top-10 right-0 z-10 bg-white shadow-xl rounded-md py-1 p-10">
               <Link
-                to={"../home/profile"}
+                to={"../../home/profile"}
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
                 onClick={toggleDropdown}
               >
