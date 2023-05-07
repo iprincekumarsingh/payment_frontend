@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
 import axios from "../api/axios";
 import logo from "../img/sxbank.jpg";
 import Cookie from "js-cookie";
@@ -35,11 +36,6 @@ export default function Profile() {
   function openProfileModal() {
     setProfileModal(true);
   }
-
-  // function afterOpenModal() {
-  //   // references are now sync'd and can be accessed.
-  //   subtitle.style.color = "#f00";
-  // }
 
   function ProfilecloseModal() {
     setProfileModal(false);
@@ -189,194 +185,39 @@ export default function Profile() {
         toast.error(err.response.data.message);
       });
   };
+  const profileData = [
+    { label: "Name", value: "John Doe" },
+    { label: "Email", value: "johndoe@example.com" },
+    { label: "Phone", value: "+1 (555) 123-4567" },
+    { label: "Address", value: "123 Main St, Anytown, USA" },
+  ];
   return (
     <>
       <Toaster />
       <Topbar title="Profile" />
-      <div className="flex-col">
-        {/* <div>{counter}</div> */}
-
-        <div className="flex justify-start    items-start">
-          <div className="flex-col items-start p-4 mt-3">
-            <h2 className="text-2xl font-semibold">{name}</h2>
-            <h2 className="text-2xl font-semibold">{phone}</h2>
-            <h2 className="text-2xl font-semibold">test@gmail.com</h2>
+      <div className="bg-gray-100 ">
+        <div className="bg-white rounded-md  p-3 max-w-md mx-auto mt-1">
+          <div className="text-start mt-4">
+            <h1 className="text-3xl font-bold text-gray-800">John Doe</h1>
+            <p className="text-gray-500 text-lg mt-2">johndoe@example.com</p>
+          </div>
+          <div className="border-t border-gray-200 mt-6 pt-6">
+            {profileData.map((data, index) => (
+              <div key={index} className="flex justify-between mt-4">
+                <span className="text-lg text-gray-600 font-medium">
+                  {data.label}
+                </span>
+                <span className="text-lg font-semibold">{data.value}</span>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              Edit Profile
+            </button>
           </div>
         </div>
-
-        <div
-          className="flex "
-          style={{
-            background: "#03203C",
-            margin: 10,
-            border: "none",
-            borderRadius: 3,
-            color: "wheat",
-            textAlign: "center",
-            display: "flex",
-          }}
-        >
-          <button
-            style={{
-              textAlign: "center",
-              width: "100%",
-              padding: 9,
-              borderRadius: 30,
-            }}
-            onClick={openProfileModal}
-          >
-            Edit
-          </button>
-        </div>
-        <div
-          className="flex "
-          style={{
-            margin: 10,
-
-            borderRadius: 3,
-            color: "black",
-            border: "1px solid #1C8D73",
-            textAlign: "center",
-            display: "flex",
-          }}
-        >
-          <button
-            style={{
-              textAlign: "center",
-              width: "100%",
-              padding: 9,
-              borderRadius: 30,
-            }}
-            onClick={() => {
-              logout();
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      </div>{" "}
-      <Modal
-        isOpen={ProfileModal}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={ProfilecloseModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <section className="rounded-3xl border-[1px] border-black border-solid">
-          <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
-            <div className="mx-auto flex items-center justify-around max-w-lg text-center">
-              <h1 className="text-[14px] text-start font-bold sm:text-3xl">
-                Update Profile
-              </h1>
-              <button
-                onClick={() => {
-                  ProfilecloseModal();
-                }}
-              >
-                X
-              </button>
-            </div>
-
-            <form
-              onSubmit={(e) => handleSubmit(e)}
-              className="mx-auto mb-0 mt-8 max-w-md space-y-4"
-            >
-              <div>
-                <label htmlFor="email" className="sr-only">
-                  Name
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    className="w-full rounded-lg p-4 pe-12 text-sm shadow-sm"
-                    placeholder="Full Name"
-                    onChange={(e) => setfullname(e.target.value)}
-                    defaultValue={fullname}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="email" className="sr-only">
-                  Alternative Mobile Number
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                    placeholder="Alternate Mobile Number"
-                    onChange={(e) => setalertnativephone(e.target.value)}
-                    defaultValue={alertnativephone}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="email" className="sr-only">
-                  Name
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                    placeholder="Account Number"
-                    onChange={(e) => setaccountnumber(e.target.value)}
-                    defaultValue={accountnumber}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="email" className="sr-only">
-                  Name
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                    placeholder="Bank Name"
-                    onChange={(e) => setbankname(e.target.value)}
-                    defaultValue={bankname}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                    placeholder="IFS Code"
-                    onChange={(e) => setifsc(e.target.value)}
-                    defaultValue={ifsc}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                    placeholder="Aadhar Number"
-                    onChange={(e) => setaddhar(e.target.value)}
-                    defaultValue={addhar}
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  type="submit"
-                  className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </Modal>
+      </div>
     </>
   );
 }

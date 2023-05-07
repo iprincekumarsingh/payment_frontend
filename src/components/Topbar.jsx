@@ -1,12 +1,20 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
+
 import { CiSettings, CiLogout } from "react-icons/ci";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Cookie from "js-cookie";
 import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 export default function Topbar({ title, imgLink, backLink, imgWidth }) {
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function handleGoBack() {
+    navigate(-1);
+  }
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -20,16 +28,25 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
 
     window.location.href = "/";
   };
+  function renderBackButton() {
+    if (location.pathname === "/" || location.pathname === "/home/home/user") {
+      // If the current route is either '/' or '/home/user', don't render the back button
+      return null;
+    } else {
+      // Otherwise, render a back button that navigates to the previous page
+      return (
+        <Link to="#" onClick={() => window.history.back()}>
+          <AiOutlineArrowLeft className="text-white" />
+        </Link>
+      );
+    }
+  }
 
   return (
     <nav className="bg-[#0F4A8A] shadow-md">
       <div className="max-w-screen-xl flex items-center justify-between p-4">
         <div className="flex items-center">
-          {backLink && (
-            <Link to={backLink} className="mr-4">
-              <AiOutlineArrowLeft className="text-black text-xl" />
-            </Link>
-          )}
+          {renderBackButton()}
           <a href={imgLink} className="hidden md:block">
             <img src={imgLink} width={imgWidth} alt="" />
           </a>
@@ -52,7 +69,7 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
                 <CgProfile className="mr-2" />
                 <span>Profile</span>
               </Link>
-             
+
               <Link
                 to={"../../settings"}
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
