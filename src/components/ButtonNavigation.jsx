@@ -5,7 +5,6 @@ export default function ButtonNavigation({ nav_link, nav_icon, nav_text }) {
   return (
     <Link
       to={nav_link}
-      exact
       className="flex flex-col items-center justify-center w-full pt-2 pb-1 text-center text-xs focus:text-teal-500 hover:text-teal-500"
     >
       <svg

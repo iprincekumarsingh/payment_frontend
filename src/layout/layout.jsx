@@ -7,6 +7,7 @@ export default function LayoutHome() {
   return (
     <>
       <Outlet />
+      
       {/* <div className="fixed bottom-0 left-0 right-0 z-10">
         <nav className="flex justify-around items-center bg-gray-200 shadow-md h-16">
           <ButtonNavigation

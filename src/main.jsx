@@ -16,6 +16,7 @@ import TransferMoney from "./pages/TransferMoney.jsx";
 import OnBoarding from "./pages/OnBoarding.jsx";
 import Register from "./auth/Register.jsx";
 import ForgotPassword from "./auth/ForgotPassword.jsx";
+import Setting from "./pages/Setting.jsx";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,11 @@ const router = createBrowserRouter([
     path: "/auth/onboarding",
     element: <OnBoarding></OnBoarding>,
     // errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/settings",
+    element: <Setting></Setting>
+
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

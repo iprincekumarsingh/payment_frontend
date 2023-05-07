@@ -366,7 +366,7 @@ export default function Home() {
                   <button
                     className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
-                  // disabled={isLoading}
+                    // disabled={isLoading}
                   >
                     Request Money
                   </button>
@@ -378,29 +378,43 @@ export default function Home() {
         </div>
       </div>
       <div className="mb-20" style={{ margin: "10px" }}>
-  <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-  <div className="w-full p-1 h-56 text-white transition-transform transform rounded-xl bg-gradient-to-b ">
-    <img className="w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png" alt="Debit Card" />
-    <div className="absolute top-8 px-8 w-full">
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="font-medium">Debit Card</p>
-          <p className="font-bold">{split_wallet}</p>
+        <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
+        <div className="w-full p-1 h-56 text-white transition-transform transform rounded-xl bg-gradient-to-b ">
+          <a href="" target="_blank" rel="noopener noreferrer">
+            <img
+              className="w-full h-full rounded-xl"
+              src="https://i.imgur.com/kGkSg1v.png"
+              alt="Debit Card"
+            />
+            <div className="absolute top-8 px-8 w-full">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-medium">Debit Card</p>
+                  <p className="font-bold">{wallet}</p>
+                </div>
+                <img className="w-14 h-14" src={logo} alt="Logo" />
+              </div>
+              <a
+                href=""
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                {name}
+              </a>
+              <div className="flex justify-start my-2">
+                {/* <p className="text-sm font-medium">Valid Thru</p> */}
+                <p className="text-2xl font-medium my-2"></p>
+              </div>
+              <div className="flex justify-end">
+                <a href="" target="_blank" rel="noopener noreferrer">
+                  <img className="w-14 h-14" src={logo2} alt="Logo" />
+                </a>
+              </div>
+            </div>
+          </a>
         </div>
-        <img className="w-14 h-14" src={logo} alt="Logo" />
       </div>
-      <p className="text-2xl font-medium my-2">{name}</p>
-      <div className="flex justify-start my-2">
-        {/* <p className="text-sm font-medium">Valid Thru</p> */}
-      </div>
-      <div className="flex justify-end">
-        <img className="w-14 h-14" src={logo2} alt="Logo" />
-      </div>
-    </div>
-  </div>
-</div>
-
-
     </div>
   );
 }
