@@ -6,7 +6,12 @@ import back_arrow from "../img/icons/back.png";
 import { Link } from "react-router-dom";
 import Topbar from "../components/Topbar";
 import ChipsAmount from "../components/chipsAmount";
-
+import BeatLoader from "react-spinners/BeatLoader";
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 export default function TransferMoney() {
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
@@ -14,6 +19,16 @@ export default function TransferMoney() {
   const [errorMessage, setErrorMessage] = useState("");
   const [requestMoney, setRequestMoney] = useState(false);
   const [transferHistory, setTransferHistory] = useState([]);
+  const [pinverifyModal, setPinverifyModal] = useState(false);
+  const [pin, setPin] = useState("");
+  const [pin1, setPin1] = useState("");
+  const [pin2, setPin2] = useState("");
+  const [pin3, setPin3] = useState("");
+  const [pin4, setPin4] = useState("");
+  const [buttonMsg, setButtonMsg] = useState("Verify");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  let [loading, setLoading] = useState(false);
   const customStyles = {
     content: {
       top: "50%",
@@ -37,9 +52,13 @@ export default function TransferMoney() {
     setErrorMessage("");
     setRequestMoney(false);
   }
+  function requestPinVerify() {
+    setPinverifyModal(true);
+  }
 
   const onhandleClick = (e) => {
     e.preventDefault();
+
     if (!phone) {
       setErrorMessage("Please enter both phone number and amount");
       return;
@@ -73,44 +92,70 @@ export default function TransferMoney() {
       });
   };
 
-  const TransferMoneyFunction = (e) => {
+  const checkingMoneyRequest = (e) => {
     e.preventDefault();
-    if (!phone || !amount) {
-      setErrorMessage("Please enter both phone number and amount");
+
+    if (!amount) {
+      setErrorMessage("Please enter the amount");
+      return;
+    }
+    // checking if the amount is greater than 10000
+    if (amount > 10000) {
+      setErrorMessage("Amount should be less than 10000");
       return;
     }
 
-    axios
-      .post(
-        "transfer/transferMoney",
-        {
-          phone: phone,
-          amount: amount,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + Cookie.get("token"),
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        setSuccessMessage(res.data.message);
-        closeRequestMoneyModal(false);
-        setErrorMessage("");
+    // // checking if the pin is set or not
+    // localStorage.setItem("pin", 1234);
 
-        setAmount("");
-        // reset the form
-        form.reset();
-      })
-      .catch((err) => {
-        //  check the status code
-        console.log(err.response.data);
-        setSuccessMessage("");
-        setErrorMessage(err.response.data.message);
-      });
+    if (localStorage.getItem("pin") === null) {
+      setErrorMessage("Please set your pin first");
+      return;
+    }
+    setRequestMoney(false);
+    requestPinVerify(true);
   };
+
+  const VerifAppPin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setButtonMsg();
+    // checking if the pin is correct or not
+    if (pin !== localStorage.getItem("pin")) {
+      setErrorMessage("Please enter the correct pin");
+      setLoading(false);
+      return;
+    }
+
+    if (pin === localStorage.getItem("pin")) {
+      axios
+        .post(
+          "transfer/transferMoney",
+          {
+            phone: phone,
+            amount: amount,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + Cookie.get("token"),
+            },
+          }
+        )
+        .then((res) => {
+          setSuccessMessage("Money transferred successfully");
+          setPinverifyModal(false);
+          setErrorMessage("");
+          setLoading(false);
+        })
+        .catch((err) => {
+          setErrorMessage(err.response.data.message);
+        });
+    }
+
+    // checking if the user has enough balance or not
+  };
+
   useEffect(() => {
     axios
       .get("transfer/history", {
@@ -120,10 +165,10 @@ export default function TransferMoney() {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setTransferHistory(res.data.transferHistory);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, [successMessage, errorMessage]);
   const notificationListMap = transferHistory.map((item, index) => {
     return (
@@ -146,12 +191,7 @@ export default function TransferMoney() {
 
   return (
     <>
-      <Topbar
-        title="Money Transfer"
-        imgLink={back_arrow}
-        imgWidth={30}
-        backLink={"/home/home/user"}
-      ></Topbar>
+      <Topbar title="Money Transfer" backLink={"/home/home/user"}></Topbar>
 
       <form
         onSubmit={(e) => {
@@ -214,7 +254,6 @@ export default function TransferMoney() {
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeRequestMoneyModal}
         style={customStyles}
-        contentLabel="Example Modal"
       >
         <section
           className="rounded-2xl p-4 "
@@ -224,11 +263,7 @@ export default function TransferMoney() {
             <h1 className="text-1xl font-bold text-start text-blue-500"></h1>
           </div>
 
-          <form
-            onSubmit={(e) => {
-              TransferMoneyFunction(e);
-            }}
-          >
+          <form onSubmit={(e) => checkingMoneyRequest(e)}>
             <div class="mb-4 mt-0">
               <h1 className="text-2xl p-2 font-semibold">Transfer Money</h1>
               <label
@@ -250,24 +285,22 @@ export default function TransferMoney() {
                 onChange={(e) => setAmount(e.target.value)}
               />
               <div className="flex justify-even overflow-x-auto w-full text-center ">
-              <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(100))}
-                        amount_chip={100}
-                      ></ChipsAmount>
-                      <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(500))}
-                        amount_chip={500}
-                      ></ChipsAmount>
-                      <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(100))}
-                        amount_chip={1000}
-                      ></ChipsAmount>
-                      <ChipsAmount
-                        setClick={() =>
-                          setAmount(Number(amount) + Number(2000))
-                        }
-                        amount_chip={2000}
-                      ></ChipsAmount>
+                <ChipsAmount
+                  setClick={() => setAmount(Number(amount) + Number(100))}
+                  amount_chip={100}
+                ></ChipsAmount>
+                <ChipsAmount
+                  setClick={() => setAmount(Number(amount) + Number(500))}
+                  amount_chip={500}
+                ></ChipsAmount>
+                <ChipsAmount
+                  setClick={() => setAmount(Number(amount) + Number(100))}
+                  amount_chip={1000}
+                ></ChipsAmount>
+                <ChipsAmount
+                  setClick={() => setAmount(Number(amount) + Number(2000))}
+                  amount_chip={2000}
+                ></ChipsAmount>
               </div>
               <p className="text-[#ff0000] mt-3 text-center">{errorMessage}</p>
               <p className="text-green-700 mt-3 text-center">
@@ -284,13 +317,83 @@ export default function TransferMoney() {
           <hr />
         </section>
       </Modal>
+      <Modal
+        isOpen={pinverifyModal}
+        onRequestClose={closeRequestMoneyModal}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: "50",
+          },
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "1rem",
+            border: "1px solid rgba(189, 189, 189, 1)",
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+            padding: "2rem",
+            minWidth: "20rem",
+            maxWidth: "80vw",
+          },
+        }}
+      // className="flex items-center justify-center"
+      // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+      >
+        <div className="bg-white rounded-lg w-full sm:w-96">
+          <div className="p-4">
+            <h2 className="text-1xl font-bold mb-4 text-center">
+              Enter your 4-digit UPI PIN
+            </h2>
+            <form onSubmit={VerifAppPin}>
+              <div className="flex flex-col items-center justify-center mb-6">
+                <input
+                  type="text"
+                  className="h-12 w-full sm:w-72 rounded-lg border-gray-300 border-2 text-center mb-2 focus:outline-none focus:border-blue-500"
+                  placeholder="Enter PIN"
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                />
+                {errorMessage && (
+                  <span className="text-red-500 text-sm">{errorMessage}</span>
+                )}
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded-lg"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {""}
+                  {/* check if the loading is true or not */}
+                  {/* {loading && <Loader />} */}
+                  {loading && (
+                    <BeatLoader
+                      type="TailSpin"
+                      color="#fff"
+                      height={20}
+                      width={20}
+                      className="ml-2"
+                    />
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Modal>
+
       <div className="mt-5">
         <h2 className="text-2xl p-2">Recent Transactions</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
             <thead className="ltr:text-left rtl:text-right">
               <tr>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                <th class="whitespace-nowrap text-start px-4 py-2 font-medium text-gray-900">
                   Transaction Details
                 </th>
                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">

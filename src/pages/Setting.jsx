@@ -13,6 +13,8 @@ export default function Setting() {
   const [wallet, setWallet] = useState("");
   const [counter, setCounter] = useState(0);
   const [letterFormat, setLetterFormat] = useState("");
+
+  const [pin, setPin] = useState("");
   useEffect(() => {
     //checkk if the user is logged in or not
     if (!Cookie.get("token")) {
@@ -33,6 +35,9 @@ export default function Setting() {
       setName(data.fullname);
       //  get the fisrt letter of name
       // setLetterFormat(data.name.charAt(0));
+    }
+    if (localStorage.getItem("pin")) {
+      setPin(localStorage.getItem("pin"));
     }
   }, []);
   return (
@@ -86,50 +91,52 @@ export default function Setting() {
             <hr className="my-4" />
             <div className="mb-6">
               <h2 className="text-lg font-bold text-gray-900 mb-2">Settings</h2>
-              <ul className="list-inside list-disc">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-gray-700 hover:text-blue-500"
-                  >
-                    Change Password
-                  </a>
+              <ul className="bg-white divide-y divide-gray-200">
+                <li className="px-4 py-4 sm:px-6">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm font-medium text-gray-900">
+                      Change Password
+                    </div>
+                  </div>
                 </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-gray-700 hover:text-blue-500"
-                  >
-                    Change Pin
-                  </a>
+                <li className="px-4 py-4 sm:px-6">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm font-medium text-gray-900">PIN</div>
+                    <div className="flex items-center">
+                      {localStorage.getItem("pin") ? (
+                        <a
+                          href="#"
+                          className="ml-3 text-sm text-gray-400 hover:text-blue-500"
+                          onClick={() => {
+                            localStorage.removeItem("pin");
+                            setPin("");
+                          }}
+                        >
+                          Remove
+                        </a>
+                      ) : (
+                        <a
+                          href="#"
+                          className="ml-3 text-sm text-gray-400 hover:text-blue-500"
+                          onClick={() => {
+                            const newPin = prompt("Enter new PIN:");
+                            if (newPin) {
+                              localStorage.setItem("pin", newPin);
+                              setPin(newPin);
+                             
+                            }
+                          }}
+                        >
+                          Set
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </li>
+              
               </ul>
             </div>
-            <hr className="my-4" />
-            {/* <div className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-2">
-                Help &amp; Support
-              </h2>
-              <ul className="list-inside list-disc">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-gray-700 hover:text-blue-500"
-                  >
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-gray-700 hover:text-blue-500"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div> */}
-            <hr className="my-4" />
+            
             <div>
               <button className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full">
                 Logout

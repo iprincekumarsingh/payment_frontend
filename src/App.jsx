@@ -72,19 +72,15 @@ function App() {
         Cookie.set("role", JSON.stringify(res.data.user.role));
         console.log(res.data.user.phone);
 
-
         if (localStorage.getItem("PROFILE_DATA") != null) {
           localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         }
 
-
-        if(res.data.user.wallet_no == null){
+        if (res.data.user.wallet_no == null) {
           window.location.href = "/auth/onboarding";
-        }else{
+        } else {
           window.location.href = "/home/home/user";
         }
-
-
 
         setIsSubmitting(false);
       })
