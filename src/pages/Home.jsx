@@ -183,15 +183,14 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <Topbar title="SX Bank"></Topbar>
-      <div className="overflow-x-auto">
-        <div className="flex-col mb-4  p-1 m-[10px]">
-          <h1 className="text-2xl  ">Welcome Back </h1>
-          <span className="text-2xl text-black font-bold  ">{name}</span>
-
-          {/* <h1 className="text-base">Account no - {localStorage.getItem}</h1> */}
+    <div className="overflow-x-auto overflow-y-auto">
+      <Topbar title="SX Bank" />
+      <div className="overflow-x-auto p-4">
+        <div className="flex flex-col items-center justify-center mb-8">
+          <h1 className="text-3xl font-bold mb-2">Welcome back, {name}!</h1>
+        
         </div>
+
         <div>
           <section className="container">
             <div class="flex-col border border-gray-300 rounded-lg shadow-md p-4 m-5">
@@ -225,7 +224,7 @@ export default function Home() {
                   <p className="text-xs md:text-base">Transfer Money</p>
                 </Link>
               </div>
-              <div class="flex justify-around overflow-x-auto p-2 gap-1  bg-[#f2faff]">
+              <div class="flex flex-wrap justify-around overflow-x-auto p- bg-[#f2faff]">
                 <Widget_card
                   card_text={"Wallet Balance :" + amount}
                 ></Widget_card>
@@ -382,25 +381,26 @@ export default function Home() {
             }}
           >
             <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-            <div className="w-[99%] p-1 h-56     text-white  transition-transform transform ">
+            <div className="w-[99%] p-1 h-56 bg-gradient-to-b   text-white rounded-xl  transition-transform transform">
               <img
-                className="relative  w-full h-full rounded-xl"
+                className="relative w-full h-full rounded-xl"
                 src="https://i.imgur.com/kGkSg1v.png"
+                alt="Debit Card"
               />
               <div className="w-full px-8 absolute top-8">
                 <div className="flex justify-between items-center">
-                  <div className>
-                    <p className="font-medium">Debit Card</p>
-                    <p className="font-bold">{split_wallet}</p>
+                  <div>
+                    <p className="font-medium text-lg">Debit Card</p>
+                    <p className="font-bold text-2xl">{wallet}</p>
                   </div>
-                  <img className="w-14 h-14" src={logo} />
+                  <img className="w-14 h-14" src={logo} alt="Logo" />
                 </div>
-                <div className="pt-1 flex justify-start ">
-                  {/* <p className="text-sm font-medium">Valid Thru</p> */}
-                </div>
-                <p className="text-2xl font-medium">{name}</p>
-                <div className="pt-1  flex justify-end  ">
-                  <img className="w-14 h-14" src={logo2} />
+                <div className="pt-2">
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm font-medium invisible">Valid Thru</p>
+                    <img className="w-14 h-14" src={logo2} alt="Logo 2" />
+                  </div>
+                  <p className="text-2xl font-medium pt-2">{name}</p>
                 </div>
               </div>
             </div>
