@@ -1,64 +1,143 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Topbar from "../components/Topbar";
-
+import Cookie from "js-cookie";
 export default function Setting() {
+  const [fullname, setfullname] = useState("");
+  const [name, setName] = useState("");
+  const [alertnativephone, setalertnativephone] = useState("");
+  const [accountnumber, setaccountnumber] = useState("");
+  const [ifsc, setifsc] = useState("");
+  const [bankname, setbankname] = useState("");
+  const [addhar, setaddhar] = useState("");
+  const [phone, setPhone] = useState("");
+  const [wallet, setWallet] = useState("");
+  const [counter, setCounter] = useState(0);
+  const [letterFormat, setLetterFormat] = useState("");
+  useEffect(() => {
+    //checkk if the user is logged in or not
+    if (!Cookie.get("token")) {
+      window.location.href = "/auth/login";
+    }
+  }, []);
+  useEffect(() => {
+    if (localStorage.getItem("PROFILE_DATA") != null) {
+      const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
+      setfullname(data.fullname);
+      setalertnativephone(data.alt_phone);
+      setaccountnumber(data.account_number);
+      setifsc(data.ifsc_code);
+      setbankname(data.bank_name);
+      setPhone(data.phone);
+      setaddhar(data.aadhaar_number);
+      setWallet(data.wallet_no);
+      setName(data.fullname);
+      //  get the fisrt letter of name
+      // setLetterFormat(data.name.charAt(0));
+    }
+  }, []);
   return (
     <>
       <Topbar title="Settings"></Topbar>
       <div className="bg-gray-100 min-h-screen">
-  <div className="container mx-auto px-4 py-6">
-    {/* <h1 className="text-3xl font-bold mb-4">Settings</h1> */}
-    <div className="bg-white rounded-lg shadow-lg px-4 py-2">
-      <div className="mb-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-2">Account Information</h2>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Username:</p>
-            {/* <p className="text-sm text-gray-700">{username}</p> */}
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Phone:</p>
-            <p className="text-sm text-gray-700">{"8093483115"}</p>
+        <div className="container mx-auto px-4 py-6">
+          {/* <h1 className="text-3xl font-bold mb-4">Settings</h1> */}
+          <div className="bg-white rounded-lg shadow-lg px-4 py-2">
+            <div className="mb-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-2">
+                Account Information
+              </h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-700">{name}</p>
+                  <p className="text-sm font-medium text-gray-500 mb-1">
+                    Wallet Number : {wallet}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">
+                    Phone:
+                  </p>
+                  <p className="text-sm text-gray-700">{phone}</p>
+                </div>
+              </div>
+            </div>
+            <div className="mb-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-2">
+                Bank Account Information
+              </h2>
+              <div className="">
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">
+                    Bank name: {bankname}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {/* <a href="3" target="_blank" rel="noopener noreferrer"> */}
+                    Account Number :{accountnumber}
+                    {/* </a> */}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {/* <a href="3" target="_blank" rel="noopener noreferrer"> */}
+                    IFSC Code :{ifsc}
+                    {/* </a> */}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr className="my-4" />
+            <div className="mb-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-2">Settings</h2>
+              <ul className="list-inside list-disc">
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-gray-700 hover:text-blue-500"
+                  >
+                    Change Password
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-gray-700 hover:text-blue-500"
+                  >
+                    Change Pin
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <hr className="my-4" />
+            {/* <div className="mb-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-2">
+                Help &amp; Support
+              </h2>
+              <ul className="list-inside list-disc">
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-gray-700 hover:text-blue-500"
+                  >
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-gray-700 hover:text-blue-500"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div> */}
+            <hr className="my-4" />
+            <div>
+              <button className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full">
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="mb-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-2">Payment Information</h2>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Paytm:</p>
-            <p className="text-sm text-blue-500"><a href="3" target="_blank" rel="noopener noreferrer">{"8093483115"}</a></p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Credit Card:</p>
-            <p className="text-sm text-gray-700">{"8093483115"}</p>
-          </div>
-        </div>
-      </div>
-      <hr className="my-4" />
-      <div className="mb-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-2">Settings</h2>
-        <ul className="list-inside list-disc">
-          <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500">Change Password</a></li>
-          <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500">Notifications</a></li>
-        </ul>
-      </div>
-      <hr className="my-4" />
-      <div className="mb-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-2">Help &amp; Support</h2>
-        <ul className="list-inside list-disc">
-          <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500">FAQ</a></li>
-          <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500">Contact Us</a></li>
-        </ul>
-      </div>
-      <hr className="my-4" />
-      <div>
-        <button className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full" >Logout</button>
-      </div>
-    </div>
-  </div>
-</div>
-
     </>
   );
 }
