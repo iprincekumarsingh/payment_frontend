@@ -15,6 +15,7 @@ import money_transfer from "../img/money_transfer.png";
 import Topbar from "../components/Topbar";
 import HomeIcons from "../components/HomeIcons";
 import Widget_card from "../components/Widget_card";
+import ChipsAmount from "../components/chipsAmount";
 
 export default function Home() {
   Modal.setAppElement("#root");
@@ -323,10 +324,7 @@ export default function Home() {
                       Request Money to{" "}
                       <span className="font-bold"> SX Bank</span>
                     </h1>
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="username"
-                    ></label>
+
                     <input
                       style={{
                         border: "1px solid rgba(189, 189, 189, 1)",
@@ -342,37 +340,30 @@ export default function Home() {
                       onChange={(e) => setAmount(e.target.value)}
                     />
                     <div className="flex justify-even overflow-x-auto w-full text-center ">
-                      <div
-                        className="flex border border-solid border-gray-400 rounded-lg p-2 m-2 text-lg cursor-pointer"
-                        onClick={() => setAmount(Number(amount) + Number(100))}
-                      >
-                        ₹100
-                      </div>
-                      <div
-                        className="flex border border-solid border-gray-400 rounded-lg p-2 m-2 text-lg cursor-pointer"
-                        onClick={() => setAmount(Number(amount) + Number(200))}
-                      >
-                        ₹200
-                      </div>
-                      <div
-                        className="flex border border-solid border-gray-400 rounded-lg p-2 m-2 text-lg cursor-pointer"
-                        onClick={() => setAmount(Number(amount) + Number(1000))}
-                      >
-                        ₹1000
-                      </div>
-                      <div
-                        className="flex border border-solid border-gray-400 rounded-lg p-2 m-2 text-lg cursor-pointer"
-                        onClick={() => setAmount(Number(amount) + Number(2000))}
-                      >
-                        ₹2000
-                      </div>
+                      <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(100))}
+                        amount_chip={100}
+                      ></ChipsAmount>
+                      <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(500))}
+                        amount_chip={500}
+                      ></ChipsAmount>
+                      <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(100))}
+                        amount_chip={1000}
+                      ></ChipsAmount>
+                      <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(2000))}
+                        amount_chip={2000}
+                      ></ChipsAmount>
                     </div>
                     <p className="text-red-500 mt-3 text-center">{message}</p>
                     <p className="text-green-700 mt-3 text-center">{success}</p>
                   </div>
                   <button
-                    class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
+                    // disabled={isLoading}
                   >
                     Request Money
                   </button>
