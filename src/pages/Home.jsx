@@ -92,7 +92,6 @@ export default function Home() {
 
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
 
-
         setName(res.data.data.fullname);
       })
       .catch((err) => {
@@ -183,61 +182,102 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Topbar title="Home"></Topbar>
+    <div className="overflow-x-auto">
+      <Topbar title="SX Bank"></Topbar>
       <div className="overflow-x-auto">
         <div className="flex-col mb-4  p-1 m-[10px]">
           <h1 className="text-2xl  ">Welcome Back </h1>
           <span className="text-2xl text-black font-bold  ">{name}</span>
-          <div className="mt-2">Account no - {wallet}</div>
 
           {/* <h1 className="text-base">Account no - {localStorage.getItem}</h1> */}
         </div>
         <div>
-          <section className="container  mt-4 border-[black]-100 h-1/4">
-            <div className="  ">
-              <div
-                className=" "
-                style={{
-                  border: "1px solid",
-                  margin: "10px",
-                  borderRadius: "10px",
-                }}
-              >
-                <div className="flex justify-around items-center mt-2 gap-4 shadow-2xl shadow-black-500/40 p-2">
-                  <HomeIcons
-                    onclickBtn={openModal}
-                    icon={add_money}
-                    text_p={"Add Money"}
-                  ></HomeIcons>
-                  <HomeIcons
-                    onclickBtn={requestMoneyModal}
-                    icon={receive_money}
-                    text_p={"Request Money"}
-                  ></HomeIcons>
+          <section
+            className="container"
+          >
+            <div
+              className="flex-col    "
+              style={{
+                border: "1px solid black",
+                margin: "5px",
+              }}
+            >
+              <div className="flex justify-around items-centermt-[60px] mb-4">
+                <HomeIcons
+                  onclickBtn={openModal}
+                  icon={add_money}
+                  text_p={"Add Money"}
+                ></HomeIcons>
+                <HomeIcons
+                  onclickBtn={requestMoneyModal}
+                  icon={receive_money}
+                  text_p={"Request Money"}
+                ></HomeIcons>
 
-                  <Link
-                    to="/transfer/money"
-                    // onClick={requestMoneyModal}
-                    className="flex-col  justify-center items-center text-center w-[100px] "
-                    style={{
-                      // background: "rgb(202, 213, 226)",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      className="vertical-0"
-                      src={money_transfer}
-                      alt=""
-                      width={50}
-                    />
-                    <p>Transfer Money</p>
-                  </Link>
-                </div>
+                <Link
+                  to="/transfer/money"
+                  // onClick={requestMoneyModal}
+                  className="flex-col  justify-center items-center text-center w-[150px] text-[14px] "
+                  style={{
+                    // background: "rgb(202, 213, 226)",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    className="vertical-0"
+                    src={money_transfer}
+                    alt=""
+                    width={30}
+                  />
+                  <p>Transfer Money</p>
+                </Link>
+              </div>
+              <div className="flex w-full  bg-[#f2faff] justify-around p-2 overflow-x-auto"
+                style={{
+                 
+                  margin: "5px 0px",
+                }}>
+                <h1
+                  className=""
+                  style={{
+                    border: "1px solid rgb(0, 186, 242)",
+                    // margin: "0px 30px",
+                    borderRadius: "80px",
+                    textAlign: "center",
+                    margin: "0px 6px",
+                    // width: "fit-content",
+
+                    // width: "fit-content",
+                    padding: "6px",
+                    height: "31px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  Wallet balance : {amount}
+                </h1>
+                <h1
+                  className="p-3"
+                  style={{
+                    border: "1px solid rgb(0, 186, 242)",
+                    // margin: "0px 30px",
+                    borderRadius: "80px",
+                    textAlign: "center",
+
+                    width: "fit-content",
+                    height: "31px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  Wallet id : {wallet}
+                </h1>
               </div>
             </div>
             <Modal
@@ -383,15 +423,15 @@ export default function Home() {
           ""
         ) : (
           <div
-            className="shadow-2xl  p-2 mb-20"
+            className=" mb-20"
             style={{
               margin: "10px",
             }}
           >
             <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-            <div className="w-[99%] p-1 h-56   rounded-xl  text-white  transition-transform transform ">
+            <div className="w-[99%] p-1 h-56     text-white  transition-transform transform ">
               <img
-                className="relative object-cover w-full h-full rounded-xl"
+                className="relative  w-full h-full rounded-xl"
                 src="https://i.imgur.com/kGkSg1v.png"
               />
               <div className="w-full px-8 absolute top-8">
@@ -414,6 +454,6 @@ export default function Home() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
