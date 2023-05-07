@@ -1,3 +1,4 @@
+import Cookie from "js-cookie";
 import { Link, useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
@@ -15,11 +16,22 @@ export default function ErrorPage() {
         <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
           Sorry, we couldn&amp;apos:t find the page you're looking for.
         </p>
-        <div className="flex items-center justify-center mt-6 gap-x-3">
-         
-          <Link to={`home`} className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500">
-            Go Home
-          </Link>
+        <div className="flex items-center justify-center mt-6">
+          {Cookie.get("token") ? (
+            <Link
+              to={`home/home/user`}
+              className="inline-block rounded-md bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
+            >
+              Go Home
+            </Link>
+          ) : (
+            <Link
+              to={`auth/login`}
+              className="inline-block rounded-md bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
       {/* </div> */}

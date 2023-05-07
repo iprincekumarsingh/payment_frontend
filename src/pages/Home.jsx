@@ -194,9 +194,9 @@ export default function Home() {
         </div>
 
         <div>
-          <section className="container">
-            <div class="flex-col w-full border border-gray-300 rounded-lg shadow-md p-4 m-1">
-              <div className="flex justify-center items-center p-4">
+          <section className="">
+            <div class="flex flex-col w-full border border-gray-300 rounded-lg shadow-md p-4 m-1">
+              <div class="flex  md:flex-row justify-center items-center p-4">
                 <HomeIcons
                   onclickBtn={openModal}
                   icon={add_money}
@@ -209,7 +209,7 @@ export default function Home() {
                 />
                 <Link
                   to="/transfer/money"
-                  className="flex flex-col justify-center items-center text-center w-full md:w-48 "
+                  class="flex flex-col justify-center items-center text-center w-full md:w-48"
                   style={{
                     borderRadius: "10px",
                     display: "flex",
@@ -218,19 +218,17 @@ export default function Home() {
                   }}
                 >
                   <img
-                    className="h-6 mb-2"
+                    class="h-6 mb-2"
                     src={money_transfer}
                     alt=""
                     width={30}
                   />
-                  <p className="text-xs md:text-base">Transfer Money</p>
+                  <p class="text-xs md:text-base">Transfer Money</p>
                 </Link>
               </div>
-              <div class="flex w-full justify-around overflow-x-auto p- bg-[#f2faff]">
-                <Widget_card
-                  card_text={"Wallet Balance :" + amount}
-                ></Widget_card>
-                <Widget_card card_text={"Wallet ID :" + wallet}></Widget_card>
+              <div class="flex  md:flex-row justify-around items-center overflow-x-auto p- bg-[#f2faff]">
+                <Widget_card card_text={"Wallet Balance: " + amount} />
+                <Widget_card card_text={"Wallet ID: " + wallet} />
               </div>
             </div>
 
@@ -368,7 +366,7 @@ export default function Home() {
                   <button
                     className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
-                    // disabled={isLoading}
+                  // disabled={isLoading}
                   >
                     Request Money
                   </button>
@@ -379,6 +377,30 @@ export default function Home() {
           </section>
         </div>
       </div>
+      <div className="mb-20" style={{ margin: "10px" }}>
+  <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
+  <div className="w-full p-1 h-56 text-white transition-transform transform rounded-xl bg-gradient-to-b ">
+    <img className="w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png" alt="Debit Card" />
+    <div className="absolute top-8 px-8 w-full">
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="font-medium">Debit Card</p>
+          <p className="font-bold">{split_wallet}</p>
+        </div>
+        <img className="w-14 h-14" src={logo} alt="Logo" />
+      </div>
+      <p className="text-2xl font-medium my-2">{name}</p>
+      <div className="flex justify-start my-2">
+        {/* <p className="text-sm font-medium">Valid Thru</p> */}
+      </div>
+      <div className="flex justify-end">
+        <img className="w-14 h-14" src={logo2} alt="Logo" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
     </div>
   );
 }
