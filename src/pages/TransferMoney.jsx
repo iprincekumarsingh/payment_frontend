@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import back_arrow from "../img/icons/back.png";
 import { Link } from "react-router-dom";
 import Topbar from "../components/Topbar";
+import ChipsAmount from "../components/chipsAmount";
 
 export default function TransferMoney() {
   const [phone, setPhone] = useState("");
@@ -98,7 +99,7 @@ export default function TransferMoney() {
         setSuccessMessage(res.data.message);
         closeRequestMoneyModal(false);
         setErrorMessage("");
-     
+
         setAmount("");
         // reset the form
         form.reset();
@@ -145,9 +146,12 @@ export default function TransferMoney() {
 
   return (
     <>
-      <Topbar title="Money Transfer" imgLink={back_arrow} imgWidth={30} backLink={"/home/home/user"}>
-     
-      </Topbar>
+      <Topbar
+        title="Money Transfer"
+        imgLink={back_arrow}
+        imgWidth={30}
+        backLink={"/home/home/user"}
+      ></Topbar>
 
       <form
         onSubmit={(e) => {
@@ -155,32 +159,55 @@ export default function TransferMoney() {
         }}
       >
         {/* input form with border 1px */}
-        <div className="flex justify-around shadow-lg mt-5">
-          {/* <div className="flex flex-col items-center justify-center"> */}
+        <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
           <input
-            style={{ width: "60%", border: "1px solid black" }}
-            class=" appearance-none border-solid m-2  rounded-md  py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+            class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="username"
             type="text"
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Enter Phone Number"
           />
-
-          <button
-            style={{
-              width: "35%",
-              border: "1px solid black",
-              backgroundColor: "#1E3A8A",
-              color: "white",
-            }}
-            class=" appearance-none border-solid m-2 text-1xl  rounded-md  py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-          >
+          <button class="appearance-none w-full md:w-1/3 text-base bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md md:rounded-l-none mt-2 md:mt-0">
             Send Money
           </button>
-          {/* </div> */}
         </div>
-        <p className="text-green-700 p-2 mt-1">{successMessage}</p>
-        <p className="text-[#ff0000] p-2 mt-1">{errorMessage}</p>
+
+        <div className="flex flex-col mt-5">
+          {successMessage && (
+            <div className="flex justify-center items-center mb-3 px-4 py-3 bg-green-200 text-green-700 rounded-md">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.293-5.293a1 1 0 011.414 0l2 2a1 1 0 01-1.414 1.414L10 13.414l-1.293 1.293a1 1 0 01-1.414-1.414l2-2z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{successMessage}</span>
+            </div>
+          )}
+          {errorMessage && (
+            <div className="flex justify-center items-center mb-3 px-4 py-3 bg-red-200 text-red-700 rounded-md">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-9a1 1 0 011 1v4a1 1 0 01-2 0v-4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{errorMessage}</span>
+            </div>
+          )}
+        </div>
       </form>
       <Modal
         isOpen={requestMoney}
@@ -223,58 +250,24 @@ export default function TransferMoney() {
                 onChange={(e) => setAmount(e.target.value)}
               />
               <div className="flex justify-even overflow-x-auto w-full text-center ">
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    margin: "5px",
-                    fontSize: "18px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(100))}
-                >
-                  ₹100
-                </div>
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    margin: "5px",
-                    fontSize: "18px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(200))}
-                >
-                  ₹200
-                </div>
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    margin: "5px",
-                    fontSize: "18px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(1000))}
-                >
-                  ₹1000
-                </div>
-                <div
-                  className="flex "
-                  style={{
-                    border: "1px solid rgba(189, 189, 189, 1)",
-                    padding: "8px",
-                    margin: "5px",
-                    fontSize: "18px",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => setAmount(Number(amount) + Number(2000))}
-                >
-                  ₹2000
-                </div>
+              <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(100))}
+                        amount_chip={100}
+                      ></ChipsAmount>
+                      <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(500))}
+                        amount_chip={500}
+                      ></ChipsAmount>
+                      <ChipsAmount
+                        setClick={() => setAmount(Number(amount) + Number(100))}
+                        amount_chip={1000}
+                      ></ChipsAmount>
+                      <ChipsAmount
+                        setClick={() =>
+                          setAmount(Number(amount) + Number(2000))
+                        }
+                        amount_chip={2000}
+                      ></ChipsAmount>
               </div>
               <p className="text-[#ff0000] mt-3 text-center">{errorMessage}</p>
               <p className="text-green-700 mt-3 text-center">
@@ -291,25 +284,26 @@ export default function TransferMoney() {
           <hr />
         </section>
       </Modal>
-      <div>
-        <h2 className="text-2xl p-2">Recent Transcations</h2>
-        {/* {JSON.stringify(transferHistory)} */}
-      </div>
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
-          <thead class="ltr:text-left rtl:text-right">
-            <tr>
-              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Transcations Details
-              </th>
-              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Amount
-              </th>
-            </tr>
-          </thead>
+      <div className="mt-5">
+        <h2 className="text-2xl p-2">Recent Transactions</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
+            <thead className="ltr:text-left rtl:text-right">
+              <tr>
+                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                  Transaction Details
+                </th>
+                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                  Amount
+                </th>
+              </tr>
+            </thead>
 
-          <tbody class="divide-y divide-gray-200">{notificationListMap}</tbody>
-        </table>
+            <tbody class="divide-y divide-gray-200">
+              {notificationListMap}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

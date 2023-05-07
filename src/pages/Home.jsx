@@ -320,25 +320,28 @@ export default function Home() {
 
                 <form onSubmit={requesMoneyFunction}>
                   <div className="mb-1 mt-4">
-                    <h1>
+                    <h1 className="py-2">
                       Request Money to{" "}
-                      <span className="font-bold"> SX Bank</span>
+                      <span className="font-bold">SX Bank</span>
                     </h1>
 
-                    <input
-                      style={{
-                        border: "1px solid rgba(189, 189, 189, 1)",
-                        padding: "10px",
-                        marginBottom: "10px",
-                        borderRadius: "10px",
-                      }}
-                      className="w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline appearance-none"
-                      id="username"
-                      type="number"
-                      placeholder="Enter Amount to withdraw"
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                    />
+                    <div className=" p-4 rounded-md shadow-lg">
+                      <div className="relative">
+                        <label htmlFor="amount" className="sr-only">
+                          Enter Amount
+                        </label>
+                        <input
+                          id="amount"
+                          name="amount"
+                          type="number"
+                          value={amount}
+                          onChange={(e) => setAmount(e.target.value)}
+                          className="block w-full px-4 py-3 rounded-md bg-white  placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Enter Amount"
+                        />
+                      </div>
+                    </div>
+
                     <div className="flex justify-even overflow-x-auto w-full text-center ">
                       <ChipsAmount
                         setClick={() => setAmount(Number(amount) + Number(100))}
@@ -353,7 +356,9 @@ export default function Home() {
                         amount_chip={1000}
                       ></ChipsAmount>
                       <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(2000))}
+                        setClick={() =>
+                          setAmount(Number(amount) + Number(2000))
+                        }
                         amount_chip={2000}
                       ></ChipsAmount>
                     </div>
