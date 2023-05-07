@@ -185,12 +185,7 @@ export default function Profile() {
         toast.error(err.response.data.message);
       });
   };
-  const profileData = [
-    { label: "Name", value: "John Doe" },
-    { label: "Email", value: "johndoe@example.com" },
-    { label: "Phone", value: "+1 (555) 123-4567" },
-    { label: "Address", value: "123 Main St, Anytown, USA" },
-  ];
+
   return (
     <>
       <Toaster />
@@ -198,23 +193,53 @@ export default function Profile() {
       <div className="bg-gray-100 ">
         <div className="bg-white rounded-md  p-3 max-w-md mx-auto mt-1">
           <div className="text-start mt-4">
-            <h1 className="text-3xl font-bold text-gray-800">John Doe</h1>
-            <p className="text-gray-500 text-lg mt-2">johndoe@example.com</p>
+            <h1 className="text-3xl font-bold text-gray-800">{name}</h1>
+            <p className="text-gray-500 text-lg mt-2">{phone}</p>
           </div>
           <div className="border-t border-gray-200 mt-6 pt-6">
-            {profileData.map((data, index) => (
-              <div key={index} className="flex justify-between mt-4">
-                <span className="text-lg text-gray-600 font-medium">
-                  {data.label}
-                </span>
-                <span className="text-lg font-semibold">{data.value}</span>
-              </div>
-            ))}
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">Name</span>
+              <span className="text-lg font-semibold">{name}</span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">Phone</span>
+              <span className="text-lg font-semibold">{phone}</span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">
+                Alternative Phone
+              </span>
+              <span className="text-lg font-semibold">{alertnativephone}</span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">
+                Aadhar Number
+              </span>
+              <span className="text-lg font-semibold">{addhar}</span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">
+                Bank Name
+              </span>
+              <span className="text-lg font-semibold">{bankname}</span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">
+                IFSC Code
+              </span>
+              <span className="text-lg font-semibold">{ifsc}</span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <span className="text-lg text-gray-600 font-medium">
+                Wallet Number
+              </span>
+              <span className="text-lg font-semibold">{wallet}</span>
+            </div>
           </div>
           <div className="flex justify-center mt-8">
-            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            {/* <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
               Edit Profile
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
