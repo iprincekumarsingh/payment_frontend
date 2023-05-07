@@ -191,8 +191,8 @@ export default function Profile() {
   };
   return (
     <>
-      <Toaster  />
-     <Topbar title="Profile" />
+      <Toaster />
+      <Topbar title="Profile" />
       <div className="flex-col">
         {/* <div>{counter}</div> */}
 
@@ -254,62 +254,7 @@ export default function Profile() {
             Logout
           </button>
         </div>
-        {wallet == undefined ? (
-          <div
-            className="flex "
-            style={{
-              background: "#1C8D73",
-              margin: 10,
-              border: "none",
-              borderRadius: 3,
-              color: "wheat",
-              textAlign: "center",
-              display: "flex",
-            }}
-          >
-            <button
-              style={{
-                textAlign: "center",
-                width: "100%",
-                color: "white",
-                padding: 9,
-                borderRadius: 30,
-              }}
-              onClick={() => {
-                createWallet();
-              }}
-            >
-              Create Wallet
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
       </div>{" "}
-      {/* check if data is wpty or not */}
-      {/* {wallet == undefined || wallet == "" ? (
-        ""
-      ) : (
-        <div className="w-[99%] p-1 h-56  bg-red-100 rounded-xl  text-white shadow-2xl transition-transform transform ">
-          <img
-            className="relative object-cover w-full h-full rounded-xl"
-            src="https://i.imgur.com/kGkSg1v.png"
-          />
-          <div className="w-full px-8 absolute top-8">
-            <div className="flex justify-between">
-              <div className>
-                <p className="font-light">Name</p>
-                <p className="font-medium tracking-widest">{fullname}</p>
-              </div>
-              <img className="w-14 h-14" src={logo} />
-            </div>
-            <div className="pt-1">
-              <p className="font-light">Wallet Number</p>
-              <p className="font-medium tracking-more-wider">{wallet}</p>
-            </div>
-          </div>
-        </div>
-      )} */}
       <Modal
         isOpen={ProfileModal}
         // onAfterOpen={afterOpenModal}
