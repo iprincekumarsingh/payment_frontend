@@ -14,6 +14,7 @@ import back_arrow from "../img/icons/back.png";
 import money_transfer from "../img/money_transfer.png";
 import Topbar from "../components/Topbar";
 import HomeIcons from "../components/HomeIcons";
+import Widget_card from "../components/Widget_card";
 
 export default function Home() {
   const customStyles = {
@@ -192,9 +193,7 @@ export default function Home() {
           {/* <h1 className="text-base">Account no - {localStorage.getItem}</h1> */}
         </div>
         <div>
-          <section
-            className="container"
-          >
+          <section className="container">
             <div
               className="flex-col    "
               style={{
@@ -236,50 +235,14 @@ export default function Home() {
                   <p>Transfer Money</p>
                 </Link>
               </div>
-              <div className="flex w-full  bg-[#f2faff] justify-around p-2 overflow-x-auto"
-                style={{
-                 
-                  margin: "5px 0px",
-                }}>
-                <h1
-                  className=""
-                  style={{
-                    border: "1px solid rgb(0, 186, 242)",
-                    // margin: "0px 30px",
-                    borderRadius: "80px",
-                    textAlign: "center",
-                    margin: "0px 6px",
-                    // width: "fit-content",
-
-                    // width: "fit-content",
-                    padding: "6px",
-                    height: "31px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  Wallet balance : {amount}
-                </h1>
-                <h1
-                  className="p-3"
-                  style={{
-                    border: "1px solid rgb(0, 186, 242)",
-                    // margin: "0px 30px",
-                    borderRadius: "80px",
-                    textAlign: "center",
-
-                    width: "fit-content",
-                    height: "31px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  Wallet id : {wallet}
-                </h1>
-              </div>
+            <div class="flex justify-around overflow-x-auto m-2 gap-1">
+              <Widget_card
+                card_text={"Wallet Balance :" + amount}
+              ></Widget_card>
+              <Widget_card card_text={"Wallet ID :" + wallet}></Widget_card>
             </div>
+            </div>
+
             <Modal
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
