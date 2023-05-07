@@ -37,10 +37,7 @@ const router = createBrowserRouter([
         path: "home/transactions",
         element: <Transcations></Transcations>,
       },
-      {
-        path: "home/profile",
-        element: <Profile></Profile>,
-      },
+     
       {
         path: "home/admin",
         element: <Admin />,
@@ -56,6 +53,10 @@ const router = createBrowserRouter([
     path: "/auth/login",
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "home/profile",
+    element: <Profile></Profile>,
   },
   {
     path: "/auth/register",

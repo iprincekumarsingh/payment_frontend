@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings, CiLogout } from "react-icons/ci";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import Cookie from "js-cookie";
 import { Link } from "react-router-dom";
 export default function Topbar({ title, imgLink, backLink, imgWidth }) {
@@ -23,11 +24,18 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
   return (
     <nav className="bg-[#0F4A8A] shadow-md">
       <div className="max-w-screen-xl flex items-center justify-between p-4">
-        <a href={backLink} className="hidden md:block">
-          <img src={imgLink} width={imgWidth} alt="" />
-        </a>
-        <span className="text-white text-lg font-semibold">{title}</span>
-        <div className="relative">
+        <div className="flex items-center">
+          {backLink && (
+            <Link to={backLink} className="mr-4">
+              <AiOutlineArrowLeft className="text-black text-xl" />
+            </Link>
+          )}
+          <a href={imgLink} className="hidden md:block">
+            <img src={imgLink} width={imgWidth} alt="" />
+          </a>
+          <span className="text-white text-lg font-semibold ml-2">{title}</span>
+        </div>
+        <div className="relative p-21">
           <div
             onClick={toggleDropdown}
             className="flex justify-center items-center cursor-pointer"
@@ -35,7 +43,7 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
             <CgProfile className="text-white text-xl" />
           </div>
           {showDropdown && (
-            <div className="absolute top-10 right-0 z-10 bg-white shadow-lg rounded-md py-1">
+            <div className="absolute top-10 right-0 z-10 bg-white shadow-xl rounded-md py-1 p-10">
               <Link
                 to={"../home/profile"}
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
@@ -44,10 +52,10 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
                 <CgProfile className="mr-2" />
                 <span>Profile</span>
               </Link>
+             
               <Link
-              to={"../../settings"}
+                to={"../../settings"}
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
-               
               >
                 <CiSettings className="mr-2" />
                 <span>Settings</span>
