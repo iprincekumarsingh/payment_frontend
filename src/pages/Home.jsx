@@ -235,7 +235,7 @@ export default function Home() {
                   <p>Transfer Money</p>
                 </Link>
               </div>
-            <div class="flex justify-around overflow-x-auto m-2 gap-1">
+            <div class="flex justify-around overflow-x-auto p-2 gap-1  bg-[#f2faff]">
               <Widget_card
                 card_text={"Wallet Balance :" + amount}
               ></Widget_card>
