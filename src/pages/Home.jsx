@@ -100,7 +100,6 @@ export default function Home() {
 
         setName(res.data.data.fullname);
         setWallet_balance(res.data.data.wallet_balance);
-        
       })
       .catch((err) => {
         console.log(err);
@@ -231,7 +230,15 @@ export default function Home() {
                 </Link>
               </div>
               <div class="flex  md:flex-row justify-around items-center overflow-x-auto p- bg-[#f2faff]">
-                <Widget_card card_text={"Wallet Balance: " + amount} />
+                <Widget_card
+                 card_text={
+                  "Wallet Balance: ₹" +
+                  (Number.isInteger(wallet_balance)
+                    ? wallet_balance.toLocaleString("en-IN", { style: "currency", currency: "INR" }).slice(0, -3)
+                    : wallet_balance.toLocaleString("en-IN", { style: "currency", currency: "INR" }))
+                }
+                
+                />
                 <Widget_card card_text={"Wallet ID: " + wallet} />
               </div>
             </div>
