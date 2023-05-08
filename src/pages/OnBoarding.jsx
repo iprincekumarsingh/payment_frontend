@@ -34,6 +34,8 @@ export default function OnBoarding() {
       bankname,
       ifsc,
       aadhaar,
+      title,
+
     };
     console.log(data);
 
@@ -53,6 +55,16 @@ export default function OnBoarding() {
           bank_name: bankname,
           ifsc_code: ifsc,
           aadhaar_number: aadhaar,
+          title: title,
+          dob: dob,
+          citizenship: citizenship,
+          country: country,
+          address: address,
+          city: city,
+          pincode: zip,
+          country_of_birth: countrofbirth,
+          email: email,
+
         },
         {
           headers: {
@@ -70,7 +82,7 @@ export default function OnBoarding() {
         if (localStorage.getItem("PROFILE_DATA") == null) {
           localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         }
-        
+
         // localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         window.location.href = "/home/home/user";
       })
@@ -79,6 +91,16 @@ export default function OnBoarding() {
         console.log(err);
       });
   };
+
+  const [title, setTitle] = React.useState("");
+  const [dob, setDob] = React.useState("");
+  const [citizenship, setCitizenship] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [zip, setZip] = React.useState("");
+  const [countrofbirth, setCountrofbirth] = React.useState("");
+  const [email, setEmail] = React.useState("");
 
   return (
     <section className="max-w-4xl p-10 mx-auto rounded-md shadow-md  mt-5 ">
@@ -94,19 +116,79 @@ export default function OnBoarding() {
         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
           <div>
             <label className="text-black  " htmlFor="username">
+              Title
+            </label>
+            <select
+              name=""
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              id=""
+              onChange={(e) => {
+                setTitle(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="username">
               Full Name
             </label>
             <input
-              value={fullname}
-              id="username"
-              type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-              placeholder=""
               onChange={(e) => {
                 setFullname(e.target.value);
+                console.log(e.target.value);
               }}
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
+          <div>
+            <label className="text-black  " htmlFor="username">
+              Date of Birth
+            </label>
+            <input
+              onChange={(e) => {
+                setDob(e.target.value);
+                console.log(e.target.value);
+              }}
+              type="date"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="username">
+              CitizenShip
+            </label>
+            <input
+              type="text"
+              onChange={(e) => setCitizenship(e.target.value)}
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="username">
+              Country of birth
+            </label>
+
+            <select
+              name=""
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              id=""
+              onChange={(e) => {
+                setCountrofbirth(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option value="">Select </option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+            </select>
+          </div>
+          <h1 className="text-xl font-bold text-black  capitalize dark:text-black ">
+            Account Holder: Contact Details
+          </h1>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
               Alternative Phone{" "}
@@ -114,11 +196,83 @@ export default function OnBoarding() {
             <input
               value={phone}
               id="emailAddress"
-              type="number"
+              type="phone"
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               onChange={(e) => {
                 setPhone(e.target.value);
               }}
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="emailAddress">
+              Residence address: Street / Nr.{" "}
+            </label>
+            <input
+              value={address}
+              id="emailAddress"
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              onChange={(e) => {
+                setAddress(e.target.value);
+                console.log(address);
+              }}
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="emailAddress">
+              Residence address: Postal Code{" "}
+            </label>
+            <input
+              value={zip}
+              id="emailAddress"
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              onChange={(e) => {
+                setZip(e.target.value);
+                console.log(zip);
+              }}
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="emailAddress">
+              Residence address: City{" "}
+            </label>
+            <input
+              value={city}
+              id="emailAddress"
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              onChange={(e) => {
+                setCity(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="emailAddress">
+              Country
+            </label>
+            <select
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              name=""
+              id=""
+              onChange={(e) => {
+                setCountry(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <option value="">India</option>
+              <option value="">USA</option>
+              {/* all Country name */}
+            </select>
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="emailAddress">
+              Email
+            </label>
+            <input
+              type="email"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>

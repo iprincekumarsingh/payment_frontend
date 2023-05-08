@@ -229,10 +229,10 @@ export default function Home() {
                   <p class="text-xs md:text-base">Transfer Money</p>
                 </Link>
               </div>
-              <div class="flex  md:flex-row justify-start items-center overflow-x-auto p- bg-[#f2faff]">
+              <div class="flex  md:flex-row justify-start items-center overflow-x-auto p-2 gap-2 bg-[#f2faff]">
                 <Widget_card
                   card_text={
-                    "Wallet Balance: ₹" +
+                    "Wallet Balance: " +
                     (Number.isInteger(wallet_balance)
                       ? wallet_balance
                           .toLocaleString("en-IN", {
@@ -329,36 +329,34 @@ export default function Home() {
             >
               <section className="border ">
                 <div className="flex-col justify-center items-center">
-                  <h1 className="text-xl font-bold text-start text-blue-500">
+                  <h1 className="text-1xl font-bold text-start text-blue-500">
                     Available balance -₹ {wallet_balance}
                   </h1>
                 </div>
 
                 <form onSubmit={requesMoneyFunction}>
                   <div className="mb-1 mt-4">
-                    <h1 className="py-2">
+                    <h1 className="py-2 p-2">
                       Request Money to{" "}
                       <span className="font-bold">SX Bank</span>
                     </h1>
 
-                    <div className=" p-4 rounded-md shadow-lg">
-                      <div className="relative">
-                        <label htmlFor="amount" className="sr-only">
-                          Enter Amount
-                        </label>
-                        <input
-                          id="amount"
-                          name="amount"
-                          type="number"
-                          value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
-                          className="block w-full px-4 py-3 rounded-md bg-white  placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                          placeholder="Enter Amount"
-                        />
-                      </div>
+                    {/* <div className="p-4 rounded-md shadow-lg"> */}
+                    <div className="relative p-2">
+                      <label htmlFor="amount" className="sr-only">
+                        Enter Amount
+                      </label>
+                      <input
+                        class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="username"
+                        type="text"
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder="Enter Amount"
+                      />
                     </div>
+                    {/* </div> */}
 
-                    <div className="flex justify-even overflow-x-auto w-full text-center ">
+                    <div className="flex mt-2 mb-2 justify-even overflow-x-auto w-full text-center ">
                       <ChipsAmount
                         setClick={() => setAmount(Number(amount) + Number(100))}
                         amount_chip={100}
