@@ -168,7 +168,7 @@ export default function TransferMoney() {
         // console.log(res);
         setTransferHistory(res.data.transferHistory);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   }, [successMessage, errorMessage]);
   const notificationListMap = transferHistory.map((item, index) => {
     return (
@@ -340,8 +340,8 @@ export default function TransferMoney() {
             maxWidth: "80vw",
           },
         }}
-      // className="flex items-center justify-center"
-      // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+        // className="flex items-center justify-center"
+        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
         <div className="bg-white rounded-lg w-full sm:w-96">
           <div className="p-4">

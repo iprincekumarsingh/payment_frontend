@@ -138,7 +138,15 @@ export default function Setting() {
             </div>
 
             <div>
-              <button className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full">
+              <button onClick={(e)=>{
+                e.preventDefault();
+                Cookie.remove("token");
+                localStorage.removeItem("PROFILE_DATA");
+                
+
+                window.location.href="/auth/login"
+
+              }} className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full">
                 Logout
               </button>
             </div>

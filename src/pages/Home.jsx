@@ -57,8 +57,8 @@ export default function Home() {
   const [letterFormat, setLetterFormat] = useState("");
   const [wallet_balance, setWallet_balance] = useState(0);
   useEffect(() => {
-    if (Cookie.get("token")) {
-      const data = localStorage.getItem("PROFILE_DATA");
+    if (!Cookie.get("token")) {
+      window.location.href = "/auth/login";
     }
 
     if (localStorage.getItem("PROFILE_DATA") != null) {
@@ -114,7 +114,7 @@ export default function Home() {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    // subtitle.style.color = "#f00";
   }
 
   function closeModal() {
@@ -159,13 +159,15 @@ export default function Home() {
       setMessage("Please enter the amount");
       return;
     }
-    // requesting money
+
+    setRequestMoney(false);
+
+    // sending a otp to the registered phone number
+
     axios
       .post(
-        "money/",
-        {
-          amount,
-        },
+        "money/user/send/Otp",
+        {},
         {
           headers: {
             "Content-Type": "application/json",
@@ -180,12 +182,79 @@ export default function Home() {
         setSuccess(res.data.message);
       })
       .catch((err) => {
-        // print the error message
-        console.log(err.response.data.message);
-        setMessage(err.response.data.message);
+        console.log(err);
       });
 
-    // alert("hello");
+    setOtpModal(true);
+  };
+  const [otp, setOtp] = useState("");
+  const [otpError, setOtpError] = useState("");
+
+  const [otpModal, setOtpModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  let [loading, setLoading] = useState(false);
+
+  const verifyOtp = (e) => {
+    e.preventDefault();
+
+    // checking the otp is valid or not
+    axios
+      .post(
+        "money/user/verify/Otp",
+        {
+          otp,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        axios
+          .post(
+            "money/",
+            {
+              amount,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${Cookie.get("token")}`,
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+            // setMessage(res.data.error)
+            console.log(res.data);
+            setSuccess(res.data.message);
+
+            setIsSubmitting(false)
+            // timeout after 3 seconds
+            setTimeout(() => {
+              // setSuccess("");
+              setAmount("");
+              setSuccess("");
+
+              setOtpModal(false);
+            }, 3000);
+          })
+          .catch((err) => {
+            // print the error message
+            console.log(err.response.data.message);
+            setMessage(err.response.data.message);
+          });
+
+        // if the otp is valid then send the money to the user
+        console.log(res);
+      })
+      .catch((err) => {
+        // console.log(err.response.data.message);
+        // setOtpError(err.response.data.message);
+        console.log(err);
+      });
   };
 
   return (
@@ -352,6 +421,7 @@ export default function Home() {
                         type="text"
                         onChange={(e) => setAmount(e.target.value)}
                         placeholder="Enter Amount"
+                        value={amount}
                       />
                     </div>
                     {/* </div> */}
@@ -362,7 +432,10 @@ export default function Home() {
                         amount_chip={100}
                       ></ChipsAmount>
                       <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(500))}
+                        setClick={() => {
+                          setAmount(Number(amount) + Number(500));
+                          console.log(amount);
+                        }}
                         amount_chip={500}
                       ></ChipsAmount>
                       <ChipsAmount
@@ -431,6 +504,76 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <Modal
+        isOpen={otpModal}
+        onRequestClose={closeRequestMoneyModal}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: "50",
+          },
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "1rem",
+            border: "1px solid rgba(189, 189, 189, 1)",
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+            padding: "2rem",
+            minWidth: "20rem",
+            maxWidth: "80vw",
+          },
+        }}
+        // className="flex items-center justify-center"
+        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+      >
+        <div className="bg-white rounded-lg w-full sm:w-96">
+          <div className="p-4">
+            <h2 className="text-[14px] font-bold mb-4 text-center">
+              An OTP has been sent to registered mobile number
+            </h2>
+            <form onSubmit={verifyOtp}>
+              <div className="flex flex-col items-center justify-center mb-6">
+                <input
+                  type="text"
+                  className="h-12 w-full sm:w-72 rounded-lg border-gray-300 border-2 text-center mb-2 focus:outline-none focus:border-blue-500"
+                  placeholder="Enter 4 digit OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+                {otpError && (
+                  <span className="text-red-500 text-sm">{otpError}</span>
+                )}
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded-lg"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {""}
+                  {/* check if the loading is true or not */}
+                  {/* {loading && <Loader />} */}
+                  {loading && (
+                    <BeatLoader
+                      type="TailSpin"
+                      color="#fff"
+                      height={20}
+                      width={20}
+                      className="ml-2"
+                    />
+                  )}
+                </button>
+              </div>
+            </form>
+            <p className="text-green-700 mt-3 text-center">{success}</p>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
