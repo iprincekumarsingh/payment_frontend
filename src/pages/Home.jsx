@@ -85,6 +85,9 @@ export default function Home() {
       })
 
       .then((res) => {
+        if (res.data.data.wallet_no == null) {
+          window.location.href = "/auth/onboarding";
+        }
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
 
         setfullname(res.data.data.fullname);
@@ -231,7 +234,7 @@ export default function Home() {
             console.log(res.data);
             setSuccess(res.data.message);
 
-            setIsSubmitting(false)
+            setIsSubmitting(false);
             // timeout after 3 seconds
             setTimeout(() => {
               // setSuccess("");
@@ -260,226 +263,256 @@ export default function Home() {
   return (
     <div className="overflow-x-auto overflow-y-auto">
       <Topbar title="SX Bank" />
+
+
+      {/* check if the file is there or not  */}
+
       <div className="overflow-x-auto p-4">
-        <div className="flex flex-col items-center justify-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, {name}!</h1>
+        <div className="flex flex-col text-start items-start justify-center mb-8">
+          <h1 className="text-3xl text-start font-bold mb-2">
+            Welcome back, {name}!
+          </h1>
         </div>
 
-        <div>
-          <section className="">
-            <div class="flex flex-col w-full border border-gray-300 rounded-lg shadow-md p-4 m-1">
-              <div class="flex  md:flex-row justify-center items-center p-4">
-                <HomeIcons
-                  onclickBtn={openModal}
-                  icon={add_money}
-                  text_p={"Add Money"}
-                />
-                <HomeIcons
-                  onclickBtn={requestMoneyModal}
-                  icon={receive_money}
-                  text_p={"Request Money"}
-                />
-                <Link
-                  to="/transfer/money"
-                  class="flex flex-col justify-center items-center text-center w-full md:w-48"
-                  style={{
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    class="h-6 mb-2"
-                    src={money_transfer}
-                    alt=""
-                    width={30}
+        {localStorage.getItem("PROFILE_DATA") == null ? (
+          <div>
+            <section className="">
+              <div class="flex flex-col w-full border border-gray-300 rounded-lg shadow-md p-4 m-1">
+                <div class="flex  md:flex-row justify-center items-center p-4">
+                  <HomeIcons
+                    onclickBtn={openModal}
+                    icon={add_money}
+                    text_p={"Add Money"}
                   />
-                  <p class="text-xs md:text-base">Transfer Money</p>
-                </Link>
-              </div>
-              <div class="flex  md:flex-row justify-start items-center overflow-x-auto p-2 gap-2 bg-[#f2faff]">
-                <Widget_card
-                  card_text={
-                    "Wallet Balance: " +
-                    (Number.isInteger(wallet_balance)
-                      ? wallet_balance
+                  <HomeIcons
+                    onclickBtn={requestMoneyModal}
+                    icon={receive_money}
+                    text_p={"Request Money"}
+                  />
+                  <Link
+                    to="/transfer/money"
+                    class="flex flex-col justify-center items-center text-center w-full md:w-48"
+                    style={{
+                      borderRadius: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      class="h-6 mb-2"
+                      src={money_transfer}
+                      alt=""
+                      width={30}
+                    />
+                    <p class="text-xs md:text-base">Transfer Money</p>
+                  </Link>
+                </div>
+                <div class="flex  md:flex-row justify-start items-center overflow-x-auto p-2 gap-2 bg-[#f2faff]">
+                  <Widget_card
+                    card_text={
+                      "Wallet Balance: " +
+                      (Number.isInteger(wallet_balance)
+                        ? wallet_balance
                           .toLocaleString("en-IN", {
                             style: "currency",
                             currency: "INR",
                           })
                           .slice(0, -3)
-                      : wallet_balance.toLocaleString("en-IN", {
+                        : wallet_balance.toLocaleString("en-IN", {
                           style: "currency",
                           currency: "INR",
                         }))
-                  }
-                />
-                <Widget_card card_text={"Wallet ID: " + wallet} />
-              </div>
-            </div>
-
-            <Modal
-              isOpen={modalIsOpen}
-              onAfterOpen={afterOpenModal}
-              onRequestClose={closeModal}
-              style={{
-                overlay: {
-                  backgroundColor: "rgba(0, 0, 0, 0.6)",
-                  zIndex: "50",
-                },
-                content: {
-                  top: "50%",
-                  left: "50%",
-                  right: "auto",
-                  bottom: "auto",
-                  // marginRight: "-50%",
-                  transform: "translate(-50%, -50%)",
-                  borderRadius: "1rem",
-                  border: "1px solid rgba(189, 189, 189, 1)",
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                  // padding: "2rem",
-                  minWidth: "20rem",
-                  maxWidth: "80vw",
-                },
-              }}
-              // contentLabel="Request Money Modal"
-              contentLabel="Example Modal"
-            >
-              <section className="rounded-2xl p-4 border border-gray-300">
-                <div className="flex flex-col items-center">
-                  <h1 className="text-3xl font-bold text-center mb-4">
-                    Send Money
-                  </h1>
-                  <img
-                    className="w-full max-w-sm mb-4"
-                    src={qrcode}
-                    alt="QR code"
+                    }
                   />
-                  <p className="text-sm text-gray-500 mb-4">
-                    Scan the QR code to send money and share the screenshot on
-                    WhatsApp.
-                  </p>
-                  <button
-                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    onClick={closeModal}
-                  >
-                    Close
-                  </button>
+                  <Widget_card card_text={"Wallet ID: " + wallet} />
                 </div>
-              </section>
-            </Modal>
+              </div>
 
-            <Modal
-              isOpen={requestMoney}
-              onAfterOpen={afterOpenModal}
-              onRequestClose={closeRequestMoneyModal}
-              style={{
-                overlay: {
-                  backgroundColor: "rgba(0, 0, 0, 0.6)",
-                  zIndex: "50",
-                },
-                content: {
-                  top: "50%",
-                  left: "50%",
-                  right: "auto",
-                  bottom: "auto",
-                  marginRight: "-50%",
-                  transform: "translate(-50%, -50%)",
-                  borderRadius: "1rem",
-                  border: "1px solid rgba(189, 189, 189, 1)",
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                  padding: "2rem",
-                  minWidth: "20rem",
-                  maxWidth: "80vw",
-                },
-              }}
-              contentLabel="Request Money Modal"
-            >
-              <section className="border ">
-                <div className="flex-col justify-center items-center">
-                  <h1 className="text-1xl font-bold text-start text-blue-500">
-                    Available balance -₹ {wallet_balance}
-                  </h1>
-                </div>
-
-                <form onSubmit={requesMoneyFunction}>
-                  <div className="mb-1 mt-4">
-                    <h1 className="py-2 p-2">
-                      Request Money to{" "}
-                      <span className="font-bold">SX Bank</span>
+              <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={{
+                  overlay: {
+                    backgroundColor: "rgba(0, 0, 0, 0.6)",
+                    zIndex: "50",
+                  },
+                  content: {
+                    top: "50%",
+                    left: "50%",
+                    right: "auto",
+                    bottom: "auto",
+                    // marginRight: "-50%",
+                    transform: "translate(-50%, -50%)",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(189, 189, 189, 1)",
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                    // padding: "2rem",
+                    minWidth: "20rem",
+                    maxWidth: "80vw",
+                  },
+                }}
+                // contentLabel="Request Money Modal"
+                contentLabel="Example Modal"
+              >
+                <section className="rounded-2xl p-4 border border-gray-300">
+                  <div className="flex flex-col items-center">
+                    <h1 className="text-3xl font-bold text-center mb-4">
+                      Send Money
                     </h1>
-
-                    {/* <div className="p-4 rounded-md shadow-lg"> */}
-                    <div className="relative p-2">
-                      <label htmlFor="amount" className="sr-only">
-                        Enter Amount
-                      </label>
-                      <input
-                        class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="username"
-                        type="text"
-                        onChange={(e) => setAmount(e.target.value)}
-                        placeholder="Enter Amount"
-                        value={amount}
-                      />
-                    </div>
-                    {/* </div> */}
-
-                    <div className="flex mt-2 mb-2 justify-even overflow-x-auto w-full text-center ">
-                      <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(100))}
-                        amount_chip={100}
-                      ></ChipsAmount>
-                      <ChipsAmount
-                        setClick={() => {
-                          setAmount(Number(amount) + Number(500));
-                          console.log(amount);
-                        }}
-                        amount_chip={500}
-                      ></ChipsAmount>
-                      <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(100))}
-                        amount_chip={1000}
-                      ></ChipsAmount>
-                      <ChipsAmount
-                        setClick={() =>
-                          setAmount(Number(amount) + Number(2000))
-                        }
-                        amount_chip={2000}
-                      ></ChipsAmount>
-                    </div>
-                    <p className="text-red-500 mt-3 text-center">{message}</p>
-                    <p className="text-green-700 mt-3 text-center">{success}</p>
+                    <img
+                      className="w-full max-w-sm mb-4"
+                      src={qrcode}
+                      alt="QR code"
+                    />
+                    <p className="text-sm text-gray-500 mb-4">
+                      Scan the QR code to send money and share the screenshot on
+                      WhatsApp.
+                    </p>
+                    <button
+                      className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      onClick={closeModal}
+                    >
+                      Close
+                    </button>
                   </div>
-                  <button
-                    className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit"
+                </section>
+              </Modal>
+
+              <Modal
+                isOpen={requestMoney}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeRequestMoneyModal}
+                style={{
+                  overlay: {
+                    backgroundColor: "rgba(0, 0, 0, 0.6)",
+                    zIndex: "50",
+                  },
+                  content: {
+                    top: "50%",
+                    left: "50%",
+                    right: "auto",
+                    bottom: "auto",
+                    marginRight: "-50%",
+                    transform: "translate(-50%, -50%)",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(189, 189, 189, 1)",
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                    padding: "2rem",
+                    minWidth: "20rem",
+                    maxWidth: "80vw",
+                  },
+                }}
+                contentLabel="Request Money Modal"
+              >
+                <section className="border ">
+                  <div className="flex-col justify-center items-center">
+                    <h1 className="text-1xl font-bold text-start text-blue-500">
+                      Available balance -₹ {wallet_balance}
+                    </h1>
+                  </div>
+
+                  <form onSubmit={requesMoneyFunction}>
+                    <div className="mb-1 mt-4">
+                      <h1 className="py-2 p-2">
+                        Request Money to{" "}
+                        <span className="font-bold">SX Bank</span>
+                      </h1>
+
+                      {/* <div className="p-4 rounded-md shadow-lg"> */}
+                      <div className="relative p-2">
+                        <label htmlFor="amount" className="sr-only">
+                          Enter Amount
+                        </label>
+                        <input
+                          class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="username"
+                          type="text"
+                          onChange={(e) => setAmount(e.target.value)}
+                          placeholder="Enter Amount"
+                          value={amount}
+                        />
+                      </div>
+                      {/* </div> */}
+
+                      <div className="flex mt-2 mb-2 justify-even overflow-x-auto w-full text-center ">
+                        <ChipsAmount
+                          setClick={() =>
+                            setAmount(Number(amount) + Number(100))
+                          }
+                          amount_chip={100}
+                        ></ChipsAmount>
+                        <ChipsAmount
+                          setClick={() => {
+                            setAmount(Number(amount) + Number(500));
+                            console.log(amount);
+                          }}
+                          amount_chip={500}
+                        ></ChipsAmount>
+                        <ChipsAmount
+                          setClick={() =>
+                            setAmount(Number(amount) + Number(100))
+                          }
+                          amount_chip={1000}
+                        ></ChipsAmount>
+                        <ChipsAmount
+                          setClick={() =>
+                            setAmount(Number(amount) + Number(2000))
+                          }
+                          amount_chip={2000}
+                        ></ChipsAmount>
+                      </div>
+                      <p className="text-red-500 mt-3 text-center">{message}</p>
+                      <p className="text-green-700 mt-3 text-center">
+                        {success}
+                      </p>
+                    </div>
+                    <button
+                      className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      type="submit"
                     // disabled={isLoading}
-                  >
-                    Request Money
-                  </button>
-                </form>
-                <hr />
-              </section>
-            </Modal>
-          </section>
-        </div>
+                    >
+                      Request Money
+                    </button>
+                  </form>
+                  <hr />
+                </section>
+              </Modal>
+            </section>
+          </div>
+        ) : (
+          <div className="bg-indigo-900 text-center py-2 lg:px-2">
+            <div
+              className="p-2  items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
+              role="alert"
+            >
+              <span className="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">
+                Alert
+              </span>
+              <span className="font-semibold mr-2 text-left flex-auto">
+                Complete your KYC to get full access to SX Bank
+              </span>
+              <svg
+                className="fill-current opacity-75 h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+              </svg>
+            </div>
+          </div>
+        )}
       </div>
       <div className="mb-20" style={{ margin: "10px" }}>
         <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-        <div className="w-full p-1 h-56 text-white transition-transform transform rounded-xl bg-gradient-to-b ">
+        <div className="w-full p-1 h-56 text-white bg-[#242B2E] transition-transform transform rounded-xl bg-gradient-to-b ">
           <a href="" target="_blank" rel="noopener noreferrer">
-            <img
-              className="w-full h-full rounded-xl"
-              src="https://i.imgur.com/kGkSg1v.png"
-              alt="Debit Card"
-            />
             <div className="absolute top-8 px-8 w-full">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="font-medium">Debit Card</p>
-                  <p className="font-bold">{wallet}</p>
+                  <p className="font-semi">Debit Card</p>
+                  <p className="font-extrabold text-white">{wallet}</p>
                 </div>
                 <img className="w-14 h-14" src={logo} alt="Logo" />
               </div>
@@ -527,8 +560,8 @@ export default function Home() {
             maxWidth: "80vw",
           },
         }}
-        // className="flex items-center justify-center"
-        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+      // className="flex items-center justify-center"
+      // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
         <div className="bg-white rounded-lg w-full sm:w-96">
           <div className="p-4">
