@@ -277,34 +277,54 @@ export default function Home() {
 
         <div>
           <section className="container">
-            <div class="flex flex-col w-full    p-4 m-1">
-              <div class="flex  md:flex-row justify-center items-center p-4">
-                <HomeIcons
-                  onclickBtn={openModal}
-                  icon={add_money}
-                  text_p={"Add Money"}
-                />
-                <HomeIcons
-                  onclickBtn={requestMoneyModal}
-                  icon={request_money}
-                  text_p={"Request Money"}
-                />
-                <Link
-                  to="/transfer/money"
-                  class="flex flex-col justify-center items-center text-center w-full md:w-48"
-                  style={{
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img class=" mb-2" src={money_transfer} alt="" width={50} />
-                  <p class="text-xs md:text-base">Transfer Money</p>
-                </Link>
+            <div class="flex flex-col w-full p-4 m-1 bg-white rounded-lg shadow-lg">
+              <div className="flex  md:flex-row justify-center items-center gap-4 p-4">
+                <div className="flex-1">
+                  <div
+                    onClick={openModal}
+                    className="flex flex-col items-center justify-center  p-4 rounded-lg  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+                  >
+                    <img
+                      className="mb-2 rounded-full w-12 h-12"
+                      src={add_money}
+                      alt=""
+                    />
+                    <p className="text-sm md:text-base text-whi flex items-center justify-center h-full">
+                      Add Money
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div
+                    onClick={requestMoneyModal}
+                    className="flex flex-col items-center justify-center  p-4 rounded-lgd cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+                  >
+                    <img
+                      className="mb-2 rounded-full w-12 h-12"
+                      src={request_money}
+                      alt=""
+                    />
+                    <p className="text-sm md:text-base text-whi flex items-center justify-center h-full">
+                      Request Money
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <Link
+                    to="/transfer/money"
+                    className="flex flex-col items-center justify-center  p-4 rounded-lg  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+                  >
+                    <img
+                      className="mb-2 rounded-full w-12 h-12"
+                      src={money_transfer}
+                      alt=""
+                    />
+                    <p className="text-sm md:text-base text-whe flex items-center justify-center h-full">
+                      Transfer Money
+                    </p>
+                  </Link>
+                </div>
               </div>
-
-
             </div>
             <Widget_card card_text={"Wallet ID: " + wallet} />
 
@@ -444,7 +464,7 @@ export default function Home() {
                   <button
                     className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
-                  // disabled={isLoading}
+                    // disabled={isLoading}
                   >
                     Request Money
                   </button>
@@ -511,8 +531,8 @@ export default function Home() {
             maxWidth: "80vw",
           },
         }}
-      // className="flex items-center justify-center"
-      // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+        // className="flex items-center justify-center"
+        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
         <div className="bg-white rounded-lg w-full sm:w-96">
           <div className="p-4">

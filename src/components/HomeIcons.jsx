@@ -4,14 +4,10 @@ export default function HomeIcons({ onclickBtn, text_p, icon }) {
   return (
     <div
       onClick={onclickBtn}
-      className="flex flex-col justify-center items-center text-center w-full md:w-48 text-sm md:text-base"
-      style={{
-        padding: "0.5rem",
-        borderRadius: "10px",
-      }}
+      className="w-full md:w-48  p-4 cursor-pointer flex flex-col items-center justify-center transition duration-300 ease-in-out transform hover:scale-105"
     >
-      <img className=" mb-2" src={icon} alt="" width={50} />
-      <p className="w-full text-xs md:text-base">{text_p}</p>
+      <img className="mb-2 rounded-full" src={icon} alt="" width={50} />
+      <p className="text-sm md:text-base text-center ">{text_p}</p>
     </div>
   );
 }
