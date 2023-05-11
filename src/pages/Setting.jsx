@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Topbar from "../components/Topbar";
 import Cookie from "js-cookie";
+import axios from "../api/axios";
 export default function Setting() {
   const [fullname, setfullname] = useState("");
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ export default function Setting() {
   const [wallet, setWallet] = useState("");
   const [counter, setCounter] = useState(0);
   const [letterFormat, setLetterFormat] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const [pin, setPin] = useState("");
   useEffect(() => {
@@ -40,6 +42,30 @@ export default function Setting() {
       setPin(localStorage.getItem("pin"));
     }
   }, []);
+
+  const handleSubmit = (newPass) => {
+    // alert(newPass);
+
+    axios
+      .put(
+        "auth/changepassword",
+        {
+          newPassowrd: newPass,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        alert("Password changed successfully");
+      })
+      .catch((err) => {
+        alert("Something went wrong");
+      });
+  };
   return (
     <>
       <Topbar title="Settings"></Topbar>
@@ -94,7 +120,16 @@ export default function Setting() {
               <ul className="bg-white divide-y divide-gray-200">
                 <li className="px-4 py-4 sm:px-6">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div
+                      className="text-sm font-medium text-gray-900"
+                      onClick={(e) => {
+                        const newPass = prompt("Enter new password:");
+
+                        setNewPassword(newPass);
+
+                        handleSubmit(newPass);
+                      }}
+                    >
                       Change Password
                     </div>
                   </div>
@@ -123,7 +158,6 @@ export default function Setting() {
                             if (newPin) {
                               localStorage.setItem("pin", newPin);
                               setPin(newPin);
-
                             }
                           }}
                         >
@@ -133,20 +167,20 @@ export default function Setting() {
                     </div>
                   </div>
                 </li>
-
               </ul>
             </div>
 
             <div>
-              <button onClick={(e)=>{
-                e.preventDefault();
-                Cookie.remove("token");
-                localStorage.removeItem("PROFILE_DATA");
-                
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  Cookie.remove("token");
+                  localStorage.removeItem("PROFILE_DATA");
 
-                window.location.href="/auth/login"
-
-              }} className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full">
+                  window.location.href = "/auth/login";
+                }}
+                className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full"
+              >
                 Logout
               </button>
             </div>
