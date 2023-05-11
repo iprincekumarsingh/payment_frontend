@@ -12,6 +12,7 @@ export default function OnBoarding() {
   const [fathername, setFathername] = React.useState("");
   const [nominee, setNominee] = React.useState("");
   const [panno, setPanno] = React.useState("");
+  const [file, setFile] = React.useState("");
 
   useEffect(() => {
     document.title = "Onboarding";
@@ -27,10 +28,10 @@ export default function OnBoarding() {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
+
     setBtn("Updating...");
     setErrorMsg("");
     const data = {
-    
       phone,
       bankaccount,
       bankname,
@@ -38,44 +39,54 @@ export default function OnBoarding() {
       aadhaar,
       title,
     };
-    console.log(data);
 
-    if ( !phone || !bankaccount || !bankname || !ifsc || !aadhaar) {
-      setErrorMsg("Please fill all the fields");
+    // check aaadhhar number is valid or not
+    if (aadhaar.length !== 12) {
+      setErrorMsg("Aadhaar number must be 12 digits");
       setBtn("Update");
       return;
     }
+    const formData = new window.FormData();
+    formData.append("file", file);
+
+    const userData = {
+      // Other user data properties
+      alt_phone: phone,
+      account_number: bankaccount,
+      bank_name: bankname,
+      ifsc_code: ifsc,
+      aadhaar_number: aadhaar,
+      title: title,
+      dob: dob,
+      citizenship: citizenship,
+      country: country,
+      address: address,
+      city: city,
+      pincode: zip,
+      country_of_birth: countrofbirth,
+      email: email,
+      father_name: fathername,
+      nominee_name: nominee,
+      pan_no: panno,
+      file: formData,
+    };
+
+    // Add user data to form data
+
+    for (const key in userData) {
+      console.log(key, userData[key]);
+      formData.append(key, userData[key]);
+    }
+
+    console.log(formData);
 
     axios
-      .put(
-        "auth/onboarding/new_user",
-        {
-          // fullname,
-          alt_phone: phone,
-          account_number: bankaccount,
-          bank_name: bankname,
-          ifsc_code: ifsc,
-          aadhaar_number: aadhaar,
-          title: title,
-          dob: dob,
-          citizenship: citizenship,
-          country: country,
-          address: address,
-          city: city,
-          pincode: zip,
-          country_of_birth: countrofbirth,
-          email: email,
-          father_name: fathername,
-          nominee_name: nominee,
-          pan_no: panno,
+      .post("auth/onboarding/new_user", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + Cookie.get("token"),
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + Cookie.get("token"),
-          },
-        }
-      )
+      })
       .then((res) => {
         setBtn("Update");
         setErrorMsg("");
@@ -86,7 +97,7 @@ export default function OnBoarding() {
           localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         }
 
-        // localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
+        localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
         window.location.href = "/home/home/user";
       })
       .catch((err) => {
@@ -149,7 +160,8 @@ export default function OnBoarding() {
           </div> */}
           <div>
             <label className="text-black  " htmlFor="username">
-              Date of Birth  <span
+              Date of Birth{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -169,7 +181,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="username">
-              CitizenShip  <span
+              CitizenShip{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -186,7 +199,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="username">
-              Country of birth  <span
+              Country of birth{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -215,7 +229,8 @@ export default function OnBoarding() {
           </h1>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
-              Alternative Phone{" "}  <span
+              Alternative Phone{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -236,7 +251,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
-              Father Name  <span
+              Father Name{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -256,7 +272,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
-              Nominee Name  <span
+              Nominee Name{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -270,20 +287,22 @@ export default function OnBoarding() {
               type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               onChange={(e) => {
-                setNominee(e.target.value);  <span
-                style={{
-                  color: "red",
-                }}
-              >
-                {" "}
-                *
-              </span>
+                setNominee(e.target.value);
+                <span
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  {" "}
+                  *
+                </span>;
               }}
             />
           </div>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
-              Residence address: Street / Nr.{" "}  <span
+              Residence address: Street / Nr.{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -305,7 +324,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
-              Residence address: Postal Code{" "}  <span
+              Residence address: Postal Code{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -327,7 +347,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
-              Residence address: City{" "}  <span
+              Residence address: City{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -348,7 +369,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
-              Country  <span
+              Country{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -373,7 +395,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="emailAddress">
-              Email  <span
+              Email{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -390,7 +413,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="password">
-              Bank Account Number  <span
+              Bank Account Number{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -411,7 +435,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
-              BANK NAME  <span
+              BANK NAME{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -431,7 +456,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
-              IFSC CODE  <span
+              IFSC CODE{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -451,7 +477,8 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
-              Aadhaar Number  <span
+              Aadhaar Number{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -472,7 +499,8 @@ export default function OnBoarding() {
 
           <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
-              Pan No  <span
+              Pan No{" "}
+              <span
                 style={{
                   color: "red",
                 }}
@@ -490,7 +518,7 @@ export default function OnBoarding() {
               }}
             />
           </div>
-          {/* <div>
+          <div>
             <label className="text-black  " htmlFor="passwordConfirmation">
               Aadhar Card/ Driving License/ Voter ID / Passport (Any One){" "}
               <span
@@ -504,13 +532,14 @@ export default function OnBoarding() {
             </label>
             <input
               id="passwordConfirmation"
-              type="file" accept=".jpg,.png,.jpeg ,.pdf"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              type="file"
               onChange={(e) => {
-                setAadhaar(e.target.value);
+                setFile(e.target.files[0]);
               }}
+              accept=".jpg,.png,.jpeg ,.pdf"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
-          </div> */}
+          </div>
         </div>
         <div className="flex justify-center w-full mt-6">
           <button

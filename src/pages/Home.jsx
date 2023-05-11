@@ -274,7 +274,7 @@ export default function Home() {
           </h1>
         </div>
 
-        {localStorage.getItem("PROFILE_DATA") == null ? (
+        {localStorage.getItem("PROFILE_DATA") != null ? (
           <div>
             <section className="">
               <div class="flex flex-col w-full border border-gray-300 rounded-lg shadow-md p-4 m-1">

@@ -17,6 +17,7 @@ import OnBoarding from "./pages/OnBoarding.jsx";
 import Register from "./auth/Register.jsx";
 import ForgotPassword from "./auth/ForgotPassword.jsx";
 import Setting from "./pages/Setting.jsx";
+import Fileupload from "./test/fileupload.jsx";
 
 const router = createBrowserRouter([
   {
@@ -87,7 +88,13 @@ const router = createBrowserRouter([
     element: <Setting></Setting>
 
   },
+
+  {
+    path: "/file/test",
+    element:<Fileupload></Fileupload>
+  }
 ]);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <RouterProvider router={router} />
