@@ -46,6 +46,27 @@ export default function OnBoarding() {
       setBtn("Update");
       return;
     }
+    // check bank account number is valid or not
+    if (bankaccount.length !== 12) {
+      setErrorMsg("Bank account number must be 12 digits");
+      setBtn("Update");
+      return;
+    }
+    // check all fields are filled or not
+
+    if (
+      phone === "" ||
+      bankaccount === "" ||
+      bankname === "" ||
+      ifsc === "" ||
+      aadhaar === "" ||
+      title === ""
+    ) {
+      setErrorMsg("All fields are required");
+
+      setBtn("Update");
+      return;
+    }
     const formData = new window.FormData();
     formData.append("file", file);
 
