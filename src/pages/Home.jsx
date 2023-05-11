@@ -285,7 +285,7 @@ export default function Home() {
                     className="flex flex-col items-center justify-center  p-4 rounded-lg  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
                   >
                     <img
-                      className="mb-2 rounded-full w-12 h-12"
+                      className="mb-2 w-12 h-12"
                       src={add_money}
                       alt=""
                     />
@@ -300,7 +300,7 @@ export default function Home() {
                     className="flex flex-col items-center justify-center  p-4 rounded-lgd cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
                   >
                     <img
-                      className="mb-2 rounded-full w-12 h-12"
+                      className="mb-2 w-12 h-12"
                       src={request_money}
                       alt=""
                     />
@@ -312,10 +312,10 @@ export default function Home() {
                 <div className="flex-1">
                   <Link
                     to="/transfer/money"
-                    className="flex flex-col items-center justify-center  p-4 rounded-lg  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+                    className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
                   >
                     <img
-                      className="mb-2 rounded-full w-12 h-12"
+                      className="mb-2  w-12 h-12"
                       src={money_transfer}
                       alt=""
                     />
