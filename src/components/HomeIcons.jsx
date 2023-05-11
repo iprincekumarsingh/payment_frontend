@@ -10,7 +10,7 @@ export default function HomeIcons({ onclickBtn, text_p, icon }) {
         borderRadius: "10px",
       }}
     >
-      <img className="h-6 mb-2" src={icon} alt="" width={30} />
+      <img className=" mb-2" src={icon} alt="" width={50} />
       <p className="w-full text-xs md:text-base">{text_p}</p>
     </div>
   );

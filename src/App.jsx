@@ -99,7 +99,7 @@ function App() {
       {/* component */}
       <Toaster />
 
-      <div className="flex-col  justify-center items-center h-screen">
+      <div className="flex-col  justify-center items-center h-screen p-4">
         {/* <img src={logo} width={50} alt="" srcset="" /> */}
         <div className="flex  justify-center items-center h-screen ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
