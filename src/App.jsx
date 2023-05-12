@@ -7,12 +7,6 @@ import logo from "./img/sxbank.jpg";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from "react-router-dom";
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
-
 function App() {
   useEffect(() => {
     if (Cookie.get("token")) {
@@ -44,6 +38,7 @@ function App() {
 
       return toast.error("Please enter a phone number");
     }
+    
 
     if (phone.length < 10 || phone.length > 10) {
       setLoading(false);
@@ -103,8 +98,10 @@ function App() {
         {/* <img src={logo} width={50} alt="" srcset="" /> */}
         <div className="flex  justify-center items-center h-screen ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+             <div className="flex justify-center p-4 items-center">
+             <img src={logo} width={100}  className="flex justify-center items-center rounded-xl" alt="" srcset={logo} />
+             </div>
             <h2 className="text-3xl flex font-bold leading-tight text-black sm:text-4xl">
-              {/* <img src={logo} width={40} className="flex justify-center items-center" alt="" srcset="" /> */}
               Sign in
             </h2>
             <p className="mt-2 text-base text-gray-600  " style={{}}>
@@ -133,7 +130,8 @@ function App() {
                   </label>
                   <div className="mt-2.5">
                     <input
-                      className="flex h-10 w-full rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                      className="flex h-10 w-full rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:focus:ring-gray-400 
+                      dark:focus:ring-offset-gray-800"
                       type="number"
                       placeholder="80934XXXX"
                       value={phone}
@@ -149,13 +147,13 @@ function App() {
                     >
                       Password
                     </label>
-                    <a
-                      href="#"
+                    <Link
+                      to={"forgot-password"}
                       title
                       className="text-sm font-medium text-indigo-600 hover:text-indigo-700 hover:underline focus:text-indigo-700"
                     >
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
                   <div className="mt-2.5">
                     <input

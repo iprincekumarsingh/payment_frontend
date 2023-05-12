@@ -92,6 +92,10 @@ const router = createBrowserRouter([
   {
     path: "/file/test",
     element:<Fileupload></Fileupload>
+  },
+  {
+    path:"forgot-password",
+    element:<h1>ForgotPasswor</h1>
   }
 ]);
 
