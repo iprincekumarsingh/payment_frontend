@@ -38,7 +38,7 @@ function App() {
 
       return toast.error("Please enter a phone number");
     }
-    
+
 
     if (phone.length < 10 || phone.length > 10) {
       setLoading(false);
@@ -98,9 +98,9 @@ function App() {
         {/* <img src={logo} width={50} alt="" srcset="" /> */}
         <div className="flex  justify-center items-center h-screen ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-             <div className="flex justify-center p-4 items-center">
-             <img src={logo} width={100}  className="flex justify-center items-center rounded-xl" alt="" srcset={logo} />
-             </div>
+            <div className="flex justify-center p-4 items-center">
+              <img src={logo} width={100} className="flex justify-center items-center rounded-xl" alt="" srcset={logo} />
+            </div>
             <h2 className="text-3xl flex font-bold leading-tight text-black sm:text-4xl">
               Sign in
             </h2>
@@ -148,7 +148,7 @@ function App() {
                       Password
                     </label>
                     <Link
-                      to={"forgot-password"}
+                      to={"../forgot-password"}
                       title
                       className="text-sm font-medium text-indigo-600 hover:text-indigo-700 hover:underline focus:text-indigo-700"
                     >

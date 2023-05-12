@@ -24,10 +24,7 @@ export default function OtpVerification() {
   const location = useLocation();
   const phoneNumber = new URLSearchParams(location.search).get("phone");
 
-  const [o1, setO1] = useState("");
-  const [o2, setO2] = useState("");
-  const [o3, setO3] = useState("");
-  const [o4, setO4] = useState("");
+
   const [progress, setProgress] = useState("Verify OTP");
 
   const [otp, setOtp] = useState("");

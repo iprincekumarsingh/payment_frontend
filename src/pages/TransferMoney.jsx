@@ -21,10 +21,7 @@ export default function TransferMoney() {
   const [transferHistory, setTransferHistory] = useState([]);
   const [pinverifyModal, setPinverifyModal] = useState(false);
   const [pin, setPin] = useState("");
-  const [pin1, setPin1] = useState("");
-  const [pin2, setPin2] = useState("");
-  const [pin3, setPin3] = useState("");
-  const [pin4, setPin4] = useState("");
+  
   const [buttonMsg, setButtonMsg] = useState("Verify");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -39,9 +36,7 @@ export default function TransferMoney() {
       width: "90%",
       padding: "10px",
       shadow: "none",
-
       border: "none",
-
       transform: "translate(-50%, -50%)",
     },
   };

@@ -15,9 +15,10 @@ import RMoney from "./admin/RMoney.jsx";
 import TransferMoney from "./pages/TransferMoney.jsx";
 import OnBoarding from "./pages/OnBoarding.jsx";
 import Register from "./auth/Register.jsx";
-import ForgotPassword from "./auth/ForgotPassword.jsx";
+
 import Setting from "./pages/Setting.jsx";
 import Fileupload from "./test/fileupload.jsx";
+import ForgotPasswordPage from "./pages/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -63,11 +64,7 @@ const router = createBrowserRouter([
     path: "/auth/register",
     element: <Register></Register>,
   },
-  {
-
-    path: "/auth/forgotpassword",
-    element: <ForgotPassword></ForgotPassword>
-  },
+  
   {
     path: "/transfer/money",
     element: <TransferMoney></TransferMoney>,
@@ -95,7 +92,7 @@ const router = createBrowserRouter([
   },
   {
     path:"forgot-password",
-    element:<h1>ForgotPasswor</h1>
+    element:<ForgotPasswordPage></ForgotPasswordPage>
   }
 ]);
 
