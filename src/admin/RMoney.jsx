@@ -7,6 +7,7 @@ import rmoney from "../img/icons/rmoney.png";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import Cookie from "js-cookie";
+import Topbar from "../components/Topbar";
 export default function RMoney() {
   const approveBtn = (msg) => {
     alert(msg);
@@ -16,8 +17,22 @@ export default function RMoney() {
   };
 
   const [notificationList, setNotificationList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const fetchAPI = async () => { };
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // const filteredResults = notificationList.filter((item) =>
+  //   item.phone.includes(searchTerm)
+  // );
+  const filteredResults = notificationList.filter((item) =>
+    item.user.phone.includes(searchTerm)
+  );
+
+  const renderResults = searchTerm !== "" ? filteredResults : notificationList;
+
+  const fetchAPI = async () => {};
 
   // getting all notifications money request
   useEffect(() => {
@@ -38,12 +53,54 @@ export default function RMoney() {
         console.log(err);
       });
   }, []);
+  const formatDate = (date) => {
+    const options = { day: "numeric", month: "short", year: "2-digit" };
+    const formattedDate = new Date(date).toLocaleDateString("en-US", options);
+    const [day, month, year] = formattedDate.split(" ");
+    return `${day} ${month} ${year}`;
+  };
 
-  //  render all the notificationlist with a key
-  const notificationListMap = notificationList.map((item, index) => {
+  const handleApprove = (id, status) => {
+    axios
+      .put(
+        "money/" + id,
+        { status: status },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Separate approved and rejected items
+  const approvedItems = renderResults.filter(
+    (item) => item.status === "approved"
+  );
+  const rejectedItems = renderResults.filter(
+    (item) => item.status === "rejected"
+  );
+
+  // Concatenate the arrays, placing approved and rejected items at the end
+  const sortedResults = [
+    ...renderResults.filter(
+      (item) => item.status !== "approved" && item.status !== "rejected"
+    ),
+    ...approvedItems,
+    ...rejectedItems,
+  ];
+
+  const notificationListMap = sortedResults.map((item, index) => {
     return (
       <tr className=" border-b " key={index}>
-        <tr
+        <td
           className="flex-col px-6 py-4 "
           style={{
             display: "flex",
@@ -54,45 +111,55 @@ export default function RMoney() {
             {item.name}
           </th>
           <th className=" font-medium text-gray-900 whitespace-nowrap ">
-            Date- 24/2/23
+            {formatDate(item.createdAt)}
           </th>
           <th className=" font-medium text-gray-900 whitespace-nowrap ">
-            778148241346
+            Phone: {item.user.phone}
           </th>
           <th className=" font-medium text-gray-900 whitespace-nowrap ">
             Status: {item.status}
           </th>
-        </tr>
+        </td>
         <td className="px-6 py-4 text-black">Rs.{item.amount}</td>
         <div>
-          <button
-            onClick={() => {
-              approveBtn("Approved Successfully");
-            }}
-            className="bg-emerald-600"
-            style={{
-              width: "100px",
-              padding: "10px 20px",
-              margin: "2px",
-              color: "white",
-            }}
-          >
-            APPROVED
-          </button>
-          <button
-            onClick={() => {
-              rejectBtn("Rejected Successfully");
-            }}
-            style={{
-              background: "red",
-              padding: "10px 20px",
-              margin: "2px",
-              width: "100px",
-              color: "white",
-            }}
-          >
-            Reject
-          </button>
+          {item.status === "approved" ? (
+            <p className="text-center text-green-700 flex items-center">
+              Accepted Already
+            </p>
+          ) : item.status === "rejected" ? (
+            <p className="text-center text-red">Rejected</p>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  handleApprove(item._id, "approved");
+                }}
+                className="bg-emerald-600"
+                style={{
+                  width: "100px",
+                  padding: "10px 20px",
+                  margin: "2px",
+                  color: "white",
+                }}
+              >
+                APPROVED
+              </button>
+              <button
+                onClick={() => {
+                  handleApprove(item._id, "rejected");
+                }}
+                style={{
+                  background: "red",
+                  padding: "10px 20px",
+                  margin: "2px",
+                  width: "100px",
+                  color: "white",
+                }}
+              >
+                Reject
+              </button>
+            </>
+          )}
         </div>
       </tr>
     );
@@ -100,8 +167,17 @@ export default function RMoney() {
 
   return (
     <>
-      <div className="flex w-full justify-start first-letter: m-0 p-4 bg-slate-500 gap-12">
-        <div className="text-2xl md-w-[60%  ] w-[60%]">Admin Panel</div>
+      <Topbar title={"Money Requests"} />
+
+      <div className="flex justify-center">
+        <input
+          type="text"
+          className="p-2 border m-2 w-[300px] border-black focus:border-blue-500 rounded-md"
+          placeholder="Search Phone Number"
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
       </div>
       <div className="w-full overflow-x-auto mb-14">
         <table className="w-full text-sm text-left it text-gray-500 dark:text-gray-400">
@@ -119,14 +195,6 @@ export default function RMoney() {
             </tr>
           </thead>
           {notificationListMap}
-          {/* <tbody>{notificationListMap}</tbody> */}
-          {/* {JSON.stringify(notificationList)} */}
-          {/* {notificationList.map((item, index) => {
-            return (
-              <div>{item.amount}</div>
-            )
-          }
-          )} */}
         </table>
       </div>
     </>

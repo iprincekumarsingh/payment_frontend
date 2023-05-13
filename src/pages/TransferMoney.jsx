@@ -37,6 +37,7 @@ export default function TransferMoney() {
       padding: "10px",
       shadow: "none",
       border: "none",
+
       transform: "translate(-50%, -50%)",
     },
   };

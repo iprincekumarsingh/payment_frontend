@@ -284,11 +284,7 @@ export default function Home() {
                     onClick={openModal}
                     className="flex flex-col items-center justify-center  p-4 rounded-lg  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
                   >
-                    <img
-                      className="mb-2 w-12 h-12"
-                      src={add_money}
-                      alt=""
-                    />
+                    <img className="mb-2 w-12 h-12" src={add_money} alt="" />
                     <p className="text-sm md:text-base text-whi flex items-center justify-center h-full">
                       Add Money
                     </p>
@@ -326,7 +322,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <Widget_card card_text={"Wallet ID: " + wallet} />
+           
+            <Widget_card card_text={"Wallet ID: " + wallet } />
 
             <Modal
               isOpen={modalIsOpen}
@@ -478,8 +475,16 @@ export default function Home() {
       <div className="mb-20" style={{ margin: "10px" }}>
         <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
         <div className="w-full p-1 h-56 text-white bg-[#242B2E] transition-transform transform rounded-xl bg-gradient-to-b ">
-          <a href="" target="_blank" rel="noopener noreferrer">
+          <a href="#">
             <div className="absolute top-8 px-8 w-full">
+              <div className="flex justify-end mb-3 my-2">
+                {/* <p className="text-sm font-medium">Valid Thru</p> */}
+                <a href="#">
+                  <img className="w-14 h-14" src={logo2} alt="Logo" />
+                </a>
+                <p className="text-2xl font-medium my-2"></p>
+              </div>
+              <div className="flex justify-end"></div>
               <div className="flex justify-between items-center">
                 <div>
                   <p className="font-semi">Debit Card</p>
@@ -495,15 +500,6 @@ export default function Home() {
               >
                 {name}
               </a>
-              <div className="flex justify-start my-2">
-                {/* <p className="text-sm font-medium">Valid Thru</p> */}
-                <p className="text-2xl font-medium my-2"></p>
-              </div>
-              <div className="flex justify-end">
-                <a href="" target="_blank" rel="noopener noreferrer">
-                  <img className="w-14 h-14" src={logo2} alt="Logo" />
-                </a>
-              </div>
             </div>
           </a>
         </div>

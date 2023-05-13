@@ -77,6 +77,19 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
                 <CiSettings className="mr-2" />
                 <span>Settings</span>
               </Link>
+
+              {Cookie.get("role") === "admin" ? (
+                <Link
+                  to={"../home/admin"}
+                  className="flex items-center px-4 py-2 hover:bg-gray-100"
+                >
+                  <CiLogout className="mr-2" />
+                  <span>Admin</span>
+                </Link>
+              ) : (
+                <></>
+              )}
+
               <div
                 href="#"
                 className="flex items-center px-4 py-2 hover:bg-gray-100"

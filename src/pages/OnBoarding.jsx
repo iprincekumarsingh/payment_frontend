@@ -162,6 +162,7 @@ export default function OnBoarding() {
                 console.log(e.target.value);
               }}
             >
+              <option value="">Select Title</option>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
             </select>

@@ -39,7 +39,6 @@ function App() {
       return toast.error("Please enter a phone number");
     }
 
-
     if (phone.length < 10 || phone.length > 10) {
       setLoading(false);
       setProgress("Login");
@@ -64,7 +63,7 @@ function App() {
         Cookie.set("token", res.data.token);
         Cookie.set("user", JSON.stringify(res.data.user.full_name));
         Cookie.set("user_id", JSON.stringify(res.data.user.id));
-        Cookie.set("role", JSON.stringify(res.data.user.role));
+        Cookie.set("role", res.data.user.role);
         console.log(res.data.user.phone);
 
         if (localStorage.getItem("PROFILE_DATA") != null) {
@@ -99,7 +98,13 @@ function App() {
         <div className="flex  justify-center items-center h-screen ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
             <div className="flex justify-center p-4 items-center">
-              <img src={logo} width={100} className="flex justify-center items-center rounded-xl" alt="" srcset={logo} />
+              <img
+                src={logo}
+                width={100}
+                className="flex justify-center items-center rounded-xl"
+                alt=""
+                srcset={logo}
+              />
             </div>
             <h2 className="text-3xl flex font-bold leading-tight text-black sm:text-4xl">
               Sign in

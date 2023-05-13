@@ -19,6 +19,8 @@ import Register from "./auth/Register.jsx";
 import Setting from "./pages/Setting.jsx";
 import Fileupload from "./test/fileupload.jsx";
 import ForgotPasswordPage from "./pages/ForgotPassword.jsx";
+import Alluser from "./admin/Alluser.jsx";
+import User from "./admin/User.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         path: "home/transactions",
         element: <Transcations></Transcations>,
       },
-     
+
       {
         path: "home/admin",
         element: <Admin />,
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "admin/notification",
         element: <RMoney></RMoney>,
+      },
+      {
+        path: "admin/users",
+        element: <Alluser></Alluser>,
       },
     ],
   },
@@ -64,7 +70,7 @@ const router = createBrowserRouter([
     path: "/auth/register",
     element: <Register></Register>,
   },
-  
+
   {
     path: "/transfer/money",
     element: <TransferMoney></TransferMoney>,
@@ -82,18 +88,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <Setting></Setting>
-
+    element: <Setting></Setting>,
   },
 
   {
     path: "/file/test",
-    element:<Fileupload></Fileupload>
+    element: <Fileupload></Fileupload>,
   },
   {
-    path:"forgot-password",
-    element:<ForgotPasswordPage></ForgotPasswordPage>
-  }
+    path: "forgot-password",
+    element: <ForgotPasswordPage></ForgotPasswordPage>,
+  },
+  {
+    path: "admin/user/:id",
+    element: <User></User>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
