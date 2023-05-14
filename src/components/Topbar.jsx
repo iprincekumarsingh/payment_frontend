@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
+import adminIcon from "../img/icons/admin.png"
 
 import { CiSettings, CiLogout } from "react-icons/ci";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -83,7 +84,7 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
                   to={"../home/admin"}
                   className="flex items-center px-4 py-2 hover:bg-gray-100"
                 >
-                  <CiLogout className="mr-2" />
+                  <img src={adminIcon} width={20} className="mr-2" alt="" srcset="" />
                   <span>Admin</span>
                 </Link>
               ) : (
