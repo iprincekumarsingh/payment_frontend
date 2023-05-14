@@ -68,7 +68,7 @@ export default function Home() {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
 
       setfullname(
-        data.first_name + " " +  data.middle_name + " "+ data.last_name
+        data.first_name + " " + data.middle_name + " " + data.last_name
       );
 
       setalertnativephone(data.alt_phone);
@@ -78,7 +78,7 @@ export default function Home() {
       setPhone(data.phone);
       setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
-      setName(data.first_name );
+      setName(data.first_name);
       setWallet_balance(data.wallet_balance);
     }
 
@@ -97,7 +97,13 @@ export default function Home() {
         }
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
 
-        setfullname(res.data.data.first_name+ " " + res.data.data.middle_name + " "+ res.data.data.last_name);
+        setfullname(
+          res.data.data.first_name +
+            " " +
+            res.data.data.middle_name +
+            " " +
+            res.data.data.last_name
+        );
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
         setifsc(res.data.data.ifsc_code);
@@ -135,6 +141,10 @@ export default function Home() {
 
   function closeModal() {
     setIsOpen(false);
+    setAmount(0);
+    setMessage("");
+    setSuccess("");
+    setOtpError("");
   }
 
   function requestMoneyModal() {
@@ -196,9 +206,14 @@ export default function Home() {
         // setMessage(res.data.error)
         console.log(res.data);
         setSuccess(res.data.message);
+
+        setTimeout(() => {
+          setSuccess("");
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
+        setSuccess(err.response.data.message);
       });
 
     setOtpModal(true);
@@ -242,34 +257,24 @@ export default function Home() {
             }
           )
           .then((res) => {
-            console.log(res.data);
-            // setMessage(res.data.error)
-            console.log(res.data);
             setSuccess(res.data.message);
-
+            console.log(res.data.message);
             setIsSubmitting(false);
-            // timeout after 3 seconds
             setTimeout(() => {
               // setSuccess("");
               setAmount("");
               setSuccess("");
 
               setOtpModal(false);
-            }, 3000);
+            }, 2000);
           })
           .catch((err) => {
-            // print the error message
-            console.log(err.response.data.message);
-            setMessage(err.response.data.message);
+            console.log(err.response.data.error);
+            setOtpError(err.response.data.error);
           });
-
-        // if the otp is valid then send the money to the user
-        console.log(res);
       })
       .catch((err) => {
-        // console.log(err.response.data.message);
-        // setOtpError(err.response.data.message);
-        console.log(err);
+        setOtpError(err.response.data.error);
       });
   };
 
@@ -414,6 +419,20 @@ export default function Home() {
               contentLabel="Request Money Modal"
             >
               <section className="border ">
+                <div
+                  className="flex justify-end"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setRequestMoney(false);
+                    setAmount("");
+                    setOtp("");
+                    setOtpError("");
+                    setSuccess("");
+                  }}
+                >
+                  {" "}
+                  X
+                </div>
                 <div className="flex-col justify-center items-center">
                   <h1 className="text-1xl font-bold text-start text-blue-500">
                     Available balance -₹ {wallet_balance}
@@ -456,7 +475,9 @@ export default function Home() {
                         amount_chip={500}
                       ></ChipsAmount>
                       <ChipsAmount
-                        setClick={() => setAmount(Number(amount) + Number(100))}
+                        setClick={() =>
+                          setAmount(Number(amount) + Number(1000))
+                        }
                         amount_chip={1000}
                       ></ChipsAmount>
                       <ChipsAmount
@@ -491,7 +512,12 @@ export default function Home() {
               <div className="flex  justify-between mb-3 my-2">
                 {/* <p className="text-sm font-medium">Valid Thru</p> */}
                 <a href="#">
-                  <img className="w-14 h-14" src={card_pin} width={20} alt="Logo" />
+                  <img
+                    className="w-14 h-14"
+                    src={card_pin}
+                    width={20}
+                    alt="Logo"
+                  />
                 </a>
                 <a href="#">
                   <img className="w-14 h-14" src={logo2} alt="Logo" />
@@ -544,6 +570,20 @@ export default function Home() {
         // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
         <div className="bg-white rounded-lg w-full sm:w-96">
+          <div
+            className="flex justify-end"
+            onClick={(e) => {
+              e.preventDefault();
+              setOtpModal(false);
+              setAmount("");
+              setOtp("");
+              setOtpError("");
+              setSuccess("");
+            }}
+          >
+            {" "}
+            X
+          </div>
           <div className="p-4">
             <h2 className="text-[14px] font-bold mb-4 text-center">
               An OTP has been sent to registered mobile number
