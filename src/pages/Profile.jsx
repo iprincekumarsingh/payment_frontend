@@ -110,7 +110,7 @@ export default function Profile() {
   useEffect(() => {
     if (localStorage.getItem("PROFILE_DATA") != null) {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
-      setfullname(data.fullname);
+      setfullname(data.first_name + " " + data.middle_name + " "+ data.last_name);
       setalertnativephone(data.alt_phone);
       setaccountnumber(data.account_number);
       setifsc(data.ifsc_code);
@@ -133,7 +133,7 @@ export default function Profile() {
 
       .then((res) => {
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
-        setfullname(res.data.data.fullname);
+        setfullname(res.data.data.first_name+ " " + res.data.data.middle_name + " "+ res.data.data.last_name);
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
         setifsc(res.data.data.ifsc_code);
@@ -193,7 +193,7 @@ export default function Profile() {
       <div className="bg-gray-100 ">
         <div className="bg-white rounded-md  p-3 max-w-md mx-auto mt-1">
           <div className="text-start mt-4">
-            <h1 className="text-3xl font-bold text-gray-800">{name}</h1>
+            <h1 className="text-3xl font-bold text-gray-800">{fullname}</h1>
             <p className="text-gray-500 text-lg mt-2">{phone}</p>
           
           </div>
