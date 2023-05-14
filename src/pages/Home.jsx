@@ -68,7 +68,7 @@ export default function Home() {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
 
       setfullname(
-        data.first_name + " " + " " + data.middle_name + data.last_name
+        data.first_name + " " +  data.middle_name + " "+ data.last_name
       );
 
       setalertnativephone(data.alt_phone);
@@ -78,7 +78,7 @@ export default function Home() {
       setPhone(data.phone);
       setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
-      setName(data.fullname);
+      setName(data.first_name );
       setWallet_balance(data.wallet_balance);
     }
 
@@ -97,7 +97,7 @@ export default function Home() {
         }
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
 
-        setfullname(res.data.data.first_name);
+        setfullname(res.data.data.first_name+ " " + res.data.data.middle_name + " "+ res.data.data.last_name);
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
         setifsc(res.data.data.ifsc_code);
@@ -282,7 +282,7 @@ export default function Home() {
       <div className="overflow-x-auto p-4">
         <div className="flex flex-col text-start items-start justify-center ">
           <h1 className="text-3xl text-start font-bold mb-2">
-            Welcome back, {name}!
+            Welcome back, {name}
           </h1>
         </div>
 
@@ -511,7 +511,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                {name}
+                {fullname}
               </a>
             </div>
           </a>
