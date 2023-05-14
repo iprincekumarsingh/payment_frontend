@@ -186,7 +186,7 @@ export default function Admin() {
             </h1>
           </div>
         </Link>
-        <Link to="../home/transactions">
+        {/* <Link to="../home/transactions">
           <div
             className="mb-4 p-4 text-center flex-col justify-center items-center"
             style={{
@@ -198,7 +198,7 @@ export default function Admin() {
               Transcations
             </h1>
           </div>
-        </Link>
+        </Link> */}
       </div>
       {/*  */}
       <div className="p-2 text-start flex  text-1xl  justify-around items-center mt-3">

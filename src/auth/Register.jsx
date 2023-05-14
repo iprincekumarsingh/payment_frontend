@@ -5,7 +5,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import Cookie from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "../api/axios";
-import logo from "../img/sxbank.jpg";  
+import logo from "../img/sxbank.jpg";
 const override = {
   display: "block",
   margin: "0 auto",
@@ -27,19 +27,13 @@ export default function Register() {
     setProgress();
     setIsSubmitting(true);
 
-    if (!name || !phone || !password) {
+    if ( !phone || !password) {
       setLoading(false);
       setProgress("Register");
       setIsSubmitting(false);
       return toast.error("Please fill all the fields");
     }
-    if (!name) {
-      setLoading(false);
-      setProgress("Register");
-      setIsSubmitting(false);
-
-      return toast.error("Please enter your name");
-    }
+   
     if (!phone) {
       setLoading(false);
       setProgress("Register");
@@ -69,7 +63,7 @@ export default function Register() {
       .post("/auth/register", {
         phone_number: phone,
         password: password,
-        fullname: name,
+        // fullname: name,
       })
       .then((res) => {
         setLoading(false);
@@ -98,9 +92,15 @@ export default function Register() {
       <Toaster />
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-        <div className="flex justify-center p-4 items-center">
-             <img src={logo} width={100}  className="flex justify-center items-center rounded-xl" alt="" srcset={logo} />
-             </div>
+          <div className="flex justify-center p-4 items-center">
+            <img
+              src={logo}
+              width={100}
+              className="flex justify-center items-center rounded-xl"
+              alt=""
+              srcset={logo}
+            />
+          </div>
           <h2 className="text-3xl font-bold leading-tight text-black  sm:text-4xl">
             Sign Up
           </h2>
@@ -121,7 +121,7 @@ export default function Register() {
             className="mt-8"
           >
             <div className="space-y-5">
-              <div>
+              {/* <div>
                 <label
                   htmlFor="name"
                   className="text-base font-medium text-gray-900 "
@@ -137,7 +137,7 @@ export default function Register() {
                     id="name"
                   />
                 </div>
-              </div>
+              </div> */}
               <div>
                 <label
                   htmlFor="name"
@@ -207,10 +207,15 @@ export default function Register() {
                   {" "}
                   terms of service
                 </span>
-                to <span style={{
-
-                  lineHeight:"1px"
-                }}>  learn more</span>
+                to{" "}
+                <span
+                  style={{
+                    lineHeight: "1px",
+                  }}
+                >
+                  {" "}
+                  learn more
+                </span>
               </span>
             </p>
           </div>

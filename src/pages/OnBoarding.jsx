@@ -13,6 +13,9 @@ export default function OnBoarding() {
   const [nominee, setNominee] = React.useState("");
   const [panno, setPanno] = React.useState("");
   const [file, setFile] = React.useState("");
+  const [first_name, setFirst_name] = React.useState("");
+  const [last_name, setLast_name] = React.useState("");
+  const [middle_name, setMiddle_name] = React.useState("");
 
   useEffect(() => {
     document.title = "Onboarding";
@@ -90,6 +93,9 @@ export default function OnBoarding() {
       nominee_name: nominee,
       pan_no: panno,
       file: formData,
+      first_name: first_name,
+      last_name: last_name,
+      middle_name: middle_name,
     };
 
     // Add user data to form data
@@ -167,19 +173,45 @@ export default function OnBoarding() {
               <option value="Mrs">Mrs</option>
             </select>
           </div>
-          {/* <div>
+          <div>
             <label className="text-black  " htmlFor="username">
-              Full Name
+              First Name
             </label>
             <input
               onChange={(e) => {
-                setFullname(e.target.value);
+                setFirst_name(e.target.value);
                 console.log(e.target.value);
               }}
               type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
-          </div> */}
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="username">
+              Middle Name
+            </label>
+            <input
+              onChange={(e) => {
+                setMiddle_name(e.target.value);
+                console.log(e.target.value);
+              }}
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
+          <div>
+            <label className="text-black  " htmlFor="username">
+              Middle Name
+            </label>
+            <input
+              onChange={(e) => {
+                setLast_name(e.target.value);
+                console.log(e.target.value);
+              }}
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
           <div>
             <label className="text-black  " htmlFor="username">
               Date of Birth{" "}
@@ -410,8 +442,9 @@ export default function OnBoarding() {
                 console.log(e.target.value);
               }}
             >
-              <option value="">India</option>
-              <option value="">USA</option>
+              <option value="">Select Country</option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
               {/* all Country name */}
             </select>
           </div>
@@ -446,8 +479,8 @@ export default function OnBoarding() {
               </span>
             </label>
             <input
-              id="password"
-              type="number"
+              id="text"
+              type="text"
               value={bankaccount}
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               onChange={(e) => {
@@ -469,7 +502,7 @@ export default function OnBoarding() {
             </label>
             <input
               id="passwordConfirmation"
-              type="password"
+              type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               onChange={(e) => {
                 setBankname(e.target.value);

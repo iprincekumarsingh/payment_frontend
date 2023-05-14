@@ -195,6 +195,7 @@ export default function Profile() {
           <div className="text-start mt-4">
             <h1 className="text-3xl font-bold text-gray-800">{name}</h1>
             <p className="text-gray-500 text-lg mt-2">{phone}</p>
+          
           </div>
           <div className="border-t border-gray-200 mt-6 pt-6">
             <div className="flex justify-between mt-4">

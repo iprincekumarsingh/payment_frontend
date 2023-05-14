@@ -38,12 +38,15 @@ export default function User() {
               {user.fullname}
             </h1>
             <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
+            <p className="text-gray-500 text-2xl font-semibold mt-2">
+              Wallet Balance - {user.wallet_balance}
+            </p>
           </div>
 
           <div className="border-t border-gray-200 mt-6 pt-6">
             <div className="flex justify-center">
               <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Edit Profile
+                Login Into user Account
               </button>
             </div>
 

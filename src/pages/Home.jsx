@@ -9,6 +9,7 @@ import Cookie from "js-cookie";
 import logo from "../img/sxbank.jpg";
 import axios from "../api/axios";
 import logo2 from "../img/icons/logo2.png";
+import card_pin from "../img/icons/card_sim.png";
 
 import money_transfer from "../img/pay.png";
 import add_money from "../img/add.png";
@@ -66,7 +67,10 @@ export default function Home() {
     if (localStorage.getItem("PROFILE_DATA") != null) {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
 
-      setfullname(data.fullname);
+      setfullname(
+        data.first_name + " " + " " + data.middle_name + data.last_name
+      );
+
       setalertnativephone(data.alt_phone);
       setaccountnumber(data.account_number);
       setifsc(data.ifsc_code);
@@ -87,12 +91,13 @@ export default function Home() {
       })
 
       .then((res) => {
+        console.log(res.data.data);
         if (res.data.data.wallet_no == null) {
           window.location.href = "/auth/onboarding";
         }
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
 
-        setfullname(res.data.data.fullname);
+        setfullname(res.data.data.first_name);
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
         setifsc(res.data.data.ifsc_code);
@@ -103,7 +108,13 @@ export default function Home() {
 
         setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
 
-        setName(res.data.data.fullname);
+        setName(
+          res.data.data.first_name +
+            " " +
+            res.data.data.middle_name +
+            " " +
+            res.data.data.last_name
+        );
         setWallet_balance(res.data.data.wallet_balance);
       })
       .catch((err) => {
@@ -322,8 +333,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-           
-            <Widget_card card_text={"Wallet ID: " + wallet } />
+
+            <Widget_card card_text={"Wallet ID: " + wallet} />
 
             <Modal
               isOpen={modalIsOpen}
@@ -474,15 +485,17 @@ export default function Home() {
       </div>
       <div className="mb-20" style={{ margin: "10px" }}>
         <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-        <div className="w-full p-1 h-56 text-white bg-[#242B2E] transition-transform transform rounded-xl bg-gradient-to-b ">
+        <div className="w-full p-1 h-56 text-white bg-[#D31E40] transition-transform transform rounded-xl bg-gradient-to-b ">
           <a href="#">
             <div className="absolute top-8 px-8 w-full">
-              <div className="flex justify-end mb-3 my-2">
+              <div className="flex  justify-between mb-3 my-2">
                 {/* <p className="text-sm font-medium">Valid Thru</p> */}
+                <a href="#">
+                  <img className="w-14 h-14" src={card_pin} width={20} alt="Logo" />
+                </a>
                 <a href="#">
                   <img className="w-14 h-14" src={logo2} alt="Logo" />
                 </a>
-                <p className="text-2xl font-medium my-2"></p>
               </div>
               <div className="flex justify-end"></div>
               <div className="flex justify-between items-center">
