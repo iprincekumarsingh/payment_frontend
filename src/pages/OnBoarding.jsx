@@ -201,7 +201,7 @@ export default function OnBoarding() {
           </div>
           <div>
             <label className="text-black  " htmlFor="username">
-              Middle Name
+              Last Name
             </label>
             <input
               onChange={(e) => {
