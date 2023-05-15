@@ -98,7 +98,7 @@ export default function Alluser() {
     return (
       <tr className=" border-b " key={index}>
         <td
-          className="flex-col px-6 py-4 "
+          className="flex-col py-4 "
           style={{
             display: "flex",
             flexDirection: "column",
@@ -116,51 +116,42 @@ export default function Alluser() {
         </td>
 
         <td>
-          <div>
-            {item.status === "approved" ? (
-              <p className="text-center text-green-700 flex items-center">
-                Accepted Already
-              </p>
-            ) : item.status === "rejected" ? (
-              <p className="text-center text-red">Rejected</p>
-            ) : (
-              <>
-                <button
-                  onClick={() => {
-                    addMoney(item._id);
-                    setMoney(item.wallet_balance);
-                  }}
-                  className="bg-emerald-600"
-                  style={{
-                    width: "100px",
-                    padding: "10px 20px",
-                    margin: "2px",
-                    color: "white",
+          <div className="flex " style={{ display: "flex",
+        flexWrap:"wrap" }}>
+            <button
+              onClick={() => {
+                addMoney(item._id);
+                setMoney(item.wallet_balance);
+              }}
+              className="bg-emerald-600"
+              style={{
+                width: "100px",
+                padding: "10px 20px",
+                margin: "2px",
+                color: "white",
 
-                    // fontSize: "12px",
-                  }}
-                >
-                  + Money
-                </button>
+                // fontSize: "12px",
+              }}
+            >
+              + Money
+            </button>
 
-                {/* pass link with parameter */}
-                <Link
-                  to={`/admin/user/${item._id}`}
-                  onClick={() => {
-                    handleApprove(item._id, "rejected");
-                  }}
-                  style={{
-                    background: "blue",
-                    padding: "10px 20px",
-                    margin: "2px",
-                    width: "100px",
-                    color: "white",
-                  }}
-                >
-                  View
-                </Link>
-              </>
-            )}
+            {/* pass link with parameter */}
+            <Link
+              to={`/admin/user/${item._id}`}
+              onClick={() => {
+                handleApprove(item._id, "rejected");
+              }}
+              style={{
+                background: "blue",
+                padding: "10px 20px",
+                margin: "2px",
+                width: "100px",
+                color: "white",
+              }}
+            >
+              View
+            </Link>
           </div>
         </td>
       </tr>
