@@ -548,6 +548,7 @@ export default function OnBoarding() {
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               onChange={(e) => {
                 setAadhaar(e.target.value);
+                console.log(e.target.value);
               }}
             />
           </div>
@@ -569,7 +570,8 @@ export default function OnBoarding() {
               type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               onChange={(e) => {
-                setAadhaar(e.target.value);
+                setPanno(e.target.value);
+                console.log(e.target.value);
               }}
             />
           </div>

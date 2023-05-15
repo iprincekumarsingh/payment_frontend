@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function Alluser() {
   const [searchTerm, setSearchTerm] = useState("");
+
   const [user, setUser] = useState([]);
 
   const [amount, setAmount] = useState("");
@@ -16,6 +17,8 @@ export default function Alluser() {
   const [message, setMessage] = useState("");
 
   const [addMOney, setAddMoney] = useState("");
+
+  const [money, setMoney] = useState("");
 
   function closeRequestMoneyModal() {
     setAddMoney(false);
@@ -75,7 +78,23 @@ export default function Alluser() {
       });
   };
 
-  const notificationListMap = user.map((item, index) => {
+  const filteredUsers = user.filter((item) => {
+    const searchLower = searchTerm.toLowerCase();
+    const fullName =
+      item.first_name && item.last_name
+        ? `${item.first_name} ${item.last_name}`.toLowerCase()
+        : "";
+    const phone = item.phone ? item.phone.toLowerCase() : "";
+    const walletId = item.wallet_id ? item.wallet_id.toLowerCase() : "";
+
+    return (
+      fullName.includes(searchLower) ||
+      phone.includes(searchLower) ||
+      walletId.includes(searchLower)
+    );
+  });
+
+  const notificationListMap = filteredUsers.map((item, index) => {
     return (
       <tr className=" border-b " key={index}>
         <td
@@ -86,7 +105,7 @@ export default function Alluser() {
           }}
         >
           <th className="flex-col  text-start font-medium text-gray-900 whitespace-nowrap ">
-            {item.fullname}
+            Name: {item.first_name} {item.last_name}
           </th>
           <th className=" font-medium text-start text-gray-900 whitespace-nowrap ">
             {/* {formatDate(item.createdAt)} */}
@@ -109,6 +128,7 @@ export default function Alluser() {
                 <button
                   onClick={() => {
                     addMoney(item._id);
+                    setMoney(item.wallet_balance);
                   }}
                   className="bg-emerald-600"
                   style={{
@@ -159,7 +179,6 @@ export default function Alluser() {
           placeholder="Search user by phone number"
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            console.log(searchTerm);
           }}
         />
       </div>
@@ -215,6 +234,9 @@ export default function Alluser() {
           className="flex-col justify-center items-center"
           method="post"
         >
+          <h1 className="text-2xl font-semibold p-2">
+            User Wallet Balance : Rs. {money}
+          </h1>
           <h2 className="p-2 text-base">Add Money to user Account</h2>
 
           <input
