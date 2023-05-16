@@ -21,7 +21,7 @@ export default function TransferMoney() {
   const [transferHistory, setTransferHistory] = useState([]);
   const [pinverifyModal, setPinverifyModal] = useState(false);
   const [pin, setPin] = useState("");
-  
+
   const [buttonMsg, setButtonMsg] = useState("Verify");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -168,7 +168,7 @@ export default function TransferMoney() {
   }, [successMessage, errorMessage]);
   const notificationListMap = transferHistory.map((item, index) => {
     return (
-      <tr className=" border-b text-center   " key={index}>
+      <tr className=" border-b text-center text-xs" key={index}>
         <td className="whitespace-nowrap px-4 py-2 text-start font-medium text-gray-900">
           Transferred to : {item.receiver.phone}
           <tr>
@@ -178,73 +178,17 @@ export default function TransferMoney() {
             <td>Status :{item.status}</td>
           </tr>
         </td>
-        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-          Rs. {item.amount}
+        <td className="whitespace-nowrap px-4 text-base py-2 text-gray-700">
+          ₹ {item.amount}
         </td>
       </tr>
     );
   });
 
   return (
-    <>
+    <div className="overflow-hidden">
       <Topbar title="Money Transfer" backLink={"/home/home/user"}></Topbar>
 
-      <form
-        onSubmit={(e) => {
-          onhandleClick(e);
-        }}
-      >
-        {/* input form with border 1px */}
-        <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
-          <input
-            class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="username"
-            type="text"
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Enter Phone Number"
-          />
-          <button class="appearance-none w-full md:w-1/3 text-base bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md md:rounded-l-none mt-2 md:mt-0">
-            Send Money
-          </button>
-        </div>
-
-        <div className="flex flex-col mt-5">
-          {successMessage && (
-            <div className="flex justify-center items-center mb-3 px-4 py-3 bg-green-200 text-green-700 rounded-md">
-              <svg
-                className="w-6 h-6 mr-2"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.293-5.293a1 1 0 011.414 0l2 2a1 1 0 01-1.414 1.414L10 13.414l-1.293 1.293a1 1 0 01-1.414-1.414l2-2z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>{successMessage}</span>
-            </div>
-          )}
-          {errorMessage && (
-            <div className="flex justify-center items-center mb-3 px-4 py-3 bg-red-200 text-red-700 rounded-md">
-              <svg
-                className="w-6 h-6 mr-2"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-9a1 1 0 011 1v4a1 1 0 01-2 0v-4a1 1 0 011-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>{errorMessage}</span>
-            </div>
-          )}
-        </div>
-      </form>
       <Modal
         isOpen={requestMoney}
         // onAfterOpen={afterOpenModal}
@@ -383,27 +327,85 @@ export default function TransferMoney() {
         </div>
       </Modal>
 
-      <div className="mt-5">
-        <h2 className="text-2xl p-2">Recent Transactions</h2>
+      <h2 className="text-2xl p-2">Recent Transactions</h2>
+      <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm border-b">
+        <thead className="ltr:text-left rtl:text-right">
+          <tr>
+            <th class="whitespace-nowrap text-start px-4 py-2 font-medium text-gray-900">
+              Transaction Details
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+              Amount
+            </th>
+          </tr>
+        </thead>
+      </table>
+      <div className="w-full h-[62vh] overflow-x-hidden overflow-y-auto">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
-            <thead className="ltr:text-left rtl:text-right">
-              <tr>
-                <th class="whitespace-nowrap text-start px-4 py-2 font-medium text-gray-900">
-                  Transaction Details
-                </th>
-                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  Amount
-                </th>
-              </tr>
-            </thead>
-
             <tbody class="divide-y divide-gray-200">
               {notificationListMap}
             </tbody>
           </table>
         </div>
       </div>
-    </>
+      <form
+        onSubmit={(e) => {
+          onhandleClick(e);
+        }}
+        className="bg-white sticky bottom-0 left-0"
+      >
+        {/* input form with border 1px */}
+        <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
+          <input
+            class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="username"
+            type="text"
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Enter Phone Number"
+          />
+          <button class="appearance-none w-full md:w-1/3 text-base bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md md:rounded-l-none mt-2 md:mt-0">
+            Send Money
+          </button>
+        </div>
+
+        <div className="flex flex-col mt-5">
+          {successMessage && (
+            <div className="flex justify-center items-center mb-3 px-4 py-3 bg-green-200 text-green-700 rounded-md">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.293-5.293a1 1 0 011.414 0l2 2a1 1 0 01-1.414 1.414L10 13.414l-1.293 1.293a1 1 0 01-1.414-1.414l2-2z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{successMessage}</span>
+            </div>
+          )}
+          {errorMessage && (
+            <div className="flex justify-center items-center mb-3 px-4 py-3 bg-red-200 text-red-700 rounded-md">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-9a1 1 0 011 1v4a1 1 0 01-2 0v-4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{errorMessage}</span>
+            </div>
+          )}
+        </div>
+      </form>
+    </div>
   );
 }
