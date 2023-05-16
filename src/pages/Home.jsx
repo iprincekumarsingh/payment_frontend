@@ -531,14 +531,11 @@ export default function Home() {
                 </div>
                 <img className="w-14 h-14" src={logo} alt="Logo" />
               </div>
-              <a
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
+              <p
+               
               >
                 {fullname}
-              </a>
+              </p>
             </div>
           </a>
         </div>
