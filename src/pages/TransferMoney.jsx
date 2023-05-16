@@ -139,10 +139,14 @@ export default function TransferMoney() {
           }
         )
         .then((res) => {
+          setPhone("");
+          setAmount("");
+          setPin("");
           setSuccessMessage("Money transferred successfully");
           setTimeout(() => {
             setSuccessMessage("");
           }, 1000);
+
           setPinverifyModal(false);
           setErrorMessage("");
           setLoading(false);
@@ -379,6 +383,7 @@ export default function TransferMoney() {
             id="username"
             type="text"
             onChange={(e) => setPhone(e.target.value)}
+            value={phone}
             placeholder="Enter Phone Number"
           />
           <button class="appearance-none w-full md:w-1/3 text-base bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md md:rounded-l-none mt-2 md:mt-0">

@@ -19,6 +19,8 @@ import Topbar from "../components/Topbar";
 import HomeIcons from "../components/HomeIcons";
 import Widget_card from "../components/Widget_card";
 import ChipsAmount from "../components/chipsAmount";
+import { AiOutlineClose } from "react-icons/ai";
+import CheckBalance from "../components/Models/CheckBalance";
 
 export default function Home() {
   Modal.setAppElement("#root");
@@ -312,6 +314,10 @@ export default function Home() {
           <p className="font-black text-2xl sm:text-2xl text-[#312aff]">
             {name}
           </p>
+          <p className="text-sm sm:text-2xl text-[#000000]">
+            <span className="font-[800]">Available Balance:</span> ₹
+            {wallet_balance}
+          </p>
         </div>
 
         <div>
@@ -413,8 +419,8 @@ export default function Home() {
               }}
               contentLabel="Request Money Modal"
             >
-              <section className="border ">
-                <div
+              <section className="">
+                {/* <div
                   className="flex justify-end"
                   onClick={(e) => {
                     e.preventDefault();
@@ -425,31 +431,24 @@ export default function Home() {
                     setSuccess("");
                   }}
                 >
-                  {" "}
-                  X
-                </div>
-                <div className="flex-col justify-center items-center">
-                  <h1 className="text-1xl font-bold text-start text-blue-500">
-                    Available balance -₹ {wallet_balance}
-                  </h1>
-                </div>
+                  <AiOutlineClose className="text-2xl" />
+                </div> */}
 
                 <form onSubmit={requesMoneyFunction}>
                   <div className="mb-1 mt-4">
-                    <h1 className="py-2 p-2">
-                      Request Money to{" "}
-                      <span className="font-bold">SX Bank</span>
+                    <h1 className="pb-2 font-black text-center">
+                      Withdraw Amount
                     </h1>
 
                     {/* <div className="p-4 rounded-md shadow-lg"> */}
-                    <div className="relative p-2">
+                    <div className="relative w-full">
                       <label htmlFor="amount" className="sr-only">
                         Enter Amount
                       </label>
                       <input
                         class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="username"
-                        type="text"
+                        type="number"
                         onChange={(e) => setAmount(e.target.value)}
                         placeholder="Enter Amount"
                         value={amount}
@@ -519,11 +518,18 @@ export default function Home() {
               <p className="text-sm font-bold">10/27</p>
             </div>
             <div>
-              <img className="w-14 h-14" src={card_pin} alt="Logo" />
+              <img
+                className="w-14 h-14 invert rounded-md"
+                src={logo2}
+                alt="Logo"
+              />
             </div>
           </div>
         </div>
       </div>
+      {/* <Modal>
+        <CheckBalance amount={wallet_balance} />
+      </Modal> */}
       <Modal
         isOpen={otpModal}
         onRequestClose={closeRequestMoneyModal}

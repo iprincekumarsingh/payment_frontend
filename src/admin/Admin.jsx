@@ -90,25 +90,14 @@ export default function Admin() {
   ];
 
   const notificationListMap = sortedResults.map((item, index) => {
+    console.log(item);
     return (
-      <tr className=" border-b " key={index}>
-        <tr
-          className="flex-col px-6 py-4 "
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <th className="flex-col font-medium text-gray-900 whitespace-nowrap ">
-            {item.name}
-          </th>
-          <th className=" font-medium text-gray-900 whitespace-nowrap ">
-            Date- 24/2/23
-          </th>
-          <th className=" font-medium text-gray-900 whitespace-nowrap ">
-            778148241346
-          </th>
-        </tr>
+      <tr className=" border-b text-black" key={index}>
+        <p>
+          <p className=" ">{item?.user?.first_name}</p>
+          <p className=" text-[10px]">778148241346</p>
+          <p className="  text-[10px]">{item.createdAt?.split("T")?.[0]}</p>
+        </p>
         <td className="px-6 py-4 text-black">Rs.{item.amount}</td>
         <div>
           {item.status === "approved" ? (
