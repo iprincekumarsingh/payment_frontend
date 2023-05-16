@@ -146,9 +146,7 @@ export default function Alluser() {
                 {/* pass link with parameter */}
                 <Link
                   to={`/admin/user/${item._id}`}
-                  onClick={() => {
-                    handleApprove(item._id, "rejected");
-                  }}
+                 
                   style={{
                     background: "blue",
                     padding: "10px 20px",
@@ -170,7 +168,7 @@ export default function Alluser() {
   return (
     <div>
       <Toaster />
-      <Topbar title="All Users"></Topbar>
+      <Topbar title="All Users" hideicon={"hidden"}></Topbar>
 
       <div className="flex justify-center">
         <input

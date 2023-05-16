@@ -156,7 +156,7 @@ export default function Admin() {
 
   return (
     <>
-      <Topbar title="SX Bank Admin"></Topbar>
+      <Topbar title="SX Bank Admin" hideicon={"hidden"}></Topbar>
 
       <div
         className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center "

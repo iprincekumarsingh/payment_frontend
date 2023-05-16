@@ -20,7 +20,7 @@ function App() {
 
   const [count, setCount] = useState(0);
 
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState();
   const [password, setPassword] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [progress, setProgress] = useState("Login");
@@ -52,7 +52,7 @@ function App() {
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
-
+    // alert(phone)
     axios
       .post("/auth/login", { phone_number: phone, password: password })
       .then((res) => {
@@ -139,8 +139,12 @@ function App() {
                       dark:focus:ring-offset-gray-800"
                       type="number"
                       placeholder="80934XXXX"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                 
+                      onChange={(e) => {
+                        setPhone(e.target.value)
+                        // console.log(e.target.value);
+                        console.log(phone);
+                      }}
                     />
                   </div>
                 </div>

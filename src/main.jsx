@@ -21,6 +21,8 @@ import Fileupload from "./test/fileupload.jsx";
 import ForgotPasswordPage from "./pages/ForgotPassword.jsx";
 import Alluser from "./admin/Alluser.jsx";
 import User from "./admin/User.jsx";
+import UserTranscations from "./admin/transcations.jsx";
+import MoneyRequestTranscations from "./admin/MoneyRequestTranscations.jsx";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +105,14 @@ const router = createBrowserRouter([
     path: "admin/user/:id",
     element: <User></User>,
   },
+  {
+    path: "admin/user/transcations/:id",
+    element: <UserTranscations></UserTranscations>,
+  },
+  {
+    path:"/admin/user/moneyRequest/:id",
+    element:<MoneyRequestTranscations></MoneyRequestTranscations>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

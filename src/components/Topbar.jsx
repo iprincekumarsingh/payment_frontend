@@ -1,14 +1,20 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import adminIcon from "../img/icons/admin.png"
+import adminIcon from "../img/icons/admin.png";
 
 import { CiSettings, CiLogout } from "react-icons/ci";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Cookie from "js-cookie";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-export default function Topbar({ title, imgLink, backLink, imgWidth }) {
+export default function Topbar({
+  title,
+  imgLink,
+  backLink,
+  imgWidth,
+  hideicon,
+}) {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,10 +62,13 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
         <div className="relative p-21">
           <div
             onClick={toggleDropdown}
-            className="flex justify-center items-center cursor-pointer"
+            className={`flex justify-center items-center cursor-pointer ${
+              hideicon ? "hidden" : ""
+            }`}
           >
             <CgProfile className="text-white text-xl" />
           </div>
+
           {showDropdown && (
             <div className="absolute top-10 right-0 z-10 bg-white shadow-xl rounded-md py-1 p-10">
               <Link
@@ -84,7 +93,13 @@ export default function Topbar({ title, imgLink, backLink, imgWidth }) {
                   to={"../home/admin"}
                   className="flex items-center px-4 py-2 hover:bg-gray-100"
                 >
-                  <img src={adminIcon} width={20} className="mr-2" alt="" srcset="" />
+                  <img
+                    src={adminIcon}
+                    width={20}
+                    className="mr-2"
+                    alt=""
+                    srcset=""
+                  />
                   <span>Admin</span>
                 </Link>
               ) : (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Cookie from "js-cookie";
 import Topbar from "../components/Topbar";
 import Modal from "react-modal";
@@ -65,7 +65,7 @@ export default function User() {
   return (
     <>
       <Toaster />
-      <Topbar title={"Profile  | " + user.first_name}></Topbar>
+      <Topbar title={"User Profile  "} hideicon={"hidden"}></Topbar>
       <div className="bg-gray-100 w-full">
         <div className="bg-white rounded-md p-3 mx-auto mt-1">
           <div className="text-start mt-4">
@@ -88,15 +88,46 @@ export default function User() {
                 Login Into User Account
               </button> */}
               <button
-                className="w-full  bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+                className="w-full mb-2  bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
                 onClick={() => setIncreaseWalletLimitModal(true)}
               >
                 Increase Wallet Limit
               </button>
+              <button
+                style={{
+                  textDecoration: "none",
+                  width: "100%",
+                }}
+                className="w-full  bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+              >
+                <Link to={`../admin/user/transcations/${id}`}>
+                  Show  Transactions
+                </Link>
+              </button>
+              {/* <button
+                style={{
+                  textDecoration: "none",
+                  width: "100%",
+                }}
+                className="w-full mb-2  mt-2 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+              >
+                <Link to={`../admin/user/moneyRequest/${id}`}>
+                  Show Wallet Transactions
+                </Link>
+              </button> */}
             </div>
 
             <div className="mt-4">
-              <InfoRow label="Name" value={user.fullname} />
+              <InfoRow
+                label="Name"
+                value={
+                  user.first_name +
+                  " " +
+                  user.middle_name +
+                  " " +
+                  user.last_name
+                }
+              />
               <InfoRow label="Phone" value={user.phone} />
               <InfoRow label="Alternative Phone" value={user.alt_phone} />
               <InfoRow label="Aadhar Number" value={user.aadhaar_number} />
