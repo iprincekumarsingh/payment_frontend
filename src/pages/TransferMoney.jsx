@@ -353,7 +353,7 @@ export default function TransferMoney() {
         onSubmit={(e) => {
           onhandleClick(e);
         }}
-        className="bg-white fixed z-[999] bottom-2 left-0"
+        className="bg-white fixed z-[999] bottom-2 left-0 w-full"
       >
         {/* input form with border 1px */}
         <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
