@@ -140,12 +140,18 @@ export default function TransferMoney() {
         )
         .then((res) => {
           setSuccessMessage("Money transferred successfully");
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 1000);
           setPinverifyModal(false);
           setErrorMessage("");
           setLoading(false);
         })
         .catch((err) => {
           setErrorMessage(err.response.data.message);
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 1000);
         });
     }
 
@@ -203,7 +209,7 @@ export default function TransferMoney() {
         style={customStyles}
       >
         <section
-          className="rounded-2xl p-4 "
+          className="rounded-2xl p-4 z-[9999]"
           style={{ border: "1px solid rgba(189, 189, 189, 1)" }}
         >
           <div className="flex-col justify-center items-center ">
@@ -290,7 +296,7 @@ export default function TransferMoney() {
         // className="flex items-center justify-center"
         // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
-        <div className="bg-white rounded-lg w-full sm:w-96">
+        <div className="bg-white rounded-lg w-full sm:w-96 z-[9999]">
           <div className="p-4">
             <h2 className="text-1xl font-bold mb-4 text-center">
               Enter your 4-digit UPI PIN
@@ -364,7 +370,7 @@ export default function TransferMoney() {
         onSubmit={(e) => {
           onhandleClick(e);
         }}
-        className="bg-white fixed z-[999] bottom-2 left-0 w-full"
+        className="bg-white fixed bottom-2 left-0 w-full"
       >
         {/* input form with border 1px */}
         <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
