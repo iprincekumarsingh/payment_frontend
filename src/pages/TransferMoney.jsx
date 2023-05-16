@@ -340,11 +340,11 @@ export default function TransferMoney() {
           </tr>
         </thead>
       </table>
-      <div className="w-full h-[62vh] overflow-x-hidden overflow-y-auto">
+      <div className="w-full h-[61vh] overflow-x-hidden overflow-y-auto">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
             <tbody class="divide-y divide-gray-200">
-              {notificationListMap}
+              {transferHistory.length ? notificationListMap : "Loading..."}
             </tbody>
           </table>
         </div>
@@ -353,7 +353,7 @@ export default function TransferMoney() {
         onSubmit={(e) => {
           onhandleClick(e);
         }}
-        className="bg-white sticky bottom-0 left-0"
+        className="bg-white fixed z-[999] bottom-2 left-0"
       >
         {/* input form with border 1px */}
         <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
