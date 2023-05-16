@@ -340,7 +340,7 @@ export default function TransferMoney() {
           </tr>
         </thead>
       </table>
-      <div className="w-full h-[61vh] overflow-x-hidden overflow-y-auto">
+      <div className="w-full h-[55vh] overflow-x-hidden overflow-y-auto">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
             <tbody class="divide-y divide-gray-200">
