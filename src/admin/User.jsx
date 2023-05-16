@@ -68,53 +68,38 @@ export default function User() {
       <Topbar title={"User Profile  "} hideicon={"hidden"}></Topbar>
       <div className="bg-gray-100 w-full">
         <div className="bg-white rounded-md p-3 mx-auto mt-1">
-          <div className="text-start mt-4">
-            <h1 className="text-3xl font-bold text-gray-800">
-              {user.fullname}
-            </h1>
-            <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
-            <p className="text-gray-500 text-2xl font-semibold mt-2">
-              Wallet Balance -{" "}
-              {Intl.NumberFormat("en-IN", {
-                style: "currency",
-                currency: "INR",
-              }).format(Number(user.wallet_balance))}
-            </p>
+          <div className="bg-white rounded-md p-3 mx-auto mt-1 relative">
+            <div className="text-start mt-4">
+              <h1 className="text-3xl font-bold text-gray-800">
+                {user.fullname}
+              </h1>
+              <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
+              <p className="text-gray-500 text-2xl font-semibold mt-2">
+                Wallet Balance -{" "}
+                {Intl.NumberFormat("en-IN", {
+                  style: "currency",
+                  currency: "INR",
+                }).format(Number(user.wallet_balance))}
+              </p>
+            </div>
           </div>
 
           <div className="border-t border-gray-200 mt-6 pt-6">
-            <div className="flex-col gap-2 justify-center">
-              {/* <button className="w-full mb-2 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out">
-                Login Into User Account
-              </button> */}
+            <div className="flex-col w-full justify-center">
               <button
-                className="w-full mb-2  bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+                className="w-full mb-2  bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
                 onClick={() => setIncreaseWalletLimitModal(true)}
               >
                 Increase Wallet Limit
               </button>
-              <button
-                style={{
-                  textDecoration: "none",
-                  width: "100%",
-                }}
-                className="w-full  bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+            </div>
+            <div className="flex-col w-full justify-center">
+              <Link
+                to={`../admin/user/transcations/${id}`}
+                className="block w-full py-2 px-4 rounded-lg text-center bg-blue-500 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
-                <Link to={`../admin/user/transcations/${id}`}>
-                  Show  Transactions
-                </Link>
-              </button>
-              {/* <button
-                style={{
-                  textDecoration: "none",
-                  width: "100%",
-                }}
-                className="w-full mb-2  mt-2 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
-              >
-                <Link to={`../admin/user/moneyRequest/${id}`}>
-                  Show Wallet Transactions
-                </Link>
-              </button> */}
+                Show Transactions
+              </Link>
             </div>
 
             <div className="mt-4">
