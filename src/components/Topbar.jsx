@@ -66,7 +66,7 @@ export default function Topbar({
             <span className="text-3xl text-white">
               <FaUserCircle />
             </span>
-            <span className="group-focus:block hidden right-0 top-10 w-[200px] rounded-md p-5 border shadow-xl bg-white absolute z-[9999]">
+            <span className="group-focus-within:block hidden right-0 top-10 w-[200px] rounded-md p-5 border shadow-xl bg-white absolute z-[9999]">
               <Link
                 to={"../../home/profile"}
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
