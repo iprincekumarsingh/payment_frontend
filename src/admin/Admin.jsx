@@ -158,48 +158,34 @@ export default function Admin() {
     <>
       <Topbar title="SX Bank Admin" hideicon={"hidden"}></Topbar>
 
-      <div
-        className="flex shadow-lg  mt-4  flex-wrap justify-center items-center text-center "
-        style={{
-          border: "1px solid",
-          margin: "10px",
-          borderRadius: "10px",
-        }}
-      >
-        <Link
-          to={"../admin/users"}
-          className="mb-4 p-4 text-center flex-col justify-center items-center"
-        >
-          <img src={user} alt="" srcset="" />
-          <h1 className="text-[13px] mt-4 font-bold text-center">Users</h1>
-        </Link>
-        <Link to="../admin/notification">
-          <div
-            className="mb-4 p-4 text-center  flex-col justify-center items-center"
-            style={{
-              display: "flex",
-            }}
-          >
-            <img src={rmoney} alt="" srcset="" />
-            <h1 className="text-[13px] mt-4 font-bold text-center">
-              Request Money
-            </h1>
+      <div class="flex flex-col w-full p-4 m-1 bg-white rounded-lg shadow-lg">
+        <h1 className="text-2xl"> Admin Panel</h1>
+        <div className="flex  md:flex-row justify-center items-center gap-4 p-4">
+          <div className="flex-1">
+            <Link
+              to="../admin/users"
+              className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+            >
+              <img className="mb-2  w-12 h-12" src={user} alt="" />
+              <p className="text-sm md:text-base text-whe flex items-center justify-center h-full">
+                Users
+              </p>
+            </Link>
           </div>
-        </Link>
-        {/* <Link to="../home/transactions">
-          <div
-            className="mb-4 p-4 text-center flex-col justify-center items-center"
-            style={{
-              display: "flex",
-            }}
-          >
-            <img src={transcationspng} alt="" srcset="" />
-            <h1 className="text-[13px] mt-4 font-bold text-center">
-              Transcations
-            </h1>
+          <div className="flex-1">
+            <Link
+              to="../admin/notification"
+              className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+            >
+              <img className="mb-2  w-12 h-12" src={notification} alt="" />
+              <p className="text-sm md:text-base text-whe flex items-center justify-center h-full">
+                Notifications
+              </p>
+            </Link>
           </div>
-        </Link> */}
+        </div>
       </div>
+
       {/*  */}
       <div className="p-2 text-start flex  text-1xl  justify-around items-center mt-3">
         <div className="text-2xl">Latest Money Request</div>

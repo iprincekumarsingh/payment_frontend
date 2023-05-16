@@ -67,11 +67,11 @@ export default function User() {
       <Toaster />
       <Topbar title={"User Profile  "} hideicon={"hidden"}></Topbar>
       <div className="bg-gray-100 w-full">
-        <div className="bg-white rounded-md p-3 mx-auto mt-1">
-          <div className="bg-white rounded-md p-3 mx-auto mt-1 relative">
+        <div className="bg-white rounded-md p-2 mx-auto ">
+          <div className="bg-white rounded-md p-3 mx-auto  relative">
             <div className="text-start mt-4">
               <h1 className="text-3xl font-bold text-gray-800">
-                {user.fullname}
+                {user.first_name + " " + user.middle_name + " " + user.last_name}
               </h1>
               <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
               <p className="text-gray-500 text-2xl font-semibold mt-2">
