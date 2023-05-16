@@ -151,9 +151,9 @@ export default function TransferMoney() {
 
     // checking if the user has enough balance or not
   };
-
-  useEffect(() => {
-    axios
+  const [load, setLoad] = useState(true);
+  const getData = async () => {
+    await axios
       .get("transfer/history", {
         headers: {
           "Content-Type": "application/json",
@@ -162,9 +162,16 @@ export default function TransferMoney() {
       })
       .then((res) => {
         // console.log(res);
+        // setLoad(false);
         setTransferHistory(res.data.transferHistory);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        // setLoad(false);
+      });
+    setLoad(false);
+  };
+  useEffect(() => {
+    getData();
   }, [successMessage, errorMessage]);
   const notificationListMap = transferHistory.map((item, index) => {
     return (
@@ -344,7 +351,11 @@ export default function TransferMoney() {
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
             <tbody class="divide-y divide-gray-200">
-              {transferHistory.length ? notificationListMap : "Loading..."}
+              {load
+                ? "Loading..."
+                : transferHistory?.length !== 0
+                ? notificationListMap
+                : "No Transaction Yet"}
             </tbody>
           </table>
         </div>
