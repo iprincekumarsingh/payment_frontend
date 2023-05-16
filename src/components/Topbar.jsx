@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
+import { FaUserCircle } from "react-icons/fa";
 import adminIcon from "../img/icons/admin.png";
 
 import { CiSettings, CiLogout } from "react-icons/ci";
@@ -50,27 +51,22 @@ export default function Topbar({
   }
 
   return (
-    <nav className="bg-[#0F4A8A] shadow-md">
+    <nav className="bg-gradient-to-r from-[#5900ff] to-[#08007c] shadow-md rounded-b-2xl">
       <div className="max-w-screen-xl flex items-center justify-between p-4">
         <div className="flex items-center">
           {renderBackButton()}
           <a href={imgLink} className="hidden md:block">
             <img src={imgLink} width={imgWidth} alt="" />
           </a>
-          <span className="text-white text-lg font-semibold ml-2">{title}</span>
+          <span className="text-white text-xl font-semibold ml-2">{title}</span>
         </div>
-        <div className="relative p-21">
-          <div
-            onClick={toggleDropdown}
-            className={`flex justify-center items-center cursor-pointer ${
-              hideicon ? "hidden" : ""
-            }`}
-          >
-            <CgProfile className="text-white text-xl" />
-          </div>
 
-          {showDropdown && (
-            <div className="absolute top-10 right-0 z-10 bg-white shadow-xl rounded-md py-1 p-10">
+        <div>
+          <button className="group relative">
+            <span className="text-3xl text-white">
+              <FaUserCircle />
+            </span>
+            <span className="group-focus:block hidden right-0 top-10 w-[200px] rounded-md p-5 border shadow-xl bg-white absolute z-[9999]">
               <Link
                 to={"../../home/profile"}
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
@@ -103,19 +99,19 @@ export default function Topbar({
                   <span>Admin</span>
                 </Link>
               ) : (
-                <></>
+                ""
               )}
 
-              <div
+              <span
                 href="#"
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
                 onClick={logout}
               >
                 <CiLogout className="mr-2" />
                 <span>Logout</span>
-              </div>
-            </div>
-          )}
+              </span>
+            </span>
+          </button>
         </div>
       </div>
     </nav>

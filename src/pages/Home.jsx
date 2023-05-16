@@ -278,6 +278,28 @@ export default function Home() {
       });
   };
 
+  const transferMOney = () => {
+    window.location.href = "/transfer/money";
+  };
+
+  const cards = [
+    {
+      name: "add money",
+      img: add_money,
+      func: openModal,
+    },
+    {
+      name: "withdrawal",
+      img: request_money,
+      func: requestMoneyModal,
+    },
+    {
+      name: "Transfer",
+      img: money_transfer,
+      func: transferMOney,
+    },
+  ];
+
   return (
     <div className="overflow-x-auto overflow-y-auto">
       <Topbar title="SX Bank" />
@@ -285,58 +307,31 @@ export default function Home() {
       {/* check if the file is there or not  */}
 
       <div className="overflow-x-auto p-4">
-        <div className="flex flex-col text-start items-start justify-center ">
-          <h1 className="text-3xl text-start font-bold mb-2">
-            Welcome back, {name}
-          </h1>
+        <div className="flex flex-col text-start items-start justify-center px-2">
+          <p className="text-[16px] text-start">Welcome back,</p>
+          <p className="font-black sm:text-xl md:text-2xl text-[#312aff]">
+            {name}
+          </p>
         </div>
 
         <div>
-          <section className="container">
-            <div class="flex flex-col w-full p-4 m-1 bg-white rounded-lg shadow-lg">
-              <div className="flex  md:flex-row justify-center items-center gap-4 p-4">
-                <div className="flex-1">
+          <section className="container pt-5">
+            <div className="w-full flex justify-around">
+              {cards?.map((card, index) => {
+                return (
                   <div
-                    onClick={openModal}
-                    className="flex flex-col items-center justify-center  p-4 rounded-lg  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
+                    onClick={card?.func}
+                    className={
+                      "bg-white w-[100px] border p-5 overflow-hidden flex flex-col justify-center items-center rounded-md shadow-md"
+                    }
                   >
-                    <img className="mb-2 w-12 h-12" src={add_money} alt="" />
-                    <p className="text-sm md:text-base text-whi flex items-center justify-center h-full">
-                      Add Money
+                    <img src={card?.img} className="w-[25px]" alt="" />
+                    <p className="font-bold pt-2 text-center  capitalize text-[10px]">
+                      {card?.name}
                     </p>
                   </div>
-                </div>
-                <div className="flex-1">
-                  <div
-                    onClick={requestMoneyModal}
-                    className="flex flex-col items-center justify-center  p-4 rounded-lgd cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
-                  >
-                    <img
-                      className="mb-2 w-12 h-12"
-                      src={request_money}
-                      alt=""
-                    />
-                    <p className="text-sm md:text-base text-whi flex items-center justify-center h-full">
-                      Request Money
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <Link
-                    to="/transfer/money"
-                    className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
-                  >
-                    <img
-                      className="mb-2  w-12 h-12"
-                      src={money_transfer}
-                      alt=""
-                    />
-                    <p className="text-sm md:text-base text-whe flex items-center justify-center h-full">
-                      Transfer Money
-                    </p>
-                  </Link>
-                </div>
-              </div>
+                );
+              })}
             </div>
 
             <Widget_card card_text={"Wallet ID: " + wallet} />
@@ -506,11 +501,10 @@ export default function Home() {
       </div>
       <div className="mb-20" style={{ margin: "10px" }}>
         <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-        <div className="w-full p-1 h-56 text-white bg-[#D31E40] transition-transform transform rounded-xl bg-gradient-to-b ">
+        <div className="w-full p-1 h-56 text-white debit-card-bg1 transition-transform transform rounded-xl bg-gradient-to-b ">
           <a href="#">
             <div className="absolute top-8 px-8 w-full">
               <div className="flex  justify-between mb-3 my-2">
-                {/* <p className="text-sm font-medium">Valid Thru</p> */}
                 <a href="#">
                   <img
                     className="w-14 h-14"
@@ -520,7 +514,7 @@ export default function Home() {
                   />
                 </a>
                 <a href="#">
-                  <img className="w-14 h-14" src={logo2} alt="Logo" />
+                  <img className="w-14 h-14 invert" src={logo2} alt="Logo" />
                 </a>
               </div>
               <div className="flex justify-end"></div>
@@ -529,13 +523,9 @@ export default function Home() {
                   <p className="font-semi">Debit Card</p>
                   <p className="font-extrabold text-white">{wallet}</p>
                 </div>
-                <img className="w-14 h-14" src={logo} alt="Logo" />
+                <img className="w-14 h-14 invert" src={logo} alt="Logo" />
               </div>
-              <p
-               
-              >
-                {fullname}
-              </p>
+              <p>{fullname}</p>
             </div>
           </a>
         </div>

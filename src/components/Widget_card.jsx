@@ -1,6 +1,8 @@
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
-import copy_png from "../img/copy.png";
+// import copy_png from "../img/copy.png";
+import { MdContentCopy } from "react-icons/md";
+
 export default function Widget_card({ card_text }) {
   const handleCopy = () => {
     const cardText = document.getElementById("cardText");
@@ -23,19 +25,17 @@ export default function Widget_card({ card_text }) {
   };
 
   return (
-    <div class="mt-5 flex items-center justify-center space-x-2 e font-semibold rounded-md px-3 py-1 text-base whitespace-nowrap">
+    <div className="mt-5 w-[80%] mx-auto shadow-md border shadow-[#929292] flex items-center justify-center space-x-2 e font-semibold px-3 py-2 text-base whitespace-nowrap rounded-full">
       <Toaster />
-      <div class="truncate" id="cardText">
-        {card_text.toLocaleString("en-IN", {
-          style: "currency",
-          currency: "INR",
-        })}
+      <div className="truncate font-[400] text-sm space-x-2" id="cardText">
+        {card_text.toString()?.split(": ")?.[0]}: XXXXXXXX{""}
+        {card_text.toString()?.split(": ")?.[1]?.slice(8)}
       </div>
       <div
-        class="flex items-center justify-center space-x-1 cursor-pointer"
+        className="flex items-center justify-center space-x-1 cursor-pointer"
         onClick={handleCopy}
       >
-        <img src={copy_png} alt="" width={20} />
+        <MdContentCopy className="text-lg" />
       </div>
     </div>
   );

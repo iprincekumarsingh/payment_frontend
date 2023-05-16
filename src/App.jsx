@@ -6,6 +6,7 @@ import Cookie from "js-cookie";
 import logo from "./img/sxbank.jpg";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from "react-router-dom";
+import { ImSpinner2 } from "react-icons/im";
 
 function App() {
   useEffect(() => {
@@ -14,21 +15,15 @@ function App() {
     }
   }, []);
 
-  let [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("#ffffff");
+  const [loading, setLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [count, setCount] = useState(0);
 
   const [phone, setPhone] = useState();
   const [password, setPassword] = useState("");
-  const [phone_number, setPhone_number] = useState("");
-  const [progress, setProgress] = useState("Login");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    setProgress();
     setIsSubmitting(true);
 
     if (!phone) {
@@ -41,14 +36,12 @@ function App() {
 
     if (phone.length < 10 || phone.length > 10) {
       setLoading(false);
-      setProgress("Login");
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
     // regex to check phone number is 10 digit or not
     if (!phone.match(/^[0-9]{10}$/)) {
       setLoading(false);
-      setProgress("Login");
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
@@ -56,159 +49,118 @@ function App() {
     axios
       .post("/auth/login", { phone_number: phone, password: password })
       .then((res) => {
-        // if (res.data.status === "success") {
+        // if (res?.data?.status === "success") {
         setLoading(false);
-        setProgress("Login");
-        toast.success(res.data.message);
-        Cookie.set("token", res.data.token);
-        Cookie.set("user", JSON.stringify(res.data.user.full_name));
-        Cookie.set("user_id", JSON.stringify(res.data.user.id));
-        Cookie.set("role", res.data.user.role);
-        console.log(res.data.user.phone);
-
+        toast.success(res?.data?.message);
+        Cookie.set("token", res?.data?.token);
+        Cookie.set("user", JSON.stringify(res?.data?.user?.full_name));
+        Cookie.set("user_id", JSON.stringify(res?.data?.user?.id));
+        Cookie.set("role", res?.data?.user?.role);
         if (localStorage.getItem("PROFILE_DATA") != null) {
-          localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
+          localStorage.setItem("PROFILE_DATA", JSON.stringify(res?.data?.user));
         }
 
-        if (res.data.user.wallet_no == null) {
+        if (res?.data?.user?.wallet_no == null) {
           window.location.href = "/auth/onboarding";
         } else {
           window.location.href = "/home/home/user";
         }
 
         setIsSubmitting(false);
+        // } else {
+        //   console.log(res);
+        // }
       })
       .catch((err) => {
-        setLoading(false);
         setIsSubmitting(false);
-        setProgress("Login");
         toast.error(err.response.data.message);
-        // toast.error(err.response.data.message);
         console.log(err);
       });
   };
 
   return (
     <>
-      {/* component */}
       <Toaster />
-
-      <div className="flex-col  justify-center items-center h-screen p-4">
-        {/* <img src={logo} width={50} alt="" srcset="" /> */}
-        <div className="flex  justify-center items-center h-screen ">
-          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <div className="flex justify-center p-4 items-center">
-              <img
-                src={logo}
-                width={100}
-                className="flex justify-center items-center rounded-xl"
-                alt=""
-                srcset={logo}
+      <div className="w-screen min-h-screen p-5 flex justify-center items-center">
+        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center justify-center flex-col relative overflow-hidden">
+          <img src={logo} className="w-[100px] shadow-md pt-5" alt="" />
+          <form onSubmit={handleSubmit} className="pt-5 w-full space-y-8">
+            <div>
+              <p className="texr-sm capitalize text-center text-gray-500 font-[200] pt-4">
+                hi there,
+              </p>
+              <h1 className="text-4xl font-[600] text-center">Sign In</h1>
+            </div>
+            <div className="relative w-full">
+              <label
+                htmlFor="phone"
+                className="absolute text-sm -top-[10px] left-3 bg-white"
+              >
+                Phone
+              </label>
+              <input
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+                value={phone}
+                type="number"
+                className="w-full border placeholder:capitalize px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
+                placeholder="Enter your phone number"
+                required
               />
             </div>
-            <h2 className="text-3xl flex font-bold leading-tight text-black sm:text-4xl">
-              Sign in
-            </h2>
-            <p className="mt-2 text-base text-gray-600  " style={{}}>
-              Don't have an account?{" "}
-              <Link
-                to={"/auth/register"}
-                title
-                className="font-medium text-indigo-600 transition-all duration-200 hover:text-indigo-700 hover:underline focus:text-indigo-700"
+            <div className="relative w-full">
+              <label
+                htmlFor="password"
+                className="absolute text-sm -top-[10px] left-3 bg-white"
               >
-                Create a free account
-              </Link>
-            </p>
-            <form
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-              className="mt-8"
-            >
-              <div className="space-y-5">
-                <div>
-                  <label
-                    htmlFor
-                    className="text-base font-medium text-gray-900 dark:text-gray-600"
+                Password
+              </label>
+              <input
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                value={password}
+                type="password"
+                className="w-full border px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
+                placeholder="Enter Your Password"
+                required
+              />
+            </div>
+            <div>
+              <button className="w-full bg-[#6600ff] text-white p-2 hover:bg-[#000] transition-all text-xl rounded-md">
+                Login
+              </button>
+            </div>
+            <div className="relative bottom-2 ">
+              <div className="text-center">
+                <p className="flex justify-center items-center text-center space-x-1">
+                  <span>Don't have an account?</span>
+                  <Link
+                    to={"/auth/register"}
+                    className="text-[#6600ff] text-center font-[600]"
                   >
-                    Phone
-                  </label>
-                  <div className="mt-2.5">
-                    <input
-                      className="flex h-10 w-full rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:focus:ring-gray-400 
-                      dark:focus:ring-offset-gray-800"
-                      type="number"
-                      placeholder="80934XXXX"
-                 
-                      onChange={(e) => {
-                        setPhone(e.target.value)
-                        // console.log(e.target.value);
-                        console.log(phone);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor
-                      className="text-base font-medium text-gray-900 dark:text-gray-600"
-                    >
-                      Password
-                    </label>
-                    <Link
-                      to={"../forgot-password"}
-                      title
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-700 hover:underline focus:text-indigo-700"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                  <div className="mt-2.5">
-                    <input
-                      className="flex h-10 w-full rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
-                      type="password"
-                      placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <button
-                    type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Submitting..." : "Submit"}
-                    {""}
-                    {loading && (
-                      <BeatLoader
-                        type="TailSpin"
-                        color="#fff"
-                        height={20}
-                        width={20}
-                        className="ml-2"
-                      />
-                    )}
-                    {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="ml-2 h-4 w-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                      />
-                    </svg> */}
-                  </button>
-                </div>
+                    Create One
+                  </Link>
+                </p>
               </div>
-            </form>
-          </div>
+              <div>
+                <Link
+                  to={"/forgot-password"}
+                  className="text-[#6600ff] text-center block font-[600]"
+                >
+                  Forgot Password
+                </Link>
+              </div>
+            </div>
+          </form>
+          {isSubmitting ? (
+            <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-sm top-0 left-0 bg-[#000000b5]">
+              <ImSpinner2 className="animate-spin text-white text-5xl" />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>

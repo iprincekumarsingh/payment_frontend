@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.debit-card-bg1 {
+  background-image: linear-gradient(
+      75deg,
+      rgba(253, 253, 253, 0.05) 0%,
+      rgba(253, 253, 253, 0.05) 50%,
+      rgba(131, 131, 131, 0.05) 50%,
+      rgba(131, 131, 131, 0.05) 100%
+    ),
+    linear-gradient(
+      292deg,
+      rgba(21, 21, 21, 0.05) 0%,
+      rgba(21, 21, 21, 0.05) 50%,
+      rgba(145, 145, 145, 0.05) 50%,
+      rgba(145, 145, 145, 0.05) 100%
+    ),
+    linear-gradient(
+      122deg,
+      rgba(33, 33, 33, 0.05) 0%,
+      rgba(33, 33, 33, 0.05) 50%,
+      rgba(37, 37, 37, 0.05) 50%,
+      rgba(37, 37, 37, 0.05) 100%
+    ),
+    linear-gradient(
+      27deg,
+      rgba(243, 243, 243, 0.05) 0%,
+      rgba(243, 243, 243, 0.05) 50%,
+      rgba(17, 17, 17, 0.05) 50%,
+      rgba(17, 17, 17, 0.05) 100%
+    ),
+    linear-gradient(
+      56deg,
+      rgba(248, 248, 248, 0.05) 0%,
+      rgba(248, 248, 248, 0.05) 50%,
+      rgba(252, 252, 252, 0.05) 50%,
+      rgba(252, 252, 252, 0.05) 100%
+    ),
+    linear-gradient(
+      204deg,
+      rgba(176, 176, 176, 0.05) 0%,
+      rgba(176, 176, 176, 0.05) 50%,
+      rgba(69, 69, 69, 0.05) 50%,
+      rgba(69, 69, 69, 0.05) 100%
+    ),
+    linear-gradient(
+      192deg,
+      rgba(242, 242, 242, 0.05) 0%,
+      rgba(242, 242, 242, 0.05) 50%,
+      rgba(67, 67, 67, 0.05) 50%,
+      rgba(67, 67, 67, 0.05) 100%
+    ),
+    radial-gradient(
+      circle at center center,
+      rgb(255, 0, 0) 0%,
+      rgb(198, 12, 55) 81%
+    ) !important;
+}
