@@ -66,12 +66,16 @@ export default function User() {
     <>
       <Toaster />
       <Topbar title={"User Profile  "} hideicon={"hidden"}></Topbar>
-      <div className="bg-gray-100 w-full">
-        <div className="bg-white rounded-md p-2 mx-auto ">
+      <div className="bg-gray-100 w-full overflow-hidden">
+        <div className="bg-white rounded-md py-2 px-5 mx-auto ">
           <div className="bg-white rounded-md p-3 mx-auto  relative">
             <div className="text-start mt-4">
               <h1 className="text-3xl font-bold text-gray-800">
-                {user.first_name + " " + user.middle_name + " " + user.last_name}
+                {user.first_name +
+                  " " +
+                  user.middle_name +
+                  " " +
+                  user.last_name}
               </h1>
               <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
               <p className="text-gray-500 text-2xl font-semibold mt-2">
@@ -102,7 +106,7 @@ export default function User() {
               </Link>
             </div>
 
-            <div className="mt-4">
+            <div className="pt-2 [&>*:nth-child(2n+1)]:bg-gray-100 [&>*:nth-child(2n)]:bg-gray-300 h-[50vh] overflow-y-auto overflow-x-hidden">
               <InfoRow
                 label="Name"
                 value={
@@ -214,9 +218,9 @@ export default function User() {
 }
 function InfoRow({ label, value }) {
   return (
-    <div className="flex justify-between mt-4">
-      <span className="text-lg text-gray-600 font-medium">{label}</span>
-      <span className="text-lg font-semibold">{value}</span>
+    <div className="flex justify-between p-3 border-b">
+      <span className="text-base text-gray-600 font-medium">{label}</span>
+      <span className="text-base font-semibold">{value}</span>
     </div>
   );
 }

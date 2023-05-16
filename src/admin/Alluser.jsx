@@ -95,8 +95,53 @@ export default function Alluser() {
   });
 
   const notificationListMap = filteredUsers.map((item, index) => {
+    console.log(item);
     return (
-      <tr className=" border-b " key={index}>
+      <div
+        key={index}
+        className="border w-[90%] mx-auto rounded-md bg-white p-3 mb-5"
+      >
+        <div className="w-full flex justify-between items-center">
+          <p className="text-base font-bold">
+            {item?.first_name + " " + item?.last_name}
+          </p>
+          <p className="text-base font-bold">{item?.phone}</p>
+        </div>
+        <div className="w-full flex justify-between items-center">
+          <p className="text-base font-bold">{item?.account_number}</p>
+          <p className="text-base font-bold">
+            {item?.createdAt?.split("T")?.[0]}
+          </p>
+        </div>
+        {item.status === "approved" ? (
+          <p className="text-base text-center pt-2 text-green-500">
+            Accepted Already!
+          </p>
+        ) : (
+          <div className="w-full flex justify-between items-center pt-5">
+            <button
+              onClick={() => {
+                addMoney(item._id);
+                setMoney(item.wallet_balance);
+              }}
+              className="text-base font-[600] bg-yellow-500 text-white px-4 py-1 rounded-md"
+            >
+              Add Money
+            </button>
+
+            <Link to={`/admin/user/${item._id}`}>
+              <button className="text-base bg-green-500 font-[600] text-white px-4 py-1 rounded-md">
+                View
+              </button>
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  });
+
+  /*
+  <tr className=" border-b " key={index}>
         <td
           className="flex-col px-2 py-4 "
           style={{
@@ -108,62 +153,60 @@ export default function Alluser() {
             Name: {item.first_name} {item.last_name}
           </th>
           <th className=" font-medium text-start text-gray-900 whitespace-nowrap ">
-            {/* {formatDate(item.createdAt)} */}
-          </th>
-          <th className=" font-medium text-start text-gray-900 whitespace-nowrap ">
-            Phone: {item.phone}
-          </th>
-        </td>
+            //  {formatDate(item.createdAt)} }
+            </th>
+            <th className=" font-medium text-start text-gray-900 whitespace-nowrap ">
+              Phone: {item.phone}
+            </th>
+          </td>
+  
+          <td>
+            <div>
+              {item.status === "approved" ? (
+                <p className="text-center text-green-700 flex items-center">
+                  Accepted Already
+                </p>
+              ) : item.status === "rejected" ? (
+                <p className="text-center text-red">Rejected</p>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      addMoney(item._id);
+                      setMoney(item.wallet_balance);
+                    }}
+                    className="bg-emerald-600"
+                    style={{
+                      width: "100px",
+                      padding: "10px 20px",
+                      margin: "2px",
+                      color: "white",
+  
+                      // fontSize: "12px",
+                    }}
+                  >
+                    + Money
+                  </button>
+  
 
-        <td>
-          <div>
-            {item.status === "approved" ? (
-              <p className="text-center text-green-700 flex items-center">
-                Accepted Already
-              </p>
-            ) : item.status === "rejected" ? (
-              <p className="text-center text-red">Rejected</p>
-            ) : (
-              <>
-                <button
-                  onClick={() => {
-                    addMoney(item._id);
-                    setMoney(item.wallet_balance);
-                  }}
-                  className="bg-emerald-600"
-                  style={{
-                    width: "100px",
-                    padding: "10px 20px",
-                    margin: "2px",
-                    color: "white",
-
-                    // fontSize: "12px",
-                  }}
-                >
-                  + Money
-                </button>
-
-                {/* pass link with parameter */}
-                <Link
-                  to={`/admin/user/${item._id}`}
-                 
-                  style={{
-                    background: "blue",
-                    padding: "10px 20px",
-                    margin: "2px",
-                    width: "100px",
-                    color: "white",
-                  }}
-                >
-                  View
-                </Link>
-              </>
-            )}
-          </div>
-        </td>
-      </tr>
-    );
-  });
+                  <Link
+                    to={`/admin/user/${item._id}`}
+                    style={{
+                      background: "blue",
+                      padding: "10px 20px",
+                      margin: "2px",
+                      width: "100px",
+                      color: "white",
+                    }}
+                  >
+                    View
+                  </Link>
+                </>
+              )}
+            </div>
+          </td>
+        </tr>
+  */
 
   return (
     <div>
@@ -173,7 +216,7 @@ export default function Alluser() {
       <div className="flex justify-center">
         <input
           type="text"
-          className="p-2 border m-2 w-[300px] border-black focus:border-blue-500 rounded-md"
+          className="p-2 border m-5 w-full border-gray-300 shadow-md focus:border-blue-500 rounded-md"
           placeholder="Search user by phone number"
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -181,24 +224,8 @@ export default function Alluser() {
         />
       </div>
 
-      <div className="w-full overflow-x-auto mb-14">
-        <table className="w-full text-sm text-center it text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                User
-              </th>
-
-              <th scope="col" className="px-6 py-3">
-                Tools
-              </th>
-            </tr>
-          </thead>
-          {notificationListMap}
-
-          {/* {Userlist} */}
-          {/* {user} */}
-        </table>
+      <div className="w-full overflow-x-hidden overflow-y-auto h-[75vh] mb-14">
+        {notificationListMap}
       </div>
       <Modal
         isOpen={addMOney}

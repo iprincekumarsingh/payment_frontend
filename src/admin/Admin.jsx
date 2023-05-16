@@ -90,67 +90,61 @@ export default function Admin() {
   ];
 
   const notificationListMap = sortedResults.map((item, index) => {
-    console.log(item);
     return (
-      <tr className=" border-b text-black" key={index}>
-        <p>
-          <p className=" ">{item?.user?.first_name}</p>
-          <p className=" text-[10px]">778148241346</p>
-          <p className="  text-[10px]">{item.createdAt?.split("T")?.[0]}</p>
-        </p>
-        <td className="px-6 py-4 text-black">Rs.{item.amount}</td>
-        <div>
-          {item.status === "approved" ? (
-            <p className="text-center text-green-700 flex items-center justify-center p-2">
-              Accepted Already
-            </p>
-          ) : item.status === "rejected" ? (
-            <p className="text-center text-red justify-center p-2">Rejected</p>
-          ) : (
-            <>
-              <button
-                onClick={() => {
-                  handleApprove(item._id, "approved");
-                }}
-                className="bg-emerald-600"
-                style={{
-                  width: "100px",
-                  padding: "10px 20px",
-                  margin: "2px",
-                  color: "white",
-                }}
-              >
-                APPROVED
-              </button>
-              <button
-                onClick={() => {
-                  handleApprove(item._id, "rejected");
-                }}
-                style={{
-                  background: "red",
-                  padding: "10px 20px",
-                  margin: "2px",
-                  width: "100px",
-                  color: "white",
-                }}
-              >
-                Reject
-              </button>
-            </>
-          )}
+      <div className="border w-[90%] mx-auto rounded-md bg-white p-3 mb-5">
+        <div className="w-full flex justify-between items-center">
+          <p className="text-base font-bold">
+            {item?.user?.first_name + " " + item?.user?.last_name}
+          </p>
+          <p className="text-base font-bold">{item?.user?.phone}</p>
         </div>
-      </tr>
+        <div className="w-full flex justify-between items-center">
+          <p className="text-base font-bold">{item?.user?.phone}</p>
+          <p className="text-base font-bold">₹{item?.amount}</p>
+        </div>
+        <div className="w-full flex justify-between items-center">
+          <p className="text-base font-bold">
+            {item?.createdAt?.split("T")?.[0]}
+          </p>
+          <p className="text-base font-bold">
+            {item.status === "approved" ? "✅ " : "🕑 "} {item?.status}
+          </p>
+        </div>
+        {item.status === "approved" ? (
+          <p className="text-base text-center pt-2 text-green-500">
+            Accepted Already!
+          </p>
+        ) : (
+          <div className="w-full flex justify-between items-center pt-5">
+            <button
+              onClick={() => {
+                handleApprove(item._id, "approved");
+              }}
+              className="text-base font-[600] bg-red-500 text-white px-4 py-1 rounded-md"
+            >
+              Reject
+            </button>
+            <button
+              onClick={() => {
+                handleApprove(item._id, "rejected");
+              }}
+              className="text-base bg-green-500 font-[600] text-white px-4 py-1 rounded-md"
+            >
+              Approve
+            </button>
+          </div>
+        )}
+      </div>
     );
   });
 
   return (
-    <>
-      <Topbar title="SX Bank Admin" hideicon={"hidden"}></Topbar>
+    <div className="overflow-hidden">
+      <Topbar title="Admin Pannel" hideicon={"hidden"}></Topbar>
 
-      <div class="flex flex-col w-full p-4 m-1 bg-white rounded-lg shadow-lg">
-        <h1 className="text-2xl"> Admin Panel</h1>
+      <div class="flex flex-col w-full p-4 m-1">
         <div className="flex  md:flex-row justify-center items-center gap-4 p-4">
-          <div className="flex-1">
+          <div className="flex-1 bg-white border rounded-md shadow-xl">
             <Link
               to="../admin/users"
               className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
@@ -161,7 +155,7 @@ export default function Admin() {
               </p>
             </Link>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 bg-white border rounded-md shadow-xl">
             <Link
               to="../admin/notification"
               className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
@@ -174,38 +168,13 @@ export default function Admin() {
           </div>
         </div>
       </div>
-
-      {/*  */}
       <div className="p-2 text-start flex  text-1xl  justify-around items-center mt-3">
         <div className="text-2xl">Latest Money Request</div>
       </div>
 
-      <div className="w-full overflow-x-auto mb-14">
-        <table className="w-full text-sm text-left it text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                User
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Amount
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Tools
-              </th>
-            </tr>
-          </thead>
-          {notificationListMap}
-          {/* <tbody>{notificationListMap}</tbody> */}
-          {/* {JSON.stringify(notificationList)} */}
-          {/* {notificationList.map((item, index) => {
-            return (
-              <div>{item.amount}</div>
-            )
-          }
-          )} */}
-        </table>
+      <div className="w-full overflow-x-hidden h-[55vh] overflow-y-auto mb-14">
+        {notificationListMap}
       </div>
-    </>
+    </div>
   );
 }
