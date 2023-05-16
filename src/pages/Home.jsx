@@ -309,7 +309,7 @@ export default function Home() {
       <div className="overflow-x-auto p-4">
         <div className="flex flex-col text-start items-start justify-center px-2">
           <p className="text-[16px] text-start">Welcome back,</p>
-          <p className="font-black sm:text-xl md:text-2xl text-[#312aff]">
+          <p className="font-black text-2xl sm:text-2xl text-[#312aff]">
             {name}
           </p>
         </div>
@@ -500,34 +500,28 @@ export default function Home() {
         </div>
       </div>
       <div className="mb-20" style={{ margin: "10px" }}>
-        <h2 className="text-2xl p-4 font-semibold">Debit Card</h2>
-        <div className="w-full p-1 h-56 text-white debit-card-bg1 transition-transform transform rounded-xl bg-gradient-to-b ">
-          <a href="#">
-            <div className="absolute top-8 px-8 w-full">
-              <div className="flex  justify-between mb-3 my-2">
-                <a href="#">
-                  <img
-                    className="w-14 h-14"
-                    src={card_pin}
-                    width={20}
-                    alt="Logo"
-                  />
-                </a>
-                <a href="#">
-                  <img className="w-14 h-14 invert" src={logo2} alt="Logo" />
-                </a>
-              </div>
-              <div className="flex justify-end"></div>
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="font-semi">Debit Card</p>
-                  <p className="font-extrabold text-white">{wallet}</p>
-                </div>
-                <img className="w-14 h-14 invert" src={logo} alt="Logo" />
-              </div>
-              <p>{fullname}</p>
+        <div className="w-full h-56 text-black debit-card-bg1 shadow-md shadow-[#5d5d5d] transition-transform transform rounded-xl bg-gradient-to-b p-5 overflow-hidden">
+          <p className="font-black text-[#000000] text-xl ">Debit Card</p>
+          <div className="flex justify-between">
+            <div>
+              <p className="font-black text-base">{fullname}</p>
+              <span className="">********</span>
+              {wallet?.slice(8)}
             </div>
-          </a>
+            <div>
+              <img className="w-14 h-14 rounded-md" src={logo} alt="Logo" />
+            </div>
+          </div>
+          <div className="tracking-[12px] py-5 text-center font-black text-black relative bottom-1"></div>
+          <div className="flex justify-between items-center relative bottom-2">
+            <div>
+              <p className="text-base font-black">Expires</p>
+              <p className="text-sm font-bold">10/27</p>
+            </div>
+            <div>
+              <img className="w-14 h-14" src={card_pin} alt="Logo" />
+            </div>
+          </div>
         </div>
       </div>
       <Modal

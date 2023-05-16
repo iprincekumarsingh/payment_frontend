@@ -51,7 +51,7 @@ export default function Topbar({
   }
 
   return (
-    <nav className="bg-gradient-to-r from-[#5900ff] to-[#08007c] shadow-md rounded-b-2xl">
+    <nav className="bg-gradient-to-r from-[#5900ff] to-[#08007c] shadow-md shadow-[#575757] rounded-b-2xl">
       <div className="max-w-screen-xl flex items-center justify-between p-4">
         <div className="flex items-center">
           {renderBackButton()}
