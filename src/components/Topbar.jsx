@@ -61,7 +61,11 @@ export default function Topbar({
           <span className="text-white text-xl font-semibold ml-2">{title}</span>
         </div>
 
-        <div>
+        <div
+          className={`flex justify-center items-center cursor-pointer ${
+            hideicon ? "hidden" : ""
+          }`}
+        >
           <button className="group relative">
             <span className="text-3xl text-white">
               <FaUserCircle />
