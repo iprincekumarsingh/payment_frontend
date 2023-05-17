@@ -113,7 +113,7 @@ function ForgotPasswordPage() {
       .post("/forgotpassword/resetpassword", { phone, password })
       .then((response) => {
         setLoading(false);
-        setProgress("Login");
+        
         setIsSubmitting(false);
         toast.success(response.data.message);
         setPhone("");
@@ -126,7 +126,7 @@ function ForgotPasswordPage() {
       })
       .catch((error) => {
         setLoading(false);
-        setProgress("Login");
+       
         setIsSubmitting(false);
         toast.error(error.response.data.message);
       });
