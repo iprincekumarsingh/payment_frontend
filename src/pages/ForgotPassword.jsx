@@ -26,7 +26,6 @@ function ForgotPasswordPage() {
 
   const [phone, setPhone] = useState("");
 
- 
   function closeRequestMoneyModal() {
     setErrorMessage("");
     setRequestMoney(false);
@@ -37,12 +36,12 @@ function ForgotPasswordPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     setIsSubmitting(true);
 
     if (!phone) {
       setLoading(false);
-     
+
       setIsSubmitting(false);
 
       return toast.error("Please enter a phone number");
@@ -50,14 +49,14 @@ function ForgotPasswordPage() {
 
     if (phone.length < 10 || phone.length > 10) {
       setLoading(false);
-      
+
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
     // regex to check phone number is 10 digit or not
     if (!phone.match(/^[0-9]{10}$/)) {
       setLoading(false);
-      
+
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
@@ -66,7 +65,7 @@ function ForgotPasswordPage() {
       .post("/forgotpassword/forgotpassword", { phone })
       .then((response) => {
         setLoading(false);
-        
+
         setIsSubmitting(false);
         toast.success(response.data.message);
         // setPhone("");
@@ -74,7 +73,7 @@ function ForgotPasswordPage() {
       })
       .catch((error) => {
         setLoading(false);
-        
+
         setIsSubmitting(false);
         toast.error(error.response.data.message);
       });
@@ -87,33 +86,33 @@ function ForgotPasswordPage() {
       .post("/forgotpassword/checkotp", { phone, otp })
       .then((response) => {
         setLoading(false);
-     
+
         setIsSubmitting(false);
         toast.success(response.data.message);
-        
+
         setPinverifyModal(false);
         setResetPasswordModal(true);
       })
       .catch((error) => {
         setLoading(false);
-       
+
         setIsSubmitting(false);
         toast.error(error.response.data.message);
       });
   };
 
-  const ResetPassword = (e) => {
+  const ResetPassword = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (!password) {
       return toast.error("Please enter a password");
     }
 
-    axios
+    await axios
       .post("/forgotpassword/resetpassword", { phone, password })
       .then((response) => {
         setLoading(false);
-        
+
         setIsSubmitting(false);
         toast.success(response.data.message);
         setPhone("");
@@ -126,10 +125,11 @@ function ForgotPasswordPage() {
       })
       .catch((error) => {
         setLoading(false);
-       
+
         setIsSubmitting(false);
         toast.error(error.response.data.message);
       });
+    setLoading(false);
   };
   return (
     <>
@@ -139,11 +139,16 @@ function ForgotPasswordPage() {
 
       <div className="w-screen min-h-screen p-5 flex justify-center items-center">
         <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center justify-center flex-col relative overflow-hidden">
-          <img src={logo}  className="w-[100px] shadow-md mt-5 rounded-lg" alt="" />
+          <img
+            src={logo}
+            className="w-[100px] shadow-md mt-5 rounded-lg"
+            alt=""
+          />
           <form onSubmit={handleSubmit} className="pt-5 w-full space-y-8">
             <div>
-            
-              <h1 className="text-3xl font-[600] text-start">Forgot Password</h1>
+              <h1 className="text-3xl font-[600] text-start">
+                Forgot Password
+              </h1>
             </div>
             <div className="relative w-full">
               <label
@@ -163,13 +168,12 @@ function ForgotPasswordPage() {
                 required
               />
             </div>
-          
+
             <div>
               <button className="w-full bg-[#6600ff] text-white p-2 hover:bg-[#000] transition-all text-xl rounded-md">
-                Reset Password
+                Reset Password1
               </button>
             </div>
-           
           </form>
           {isSubmitting ? (
             <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-sm top-0 left-0 bg-[#000000b5]">
@@ -268,7 +272,7 @@ function ForgotPasswordPage() {
           },
         }}
       >
-        <div className="bg-white rounded-lg w-full sm:w-96">
+        <div className="bg-white rounded-lg w-full sm:w-96 overflow-hidden">
           <div className="p-4">
             <h2 className="text-1xl font-bold mb-4 text-center">
               Reset Password
@@ -306,6 +310,13 @@ function ForgotPasswordPage() {
               </div>
             </form>
           </div>
+          {loading ? (
+            <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-sm top-0 left-0 bg-[#000000b5]">
+              <ImSpinner2 className="animate-spin text-white text-5xl" />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </Modal>
     </>
