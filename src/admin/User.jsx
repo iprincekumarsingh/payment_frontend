@@ -14,9 +14,10 @@ export default function User() {
 
   const [increaseWalletLimitModal, setIncreaseWalletLimitModal] =
     useState(false);
-
-  useEffect(() => {
-    axios
+  const [loading, setLoading] = useState(false);
+  const getData = async () => {
+    setLoading(true);
+    await axios
       .get("/admin/getuser", {
         headers: {
           "Content-Type": "application/json",
@@ -33,6 +34,10 @@ export default function User() {
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
+  };
+  useEffect(() => {
+    getData();
   }, []);
 
   const handleSubmit = (e) => {
@@ -66,81 +71,88 @@ export default function User() {
     <>
       <Toaster />
       <Topbar title={"User Profile  "} hideicon={"hidden"}></Topbar>
-      <div className="bg-gray-100 w-full overflow-hidden">
-        <div className="bg-white rounded-md py-2 px-5 mx-auto ">
-          <div className="bg-white rounded-md p-3 mx-auto  relative">
-            <div className="text-start mt-4">
-              <h1 className="text-3xl font-bold text-gray-800">
-                {user.first_name +
-                  " " +
-                  user.middle_name +
-                  " " +
-                  user.last_name}
-              </h1>
-              <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
-              <p className="text-gray-500 text-2xl font-semibold mt-2">
-                Wallet Balance -{" "}
-                {Intl.NumberFormat("en-IN", {
-                  style: "currency",
-                  currency: "INR",
-                }).format(Number(user.wallet_balance))}
-              </p>
+      <div className="w-full overflow-hidden">
+        {loading ? (
+          <p className="text-center pt-10">Loading...</p>
+        ) : (
+          <div className="bg-white rounded-md py-2 px-5 mx-auto ">
+            <div className="bg-white rounded-md p-3 mx-auto  relative">
+              <div className="text-start mt-4">
+                <h1 className="text-3xl font-bold text-gray-800">
+                  {user.first_name +
+                    " " +
+                    user.middle_name +
+                    " " +
+                    user.last_name}
+                </h1>
+                <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
+                <p className="text-gray-500 text-2xl font-semibold mt-2">
+                  Wallet Balance -{" "}
+                  {Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                  }).format(Number(user.wallet_balance))}
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-200 mt-6 pt-6">
+              <div className="flex-col w-full justify-center">
+                <button
+                  className="w-full mb-2  bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+                  onClick={() => setIncreaseWalletLimitModal(true)}
+                >
+                  Increase Wallet Limit
+                </button>
+              </div>
+              <div className="flex-col w-full justify-center">
+                <Link
+                  to={`../admin/user/transcations/${id}`}
+                  className="block w-full py-2 px-4 rounded-lg text-center bg-blue-500 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  Show Transactions
+                </Link>
+              </div>
+
+              <div className="pt-2 [&>*:nth-child(2n+1)]:bg-gray-100 [&>*:nth-child(2n)]:bg-gray-300 h-[50vh] overflow-y-auto overflow-x-hidden">
+                <InfoRow
+                  label="Name"
+                  value={
+                    user.first_name +
+                    " " +
+                    user.middle_name +
+                    " " +
+                    user.last_name
+                  }
+                />
+                <InfoRow label="Phone" value={user.phone} />
+                <InfoRow label="Alternative Phone" value={user.alt_phone} />
+                <InfoRow label="Aadhar Number" value={user.aadhaar_number} />
+                <InfoRow label="Bank Name" value={user.bank_name} />
+                <InfoRow label="IFSC Code" value={user.ifsc_code} />
+                <InfoRow label="Wallet Number" value={user.wallet_no} />
+                <InfoRow label="Pan Number" value={user.pan_no} />
+                <InfoRow label="Address" value={user.address} />
+                <InfoRow label="Wallet" value={user.wallet_no} />
+                <InfoRow
+                  label="Wallet Limit"
+                  value={Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                  }).format(Number(user.wallet_limit))}
+                />
+
+                <InfoRow label="Citizenship" value={user.citizenship} />
+                <InfoRow
+                  label="Country of Birth"
+                  value={user.country_of_birth}
+                />
+                <InfoRow label="Pin Code" value={user.pincode} />
+                <InfoRow label="DOB" value={user.dob} />
+              </div>
             </div>
           </div>
-
-          <div className="border-t border-gray-200 mt-6 pt-6">
-            <div className="flex-col w-full justify-center">
-              <button
-                className="w-full mb-2  bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
-                onClick={() => setIncreaseWalletLimitModal(true)}
-              >
-                Increase Wallet Limit
-              </button>
-            </div>
-            <div className="flex-col w-full justify-center">
-              <Link
-                to={`../admin/user/transcations/${id}`}
-                className="block w-full py-2 px-4 rounded-lg text-center bg-blue-500 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Show Transactions
-              </Link>
-            </div>
-
-            <div className="pt-2 [&>*:nth-child(2n+1)]:bg-gray-100 [&>*:nth-child(2n)]:bg-gray-300 h-[50vh] overflow-y-auto overflow-x-hidden">
-              <InfoRow
-                label="Name"
-                value={
-                  user.first_name +
-                  " " +
-                  user.middle_name +
-                  " " +
-                  user.last_name
-                }
-              />
-              <InfoRow label="Phone" value={user.phone} />
-              <InfoRow label="Alternative Phone" value={user.alt_phone} />
-              <InfoRow label="Aadhar Number" value={user.aadhaar_number} />
-              <InfoRow label="Bank Name" value={user.bank_name} />
-              <InfoRow label="IFSC Code" value={user.ifsc_code} />
-              <InfoRow label="Wallet Number" value={user.wallet_no} />
-              <InfoRow label="Pan Number" value={user.pan_no} />
-              <InfoRow label="Address" value={user.address} />
-              <InfoRow label="Wallet" value={user.wallet_no} />
-              <InfoRow
-                label="Wallet Limit"
-                value={Intl.NumberFormat("en-IN", {
-                  style: "currency",
-                  currency: "INR",
-                }).format(Number(user.wallet_limit))}
-              />
-
-              <InfoRow label="Citizenship" value={user.citizenship} />
-              <InfoRow label="Country of Birth" value={user.country_of_birth} />
-              <InfoRow label="Pin Code" value={user.pincode} />
-              <InfoRow label="DOB" value={user.dob} />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
       <Modal
         isOpen={increaseWalletLimitModal}

@@ -9,9 +9,10 @@ export default function UserTranscations() {
   const [transcations, setTranscations] = React.useState([]);
 
   const { id } = useParams();
-
-  useEffect(() => {
-    axios
+  const [loading, setloading] = useState(false);
+  const getData = async () => {
+    setloading(true);
+    await axios
       .get("admin/user/transcations", {
         params: {
           id: id,
@@ -28,6 +29,11 @@ export default function UserTranscations() {
       .catch((err) => {
         console.log(err);
       });
+    setloading(false);
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
   const userTranscations = transcations.map((transcation, index) => {
@@ -83,21 +89,12 @@ export default function UserTranscations() {
     <>
       <Topbar title={"User Transcations"} hideicon="hidden" />
       <div>
-        <div className="w-full overflow-x-auto mb-14">
-          <table className="w-full text-sm text-center it text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Transcations Details
-                </th>
-
-                <th scope="col" className="px-6 py-3">
-                  Amount
-                </th>
-              </tr>
-            </thead>
-            {userTranscations}
-          </table>
+        <div className="w-full mb-14 h-[85vh] overflow-y-auto overflow-x-hidden">
+          {loading ? (
+            <p className="text-center pt-10">Loading...</p>
+          ) : (
+            userTranscations
+          )}
         </div>
       </div>
     </>
