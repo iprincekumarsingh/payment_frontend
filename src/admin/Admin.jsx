@@ -32,7 +32,7 @@ export default function Admin() {
         }
       )
       .then((res) => {
-        console.log(res);
+        console.log("res:" + res);
       })
       .catch((err) => {
         console.log(err);
@@ -53,8 +53,10 @@ export default function Admin() {
   );
 
   const renderResults = searchTerm !== "" ? filteredResults : notificationList;
-  useEffect(() => {
-    axios
+  const [loading, setLoading] = useState(false);
+  const getData = async () => {
+    setLoading(true);
+    await axios
       .get("money", {
         headers: {
           "Content-Type": "application/json",
@@ -70,6 +72,10 @@ export default function Admin() {
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
+  };
+  useEffect(() => {
+    getData();
   }, []);
 
   // Separate approved and rejected items
@@ -173,7 +179,11 @@ export default function Admin() {
       </div>
 
       <div className="w-full overflow-x-hidden h-[55vh] overflow-y-auto mb-14">
-        {notificationListMap}
+        {loading ? (
+          <p className="text-center pt-10">Loading...</p>
+        ) : (
+          notificationListMap
+        )}
       </div>
     </div>
   );

@@ -23,9 +23,10 @@ export default function Alluser() {
   function closeRequestMoneyModal() {
     setAddMoney(false);
   }
-
-  useEffect(() => {
-    axios
+  const [loading, setLoading] = useState(false);
+  const getData = async () => {
+    setLoading(true);
+    await axios
       .get("admin/getallusers", {
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +42,10 @@ export default function Alluser() {
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
+  };
+  useEffect(() => {
+    getData();
   }, []);
 
   const addMoney = (id) => {
@@ -225,7 +230,11 @@ export default function Alluser() {
       </div>
 
       <div className="w-full overflow-x-hidden overflow-y-auto h-[75vh] mb-14">
-        {notificationListMap}
+        {loading ? (
+          <p className="text-center pt-10">Loading...</p>
+        ) : (
+          notificationListMap
+        )}
       </div>
       <Modal
         isOpen={addMOney}

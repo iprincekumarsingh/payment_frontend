@@ -32,11 +32,11 @@ export default function RMoney() {
 
   const renderResults = searchTerm !== "" ? filteredResults : notificationList;
 
-  const fetchAPI = async () => {};
+  const [loading, setLoading] = useState(false);
 
-  // getting all notifications money request
-  useEffect(() => {
-    axios
+  const getData = async () => {
+    setLoading(true);
+    await axios
       .get("money", {
         headers: {
           "Content-Type": "application/json",
@@ -52,6 +52,11 @@ export default function RMoney() {
       .catch((err) => {
         console.log(err);
       });
+    setLoading(false);
+  };
+  // getting all notifications money request
+  useEffect(() => {
+    getData();
   }, []);
   const formatDate = (date) => {
     const options = { day: "numeric", month: "short", year: "2-digit" };
@@ -228,7 +233,11 @@ export default function RMoney() {
         />
       </div>
       <div className="w-full overflow-hidden overflow-y-auto h-[72vh] mb-14">
-        {notificationListMap}
+        {loading ? (
+          <p className="text-center pt-10">Loading...</p>
+        ) : (
+          notificationListMap
+        )}
       </div>
     </>
   );

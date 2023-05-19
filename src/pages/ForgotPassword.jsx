@@ -101,14 +101,14 @@ function ForgotPasswordPage() {
       });
   };
 
-  const ResetPassword = (e) => {
+  const ResetPassword = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (!password) {
       return toast.error("Please enter a password");
     }
 
-    axios
+    await axios
       .post("/forgotpassword/resetpassword", { phone, password })
       .then((response) => {
         setLoading(false);
@@ -129,6 +129,7 @@ function ForgotPasswordPage() {
         setIsSubmitting(false);
         toast.error(error.response.data.message);
       });
+    setLoading(false);
   };
   return (
     <>
@@ -170,7 +171,7 @@ function ForgotPasswordPage() {
 
             <div>
               <button className="w-full bg-[#6600ff] text-white p-2 hover:bg-[#000] transition-all text-xl rounded-md">
-                Reset Password
+                Reset Password1
               </button>
             </div>
           </form>
@@ -271,7 +272,7 @@ function ForgotPasswordPage() {
           },
         }}
       >
-        <div className="bg-white rounded-lg w-full sm:w-96">
+        <div className="bg-white rounded-lg w-full sm:w-96 overflow-hidden">
           <div className="p-4">
             <h2 className="text-1xl font-bold mb-4 text-center">
               Reset Password
@@ -309,6 +310,13 @@ function ForgotPasswordPage() {
               </div>
             </form>
           </div>
+          {loading ? (
+            <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-sm top-0 left-0 bg-[#000000b5]">
+              <ImSpinner2 className="animate-spin text-white text-5xl" />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </Modal>
     </>
