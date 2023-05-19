@@ -49,12 +49,29 @@ export default function OnBoarding() {
       setBtn("Update");
       return;
     }
+
     // check bank account number is valid or not
-    if (bankaccount.length !== 12) {
-      setErrorMsg("Bank account number must be 12 digits");
+
+    const adharregex = /^[0-9]+$/;
+    if (!adharregex.test(aadhaar)) {
+      setErrorMsg("Aadhaar number must be number");
       setBtn("Update");
       return;
     }
+    // check all the bank account no is number and it must be 12 to 16 digits not less than 12 and not greater than 16
+    if (bankaccount.length < 12 || bankaccount.length > 16) {
+      setErrorMsg("Bank account number must be 12 to 16 digits");
+      setBtn("Update");
+      return;
+    }
+    // regex code to check that bank account no is number or not
+    const regex = /^[0-9]+$/;
+    if (!regex.test(bankaccount)) {
+      setErrorMsg("Bank account number must be number");
+      setBtn("Update");
+      return;
+    }
+
     // check all fields are filled or not
 
     if (
