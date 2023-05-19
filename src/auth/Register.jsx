@@ -25,34 +25,34 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     setIsSubmitting(true);
 
-    if ( !phone || !password) {
-      setLoading(false)
+    if (!phone || !password) {
+      setLoading(false);
       setIsSubmitting(false);
       return toast.error("Please fill all the fields");
     }
-   
+
     if (!phone) {
-      setLoading(false)
+      setLoading(false);
       setIsSubmitting(false);
       return toast.error("Please enter a phone number");
     }
 
     if (phone.length < 10 || phone.length > 10) {
-      setLoading(false)
+      setLoading(false);
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
     if (!phone.match(/^[0-9]{10}$/)) {
-      setLoading(false)
+      setLoading(false);
       setIsSubmitting(false);
       return toast.error("Please enter a valid phone number");
     }
 
     if (!password) {
-      setLoading(false)
+      setLoading(false);
       setIsSubmitting(false);
     }
     axios
@@ -63,7 +63,7 @@ export default function Register() {
       })
       .then((res) => {
         setLoading(false);
-        
+
         setIsSubmitting(false);
         toast.success(res.data.message);
 
@@ -74,7 +74,7 @@ export default function Register() {
       .catch((err) => {
         console.log(err);
         setLoading(false);
-       
+
         setIsSubmitting(false);
         // toast.error(err.response.data.message);
         toast.error(err.response.data.message);
@@ -85,8 +85,8 @@ export default function Register() {
 
   return (
     <>
-    <Toaster></Toaster>
-    <div className="w-screen min-h-screen p-5 flex justify-center items-center">
+      <Toaster></Toaster>
+      <div className="w-screen min-h-screen p-5 flex justify-center items-center">
         <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center justify-center flex-col relative overflow-hidden">
           <img src={logo} className="w-[100px] shadow-md pt-5" alt="" />
           <form onSubmit={handleSubmit} className="pt-5 w-full space-y-8">
@@ -142,14 +142,13 @@ export default function Register() {
                 <p className="flex justify-center items-center text-center space-x-1">
                   <span>Already have an account ?</span>
                   <Link
-                    to={"/auth/register"}
+                    to={"/auth/login"}
                     className="text-[#6600ff] text-center font-[600]"
                   >
                     Login
                   </Link>
                 </p>
               </div>
-              
             </div>
           </form>
           {isSubmitting ? (

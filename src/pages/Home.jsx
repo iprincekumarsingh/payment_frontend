@@ -499,6 +499,8 @@ export default function Home() {
         </div>
       </div>
       <div className="mb-20" style={{ margin: "10px" }}>
+        <Link to={"/home/profile"}>
+       
         <div className="w-full h-56 text-black debit-card-bg1 shadow-md shadow-[#5d5d5d] transition-transform transform rounded-xl bg-gradient-to-b p-5 overflow-hidden">
           <p className="font-black text-[#000000] text-xl ">Debit Card</p>
           <div className="flex justify-between">
@@ -526,6 +528,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+         </Link>
       </div>
       {/* <Modal>
         <CheckBalance amount={wallet_balance} />

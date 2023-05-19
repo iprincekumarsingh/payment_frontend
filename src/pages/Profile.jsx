@@ -197,7 +197,7 @@ export default function Profile() {
   return (
     <>
       <Toaster />
-      <Topbar title="Profile" />
+      <Topbar title="Profile"  hideicon={"hidden"}/>
       <div className="bg-gray-100 ">
         <div className="bg-white rounded-md  p-3 max-w-md mx-auto mt-1">
           <div className="text-start mt-4">

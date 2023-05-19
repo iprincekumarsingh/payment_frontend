@@ -204,7 +204,7 @@ export default function TransferMoney() {
 
   return (
     <div className="overflow-hidden">
-      <Topbar title="Money Transfer" backLink={"/home/home/user"}></Topbar>
+      <Topbar title="Money Transfer" backLink={"/home/home/user"} hideicon={"hidden"}></Topbar>
 
       <Modal
         isOpen={requestMoney}
