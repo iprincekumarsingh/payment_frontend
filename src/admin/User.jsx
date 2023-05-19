@@ -78,13 +78,12 @@ export default function User() {
           <div className="bg-white rounded-md py-2 px-5 mx-auto ">
             <div className="bg-white rounded-md p-3 mx-auto  relative">
               <div className="text-start mt-4">
-                <h1 className="text-3xl font-bold text-gray-800">
-                  {user.first_name +
-                    " " +
-                    user.middle_name +
-                    " " +
-                    user.last_name}
-                </h1>
+              <h1 className="text-3xl font-bold text-gray-800">
+  {user.first_name && user.middle_name && user.last_name
+    ? `${user.first_name} ${user.middle_name} ${user.last_name}`
+    : "Name not set"}
+</h1>
+
                 <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
                 <p className="text-gray-500 text-2xl font-semibold mt-2">
                   Wallet Balance -{" "}

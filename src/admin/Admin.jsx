@@ -33,6 +33,7 @@ export default function Admin() {
       )
       .then((res) => {
         console.log("res:" + res);
+        getData();
       })
       .catch((err) => {
         console.log(err);
@@ -124,7 +125,7 @@ export default function Admin() {
           <div className="w-full flex justify-between items-center pt-5">
             <button
               onClick={() => {
-                handleApprove(item._id, "approved");
+                handleApprove(item._id, "rejected");
               }}
               className="text-base font-[600] bg-red-500 text-white px-4 py-1 rounded-md"
             >
@@ -132,7 +133,7 @@ export default function Admin() {
             </button>
             <button
               onClick={() => {
-                handleApprove(item._id, "rejected");
+                handleApprove(item._id, "approved");
               }}
               className="text-base bg-green-500 font-[600] text-white px-4 py-1 rounded-md"
             >
