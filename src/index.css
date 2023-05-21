@@ -111,3 +111,20 @@ body {
       rgb(198, 12, 55) 81%
     ) !important;
 }
+
+.rotate > .div1 {
+  z-index: 3 !important;
+}
+.rotate > .div2 {
+  z-index: 1 !important;
+}
+.rotate:hover {
+  transform: rotateY(180deg) !important;
+}
+.rotate:hover > .div2 {
+  z-index: 3 !important;
+  transform: rotateY(180deg) !important;
+}
+.rotate:hover > .div1 {
+  z-index: 1 !important;
+}
