@@ -78,11 +78,11 @@ export default function User() {
           <div className="bg-white rounded-md py-2 px-5 mx-auto ">
             <div className="bg-white rounded-md p-3 mx-auto  relative">
               <div className="text-start mt-4">
-              <h1 className="text-3xl font-bold text-gray-800">
-  {user.first_name && user.middle_name && user.last_name
-    ? `${user.first_name} ${user.middle_name} ${user.last_name}`
-    : "Name not set"}
-</h1>
+                <h1 className="text-3xl font-bold text-gray-800">
+                  {user.first_name && user.middle_name && user.last_name
+                    ? `${user.first_name} ${user.middle_name} ${user.last_name}`
+                    : "Name not set"}
+                </h1>
 
                 <p className="text-gray-500 text-lg mt-2">{user.phone}</p>
                 <p className="text-gray-500 text-2xl font-semibold mt-2">
@@ -95,7 +95,7 @@ export default function User() {
               </div>
             </div>
 
-            <div className="border-t border-gray-200 mt-6 pt-6">
+            <div className="border-t border-gray-200 mt-2 pt-6">
               <div className="flex-col w-full justify-center">
                 <button
                   className="w-full mb-2  bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
@@ -110,6 +110,14 @@ export default function User() {
                   className="block w-full py-2 px-4 rounded-lg text-center bg-blue-500 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Show Transactions
+                </Link>
+              </div>
+              <div className="flex-col w-full justify-center mt-1" >
+                <Link
+                  to={`../edit/user/${id}`}
+                  className="block w-full py-2 px-4 rounded-lg text-center bg-blue-500 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  Edit User
                 </Link>
               </div>
 
@@ -176,8 +184,8 @@ export default function User() {
             maxWidth: "80vw",
           },
         }}
-        // className="flex items-center justify-center"
-        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+      // className="flex items-center justify-center"
+      // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
         <div className="bg-white rounded-lg w-full sm:w-96">
           <div

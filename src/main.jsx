@@ -23,6 +23,7 @@ import Alluser from "./admin/Alluser.jsx";
 import User from "./admin/User.jsx";
 import UserTranscations from "./admin/transcations.jsx";
 import MoneyRequestTranscations from "./admin/MoneyRequestTranscations.jsx";
+import EditUser from "./admin/editUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -110,9 +111,15 @@ const router = createBrowserRouter([
     element: <UserTranscations></UserTranscations>,
   },
   {
-    path:"/admin/user/moneyRequest/:id",
-    element:<MoneyRequestTranscations></MoneyRequestTranscations>
+    path: "/admin/user/moneyRequest/:id",
+    element: <MoneyRequestTranscations></MoneyRequestTranscations>
+  },
+  {
+
+    path: "edit/user/:id",
+    element: <EditUser></EditUser>
   }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

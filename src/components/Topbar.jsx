@@ -56,15 +56,14 @@ export default function Topbar({
         <div className="flex items-center">
           {renderBackButton()}
           <a href={imgLink} className="hidden md:block">
-            <img src={imgLink} width={imgWidth} alt="" />
+            <img src={imgLink}  width={imgWidth} alt="" />
           </a>
           <span className="text-white text-xl font-semibold ml-2">{title}</span>
         </div>
 
         <div
-          className={`flex justify-center items-center cursor-pointer ${
-            hideicon ? "hidden" : ""
-          }`}
+          className={`flex justify-center items-center cursor-pointer ${hideicon ? "hidden" : ""
+            }`}
         >
           <button className="group relative">
             <span className="text-3xl text-white">
@@ -98,7 +97,7 @@ export default function Topbar({
                     width={20}
                     className="mr-2"
                     alt=""
-                    srcset=""
+                    
                   />
                   <span>Admin</span>
                 </Link>
