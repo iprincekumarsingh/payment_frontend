@@ -498,15 +498,8 @@ export default function Home() {
           </section>
         </div>
       </div>
-<<<<<<< HEAD
-      <div className="mb-20" style={{ margin: "10px" }}>
-        <Link to={"/home/profile"}>
-       
-        <div className="w-full h-56 text-black debit-card-bg1 shadow-md shadow-[#5d5d5d] transition-transform transform rounded-xl bg-gradient-to-b p-5 overflow-hidden">
-=======
       <button className=" block group debit-card-bg1 rounded-xl overflow-hidden mb-20 rotate relative w-[90%] mx-auto h-56 transition-all duration-300">
         <div className="absolute  debit-card-bg1 div1 top-0 left-0 w-full h-56 text-black   shadow-md shadow-[#5d5d5d] transition-all transform rounded-xl bg-gradient-to-b p-5 overflow-hidden">
->>>>>>> 96a3110 (rotation added to card atm1)
           <p className="font-black text-[#000000] text-xl ">Debit Card</p>
           <div className="flex justify-between">
             <div>
@@ -533,10 +526,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-         </Link>
-      </div>
-=======
         <div className="div2 absolute debit-card-bg1 w-full top-0 left-0 h-full rounded-xl pt-16 space-y-4">
           <h1 className="tracking-[7px] text-xl font-black">{wallet}</h1>
           <div className="bg-black text-white p-2">
@@ -545,7 +534,6 @@ export default function Home() {
           </div>
         </div>
       </button>
->>>>>>> 96a3110 (rotation added to card atm1)
       {/* <Modal>
         <CheckBalance amount={wallet_balance} />
       </Modal> */}
