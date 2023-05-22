@@ -5,8 +5,9 @@ import BeatLoader from "react-spinners/BeatLoader";
 import Cookie from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "../api/axios";
-import logo from "../img/sxbank.jpg";
+import logo from "../img/logo.png";
 import { ImSpinner2 } from "react-icons/im";
+import { TfiAngleRight } from "react-icons/tfi";
 const override = {
   display: "block",
   margin: "0 auto",
@@ -87,57 +88,60 @@ export default function Register() {
     <>
       <Toaster></Toaster>
       <div className="w-screen min-h-screen p-5 flex justify-center items-center">
-        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center justify-center flex-col relative overflow-hidden">
-          <img src={logo} className="w-[100px] shadow-md pt-5" alt="" />
-          <form onSubmit={handleSubmit} className="pt-5 w-full space-y-8">
+        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden bg-white h-[95vh]">
+          <img src={logo} className="w-[250px] mx-auto" alt="" />
+          <form onSubmit={handleSubmit} className="pt-20 w-full space-y-4">
             <div>
               {/* <p className="texr-sm capitalize text-center text-gray-500 font-[200] pt-4">
                 hi there,
               </p> */}
-              <h1 className="text-4xl font-[600] text-start">Sign Up</h1>
+              <h1 className="text-4xl font-[900] text-start">Register</h1>
             </div>
-            <div className="relative w-full">
-              <label
+            <div className="relative w-full pt-10">
+              {/* <label
                 htmlFor="phone"
                 className="absolute text-sm -top-[10px] left-3 bg-white"
               >
                 Phone
-              </label>
+              </label> */}
               <input
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
                 value={phone}
                 type="number"
-                className="w-full border placeholder:capitalize px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
                 placeholder="Enter your phone number"
                 required
               />
             </div>
             <div className="relative w-full">
-              <label
+              {/* <label
                 htmlFor="password"
                 className="absolute text-sm -top-[10px] left-3 bg-white"
               >
                 Password
-              </label>
+              </label> */}
               <input
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
                 value={password}
                 type="password"
-                className="w-full border px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
-                placeholder="Enter Your Password"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="Password"
                 required
               />
             </div>
-            <div>
-              <button className="w-full bg-[#6600ff] text-white p-2 hover:bg-[#000] transition-all text-xl rounded-md">
-                Register
+            <div className="pt-10">
+              <button className="w-full flex items-center justify-center space-x-1">
+                <span className="text-2xl text-[#323232] font-[800]">
+                  Register
+                </span>{" "}
+                <TfiAngleRight className="bg-[#323232] text-white w-[60px] h-[60px] p-5 rounded-full" />
               </button>
             </div>
-            <div className="relative bottom-2 ">
+            <div className="relative bottom-2 pt-5">
               <div className="text-center">
                 <p className="flex justify-center items-center text-center space-x-1">
                   <span>Already have an account ?</span>

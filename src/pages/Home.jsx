@@ -498,7 +498,7 @@ export default function Home() {
           </section>
         </div>
       </div>
-      <button className=" block group debit-card-bg1 rounded-xl overflow-hidden mb-20 rotate relative w-[90%] mx-auto h-56 transition-all duration-300">
+      <button className=" block group debit-card-bg1 rounded-xl overflow-hidden mb-20 rotate relative w-[90%] mx-auto h-56 transition-all duration-700">
         <div className="absolute  debit-card-bg1 div1 top-0 left-0 w-full h-56 text-black   shadow-md shadow-[#5d5d5d] transition-all transform rounded-xl bg-gradient-to-b p-5 overflow-hidden">
           <p className="font-black text-[#000000] text-xl ">Debit Card</p>
           <div className="flex justify-between">

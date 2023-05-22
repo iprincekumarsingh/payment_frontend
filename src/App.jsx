@@ -3,10 +3,11 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "./api/axios";
 import Cookie from "js-cookie";
 
-import logo from "./img/sxbank.jpg";
+import logo from "./img/logo.png";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
+import { TfiAngleRight } from "react-icons/tfi";
 
 function App() {
   useEffect(() => {
@@ -81,61 +82,72 @@ function App() {
   return (
     <>
       <Toaster />
-      <div className="w-screen min-h-screen p-5 flex justify-center items-center">
-        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center justify-center flex-col relative overflow-hidden">
-          <img src={logo} className="w-[100px] shadow-md pt-5" alt="" />
-          <form onSubmit={handleSubmit} className="pt-5 w-full space-y-8">
-            <div>
-              <p className="texr-sm capitalize text-center text-gray-500 font-[200] pt-4">
-                hi there,
+      <div className="w-screen min-h-screen p-3 flex justify-center items-center">
+        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden bg-white h-[95vh]">
+          <img src={logo} className="w-[250px] mx-auto" alt="" />
+          <form onSubmit={handleSubmit} className="w-full space-y-4 pt-20">
+            <div className="pb-10">
+              <p className="texr-sm capitalize text-gray-500 font-[200] pt-4">
+                welcome back,
               </p>
-              <h1 className="text-4xl font-[600] text-center">Sign In</h1>
+              <h1 className="text-4xl font-[900]">Login Here</h1>
             </div>
             <div className="relative w-full">
-              <label
+              {/* <label
                 htmlFor="phone"
                 className="absolute text-sm -top-[10px] left-3 bg-white"
               >
                 Phone
-              </label>
+              </label> */}
               <input
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
                 value={phone}
                 type="number"
-                className="w-full border placeholder:capitalize px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
-                placeholder="Enter your phone number"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="Phone Number"
                 required
               />
             </div>
             <div className="relative w-full">
-              <label
+              {/* <label
                 htmlFor="password"
                 className="absolute text-sm -top-[10px] left-3 bg-white"
               >
                 Password
-              </label>
+              </label> */}
               <input
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
                 value={password}
                 type="password"
-                className="w-full border px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
-                placeholder="Enter Your Password"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="Password"
                 required
               />
             </div>
-            <div>
-              <button className="w-full bg-[#6600ff] text-white p-2 hover:bg-[#000] transition-all text-xl rounded-md">
-                Login
+            <div className="text-end">
+              <Link
+                to={"/forgot-password"}
+                className="text-[#7e7e7e] font-[500] text-sm"
+              >
+                Forgot MPIN
+              </Link>
+            </div>
+            <div className="pt-10">
+              <button className="w-full flex items-center justify-center space-x-1">
+                <span className="text-2xl text-[#323232] font-[800]">
+                  Login
+                </span>{" "}
+                <TfiAngleRight className="bg-[#323232] text-white w-[60px] h-[60px] p-5 rounded-full" />
               </button>
             </div>
-            <div className="relative bottom-2 ">
+            <div className="relative bottom-2 pt-5">
               <div className="text-center">
                 <p className="flex justify-center items-center text-center space-x-1">
-                  <span>Don't have an account?</span>
+                  <span className="font-light">Don't have an account?</span>
                   <Link
                     to={"/auth/register"}
                     className="text-[#6600ff] text-center font-[600]"
@@ -143,14 +155,6 @@ function App() {
                     Create One
                   </Link>
                 </p>
-              </div>
-              <div>
-                <Link
-                  to={"/forgot-password"}
-                  className="text-[#6600ff] text-center block font-[600]"
-                >
-                  Forgot Password
-                </Link>
               </div>
             </div>
           </form>
