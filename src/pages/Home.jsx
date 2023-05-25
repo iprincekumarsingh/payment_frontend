@@ -308,17 +308,17 @@ export default function Home() {
       <Topbar title="SXBank 🚀" />
 
       {/* check if the file is there or not  */}
-      <div className="p-5">
+      {/* <div className="p-5">
         <input
           type="text"
           className="w-full bg-[#fff] border shadow-xl px-4 py-3 rounded-xl outline-none focus:border-[#000]"
           placeholder="Enter Bill Name"
         />
-      </div>
+      </div> */}
       <div className="overflow-x-auto p-4">
         <div>
           <section className="container">
-            <div className="w-full flex justify-around pb-5">
+            <div className="w-full flex justify-around placeholder-slate-100 pt-10 pb-5">
               {cards?.map((card, index) => {
                 return (
                   <div
@@ -336,7 +336,7 @@ export default function Home() {
               })}
             </div>
             <div className="text-center font-[600] bg-[#fff] border shadow-xl p-2 rounded-xl">
-              Available Balance: ₹{amount}
+              Available Balance: ₹{wallet_balance}
             </div>
 
             <Widget_card card_text={"Wallet ID: " + wallet} />

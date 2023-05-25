@@ -46,7 +46,7 @@ export default function Topbar({
       // Otherwise, render a back button that navigates to the previous page
       return (
         <Link to="#" onClick={() => window.history.back()}>
-          <AiOutlineArrowLeft className="text-white" />
+          <AiOutlineArrowLeft className="" />
         </Link>
       );
     }
@@ -121,7 +121,9 @@ export default function Topbar({
     //   </div>
     // </nav>
     <header className="p-5 bg-white flex justify-between items-center rounded-2xl shadow-xl mt-5 mx-3 border">
-      <p className="text-xl font-[900] capitalize">{title}</p>
+      <p className="text-xl font-[900] capitalize flex items-center space-x-3">
+        {renderBackButton()} <span>{title}</span>
+      </p>
       <div>
         <button className="group relative">
           <span className="text-3xl">
@@ -147,7 +149,11 @@ export default function Topbar({
 
             {Cookie.get("role") === "admin" ? (
               <Link
-                to={"../home/admin"}
+                to={
+                  window?.location?.pathname?.includes("/home/user")
+                    ? "../home/admin"
+                    : "../home/home/admin"
+                }
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
               >
                 <img src={adminIcon} width={20} className="mr-2" alt="" />
