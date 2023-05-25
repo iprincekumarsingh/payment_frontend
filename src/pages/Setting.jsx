@@ -67,9 +67,9 @@ export default function Setting() {
       });
   };
   return (
-    <>
+    <div className="overflow-hidden">
       <Topbar title="Settings" hideicon={"hidden"}></Topbar>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="">
         <div className="container mx-auto px-4 py-6">
           {/* <h1 className="text-3xl font-bold mb-4">Settings</h1> */}
           <div className="bg-white rounded-lg shadow-lg px-4 py-2">
@@ -187,6 +187,6 @@ export default function Setting() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
