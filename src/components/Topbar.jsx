@@ -120,7 +120,7 @@ export default function Topbar({
     //     </div>
     //   </div>
     // </nav>
-    <header className="p-5 bg-white flex justify-between items-center rounded-2xl shadow-xl mt-5 mx-3 border">
+    <header className="p-5 bg-white flex justify-between items-center rounded-b-md shadow-sm border">
       <p className="text-xl font-[900] capitalize flex items-center space-x-3">
         {renderBackButton()} <span>{title}</span>
       </p>
