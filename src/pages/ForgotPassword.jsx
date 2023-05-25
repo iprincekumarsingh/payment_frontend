@@ -3,11 +3,12 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "../api/axios";
 import Cookie from "js-cookie";
 import Modal from "react-modal";
-import logo from "../img/sxbank.jpg";
+import logo from "../img/logo.png";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from "react-router-dom";
 import Topbar from "../components/Topbar";
 import { ImSpinner2 } from "react-icons/im";
+import { TfiAngleRight } from "react-icons/tfi";
 function ForgotPasswordPage() {
   const [pinverifyModal, setPinverifyModal] = useState(false);
 
@@ -135,43 +136,38 @@ function ForgotPasswordPage() {
     <>
       {/* component */}
       <Toaster />
-      <Topbar title="Forgot Password" hideicon={"hidden"} />
+      {/* <Topbar title="Forgot Password" hideicon={"hidden"} /> */}
 
       <div className="w-screen min-h-screen p-5 flex justify-center items-center">
-        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center justify-center flex-col relative overflow-hidden">
-          <img
-            src={logo}
-            className="w-[100px] shadow-md mt-5 rounded-lg"
-            alt=""
-          />
-          <form onSubmit={handleSubmit} className="pt-5 w-full space-y-8">
-            <div>
-              <h1 className="text-3xl font-[600] text-start">
-                Forgot Password
-              </h1>
+        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden bg-white h-[95vh]">
+          <img src={logo} className="w-[250px] mx-auto" alt="" />
+          <form onSubmit={handleSubmit} className="pt-24 w-full">
+            <div className="text-center">
+              <h1 className="text-base font-[200]">Forgot Your Password ?</h1>
+              <h1 className="text-4xl font-bold">Reset Now</h1>
             </div>
-            <div className="relative w-full">
-              <label
-                htmlFor="phone"
-                className="absolute text-sm -top-[10px] left-3 bg-white"
-              >
-                Phone
-              </label>
+            <div className="relative w-full py-5">
               <input
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
                 value={phone}
                 type="number"
-                className="w-full border placeholder:capitalize px-4 py-2 rounded-md outline-none focus:border-[#6600ff]"
-                placeholder="Enter your phone number"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="phone number"
                 required
               />
             </div>
 
             <div>
-              <button className="w-full bg-[#6600ff] text-white p-2 hover:bg-[#000] transition-all text-xl rounded-md">
-                Reset Password1
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center space-x-1"
+              >
+                <span className="text-2xl text-[#323232] font-[800]">
+                  Send OTP
+                </span>{" "}
+                <TfiAngleRight className="bg-[#323232] text-white w-[60px] h-[60px] p-5 rounded-full" />
               </button>
             </div>
           </form>

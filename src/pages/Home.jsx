@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import Modal from "react-modal";
+import logonew from "../img/logo.png";
 
 import qrcode from "../img/qrcode.jpg";
 import Cookie from "js-cookie";
@@ -11,10 +12,10 @@ import axios from "../api/axios";
 import logo2 from "../img/icons/logo2.png";
 import card_pin from "../img/icons/card_sim.png";
 
-import money_transfer from "../img/pay.png";
-import add_money from "../img/add.png";
+import money_transfer from "../img/money-transfer.png";
+import add_money from "../img/income.png";
 
-import request_money from "../img/request.png";
+import request_money from "../img/cash-withdrawal.png";
 import Topbar from "../components/Topbar";
 import HomeIcons from "../components/HomeIcons";
 import Widget_card from "../components/Widget_card";
@@ -304,40 +305,38 @@ export default function Home() {
 
   return (
     <div className="overflow-x-auto overflow-y-auto">
-      <Topbar title="SX Bank" />
+      <Topbar title="SXBank 🚀" />
 
       {/* check if the file is there or not  */}
-
+      <div className="p-5">
+        <input
+          type="text"
+          className="w-full bg-[#fff] border shadow-xl px-4 py-3 rounded-xl outline-none focus:border-[#000]"
+          placeholder="Enter Bill Name"
+        />
+      </div>
       <div className="overflow-x-auto p-4">
-        <div className="flex flex-col text-start items-start justify-center px-2">
-          <p className="text-[16px] text-start">Welcome back,</p>
-          <p className="font-black text-2xl sm:text-2xl text-[#312aff]">
-            {name}
-          </p>
-          <p className="text-sm sm:text-2xl text-[#000000]">
-            <span className="font-[800]">Available Balance:</span> ₹
-            {wallet_balance}
-          </p>
-        </div>
-
         <div>
-          <section className="container pt-5">
-            <div className="w-full flex justify-around">
+          <section className="container">
+            <div className="w-full flex justify-around pb-5">
               {cards?.map((card, index) => {
                 return (
                   <div
                     onClick={card?.func}
                     className={
-                      "bg-white w-[100px] border p-5 overflow-hidden flex flex-col justify-center items-center rounded-md shadow-md"
+                      "bg-[#fff] w-[100px] border p-5 overflow-hidden flex flex-col justify-center items-center rounded-2xl shadow-xl"
                     }
                   >
-                    <img src={card?.img} className="w-[25px]" alt="" />
+                    <img src={card?.img} className="w-[45px]" alt="" />
                     <p className="font-bold pt-2 text-center  capitalize text-[10px]">
                       {card?.name}
                     </p>
                   </div>
                 );
               })}
+            </div>
+            <div className="text-center font-[600] bg-[#fff] border shadow-xl p-2 rounded-xl">
+              Available Balance: ₹{amount}
             </div>
 
             <Widget_card card_text={"Wallet ID: " + wallet} />
@@ -498,7 +497,7 @@ export default function Home() {
           </section>
         </div>
       </div>
-      <button className=" block group debit-card-bg1 rounded-xl overflow-hidden mb-20 rotate relative w-[90%] mx-auto h-56 transition-all duration-700">
+      <button className="mt-10  block group debit-card-bg1 rounded-xl overflow-hidden mb-20 rotate relative w-[90%] mx-auto h-56 transition-all duration-700">
         <div className="absolute  debit-card-bg1 div1 top-0 left-0 w-full h-56 text-black   shadow-md shadow-[#5d5d5d] transition-all transform rounded-xl bg-gradient-to-b p-5 overflow-hidden">
           <p className="font-black text-[#000000] text-xl ">Debit Card</p>
           <div className="flex justify-between">

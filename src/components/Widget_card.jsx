@@ -25,9 +25,9 @@ export default function Widget_card({ card_text }) {
   };
 
   return (
-    <div className="mt-5 w-[80%] mx-auto shadow-md border shadow-[#929292] flex items-center justify-center space-x-2 e font-semibold px-3 py-2 text-base whitespace-nowrap rounded-full">
+    <div className="mt-5 mx-auto shadow-md border flex items-center justify-center space-x-2 e font-semibold px-3 py-3 text-base whitespace-nowrap rounded-xl bg-white">
       <Toaster />
-      <div className="truncate font-[400] text-sm space-x-2" id="cardText">
+      <div className="truncate font-[600] text-sm space-x-2" id="cardText">
         {card_text.toString()?.split(": ")?.[0]}: XXXXXXXX{""}
         {card_text.toString()?.split(": ")?.[1]?.slice(8)}
       </div>

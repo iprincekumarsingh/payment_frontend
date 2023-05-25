@@ -137,7 +137,10 @@ function App() {
               </Link>
             </div>
             <div className="pt-10">
-              <button className="w-full flex items-center justify-center space-x-1">
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center space-x-1"
+              >
                 <span className="text-2xl text-[#323232] font-[800]">
                   Login
                 </span>{" "}
