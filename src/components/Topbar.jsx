@@ -124,7 +124,16 @@ export default function Topbar({
       <p className="text-xl font-[900] capitalize flex items-center space-x-3">
         {renderBackButton()} <span>{title}</span>
       </p>
-      <div>
+      <div className="flex items-center space-x-3">
+        <Link
+          to={"../admin/notification"}
+          className="flex items-center px-4 py-2 hover:bg-gray-100"
+          onClick={toggleDropdown}
+        >
+          <button className="text-3xl">
+            <IoIosNotifications />
+          </button>
+        </Link>
         <button className="group relative">
           <span className="text-3xl">
             <TbMenu />

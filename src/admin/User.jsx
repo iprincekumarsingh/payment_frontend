@@ -67,6 +67,28 @@ export default function User() {
       });
   };
 
+  const banUser = async () => {
+    console.log(Cookie.get("token"));
+
+    await axios
+      .put(
+        `https://vivacious-helmet-newt.cyclic.app/api/v1/admin/user/decativate/${user?._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        // Handle error case
+      });
+  };
+
   return (
     <>
       <Toaster />
@@ -79,8 +101,8 @@ export default function User() {
             <div className="bg-white rounded-md p-3 mx-auto  relative">
               <div className="text-start mt-4">
                 <h1 className="text-3xl font-bold text-gray-800">
-                  {user.first_name && user.middle_name && user.last_name
-                    ? `${user.first_name} ${user.middle_name} ${user.last_name}`
+                  {user?.first_name || user?.middle_name || user?.last_name
+                    ? `${user?.first_name} ${user.middle_name} ${user.last_name}`
                     : "Name not set"}
                 </h1>
 
@@ -95,7 +117,7 @@ export default function User() {
               </div>
             </div>
 
-            <div className="border-t border-gray-200 mt-2 pt-6">
+            <div className="border-t border-gray-200 pt-2">
               <div className="flex-col w-full justify-center">
                 <button
                   className="w-full mb-2  bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out"
@@ -112,13 +134,30 @@ export default function User() {
                   Show Transactions
                 </Link>
               </div>
-              <div className="flex-col w-full justify-center mt-1" >
+              <div className="flex-col w-full justify-center mt-1">
                 <Link
                   to={`../edit/user/${id}`}
                   className="block w-full py-2 px-4 rounded-lg text-center bg-blue-500 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Edit User
                 </Link>
+              </div>
+              <div className="flex-col w-full justify-center mt-1">
+                {user?.account_status === "1" ? (
+                  <button
+                    onClick={banUser}
+                    className="block w-full py-2 px-4 rounded-lg text-center bg-red-600 hover:bg-red-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+                  >
+                    Ban User
+                  </button>
+                ) : (
+                  <button
+                    onClick={banUser}
+                    className="block w-full py-2 px-4 rounded-lg text-center bg-green-600 hover:bg-green-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+                  >
+                    Unban User
+                  </button>
+                )}
               </div>
 
               <div className="pt-2 [&>*:nth-child(2n+1)]:bg-gray-100 [&>*:nth-child(2n)]:bg-gray-300 h-[50vh] overflow-y-auto overflow-x-hidden">
@@ -184,8 +223,8 @@ export default function User() {
             maxWidth: "80vw",
           },
         }}
-      // className="flex items-center justify-center"
-      // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+        // className="flex items-center justify-center"
+        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
       >
         <div className="bg-white rounded-lg w-full sm:w-96">
           <div
