@@ -318,7 +318,7 @@ export default function Home() {
       <div className="overflow-x-auto p-4">
         <div>
           <section className="container">
-            <div className="w-full flex justify-around placeholder-slate-100 pt-10 pb-5">
+            <div className="w-full flex justify-around placeholder-slate-100 pt-2 pb-5">
               {cards?.map((card, index) => {
                 return (
                   <div

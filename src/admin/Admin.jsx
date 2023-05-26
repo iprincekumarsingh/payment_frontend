@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import Cookie from "js-cookie";
 import Topbar from "../components/Topbar";
+
+import toast, { Toaster } from "react-hot-toast";
 export default function Admin() {
   const approveBtn = (msg) => {
     alert(msg);
@@ -19,6 +21,7 @@ export default function Admin() {
   const [notificationList, setNotificationList] = useState([]);
 
   const fetchAPI = async () => {};
+  // updating the data
   const handleApprove = (id, status) => {
     axios
       .put(
@@ -33,10 +36,12 @@ export default function Admin() {
       )
       .then((res) => {
         console.log("res:" + res);
+        toast.success(res.data.message);
         getData();
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.response.data.message);
       });
   };
   // getting all notifications money request
@@ -99,6 +104,7 @@ export default function Admin() {
   const notificationListMap = sortedResults.map((item, index) => {
     return (
       <div className="border w-[90%] mx-auto rounded-md bg-white p-3 mb-5">
+        <Toaster></Toaster>
         <div className="w-full flex justify-between items-center">
           <p className="text-base font-bold">
             {item?.user?.first_name + " " + item?.user?.last_name}
