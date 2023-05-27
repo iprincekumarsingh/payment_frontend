@@ -127,7 +127,7 @@ export default function Topbar({
       <div className="flex items-center space-x-3">
       {Cookie.get("role") === "admin" ? (
         <Link
-          to={"../admin/notification"}
+          to={"../../home/admin/notification"}
           className="flex items-center px-4 py-2 hover:bg-gray-100"
           onClick={toggleDropdown}
         >
@@ -164,11 +164,7 @@ export default function Topbar({
 
             {Cookie.get("role") === "admin" ? (
               <Link
-                to={
-                  window?.location?.pathname?.includes("/home/user")
-                    ? "../home/admin"
-                    : "../home/home/admin"
-                }
+                 to="../../home/home/admin"
                 className="flex items-center px-4 py-2 hover:bg-gray-100"
               >
                 <img src={adminIcon} width={20} className="mr-2" alt="" />
