@@ -125,6 +125,7 @@ export default function Topbar({
         {renderBackButton()} <span>{title}</span>
       </p>
       <div className="flex items-center space-x-3">
+      {Cookie.get("role") === "admin" ? (
         <Link
           to={"../admin/notification"}
           className="flex items-center px-4 py-2 hover:bg-gray-100"
@@ -134,6 +135,11 @@ export default function Topbar({
             <IoIosNotifications />
           </button>
         </Link>
+      )
+      :(
+        ""
+      )}
+      
         <button className="group relative">
           <span className="text-3xl">
             <TbMenu />

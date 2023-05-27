@@ -69,10 +69,11 @@ export default function User() {
 
   const banUser = async () => {
     console.log(Cookie.get("token"));
-
-    await axios
+    axios
       .put(
-        `https://vivacious-helmet-newt.cyclic.app/api/v1/admin/user/decativate/${user?._id}`,
+        `admin/user/decativate/${user._id}`,
+        {},
+
         {
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +82,9 @@ export default function User() {
         }
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        toast.success(res.data.message);
+        setIncreaseWalletLimitModal(false);
       })
       .catch((err) => {
         console.log(err);
@@ -89,6 +92,29 @@ export default function User() {
       });
   };
 
+  const unbanUser = async () => {
+    console.log(Cookie.get("token"));
+    axios
+      .put(
+        `admin/user/activate/${user._id}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        toast.success(res.data.message);
+        setIncreaseWalletLimitModal(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        // Handle error case
+      });
+  };
   return (
     <>
       <Toaster />
@@ -152,7 +178,7 @@ export default function User() {
                   </button>
                 ) : (
                   <button
-                    onClick={banUser}
+                    onClick={unbanUser}
                     className="block w-full py-2 px-4 rounded-lg text-center bg-green-600 hover:bg-green-700 text-white font-semibold shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
                   >
                     Unban User
