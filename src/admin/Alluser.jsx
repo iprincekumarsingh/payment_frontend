@@ -25,6 +25,9 @@ export default function Alluser() {
   function closeRequestMoneyModal() {
     setAddMoney(false);
   }
+  const closeDeductMoneyCloseRequest=()=>{
+    setDeductAmount(false)
+  }
   const [loading, setLoading] = useState(false);
   const getData = async () => {
     setLoading(true);
@@ -85,6 +88,8 @@ export default function Alluser() {
         
 
         setDeductAmount(false);
+        // calling the function after the successfull call in response data
+        getData()
       })
       .catch((err) => {
         console.log(err);
@@ -271,7 +276,7 @@ export default function Alluser() {
       <Modal
         isOpen={deductAmount}
         // onAfterOpen={afterOpenModal}
-        onRequestClose={closeRequestMoneyModal}
+        onRequestClose={closeDeductMoneyCloseRequest}
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.6)",
