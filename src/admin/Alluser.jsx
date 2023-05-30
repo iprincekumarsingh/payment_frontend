@@ -18,6 +18,8 @@ export default function Alluser() {
 
   const [addMOney, setAddMoney] = useState("");
 
+  const [deductAmount, setDeductAmount] = useState("");
+
   const [money, setMoney] = useState("");
 
   function closeRequestMoneyModal() {
@@ -53,7 +55,41 @@ export default function Alluser() {
     // alert(id);
     setAddMoney(true);
   };
+  const deductMoney = (id) => {
+    setId(id);
+    setDeductAmount(true);
+  };
 
+  const DedcuMoneyWalllet = (e) => {
+    e.preventDefault();
+    axios
+      .put(
+        "admin/deducteUserWallet",
+        {
+          id: id,
+          amount: amount,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setMessage(res.data.message);
+        toast.success(res.data.message);
+        setId("");
+        setAmount("");
+        
+
+        setDeductAmount(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const Addmoneypost = (e) => {
     e.preventDefault();
     axios
@@ -129,13 +165,22 @@ export default function Alluser() {
                 addMoney(item._id);
                 setMoney(item.wallet_balance);
               }}
-              className="text-base font-[600] bg-yellow-500 text-white px-4 py-1 rounded-md"
+              className="text-base font-[600] bg-yellow-500 text-white px-1 py- rounded-md"
             >
               Add Money
             </button>
-
+            <button
+              onClick={() => {
+                deductMoney(item._id);
+                console.log("dd");
+                setMoney(item.wallet_balance);
+              }}
+              className="text-base font-[600] bg-red-800 text-white px-1  rounded-md"
+            >
+              Deduct Money
+            </button>
             <Link to={`/admin/user/${item._id}`}>
-              <button className="text-base bg-green-500 font-[600] text-white px-4 py-1 rounded-md">
+              <button className="text-base bg-green-500 font-[600] text-white px-4 py- rounded-md">
                 View
               </button>
             </Link>
@@ -144,74 +189,6 @@ export default function Alluser() {
       </div>
     );
   });
-
-  /*
-  <tr className=" border-b " key={index}>
-        <td
-          className="flex-col px-2 py-4 "
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <th className="flex-col  text-start font-medium text-gray-900 whitespace-nowrap ">
-            Name: {item.first_name} {item.last_name}
-          </th>
-          <th className=" font-medium text-start text-gray-900 whitespace-nowrap ">
-            //  {formatDate(item.createdAt)} }
-            </th>
-            <th className=" font-medium text-start text-gray-900 whitespace-nowrap ">
-              Phone: {item.phone}
-            </th>
-          </td>
-  
-          <td>
-            <div>
-              {item.status === "approved" ? (
-                <p className="text-center text-green-700 flex items-center">
-                  Accepted Already
-                </p>
-              ) : item.status === "rejected" ? (
-                <p className="text-center text-red">Rejected</p>
-              ) : (
-                <>
-                  <button
-                    onClick={() => {
-                      addMoney(item._id);
-                      setMoney(item.wallet_balance);
-                    }}
-                    className="bg-emerald-600"
-                    style={{
-                      width: "100px",
-                      padding: "10px 20px",
-                      margin: "2px",
-                      color: "white",
-  
-                      // fontSize: "12px",
-                    }}
-                  >
-                    + Money
-                  </button>
-  
-
-                  <Link
-                    to={`/admin/user/${item._id}`}
-                    style={{
-                      background: "blue",
-                      padding: "10px 20px",
-                      margin: "2px",
-                      width: "100px",
-                      color: "white",
-                    }}
-                  >
-                    View
-                  </Link>
-                </>
-              )}
-            </div>
-          </td>
-        </tr>
-  */
 
   return (
     <div>
@@ -288,6 +265,61 @@ export default function Alluser() {
             type="submit"
           >
             Add Money
+          </button>
+        </form>
+      </Modal>
+      <Modal
+        isOpen={deductAmount}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeRequestMoneyModal}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: "50",
+          },
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "1rem",
+            border: "1px solid rgba(189, 189, 189, 1)",
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+            padding: "2rem",
+            minWidth: "20rem",
+            maxWidth: "80vw",
+          },
+        }}
+      >
+        <form
+          onSubmit={(e) => {
+            DedcuMoneyWalllet(e);
+          }}
+          className="flex-col justify-center items-center"
+          method="post"
+        >
+          <h1 className="text-2xl font-semibold p-2">
+            User Wallet Balance : Rs. {money}
+          </h1>
+          <h2 className="p-2 text-base">Dedcut Money to user Account</h2>
+
+          <input
+            className="w-full border p-2 border-black rounded-lg"
+            type="text"
+            placeholder="Enter Amount to be deducted"
+            value={amount}
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
+          />
+
+          <button
+            className="w-full mt-3 border-black border p-3 rounded-md"
+            type="submit"
+          >
+            Deduct Money
           </button>
         </form>
       </Modal>
