@@ -24,6 +24,7 @@ import User from "./admin/User.jsx";
 import UserTranscations from "./admin/transcations.jsx";
 import MoneyRequestTranscations from "./admin/MoneyRequestTranscations.jsx";
 import EditUser from "./admin/editUser.jsx";
+import NewUser from "./admin/NewUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
         path: "admin/users",
         element: <Alluser></Alluser>,
       },
+      {
+        path:"admin/newUser",
+        element:<NewUser></NewUser>
+      }
     ],
   },
 

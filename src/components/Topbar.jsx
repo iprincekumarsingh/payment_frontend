@@ -125,21 +125,20 @@ export default function Topbar({
         {renderBackButton()} <span>{title}</span>
       </p>
       <div className="flex items-center space-x-3">
-      {Cookie.get("role") === "admin" ? (
-        <Link
-          to={"../../home/admin/notification"}
-          className="flex items-center px-4 py-2 hover:bg-gray-100"
-          onClick={toggleDropdown}
-        >
-          <button className="text-3xl">
-            <IoIosNotifications />
-          </button>
-        </Link>
-      )
-      :(
-        ""
-      )}
-      
+        {Cookie.get("role") === "admin" ? (
+          <Link
+            to={"../../home/admin/notification"}
+            className="flex items-center px-4 py-2 hover:bg-gray-100"
+            onClick={toggleDropdown}
+          >
+            <button className="text-3xl">
+              <IoIosNotifications />
+            </button>
+          </Link>
+        ) : (
+          ""
+        )}
+
         <button className="group relative">
           <span className="text-3xl">
             <TbMenu />
@@ -163,13 +162,22 @@ export default function Topbar({
             </Link>
 
             {Cookie.get("role") === "admin" ? (
-              <Link
-                 to="../../home/home/admin"
-                className="flex items-center px-4 py-2 hover:bg-gray-100"
-              >
-                <img src={adminIcon} width={20} className="mr-2" alt="" />
-                <span>Admin</span>
-              </Link>
+              <div>
+                <Link
+                  to="../../home/home/admin"
+                  className="flex items-center px-4 py-2 hover:bg-gray-100"
+                >
+                  <img src={adminIcon} width={20} className="mr-2" alt="" />
+                  <span>Admin</span>
+                </Link>
+                <Link
+                  to="../../home/admin/newUser"
+                  className="flex items-center px-4 py-2 hover:bg-gray-100"
+                >
+                  {/* <img src={adminIcon} width={20} className="mr-2" alt="" /> */}
+                  <span>New User</span>
+                </Link>
+              </div>
             ) : (
               ""
             )}
