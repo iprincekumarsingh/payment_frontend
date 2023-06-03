@@ -25,6 +25,7 @@ import UserTranscations from "./admin/transcations.jsx";
 import MoneyRequestTranscations from "./admin/MoneyRequestTranscations.jsx";
 import EditUser from "./admin/editUser.jsx";
 import NewUser from "./admin/NewUser.jsx";
+import { BrowserView } from "react-device-detect";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
+ 
   <RouterProvider router={router} />
   // </React.StrictMode>/
 );
