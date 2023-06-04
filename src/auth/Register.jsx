@@ -20,6 +20,9 @@ export default function Register() {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [middlename, setMiddlename] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -52,17 +55,24 @@ export default function Register() {
       return toast.error("Please enter a valid phone number");
     }
 
-    // password should be number only
-    if (!password.match(/^[0-9]{6}$/)) {
-      setLoading(false);
-      setIsSubmitting(false);
-      return toast.error("Please enter a valid password");
-    }
+  //  password should be no only 4 digits
+  // passwrod regex only numbers
+  const passwordRegex = /^(?=.*\d)[\d ]+$/;
+  if (!passwordRegex.test(password)) {
+    setLoading(false);
+    setIsSubmitting(false);
+    return toast.error("Password should be only numbers");
+  }
+   
+
 
     axios
       .post("/auth/register", {
         phone_number: phone,
         password: password,
+        first_name: firstname,
+        last_name: lastname,
+        middle_name: middlename,
         // fullname: name,
       })
       .then((res) => {
@@ -91,7 +101,7 @@ export default function Register() {
     <>
       <Toaster></Toaster>
       <div className="w-screen min-h-screen p-5 flex justify-center items-center">
-        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden bg-white h-[95vh]">
+        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative  bg-white h-[95vh]">
           <img src={logo} className="w-[250px] mx-auto" alt="" />
           <form onSubmit={handleSubmit} className="pt-20 w-full space-y-4">
             <div>
@@ -101,6 +111,45 @@ export default function Register() {
               <h1 className="text-4xl font-[900] text-start">Register</h1>
             </div>
             <div className="relative w-full pt-10">
+             
+              <input
+                onChange={(e) => {
+                 setFirstname(e.target.value);
+                }}
+                value={firstname}
+                type="text"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="First Name"
+                required
+              />
+            </div>
+            <div className="relative w-full p">
+             
+              <input
+                onChange={(e) => {
+                  setMiddlename(e.target.value);
+                }}
+                value={middlename}
+                type="text"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="Middle Name"
+                required
+              />
+            </div>
+            <div className="relative w-full p">
+             
+              <input
+                onChange={(e) => {
+                  setLastname(e.target.value);
+                }}
+                value={lastname}
+                type="text"
+                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                placeholder="Last Name"
+                required
+              />
+            </div>
+            <div className="relative w-full ">
               {/* <label
                 htmlFor="phone"
                 className="absolute text-sm -top-[10px] left-3 bg-white"
