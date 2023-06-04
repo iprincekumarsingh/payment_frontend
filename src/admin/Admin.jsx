@@ -153,7 +153,7 @@ export default function Admin() {
 
   return (
     <div className="overflow-hidden">
-      <Topbar title="Admin Pannel" hideicon={"hidden"}></Topbar>
+      <Topbar title="Admin Panel" hideicon={"hidden"}></Topbar>
 
       <div class="flex flex-col w-full p-4 m-1">
         <div className="flex  md:flex-row justify-center items-center gap-4 p-4">

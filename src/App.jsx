@@ -136,7 +136,7 @@ function App() {
                   value={password}
                   type="password"
                   className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
-                  placeholder="Password"
+                  placeholder="PIN"
                   required
                 />
               </div>

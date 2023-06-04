@@ -52,10 +52,13 @@ export default function Register() {
       return toast.error("Please enter a valid phone number");
     }
 
-    if (!password) {
+    // password should be number only
+    if (!password.match(/^[0-9]{6}$/)) {
       setLoading(false);
       setIsSubmitting(false);
+      return toast.error("Please enter a valid password");
     }
+
     axios
       .post("/auth/register", {
         phone_number: phone,
@@ -127,9 +130,9 @@ export default function Register() {
                   setPassword(e.target.value);
                 }}
                 value={password}
-                type="password"
+                type="number"
                 className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
-                placeholder="Password"
+                placeholder="PIN"
                 required
               />
             </div>
