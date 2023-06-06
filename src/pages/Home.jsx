@@ -102,10 +102,10 @@ export default function Home() {
 
         setfullname(
           res.data.data.first_name +
-            " " +
-            res.data.data.middle_name +
-            " " +
-            res.data.data.last_name
+          " " +
+          res.data.data.middle_name +
+          " " +
+          res.data.data.last_name
         );
         setalertnativephone(res.data.data.alt_phone);
         setaccountnumber(res.data.data.account_number);
@@ -119,10 +119,10 @@ export default function Home() {
 
         setName(
           res.data.data.first_name +
-            " " +
-            res.data.data.middle_name +
-            " " +
-            res.data.data.last_name
+          " " +
+          res.data.data.middle_name +
+          " " +
+          res.data.data.last_name
         );
         setWallet_balance(res.data.data.wallet_balance);
       })
@@ -189,37 +189,39 @@ export default function Home() {
       return;
     }
 
-    setRequestMoney(false);
+    // setRequestMoney(false);
 
     // sending a otp to the registered phone number
 
-    axios
-      .post(
-        "money/user/send/Otp",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookie.get("token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        // setMessage(res.data.error)
-        console.log(res.data);
-        setSuccess(res.data.message);
+    // axios
+    //   .post(
+    //     "money/user/send/Otp",
+    //     {},
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${Cookie.get("token")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     // setMessage(res.data.error)
+    //     console.log(res.data);
+    //     setSuccess(res.data.message);
 
-        setTimeout(() => {
-          setSuccess("");
-        }, 1000);
-      })
-      .catch((err) => {
-        console.log(err);
-        setSuccess(err.response.data.message);
-      });
+    //     setTimeout(() => {
+    //       setSuccess("");
+    //     }, 1000);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setSuccess(err.response.data.message);
+    //   });
 
-    setOtpModal(true);
+    // setOtpModal(true);
+
+    setMessage("Failed to send OTP,check Provider balance");
   };
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
@@ -495,7 +497,7 @@ export default function Home() {
                       <button
                         className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
-                        // disabled={isLoading}
+                      // disabled={isLoading}
                       >
                         Request Money
                       </button>
@@ -613,8 +615,8 @@ export default function Home() {
               maxWidth: "80vw",
             },
           }}
-          // className="flex items-center justify-center"
-          // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+        // className="flex items-center justify-center"
+        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
         >
           <div className="bg-white rounded-lg w-full sm:w-96">
             <div

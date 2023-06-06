@@ -123,7 +123,7 @@ export default function Register() {
                 required
               />
             </div>
-            <div className="relative w-full p">
+            <div className="relative w-full ">
              
               <input
                 onChange={(e) => {
