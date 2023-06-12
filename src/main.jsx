@@ -131,6 +131,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
  
-  <RouterProvider router={router} />
+  <h1 className="text-center
+   flex justify-center items-center text-5xl mt-10">Server is Down</h1>
+  // <RouterProvider router={router} />
   // </React.StrictMode>/
 );
