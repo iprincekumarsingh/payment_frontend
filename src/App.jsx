@@ -62,6 +62,8 @@ function App() {
         Cookie.set("user", JSON.stringify(res?.data?.user?.full_name));
         Cookie.set("user_id", JSON.stringify(res?.data?.user?.id));
         Cookie.set("role", res?.data?.user?.role);
+
+
         if (localStorage.getItem("PROFILE_DATA") != null) {
           localStorage.setItem("PROFILE_DATA", JSON.stringify(res?.data?.user));
         }
@@ -73,9 +75,7 @@ function App() {
         }
 
         setIsSubmitting(false);
-        // } else {
-        //   console.log(res);
-        // }
+     
       })
       .catch((err) => {
         setIsSubmitting(false);

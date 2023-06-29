@@ -85,51 +85,51 @@ export default function Home() {
       setWallet_balance(data.wallet_balance);
     }
 
-    axios
-      .get("user/profile", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + Cookie.get("token"),
-        },
-      })
+    // axios
+    //   .get("user/profile", {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: "Bearer " + Cookie.get("token"),
+    //     },
+    //   })
 
-      .then((res) => {
-        console.log(res.data.data);
-        if (res.data.data.wallet_no == null) {
-          window.location.href = "/auth/onboarding";
-        }
-        localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //     if (res.data.data.wallet_no == null) {
+    //       window.location.href = "/auth/onboarding";
+    //     }
+    //     localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
 
-        setfullname(
-          res.data.data.first_name +
-          " " +
-          res.data.data.middle_name +
-          " " +
-          res.data.data.last_name
-        );
-        setalertnativephone(res.data.data.alt_phone);
-        setaccountnumber(res.data.data.account_number);
-        setifsc(res.data.data.ifsc_code);
-        setbankname(res.data.data.bank_name);
-        setPhone(res.data.data.phone);
-        setaddhar(res.data.data.aadhaar_number);
-        setWallet(res.data.data.wallet_no);
+    //     setfullname(
+    //       res.data.data.first_name +
+    //       " " +
+    //       res.data.data.middle_name +
+    //       " " +
+    //       res.data.data.last_name
+    //     );
+    //     setalertnativephone(res.data.data.alt_phone);
+    //     setaccountnumber(res.data.data.account_number);
+    //     setifsc(res.data.data.ifsc_code);
+    //     setbankname(res.data.data.bank_name);
+    //     setPhone(res.data.data.phone);
+    //     setaddhar(res.data.data.aadhaar_number);
+    //     setWallet(res.data.data.wallet_no);
 
-        setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
+    //     setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
 
-        setName(
-          res.data.data.first_name +
-          " " +
-          res.data.data.middle_name +
-          " " +
-          res.data.data.last_name
-        );
-        setWallet_balance(res.data.data.wallet_balance);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Something went wrong");
-      });
+    //     setName(
+    //       res.data.data.first_name +
+    //       " " +
+    //       res.data.data.middle_name +
+    //       " " +
+    //       res.data.data.last_name
+    //     );
+    //     setWallet_balance(res.data.data.wallet_balance);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     toast.error("Something went wrong");
+    //   });
   }, []);
   let subtitle;
 
@@ -157,28 +157,28 @@ export default function Home() {
     setRequestMoney(false);
   }
 
-  useEffect(() => {
-    document.title = "Home";
-    async function fetchData() {
-      axios
-        .get("money/user/transcations", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookie.get("token")}`,
-          },
-        })
-        .then((res) => {
-          setMoney(res.data);
-          if (localStorage.getItem("PROFILE_DATA") == null) {
-            localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   document.title = "Home";
+  //   async function fetchData() {
+  //     axios
+  //       .get("money/user/transcations", {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${Cookie.get("token")}`,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         setMoney(res.data);
+  //         if (localStorage.getItem("PROFILE_DATA") == null) {
+  //           localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  //   fetchData();
+  // }, []);
 
   //  render all the transcations
   const requesMoneyFunction = (e) => {
