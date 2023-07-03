@@ -27,7 +27,7 @@ export default function RMoney() {
   //   item.phone.includes(searchTerm)
   // );
   const filteredResults = notificationList.filter((item) =>
-    item.user.phone.includes(searchTerm)
+    item.user?.phone.includes(searchTerm)
   );
 
   const renderResults = searchTerm !== "" ? filteredResults : notificationList;

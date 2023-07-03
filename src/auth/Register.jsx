@@ -90,10 +90,10 @@ export default function Register() {
         setLoading(false);
 
         setIsSubmitting(false);
-        // toast.error(err.response.data.message);
+        
         toast.error(err.response.data.message);
 
-        // toast.error(err.response.data.message);
+      
       });
   };
 
