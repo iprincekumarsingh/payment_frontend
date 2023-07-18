@@ -189,38 +189,38 @@ export default function Home() {
       return;
     }
 // change after got payment to false
-    setRequestMoney(true);
+    setRequestMoney(false);
 
     // sending a otp to the registered phone number
 
-    // axios
-    //   .post(
-    //     "money/user/send/Otp",
-    //     {},
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${Cookie.get("token")}`,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     // setMessage(res.data.error)
-    //     console.log(res.data);
-    //     setSuccess(res.data.message);
+    axios
+      .post(
+        "money/user/send/Otp",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        // setMessage(res.data.error)
+        console.log(res.data);
+        setSuccess(res.data.message);
 
-    //     setTimeout(() => {
-    //       setSuccess("");
-    //     }, 1000);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setSuccess(err.response.data.message);
-    //   });
+        setTimeout(() => {
+          setSuccess("");
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setSuccess(err.response.data.message);
+      });
 
-    setMessage("Failed to send OTP,check Provider balance");
-    // setOtpModal(true);
+    // setMessage("Failed to send OTP,check Provider balance");
+    setOtpModal(true);
 
   };
   const [otp, setOtp] = useState("");
