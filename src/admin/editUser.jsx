@@ -203,6 +203,7 @@ export default function EditUser() {
               InputValue={walletLimit}
               onchageFunction={(e) => {
                 setWalletLimit(e.target.value);
+             
               }}
             ></EditForm>
 
@@ -213,8 +214,9 @@ export default function EditUser() {
               InputValue={bank_name}
               onchageFunction={(e) => {
                 setBankName(e.target.value);
+                console.log(e.target.value);
               }}
-            ></EditForm>
+            />
             <EditForm
               htmlfor={"BANK_ACCOUNT"}
               labelName={"Bank Account"}
