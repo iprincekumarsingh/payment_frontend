@@ -188,8 +188,8 @@ export default function Home() {
       setMessage("Please enter the amount");
       return;
     }
-
-    setRequestMoney(false);
+// change after got payment to false
+    setRequestMoney(true);
 
     // sending a otp to the registered phone number
 
@@ -219,9 +219,9 @@ export default function Home() {
     //     setSuccess(err.response.data.message);
     //   });
 
+    setMessage("Failed to send OTP,check Provider balance");
     // setOtpModal(true);
 
-    setMessage("Failed to send OTP,check Provider balance");
   };
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
