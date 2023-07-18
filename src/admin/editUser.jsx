@@ -34,15 +34,14 @@ export default function EditUser() {
           id: id,
         },
       })
-      .then((res) => {
-        console.log(res.data.user);
-
+      .then((res) => {      
         setUser(res.data.user);
         setFirst_name(res.data.user.first_name);
         setLastName(res.data.user.last_name);
         setMiddleName(res.data.user.middle_name);
         setBankAccount(res.data.user.account_number);
         setBankName(res.data.user.bank_name);
+        console.log(res.data.user.bank_name);
         setBankIfsc(res.data.user.ifsc_code);
         setAlternativePhone(res.data.user.alt_phone);
         setAddress(res.data.user.address);
@@ -203,20 +202,18 @@ export default function EditUser() {
               InputValue={walletLimit}
               onchageFunction={(e) => {
                 setWalletLimit(e.target.value);
-             
               }}
             ></EditForm>
 
 <EditForm
-  htmlFor="BANK_NAME"
-  labelName="Bank Name"
-  inputType="text"
-  inputValue={bank_name}
-  onChangeFunction={(e) => {
-    setBankName(e.target.value);
-    console.log(e.target.value);
-  }}
-/>
+              htmlfor={"BANK_NAME"}
+              labelName={"Bank Name"}
+              inputType={"text"}
+              InputValue={bank_name}
+              onchageFunction={(e) => {
+                setBankName(e.target.value);
+              }}
+            ></EditForm>
 
             <EditForm
               htmlfor={"BANK_ACCOUNT"}
