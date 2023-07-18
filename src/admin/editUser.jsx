@@ -207,16 +207,17 @@ export default function EditUser() {
               }}
             ></EditForm>
 
-            <EditForm
-              htmlfor={"BANK_NAME"}
-              labelName={"Bank Name"}
-              inputType={"text"}
-              InputValue={bank_name}
-              onchageFunction={(e) => {
-                setBankName(e.target.value);
-                console.log(e.target.value);
-              }}
-            />
+<EditForm
+  htmlFor="BANK_NAME"
+  labelName="Bank Name"
+  inputType="text"
+  inputValue={bank_name}
+  onChangeFunction={(e) => {
+    setBankName(e.target.value);
+    console.log(e.target.value);
+  }}
+/>
+
             <EditForm
               htmlfor={"BANK_ACCOUNT"}
               labelName={"Bank Account"}
