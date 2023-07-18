@@ -212,7 +212,7 @@ export default function EditUser() {
               inputType={"text"}
               InputValue={bank_name}
               onchageFunction={(e) => {
-                setBankAccount(e.target.value);
+                setBankName(e.target.value);
               }}
             ></EditForm>
             <EditForm
