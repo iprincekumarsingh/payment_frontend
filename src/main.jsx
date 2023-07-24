@@ -30,9 +30,14 @@ import { BrowserView } from "react-device-detect";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <h1>Something went wrong </h1>,
     errorElement: <ErrorPage></ErrorPage>,
   },
+  // {
+  //   path: "/",
+  //   element: <App></App>,
+  //   errorElement: <ErrorPage></ErrorPage>,
+  // },
   {
     path: "/home",
     element: <LayoutHome></LayoutHome>,
