@@ -28,16 +28,12 @@ import NewUser from "./admin/NewUser.jsx";
 import { BrowserView } from "react-device-detect";
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <h1>Something went wrong </h1>,
-  //   errorElement: <ErrorPage></ErrorPage>,
-  // },
   {
     path: "/",
-    element: <App></App>,
+    element: <h1>Something went wrong </h1>,
     errorElement: <ErrorPage></ErrorPage>,
   },
+  // j
   {
     path: "/home",
     element: <LayoutHome></LayoutHome>,
