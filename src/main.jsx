@@ -28,104 +28,108 @@ import NewUser from "./admin/NewUser.jsx";
 import { BrowserView } from "react-device-detect";
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <h1>Something went wrong </h1>,
+  //   errorElement: <ErrorPage></ErrorPage>,
+  // },
   {
     path: "/",
-    element: <h1 className="text-3xl text-center flex justify-center">Something went wrong </h1>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  // j
-  {
-    path: "/home",
-    element: <LayoutHome></LayoutHome>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: "home/user",
-        element: <Home></Home>,
-      },
-      {
-        path: "home/transactions",
-        element: <Transcations></Transcations>,
-      },
-
-      {
-        path: "home/admin",
-        element: <Admin />,
-      },
-      {
-        path: "admin/notification",
-        element: <RMoney></RMoney>,
-      },
-      {
-        path: "admin/users",
-        element: <Alluser></Alluser>,
-      },
-      {
-        path:"admin/newUser",
-        element:<NewUser></NewUser>
-      }
-    ],
-  },
-
-  {
-    path: "/auth/login",
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
   },
-  {
-    path: "home/profile",
-    element: <Profile></Profile>,
-  },
-  {
-    path: "/auth/register",
-    element: <Register></Register>,
-  },
+  // {
+  //   path: "/home",
+  //   element: <LayoutHome></LayoutHome>,
+  //   errorElement: <ErrorPage></ErrorPage>,
+  //   children: [
+  //     {
+  //       path: "home/user",
+  //       element: <Home></Home>,
+  //     },
+  //     {
+  //       path: "home/transactions",
+  //       element: <Transcations></Transcations>,
+  //     },
 
-  {
-    path: "/transfer/money",
-    element: <TransferMoney></TransferMoney>,
-  },
+  //     {
+  //       path: "home/admin",
+  //       element: <Admin />,
+  //     },
+  //     {
+  //       path: "admin/notification",
+  //       element: <RMoney></RMoney>,
+  //     },
+  //     {
+  //       path: "admin/users",
+  //       element: <Alluser></Alluser>,
+  //     },
+  //     {
+  //       path:"admin/newUser",
+  //       element:<NewUser></NewUser>
+  //     }
+  //   ],
+  // },
 
-  {
-    path: "auth/login/verify",
-    element: <OtpVerification></OtpVerification>,
-  },
-  // onboarding the new user
-  {
-    path: "/auth/onboarding",
-    element: <OnBoarding></OnBoarding>,
-    // errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/settings",
-    element: <Setting></Setting>,
-  },
+  // {
+  //   path: "/auth/login",
+  //   element: <App></App>,
+  //   errorElement: <ErrorPage></ErrorPage>,
+  // },
+  // {
+  //   path: "home/profile",
+  //   element: <Profile></Profile>,
+  // },
+  // {
+  //   path: "/auth/register",
+  //   element: <Register></Register>,
+  // },
 
-  {
-    path: "/file/test",
-    element: <Fileupload></Fileupload>,
-  },
-  {
-    path: "forgot-password",
-    element: <ForgotPasswordPage></ForgotPasswordPage>,
-  },
-  {
-    path: "admin/user/:id",
-    element: <User></User>,
-  },
-  {
-    path: "admin/user/transcations/:id",
-    element: <UserTranscations></UserTranscations>,
-  },
-  {
-    path: "/admin/user/moneyRequest/:id",
-    element: <MoneyRequestTranscations></MoneyRequestTranscations>
-  },
-  {
+  // {
+  //   path: "/transfer/money",
+  //   element: <TransferMoney></TransferMoney>,
+  // },
 
-    path: "edit/user/:id",
-    element: <EditUser></EditUser>
-  }
+  // {
+  //   path: "auth/login/verify",
+  //   element: <OtpVerification></OtpVerification>,
+  // },
+  // // onboarding the new user
+  // {
+  //   path: "/auth/onboarding",
+  //   element: <OnBoarding></OnBoarding>,
+  //   // errorElement: <ErrorPage></ErrorPage>,
+  // },
+  // {
+  //   path: "/settings",
+  //   element: <Setting></Setting>,
+  // },
+
+  // {
+  //   path: "/file/test",
+  //   element: <Fileupload></Fileupload>,
+  // },
+  // {
+  //   path: "forgot-password",
+  //   element: <ForgotPasswordPage></ForgotPasswordPage>,
+  // },
+  // {
+  //   path: "admin/user/:id",
+  //   element: <User></User>,
+  // },
+  // {
+  //   path: "admin/user/transcations/:id",
+  //   element: <UserTranscations></UserTranscations>,
+  // },
+  // {
+  //   path: "/admin/user/moneyRequest/:id",
+  //   element: <MoneyRequestTranscations></MoneyRequestTranscations>
+  // },
+  // {
+
+  //   path: "edit/user/:id",
+  //   element: <EditUser></EditUser>
+  // }
 
 ]);
 
