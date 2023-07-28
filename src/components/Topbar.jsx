@@ -123,24 +123,26 @@ export default function MenuAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => navigate("../../home/profile")}>
+                {/* <MenuItem onClick={() => navigate("../../home/profile")}>
                   Profile
-                </MenuItem>
+                </MenuItem> */}
 
                 {Cookies.get("role") === "admin" && (
                   <>
                     <MenuItem onClick={() => navigate("../../home/home/admin")}>
                       Admin Panel
                     </MenuItem>
-                    <MenuItem onClick={() => navigate("../../home/admin/newUser")}>
+                    <MenuItem
+                      onClick={() => navigate("../../home/admin/newUser")}
+                    >
                       New User
                     </MenuItem>
                   </>
                 )}
 
-                <MenuItem onClick={() => navigate("/settings")}>
+                {/* <MenuItem onClick={() => navigate("/settings")}>
                   Setting
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
             </div>
