@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 
-
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -40,21 +39,31 @@ export default function MenuAppBar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1,
-      backgroundColor: "black",
-      }}>
-      <AppBar className="bg-black" position="static">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="static"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          background: "white",
+          height: "70px",
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
+            color="black"
             aria-label="menu"
             sx={{ mr: 1 }}
           >
             <HomeOutlinedIcon />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, color: "black" }}
+          >
             Sx Bank
           </Typography>
           {auth && (
@@ -65,7 +74,7 @@ export default function MenuAppBar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
+                color="black"
               >
                 <AccountCircle />
               </IconButton>
