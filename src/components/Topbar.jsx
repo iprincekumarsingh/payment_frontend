@@ -82,20 +82,20 @@ export default function MenuAppBar() {
           </Typography>
           {auth && (
             <div>
-             {Cookies.get("role") === "admin" && (
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleMenu}
-          color="black"
-        >
-          <NotificationsNoneOutlinedIcon
-            onClick={() => navigate("../../home/admin/notification")}
-          />
-        </IconButton>
-      )}
+              {Cookies.get("role") === "admin" && (
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="black"
+                >
+                  <NotificationsNoneOutlinedIcon
+                    onClick={() => navigate("../../home/admin/notification")}
+                  />
+                </IconButton>
+              )}
 
               <IconButton
                 size="large"
@@ -128,9 +128,14 @@ export default function MenuAppBar() {
                 </MenuItem>
 
                 {Cookies.get("role") === "admin" && (
-                  <MenuItem onClick={() => navigate("../../home/home/admin")}>
-                    Admin Panel
-                  </MenuItem>
+                  <>
+                    <MenuItem onClick={() => navigate("../../home/home/admin")}>
+                      Admin Panel
+                    </MenuItem>
+                    <MenuItem onClick={() => navigate("../../home/admin/newUser")}>
+                      New User
+                    </MenuItem>
+                  </>
                 )}
 
                 <MenuItem onClick={() => navigate("/settings")}>
