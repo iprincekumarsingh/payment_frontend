@@ -1,198 +1,108 @@
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Menu from "@mui/material/Menu";
 import Cookies from "js-cookie";
-import React, { useState } from "react";
-import { CgProfile } from "react-icons/cg";
-import { FaUserCircle } from "react-icons/fa";
-import { IoIosNotifications } from "react-icons/io";
-import { TbMenu } from "react-icons/tb";
-import adminIcon from "../img/icons/admin.png";
-
-import { CiSettings, CiLogout } from "react-icons/ci";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import Cookie from "js-cookie";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
-export default function Topbar({
-  title,
-  imgLink,
-  backLink,
-  imgWidth,
-  hideicon,
-}) {
-  const [showDropdown, setShowDropdown] = useState(false);
+import { useNavigate } from "react-router-dom";
+import MenuItem from "@mui/material/MenuItem";
+
+
+export default function MenuAppBar() {
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  function handleGoBack() {
-    navigate(-1);
-  }
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
 
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const logout = () => {
-    Cookie.remove("token");
-    Cookie.remove("user");
-    Cookie.remove("role");
+    Cookies.remove("token");
+    Cookies.remove("user");
+    Cookies.remove("role");
     localStorage.removeItem("PROFILE_DATA");
 
     window.location.href = "/";
   };
-  function renderBackButton() {
-    if (location.pathname === "/" || location.pathname === "/home/home/user") {
-      // If the current route is either '/' or '/home/user', don't render the back button
-      return null;
-    } else {
-      // Otherwise, render a back button that navigates to the previous page
-      return (
-        <Link to="#" onClick={() => window.history.back()}>
-          <AiOutlineArrowLeft className="" />
-        </Link>
-      );
-    }
-  }
 
   return (
-    // <nav className="bg-gradient-to-r from-[#5900ff] to-[#08007c] shadow-md shadow-[#575757] rounded-b-2xl">
-    //   <div className="max-w-screen-xl flex items-center justify-between p-4">
-    //     <div className="flex items-center">
-    //       {renderBackButton()}
-    //       <a href={imgLink} className="hidden md:block">
-    //         <img src={imgLink}  width={imgWidth} alt="" />
-    //       </a>
-    //       <span className="text-white text-xl font-semibold ml-2">{title}</span>
-    //     </div>
-
-    //     <div
-    //       className={`flex justify-center items-center cursor-pointer ${hideicon ? "hidden" : ""
-    //         }`}
-    //     >
-    // <button className="group relative">
-    //   <span className="text-3xl text-white">
-    //     <FaUserCircle />
-    //   </span>
-    //   <span className="group-focus-within:block hidden right-0 top-10 w-[200px] rounded-md p-5 border shadow-xl bg-white absolute z-[9999]">
-    //     <Link
-    //       to={"../../home/profile"}
-    //       className="flex items-center px-4 py-2 hover:bg-gray-100"
-    //       onClick={toggleDropdown}
-    //     >
-    //       <CgProfile className="mr-2" />
-    //       <span>Profile</span>
-    //     </Link>
-
-    //     <Link
-    //       to={"../../settings"}
-    //       className="flex items-center px-4 py-2 hover:bg-gray-100"
-    //     >
-    //       <CiSettings className="mr-2" />
-    //       <span>Settings</span>
-    //     </Link>
-
-    //     {Cookie.get("role") === "admin" ? (
-    //       <Link
-    //         to={"../home/admin"}
-    //         className="flex items-center px-4 py-2 hover:bg-gray-100"
-    //       >
-    //         <img
-    //           src={adminIcon}
-    //           width={20}
-    //           className="mr-2"
-    //           alt=""
-
-    //         />
-    //         <span>Admin</span>
-    //       </Link>
-    //     ) : (
-    //       ""
-    //     )}
-
-    //     <span
-    //       href="#"
-    //       className="flex items-center px-4 py-2 hover:bg-gray-100"
-    //       onClick={logout}
-    //     >
-    //       <CiLogout className="mr-2" />
-    //       <span>Logout</span>
-    //     </span>
-    //   </span>
-    // </button>
-    //     </div>
-    //   </div>
-    // </nav>
-    <header className="p-5 bg-white flex justify-between items-center rounded-b-md shadow-sm border">
-      <p className="text-xl font-[900] capitalize flex items-center space-x-3">
-        {renderBackButton()} <span>{title}</span>
-      </p>
-      <div className="flex items-center space-x-3">
-        {Cookie.get("role") === "admin" ? (
-          <Link
-            to={"../../home/admin/notification"}
-            className="flex items-center px-4 py-2 hover:bg-gray-100"
-            onClick={toggleDropdown}
+    <Box sx={{ flexGrow: 1,
+      backgroundColor: "black",
+      }}>
+      <AppBar className="bg-black" position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 1 }}
           >
-            <button className="text-3xl">
-              <IoIosNotifications />
-            </button>
-          </Link>
-        ) : (
-          ""
-        )}
+            <HomeOutlinedIcon />
+          </IconButton>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            Sx Bank
+          </Typography>
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={() => navigate("../../home/profile")}>
+                  Profile
+                </MenuItem>
 
-        <button className="group relative">
-          <span className="text-3xl">
-            <TbMenu />
-          </span>
-          <span className="group-focus-within:block hidden right-0 top-10 w-[200px] rounded-md p-5 border shadow-xl bg-white absolute z-[9999]">
-            <Link
-              to={"../../home/profile"}
-              className="flex items-center px-4 py-2 hover:bg-gray-100"
-              onClick={toggleDropdown}
-            >
-              <CgProfile className="mr-2" />
-              <span>Profile</span>
-            </Link>
+                {Cookies.get("role") === "admin" && (
+                  <MenuItem onClick={() => navigate("../../home/home/admin")}>
+                    Admin Panel
+                  </MenuItem>
+                )}
 
-            <Link
-              to={"../../settings"}
-              className="flex items-center px-4 py-2 hover:bg-gray-100"
-            >
-              <CiSettings className="mr-2" />
-              <span>Settings</span>
-            </Link>
-
-            {Cookie.get("role") === "admin" ? (
-              <div>
-                <Link
-                  to="../../home/home/admin"
-                  className="flex items-center px-4 py-2 hover:bg-gray-100"
-                >
-                  <img src={adminIcon} width={20} className="mr-2" alt="" />
-                  <span>Admin</span>
-                </Link>
-                <Link
-                  to="../../home/admin/newUser"
-                  className="flex items-center px-4 py-2 hover:bg-gray-100"
-                >
-                  {/* <img src={adminIcon} width={20} className="mr-2" alt="" /> */}
-                  <span>New User</span>
-                </Link>
-              </div>
-            ) : (
-              ""
-            )}
-
-            <span
-              href="#"
-              className="flex items-center px-4 py-2 hover:bg-gray-100"
-              onClick={logout}
-            >
-              <CiLogout className="mr-2" />
-              <span>Logout</span>
-            </span>
-          </span>
-        </button>
-      </div>
-    </header>
+                <MenuItem onClick={() => navigate("/settings")}>
+                  Setting
+                </MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
+              </Menu>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }

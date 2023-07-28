@@ -89,11 +89,7 @@ function App() {
       <Toaster />
       {/* check the mobie view */}
 
-      {isBrowser ? (
-        <h1 className="text-center flex justify-center items-center">
-          Open In Mobile App
-        </h1>
-      ) : (
+     
         <div className="w-screen min-h-screen p-3 flex justify-center items-center">
           <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden bg-white h-[95vh]">
             <img src={logo} className="w-[250px] mx-auto" alt="" />
@@ -182,7 +178,7 @@ function App() {
             )}
           </div>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 }
