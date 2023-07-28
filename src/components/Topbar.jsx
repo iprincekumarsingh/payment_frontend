@@ -38,6 +38,19 @@ export default function MenuAppBar() {
     window.location.href = "/";
   };
 
+  function renderBackButton() {
+    if (location.pathname === "/" || location.pathname === "/home/home/user") {
+      // If the current route is either '/' or '/home/user', don't render the back button
+      return null;
+    } else {
+      // Otherwise, render a back button that navigates to the previous page
+      return (
+        // <Link to="#" >
+        <HomeOutlinedIcon onClick={() => navigate("../../home/home/user")} />
+        // </Link>
+      );
+    }
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -57,7 +70,7 @@ export default function MenuAppBar() {
             aria-label="menu"
             sx={{ mr: 1 }}
           >
-            <HomeOutlinedIcon />
+            {renderBackButton()}
           </IconButton>
           <Typography
             variant="h6"
