@@ -11,6 +11,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
@@ -81,6 +82,21 @@ export default function MenuAppBar() {
           </Typography>
           {auth && (
             <div>
+             {Cookies.get("role") === "admin" && (
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleMenu}
+          color="black"
+        >
+          <NotificationsNoneOutlinedIcon
+            onClick={() => navigate("../../home/admin/notification")}
+          />
+        </IconButton>
+      )}
+
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -91,6 +107,7 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
