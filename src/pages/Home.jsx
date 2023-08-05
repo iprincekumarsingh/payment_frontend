@@ -22,6 +22,7 @@ import Widget_card from "../components/Widget_card";
 import ChipsAmount from "../components/chipsAmount";
 import { AiOutlineClose } from "react-icons/ai";
 import CheckBalance from "../components/Models/CheckBalance";
+import toast from "react-hot-toast";
 
 export default function Home() {
   Modal.setAppElement("#root");
@@ -85,51 +86,7 @@ export default function Home() {
       setWallet_balance(data.wallet_balance);
     }
 
-    // axios
-    //   .get("user/profile", {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: "Bearer " + Cookie.get("token"),
-    //     },
-    //   })
-
-    //   .then((res) => {
-    //     console.log(res.data.data);
-    //     if (res.data.data.wallet_no == null) {
-    //       window.location.href = "/auth/onboarding";
-    //     }
-    //     localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
-
-    //     setfullname(
-    //       res.data.data.first_name +
-    //       " " +
-    //       res.data.data.middle_name +
-    //       " " +
-    //       res.data.data.last_name
-    //     );
-    //     setalertnativephone(res.data.data.alt_phone);
-    //     setaccountnumber(res.data.data.account_number);
-    //     setifsc(res.data.data.ifsc_code);
-    //     setbankname(res.data.data.bank_name);
-    //     setPhone(res.data.data.phone);
-    //     setaddhar(res.data.data.aadhaar_number);
-    //     setWallet(res.data.data.wallet_no);
-
-    //     setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
-
-    //     setName(
-    //       res.data.data.first_name +
-    //       " " +
-    //       res.data.data.middle_name +
-    //       " " +
-    //       res.data.data.last_name
-    //     );
-    //     setWallet_balance(res.data.data.wallet_balance);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     toast.error("Something went wrong");
-    //   });
+    
   }, []);
   let subtitle;
 
@@ -157,29 +114,6 @@ export default function Home() {
     setRequestMoney(false);
   }
 
-  // useEffect(() => {
-  //   document.title = "Home";
-  //   async function fetchData() {
-  //     axios
-  //       .get("money/user/transcations", {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${Cookie.get("token")}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setMoney(res.data);
-  //         if (localStorage.getItem("PROFILE_DATA") == null) {
-  //           localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  //   fetchData();
-  // }, []);
-
   //  render all the transcations
   const requesMoneyFunction = (e) => {
     e.preventDefault();
@@ -188,40 +122,13 @@ export default function Home() {
       setMessage("Please enter the amount");
       return;
     }
-// change after got payment to false
+    // change after got payment to false
     setRequestMoney(false);
 
     // sending a otp to the registered phone number
 
-    axios
-      .post(
-        "money/user/send/Otp",
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookie.get("token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        // setMessage(res.data.error)
-        console.log(res.data);
-        setSuccess(res.data.message);
-
-        setTimeout(() => {
-          setSuccess("");
-        }, 1000);
-      })
-      .catch((err) => {
-        console.log(err);
-        setSuccess(err.response.data.message);
-      });
-
     // setMessage("Failed to send OTP,check Provider balance");
     setOtpModal(true);
-
   };
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
@@ -233,12 +140,24 @@ export default function Home() {
   const verifyOtp = (e) => {
     e.preventDefault();
 
-    // checking the otp is valid or not
+    // verify pin from local storage
+    const pin = localStorage.getItem("pin");
+
+    if (!pin) {
+      toast.error("Please set your pin first");
+      return;
+    }
+
+    if (pin !== otp) {
+      setOtpError("Invalid Pin");
+      return;
+    }
+
     axios
       .post(
-        "money/user/verify/Otp",
+        "money/",
         {
-          otp,
+          amount,
         },
         {
           headers: {
@@ -248,37 +167,19 @@ export default function Home() {
         }
       )
       .then((res) => {
-        axios
-          .post(
-            "money/",
-            {
-              amount,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${Cookie.get("token")}`,
-              },
-            }
-          )
-          .then((res) => {
-            setSuccess(res.data.message);
-            console.log(res.data.message);
-            setIsSubmitting(false);
-            setTimeout(() => {
-              // setSuccess("");
-              setAmount("");
-              setSuccess("");
+        setSuccess(res.data.message);
+        console.log(res.data.message);
+        setIsSubmitting(false);
+        setTimeout(() => {
+          // setSuccess("");
+          setAmount("");
+          setSuccess("");
 
-              setOtpModal(false);
-            }, 2000);
-          })
-          .catch((err) => {
-            console.log(err.response.data.error);
-            setOtpError(err.response.data.error);
-          });
+          setOtpModal(false);
+        }, 2000);
       })
       .catch((err) => {
+        console.log(err.response.data.error);
         setOtpError(err.response.data.error);
       });
   };
@@ -497,7 +398,7 @@ export default function Home() {
                       <button
                         className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
-                      // disabled={isLoading}
+                        // disabled={isLoading}
                       >
                         Request Money
                       </button>
@@ -615,8 +516,8 @@ export default function Home() {
               maxWidth: "80vw",
             },
           }}
-        // className="flex items-center justify-center"
-        // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
+          // className="flex items-center justify-center"
+          // overlayClassName="fixed inset-0 bg-black opacity-50 z-50"
         >
           <div className="bg-white rounded-lg w-full sm:w-96">
             <div
@@ -635,14 +536,14 @@ export default function Home() {
             </div>
             <div className="p-4">
               <h2 className="text-[14px] font-bold mb-4 text-center">
-                An OTP has been sent to registered mobile number
+                Enter your PIN
               </h2>
               <form onSubmit={verifyOtp}>
                 <div className="flex flex-col items-center justify-center mb-6">
                   <input
-                    type="text"
+                    type="number"
                     className="h-12 w-full sm:w-72 rounded-lg border-gray-300 border-2 text-center mb-2 focus:outline-none focus:border-blue-500"
-                    placeholder="Enter 4 digit OTP"
+                    placeholder="Enter Pin"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                   />

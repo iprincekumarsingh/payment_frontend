@@ -57,6 +57,8 @@ function App() {
       .then((res) => {
         // if (res?.data?.status === "success") {
         setLoading(false);
+
+        console.log(res?.data?.user?.wallet_balance);
         toast.success(res?.data?.message);
         Cookie.set("token", res?.data?.token);
         Cookie.set("user", JSON.stringify(res?.data?.user?.full_name));
@@ -64,9 +66,26 @@ function App() {
         Cookie.set("role", res?.data?.user?.role);
 
 
+
+
+
+
         if (localStorage.getItem("PROFILE_DATA") != null) {
           localStorage.setItem("PROFILE_DATA", JSON.stringify(res?.data?.user));
+
+
+          console.log("PROFILE_DATA", localStorage.getItem("PROFILE_DATA"));
+
+
+    
+
         }
+        else{
+          localStorage.setItem("PROFILE_DATA", JSON.stringify(res?.data?.user));
+        }
+
+
+        console.log("PROFILE_DATA", localStorage.getItem("PROFILE_DATA"));
 
         if (res?.data?.user?.wallet_no == null) {
           window.location.href = "/auth/onboarding";
