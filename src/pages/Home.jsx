@@ -64,6 +64,7 @@ export default function Home() {
   const [letterFormat, setLetterFormat] = useState("");
   const [wallet_balance, setWallet_balance] = useState(0);
   useEffect(() => {
+    
     if (!Cookie.get("token")) {
       window.location.href = "/auth/login";
     }

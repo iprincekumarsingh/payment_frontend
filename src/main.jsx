@@ -28,16 +28,21 @@ import NewUser from "./admin/NewUser.jsx";
 import { BrowserView } from "react-device-detect";
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <h1>Something went wrong </h1>,
-  //   errorElement: <ErrorPage></ErrorPage>,
-  // },
   {
     path: "/",
-    element: <App></App>,
+    element: <div className="flex justify-center items-center h-screen">
+    <div className="text-center font-medium">
+     <span className="text-5xl"> ERROR 500</span>,<br></br> <span className="text-4xl font-bold">Update your App to the latest Version</span>
+    </div>
+  </div>
+  ,
     errorElement: <ErrorPage></ErrorPage>,
   },
+  // {
+  //   path: "/",
+  //   element: <App></App>,
+  //   errorElement: <ErrorPage></ErrorPage>,
+  // },
   {
     path: "/home",
     element: <LayoutHome></LayoutHome>,
@@ -65,9 +70,9 @@ const router = createBrowserRouter([
         element: <Alluser></Alluser>,
       },
       {
-        path:"admin/newUser",
-        element:<NewUser></NewUser>
-      }
+        path: "admin/newUser",
+        element: <NewUser></NewUser>,
+      },
     ],
   },
 
@@ -123,19 +128,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/user/moneyRequest/:id",
-    element: <MoneyRequestTranscations></MoneyRequestTranscations>
+    element: <MoneyRequestTranscations></MoneyRequestTranscations>,
   },
   {
-
     path: "edit/user/:id",
-    element: <EditUser></EditUser>
-  }
-
+    element: <EditUser></EditUser>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
- 
+
   <RouterProvider router={router} />
   // </React.StrictMode>/
 );
