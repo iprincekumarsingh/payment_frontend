@@ -28,21 +28,21 @@ import NewUser from "./admin/NewUser.jsx";
 import { BrowserView } from "react-device-detect";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div className="flex justify-center items-center h-screen">
-    <div className="text-center font-medium">
-     <span className="text-5xl"> ERROR 500</span>,<br></br> <span className="text-4xl font-bold">Update your App to the latest Version</span>
-    </div>
-  </div>
-  ,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
   // {
   //   path: "/",
-  //   element: <App></App>,
+  //   element: <div className="flex justify-center items-center h-screen">
+  //   <div className="text-center font-medium">
+  //    <span className="text-5xl"> ERROR 500</span>,<br></br> <span className="text-4xl font-bold">Update your App to the latest Version</span>
+  //   </div>
+  // </div>
+  // ,
   //   errorElement: <ErrorPage></ErrorPage>,
   // },
+  {
+    path: "/",
+    element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
   {
     path: "/home",
     element: <LayoutHome></LayoutHome>,
