@@ -11,11 +11,9 @@ import Transcations from "./pages/Transcations.jsx";
 import Profile from "./pages/Profile.jsx";
 import Admin from "./admin/Admin.jsx";
 import RMoney from "./admin/RMoney.jsx";
-
 import TransferMoney from "./pages/TransferMoney.jsx";
 import OnBoarding from "./pages/OnBoarding.jsx";
 import Register from "./auth/Register.jsx";
-
 import Setting from "./pages/Setting.jsx";
 import Fileupload from "./test/fileupload.jsx";
 import ForgotPasswordPage from "./pages/ForgotPassword.jsx";
@@ -30,110 +28,100 @@ import { BrowserView } from "react-device-detect";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div className="flex justify-center items-center h-screen">
-    <div className="text-center font-medium">
-     <span className="text-5xl font-bold">Server Expired</span>,<br></br> <span className="text-4xl  mt-2 font-meidum">Renew the server to restart the services!</span>
-    </div>
-  </div>
-  ,
+    element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
   },
-  // {
-  //   path: "/",
-  //   element: <App></App>,
-  //   errorElement: <ErrorPage></ErrorPage>,
-  // },
-  // {
-  //   path: "/home",
-  //   element: <LayoutHome></LayoutHome>,
-  //   errorElement: <ErrorPage></ErrorPage>,
-  //   children: [
-  //     {
-  //       path: "home/user",
-  //       element: <Home></Home>,
-  //     },
-  //     {
-  //       path: "home/transactions",
-  //       element: <Transcations></Transcations>,
-  //     },
+  {
+    path: "/home",
+    element: <LayoutHome></LayoutHome>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "home/user",
+        element: <Home></Home>,
+      },
+      {
+        path: "home/transactions",
+        element: <Transcations></Transcations>,
+      },
 
-  //     {
-  //       path: "home/admin",
-  //       element: <Admin />,
-  //     },
-  //     {
-  //       path: "admin/notification",
-  //       element: <RMoney></RMoney>,
-  //     },
-  //     {
-  //       path: "admin/users",
-  //       element: <Alluser></Alluser>,
-  //     },
-  //     {
-  //       path: "admin/newUser",
-  //       element: <NewUser></NewUser>,
-  //     },
-  //   ],
-  // },
+      {
+        path: "home/admin",
+        element: <Admin />,
+      },
+      {
+        path: "admin/notification",
+        element: <RMoney></RMoney>,
+      },
+      {
+        path: "admin/users",
+        element: <Alluser></Alluser>,
+      },
+      {
+        path: "admin/newUser",
+        element: <NewUser></NewUser>,
+      },
+    ],
+  },
 
-  // {
-  //   path: "/auth/login",
-  //   element: <App></App>,
-  //   errorElement: <ErrorPage></ErrorPage>,
-  // },
-  // {
-  //   path: "home/profile",
-  //   element: <Profile></Profile>,
-  // },
-  // {
-  //   path: "/auth/register",
-  //   element: <Register></Register>,
-  // },
+  {
+    path: "/auth/login",
+    element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "home/profile",
+    element: <Profile></Profile>,
+  },
+  {
+    path: "/auth/register",
+    element: <Register></Register>,
+  },
 
-  // {
-  //   path: "/transfer/money",
-  //   element: <TransferMoney></TransferMoney>,
-  // },
+  {
+    path: "/transfer/money",
+    element: <TransferMoney></TransferMoney>,
+  },
 
-  // {
-  //   path: "auth/login/verify",
-  //   element: <OtpVerification></OtpVerification>,
-  // },
+  {
+    path: "auth/login/verify",
+    element: <OtpVerification></OtpVerification>,
+  },
   // onboarding the new user
-  // {
-  //   path: "/auth/onboarding",
-  //   element: <OnBoarding></OnBoarding>,
-  //   // errorElement: <ErrorPage></ErrorPage>,
-  // },
-  // {
-  //   path: "/settings",
-  //   element: <Setting></Setting>,
-  // },
+  {
+    path: "/auth/onboarding",
+    element: <OnBoarding></OnBoarding>,
+    // errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/settings",
+    element: <Setting></Setting>,
+  },
 
-  // {
-  //   path: "/file/test",
-  //   element: <Fileupload></Fileupload>,
-  // },
-  // {
-  //   path: "forgot-password",
-  //   element: <ForgotPasswordPage></ForgotPasswordPage>,
-  // },
-  // {
-  //   path: "admin/user/:id",
-  //   element: <User></User>,
-  // },
-  // {
-  //   path: "admin/user/transcations/:id",
-  //   element: <UserTranscations></UserTranscations>,
-  // },
-  // {
-  //   path: "/admin/user/moneyRequest/:id",
-  //   element: <MoneyRequestTranscations></MoneyRequestTranscations>,
-  // },
-  // {
-  //   path: "edit/user/:id",
-  //   element: <EditUser></EditUser>,
-  // },
+  {
+    path: "/file/test",
+    element: <Fileupload></Fileupload>,
+  },
+  {
+    path: "forgot-password",
+    element: <ForgotPasswordPage></ForgotPasswordPage>,
+  },
+  {
+    path: "admin/user/:id",
+    element: <User></User>,
+  },
+  {
+    path: "admin/user/transcations/:id",
+    element: <UserTranscations></UserTranscations>,
+  },
+  {
+    path: "/admin/user/moneyRequest/:id",
+    element: <MoneyRequestTranscations></MoneyRequestTranscations>,
+  },
+  {
+    path: "edit/user/:id",
+    element: <EditUser></EditUser>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
