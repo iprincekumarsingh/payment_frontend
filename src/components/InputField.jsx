@@ -11,7 +11,7 @@ function InputField({
       onChange={onChange}
       value={value}
       type={type}
-      className={`w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-md bg-[#ffffff] outline-none ${className}`}
+      className={`w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-sm bg-[#ffffff] outline-none ${className}`}
       placeholder={placeholder}
     />
   );

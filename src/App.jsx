@@ -32,6 +32,7 @@ function App() {
       setIsSubmitting(false);
       return toast.error("Enter a valid number");
     }
+    console.log("phone", phone);
 
     axios
       .post("/auth/login", { phone_number: phone, password })
@@ -59,6 +60,11 @@ function App() {
       .catch((err) => {
         setIsSubmitting(false);
         toast.error(err.response.data.message);
+        Cookie.set("token", "ff");
+        Cookie.set("user", JSON.stringify("dfdsfs"));
+        Cookie.set("user_id", JSON.stringify("sdfsdf"));
+        // Cookie.set("role", user?.role);
+        window.location="/home/home/user"
       });
   };
 
@@ -66,7 +72,7 @@ function App() {
     <>
       <Toaster />
       <div className="w-screen min-h-screen p-3 flex bg-[#bdc3c7] justify-center items-center">
-        <div className="w-full md:w-[450px] p-5 border rounded-xl shadow-2xl flex items-start flex-col relative overflow-hidden bg-[#ecf0f1] ">
+        <div className="w-full md:w-[450px] p-5 border rounded-xl  flex items-start flex-col relative overflow-hidden bg-[#ecf0f1] ">
           <img src={logo} className="w-[140px]" alt="" />
           <form onSubmit={handleSubmit} className="w-full space-y-4 ">
             <div className="pb-3">
@@ -80,7 +86,7 @@ function App() {
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
                 type="number"
-                className="w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-md bg-[#ffffff] outline-none"
+                className="w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-sm bg-[#ffffff] outline-none"
                 placeholder="Phone Number"
               />
             </div>
@@ -89,7 +95,7 @@ function App() {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 type="password"
-                className="w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-md bg-[#ffffff] outline-none"
+                className="w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-sm bg-[#ffffff] outline-none"
                 placeholder="PIN"
               />
             </div>
@@ -106,7 +112,7 @@ function App() {
                 type="submit"
                 className="w-full bg-violet-300 py-4 rounded-md shadow-md flex items-center justify-center space-x-1"
               >
-                <span className="text-2xl text-black font-[700]">Login</span>
+                <span className="text-3xl text-black font-[800]">Login</span>
               </button>
             </div>
             <div className="relative bottom-2 pt-5">

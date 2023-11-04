@@ -147,7 +147,7 @@ export default function Register() {
         </section>
       </Modal>
       <div className="w-screen min-h-screen p-3 flex bg-[#bdc3c7] justify-center items-center">
-        <div className="w-full md:w-[450px] p-5 border rounded-xl shadow-2xl flex items-start flex-col relative overflow-hidden bg-[#ecf0f1]">
+        <div className="w-full md:w-[450px] p-5 border rounded-xl shadow-sm flex items-start flex-col relative overflow-hidden bg-[#ecf0f1]">
           <img src={logo} className="w-[140px]" alt="" />
           <form onSubmit={handleSubmit} className="w-full space-y-4">
             <h1 className="text-3xl font-[700]">Register</h1>
@@ -193,7 +193,7 @@ export default function Register() {
               placeholder="PIN"
               required
             />
-            <button className="w-full bg-violet-300 py-4 rounded-md shadow-md flex items-center justify-center">
+            <button className="w-full bg-violet-300 py-4 rounded-md shadow-sm flex items-center justify-center">
               <span className="text-2xl text-black font-[700]">Register</span>
             </button>
             <div className="relative bottom-2 pt-5">
@@ -209,7 +209,7 @@ export default function Register() {
           </form>
           {isSubmitting && (
             <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-sm top-0 left-0 bg-[#000000b5]">
-              <ImSpinner2 className="animate-spin text-white text-5xl" />
+             
             </div>
           )}
         </div>
