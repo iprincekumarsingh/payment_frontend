@@ -166,19 +166,22 @@ export default function Alluser() {
         ) : (
           <div className="w-full flex justify-between items-center pt-5">
             <button
-              onClick={() => {
-                addMoney(item._id);
-                setMoney(item.wallet_balance);
-              }}
+
+            // ficc 2
+              // onClick={() => {
+              //   addMoney(item._id);
+              //   setMoney(item.wallet_balance);
+              // }}
               className="text-base font-[600] bg-yellow-500 text-white px-1 py- rounded-md"
             >
               Add Money
             </button>
             <button
+            // fic 2
               onClick={() => {
-                deductMoney(item._id);
-                console.log("dd");
-                setMoney(item.wallet_balance);
+                // deductMoney(item._id);
+                // console.log("dd");
+                // setMoney(item.wallet_balance);
               }}
               className="text-base font-[600] bg-red-800 text-white px-1  rounded-md"
             >

@@ -125,3 +125,8 @@ input[type="number"] {
   z-index: 3 !important;
   transform: rotateY(180deg) !important;
 }
+
+#grad {
+  background: radial-gradient(#387989, #6dd5ed);
+  background-repeat: no-repeat;
+}
