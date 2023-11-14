@@ -69,8 +69,8 @@ export default function Home() {
       setWallet(data.wallet_no);
       setName(data.first_name);
       setWallet_balance(data.wallet_balance);
+      console.log(data.wallet_balance);
       setWalletno(data.wallet_no);
-
     }
   }, []);
   let subtitle;
