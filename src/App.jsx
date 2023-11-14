@@ -9,7 +9,7 @@ import { ImSpinner2 } from "react-icons/im";
 function App() {
   useEffect(() => {
     if (Cookie.get("token")) {
-      window.location.href = "/home/home/user";
+      window.location.href = "/home/user";
     }
   }, []);
 
@@ -53,25 +53,22 @@ function App() {
         }
 
         const redirectPath =
-          user?.wallet_no == null ? "/auth/onboarding" : "/home/home/user";
+          user?.wallet_no == null ? "/auth/onboarding" : "/home/user";
         window.location.href = redirectPath;
         setIsSubmitting(false);
       })
       .catch((err) => {
         setIsSubmitting(false);
         toast.error(err.response.data.message);
-        Cookie.set("token", "ff");
-        Cookie.set("user", JSON.stringify("dfdsfs"));
-        Cookie.set("user_id", JSON.stringify("sdfsdf"));
-        // Cookie.set("role", user?.role);
-        window.location="/home/home/user"
+      
+        toast.error(err.response.data.message);
       });
   };
 
   return (
     <>
       <Toaster />
-      <div className="w-screen min-h-screen p-3 flex bg-[#bdc3c7] justify-center items-center">
+      <div className="w-screen min-h-screen p-3 flex  justify-center items-center">
         <div className="w-full md:w-[450px] p-5 border rounded-xl  flex items-start flex-col relative overflow-hidden bg-[#ecf0f1] ">
           <img src={logo} className="w-[140px]" alt="" />
           <form onSubmit={handleSubmit} className="w-full space-y-4 ">

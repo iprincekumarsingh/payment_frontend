@@ -7,6 +7,12 @@ import axios from "../api/axios";
 import logo from "../img/sxbank.jpg";
 import Cookie from "js-cookie";
 import Topbar from "../components/Topbar";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 export default function Profile() {
   useEffect(() => {
     //checkk if the user is logged in or not
@@ -14,22 +20,6 @@ export default function Profile() {
       window.location.href = "/auth/login";
     }
   }, []);
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      width: "90%",
-      padding: "10px",
-      shadow: "none",
-
-      border: "none",
-
-      transform: "translate(-50%, -50%)",
-    },
-  };
 
   const [ProfileModal, setProfileModal] = useState(false);
   let subtitle;
@@ -195,57 +185,112 @@ export default function Profile() {
   };
 
   return (
-    <>
+    <div className="w-full h-screen bg-[#ffff]">
       <Toaster />
-      <Topbar title="Profile" hideicon={"hidden"} />
-      <div className="bg-gray-100 overflow-hidden">
-        <div className=" rounded-md  p-3 max-w-md mx-auto mt-1">
-          <div className="text-start mt-4">
-            <h1 className="text-3xl font-bold text-gray-800">{fullname}</h1>
+      <h1 className=" text-black text-center py-2 text-xl border-b-2">
+        Profile{" "}
+      </h1>
+
+      {/* header div profile name */}
+      <div className="-1 pt-5 pb-2 px-3">
+        <h1 className="text-black text-3xl font-bold">{fullname}</h1>
+        <h1 className="text-gray-500 text-base font-bold">{phone}</h1>
+      </div>
+      <hr />
+
+      <div className="-1 px-3 mt-2">
+        <h1 className="text-black text-[16px]">Sx bank Savings Account</h1>
+        <div>
+          <div className="mt-2 flex gap-2 flex-shrink w-full text-start">
+            <h1 className="text-black border w-[230px] py-1 -1 text-start px-1 rounded-lg">
+              Account no: <span>{accountnumber}</span>
+            </h1>
           </div>
-          <div className="border-t border-gray-200 mt-6 pt-6">
-            <div className="flex justify-between mt-4">
-              <span className="text-lg text-gray-600 font-medium">Phone</span>
-              <span className="text-lg font-semibold">{phone}</span>
+          <div className="mt-2 flex gap-2 flex-shrink w-full">
+            <h1 className="text-black border w-[220px] text-start px-1 rounded-lg">
+              Wallet no: <span>{wallet}</span>
+            </h1>
+          </div>
+          <div className="mt-2 flex gap-2 flex-shrink w-full">
+            <h1 className="text-black border w-[220px] text-start px-1 rounded-lg">
+              Aadhar no: <span>*********{addhar.slice(8, 12)}</span>
+            </h1>
+          </div>
+        </div>
+        <hr className="mt-3" />
+        <div className="mt-2">
+          <h1 className="text-black text-[16px]">Bank Information</h1>
+          <div>
+            <div className="mt-2 flex gap-2 flex-shrink w-full text-start">
+              <h1 className="text-black border w-[230px] py-1 -1 text-start px-1 rounded-lg">
+                Bank name : <span>{bankname}</span>
+              </h1>
             </div>
-            <div className="flex justify-between mt-4">
-              <span className="text-lg text-gray-600 font-medium">
-                Alternative Phone
-              </span>
-              <span className="text-lg font-semibold">{alertnativephone}</span>
-            </div>
-            <div className="flex justify-between mt-4">
-              <span className="text-lg text-gray-600 font-medium">
-                Aadhar Number
-              </span>
-              <span className="text-lg font-semibold">{addhar}</span>
-            </div>
-            <div className="flex justify-between mt-4">
-              <span className="text-lg text-gray-600 font-medium">
-                Bank Name
-              </span>
-              <span className="text-lg font-semibold">{bankname}</span>
-            </div>
-            <div className="flex justify-between mt-4">
-              <span className="text-lg text-gray-600 font-medium">
-                IFSC Code
-              </span>
-              <span className="text-lg font-semibold">{ifsc}</span>
-            </div>
-            <div className="flex justify-between mt-4">
-              <span className="text-lg text-gray-600 font-medium">
-                Wallet Number
-              </span>
-              <span className="text-lg font-semibold">{wallet}</span>
+
+            <div className="mt-2 flex gap-2 flex-shrink w-full">
+              <h1 className="text-black border w-[220px] text-start px-1 rounded-lg">
+                IFSC code: <span>{ifsc}</span>
+              </h1>
             </div>
           </div>
-          <div className="flex justify-center mt-8">
-            {/* <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              Edit Profile
-            </button> */}
+        </div>
+
+        <hr className="mt-5" />
+        {/* tools */}
+        {Cookies.get("role") === "admin" ? (
+          <Link to={"../admin"}>
+            <div className="mt-5 flex gap-3 items-center w-full  ">
+              <div className="flex items-center justify-between w-full gap-3">
+                <div className="flex items-center gap-3  ">
+                  <AdminPanelSettingsOutlinedIcon />
+                  <div className="flex flex-col ">
+                    <h1 className="text-base font-normal ">Admin</h1>
+                    <h1 className="text-[12px] text-gray-500">
+                      Manage User & payments
+                    </h1>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <KeyboardArrowRightOutlinedIcon />
+                </div>
+              </div>
+            </div>
+          </Link>
+        ) : null}
+
+        <Link to={"../../settings"}>
+          <div className="mt-5 flex gap-3 items-center w-full  ">
+            <div className="flex items-center justify-between w-full gap-3">
+              <div className="flex items-center gap-3  ">
+                <SettingsOutlinedIcon />
+                <div className="flex flex-col ">
+                  <h1 className="text-base font-normal ">Settings</h1>
+                  <h1 className="text-[12px] text-gray-500">
+                    Manage pin and more
+                  </h1>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <KeyboardArrowRightOutlinedIcon />
+              </div>
+            </div>
+          </div>
+        </Link>
+        <div className="mt-5 flex gap-3 items-center w-full  ">
+          <div className="flex items-center justify-between w-full gap-3">
+            <div className="flex items-center gap-3  ">
+              <LogoutOutlinedIcon />
+              <div className="flex flex-col ">
+                <h1 className="text-base font-normal ">Logout</h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

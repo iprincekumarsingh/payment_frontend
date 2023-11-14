@@ -1,56 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Topbar from "../components/Topbar";
 import Cookie from "js-cookie";
-import axios from "../api/axios";
-export default function Setting() {
-  const [fullname, setfullname] = useState("");
-  const [name, setName] = useState("");
-  const [alertnativephone, setalertnativephone] = useState("");
-  const [accountnumber, setaccountnumber] = useState("");
-  const [ifsc, setifsc] = useState("");
-  const [bankname, setbankname] = useState("");
-  const [addhar, setaddhar] = useState("");
-  const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("");
-  const [counter, setCounter] = useState(0);
-  const [letterFormat, setLetterFormat] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
+import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
-  const [pin, setPin] = useState("");
+import axios from "../api/axios";
+
+export default function Setting() {
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [pass, setPass] = useState("");
+  const togglePopup = () => {
+    setPopupOpen(!isPopupOpen);
+  };
   useEffect(() => {
-    //checkk if the user is logged in or not
+    // Check if the user is logged in or not
     if (!Cookie.get("token")) {
       window.location.href = "/auth/login";
     }
   }, []);
-  useEffect(() => {
-    if (localStorage.getItem("PROFILE_DATA") != null) {
-      const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
-      setfullname(data.fullname);
-      setalertnativephone(data.alt_phone);
-      setaccountnumber(data.account_number);
-      setifsc(data.ifsc_code);
-      setbankname(data.bank_name);
-      setPhone(data.phone);
-      setaddhar(data.aadhaar_number);
-      setWallet(data.wallet_no);
-      setName(data.fullname);
-      //  get the fisrt letter of name
-      // setLetterFormat(data.name.charAt(0));
-    }
-    if (localStorage.getItem("pin")) {
-      setPin(localStorage.getItem("pin"));
-    }
-  }, []);
 
-  const handleSubmit = (newPass) => {
-    // alert(newPass);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     axios
       .put(
         "auth/changepassword",
         {
-          newPassowrd: newPass,
+          newPassword: pass, // Fix the key to "newPassword"
         },
         {
           headers: {
@@ -59,130 +37,97 @@ export default function Setting() {
           },
         }
       )
-      .then((res) => {
+      .then(() => {
         alert("Password changed successfully");
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Something went wrong");
       });
   };
+
+  const handlePassChange = (e) => {
+
+    console.log(e.target.value);
+    const newPin = e.target.value;
+    setPass(newPin);
+  };
+
   return (
     <div className="overflow-hidden">
-      <Topbar title="Settings" hideicon={"hidden"}></Topbar>
+      <h1 className="text-black text-center py-2 text-xl border-b-2">
+        Setting{" "}
+      </h1>
       <div className="">
-        <div className="container mx-auto px-4 py-6">
-          {/* <h1 className="text-3xl font-bold mb-4">Settings</h1> */}
-          <div className="bg-white rounded-lg shadow-lg px-4 py-2">
+        <div className="container mx-auto">
+          <div className="rounded-lg px-4">
             <div className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-2">
-                Account Information
-              </h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-700">{name}</p>
-                  <p className="text-sm font-medium text-gray-500 mb-1">
-                    Wallet Number : {wallet}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500 mb-1">
-                    Phone:
-                  </p>
-                  <p className="text-sm text-gray-700">{phone}</p>
+              <ul className="bg-white divide-gray-200"></ul>
+            </div>
+            <div
+              className="mt-5 flex gap-3 items-center w-full py-2"
+              onClick={togglePopup}
+            >
+              <div className="flex items-center gap-3">
+                <LockResetOutlinedIcon />
+                <div className="flex flex-col">
+                  <h1 className="text-base font-normal">Change Password</h1>
                 </div>
               </div>
             </div>
-            <div className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-2">
-                Bank Account Information
-              </h2>
-              <div className="">
-                <div>
-                  <p className="text-sm font-medium text-gray-500 mb-1">
-                    Bank name: {bankname}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {/* <a href="3" target="_blank" rel="noopener noreferrer"> */}
-                    Account Number :{accountnumber}
-                    {/* </a> */}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {/* <a href="3" target="_blank" rel="noopener noreferrer"> */}
-                    IFSC Code :{ifsc}
-                    {/* </a> */}
-                  </p>
+            {isPopupOpen && (
+              <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center  ">
+                <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-10">
+                  <div className="bg-white w-[250px]  rounded-md ">
+                    <div className="flex justify-between px-1 items-center">
+                      <h2 className="text-base px-2 py-2 text-black font-semi  text-start ">
+                        Set Your Password
+                      </h2>
+                      <CloseOutlinedIcon
+                        style={{
+                          color: "black",
+                          borderWidth: 1,
+                          borderRadius: 10,
+                          borderColor: "black",
+                        }}
+                      />
+                    </div>
+
+                    {/* set pin pop-up */}
+                    <div className="w-full flex  items-center justify-center ">
+                      <form onSubmit={handleSubmit}>
+                        <input
+                          type="password" // Assuming it's a password input
+                          minLength={4}
+                          placeholder="New Password"
+                          className="border w-full border-gray-400 rounded-md py-2 px-2"
+                          value={pass}
+                          onChange={handlePassChange}
+                        />
+                        <button
+                          className="w-full mt-5 py-2 bg-blue-400 mb-2 text-white text-xl font-light rounded-md"
+                          type="submit"
+                        >
+                          Save
+                        </button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <hr className="my-4" />
-            <div className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Settings</h2>
-              <ul className="bg-white divide-y divide-gray-200">
-                <li className="px-4 py-4 sm:px-6">
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="text-sm font-medium text-gray-900"
-                      onClick={(e) => {
-                        const newPass = prompt("Enter new password:");
+            )}
 
-                        setNewPassword(newPass);
-
-                        handleSubmit(newPass);
-                      }}
-                    >
-                      Change Password
-                    </div>
+            <div className="mt-5 flex gap-3 items-center w-full py-2">
+              <div className="flex items-center justify-between w-full gap-3">
+                <div className="flex items-center gap-3">
+                  <PasswordOutlinedIcon />
+                  <div className="flex flex-col">
+                    <h1 className="text-base font-normal">Change Pin</h1>
                   </div>
-                </li>
-                <li className="px-4 py-4 sm:px-6">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-gray-900">PIN</div>
-                    <div className="flex items-center">
-                      {localStorage.getItem("pin") ? (
-                        <a
-                          href="#"
-                          className="ml-3 text-sm text-gray-400 hover:text-blue-500"
-                          onClick={() => {
-                            localStorage.removeItem("pin");
-                            setPin("");
-                          }}
-                        >
-                          Remove
-                        </a>
-                      ) : (
-                        <a
-                          href="#"
-                          className="ml-3 text-sm text-gray-400 hover:text-blue-500"
-                          onClick={() => {
-                            const newPin = prompt("Enter new PIN:");
-                            if (newPin) {
-                              localStorage.setItem("pin", newPin);
-                              setPin(newPin);
-                            }
-                          }}
-                        >
-                          Set
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  Cookie.remove("token");
-                  localStorage.removeItem("PROFILE_DATA");
-
-                  window.location.href = "/auth/login";
-                }}
-                className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded focus:outline-none w-full"
-              >
-                Logout
-              </button>
+                </div>
+                <div>
+                  <h1 className="text-[14px]">Remove</h1>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -168,10 +168,10 @@ export default function Alluser() {
             <button
 
             // ficc 2
-              // onClick={() => {
-              //   addMoney(item._id);
-              //   setMoney(item.wallet_balance);
-              // }}
+              onClick={() => {
+                addMoney(item._id);
+                setMoney(item.wallet_balance);
+              }}
               className="text-base font-[600] bg-yellow-500 text-white px-1 py- rounded-md"
             >
               Add Money
@@ -179,9 +179,9 @@ export default function Alluser() {
             <button
             // fic 2
               onClick={() => {
-                // deductMoney(item._id);
-                // console.log("dd");
-                // setMoney(item.wallet_balance);
+                deductMoney(item._id);
+                console.log("dd");
+                setMoney(item.wallet_balance);
               }}
               className="text-base font-[600] bg-red-800 text-white px-1  rounded-md"
             >

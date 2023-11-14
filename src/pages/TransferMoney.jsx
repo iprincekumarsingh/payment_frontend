@@ -204,7 +204,10 @@ export default function TransferMoney() {
 
   return (
     <div className="overflow-hidden">
-      <Topbar title="Money Transfer" backLink={"/home/home/user"} hideicon={"hidden"}></Topbar>
+      
+      <h1 className=" text-black text-center py-2 text-xl border-b-2">
+        Transfer Money{" "}
+      </h1>
 
       <Modal
         isOpen={requestMoney}
@@ -359,7 +362,7 @@ export default function TransferMoney() {
       </table>
       <div className="w-full h-[55vh] overflow-x-hidden overflow-y-auto">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm">
+          <table className="min-w-full divide-y-2 text-center mt-2 flex justify-center items-center divide-gray-200 bg-white text-sm">
             <tbody class="divide-y divide-gray-200">
               {load
                 ? "Loading..."

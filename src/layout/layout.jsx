@@ -6,7 +6,11 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+
 import { Outlet, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const styles = {
   bottomNavigation: {
@@ -44,14 +48,19 @@ export default function LayoutHome() {
 
           }}
           style={styles.bottomNavigation}
-          className='bg-primary'
+          className='bg-[#0d102c]'
         >
           <BottomNavigationAction component={Link}
 
-            to="home/user" label="Home" icon={<HomeOutlinedIcon />} />
-          <BottomNavigationAction component={Link} to="home/card" label="Cards" icon={<CreditCardOutlinedIcon />} />
-          <BottomNavigationAction component={Link} label="Transaction" icon={<SyncAltOutlinedIcon />} />
-          <BottomNavigationAction label="Profile" icon={<PersonOutlineOutlinedIcon />} />
+            to="user" label="Home" icon={<HomeOutlinedIcon />} />
+        
+          <BottomNavigationAction component={Link} to="profile" label="Profile" icon={<PersonOutlineOutlinedIcon />} />
+          {Cookies.get("role") === "admin" ? (
+            // <BottomNavigationAction component={Link} to="notification" label="Notification" icon={<SyncAltOutlinedIcon />} />
+            <BottomNavigationAction component={Link} to="admin" label="Admin Panel" icon={<AdminPanelSettingsOutlinedIcon />} />
+          ) : null
+          }
+        
         </BottomNavigation>
       </Box>
     </div>
