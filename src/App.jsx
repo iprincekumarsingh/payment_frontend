@@ -83,7 +83,7 @@ function App() {
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
                 type="number"
-                className="w-full  px-4 py-4 border bg-gray-800 placeholder:text-white text-black border-[#f2f2] rounded-md shadow-sm  outline-none"
+                className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
                 placeholder="Phone Number"
               />
             </div>
@@ -92,7 +92,7 @@ function App() {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 type="password"
-                className="w-full focus:bg-[#fff] px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
+                className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
                 placeholder="PIN"
               />
             </div>

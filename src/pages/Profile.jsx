@@ -11,6 +11,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 export default function Profile() {
@@ -260,6 +261,23 @@ export default function Profile() {
           </Link>
         ) : null}
 
+        <div className="mt-5 flex gap-3 items-center w-full  ">
+          <div className="flex items-center justify-between w-full gap-3">
+            <div className="flex items-center gap-3  ">
+              <CreditCardOutlinedIcon />
+              <div className="flex flex-col ">
+                <h1 className="text-base font-normal "> Physcial Card</h1>
+                <h1 className="text-[12px] text-gray-500">Manage Card</h1>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <KeyboardArrowRightOutlinedIcon />
+            </div>
+          </div>
+        </div>
+
         <Link to={"../../settings"}>
           <div className="mt-5 flex gap-3 items-center w-full  ">
             <div className="flex items-center justify-between w-full gap-3">
@@ -280,14 +298,17 @@ export default function Profile() {
             </div>
           </div>
         </Link>
-        <div className="mt-5 flex gap-3 items-center w-full   " onClick={()=>{
-          // clear all the cookies
-          Cookies.remove("token");
-          Cookies.remove("user");
-          Cookies.remove("role");
-          localStorage.removeItem("PROFILE_DATA");
-          window.location.href="/";
-        }}>
+        <div
+          className="mt-5 flex gap-3 items-center w-full   "
+          onClick={() => {
+            // clear all the cookies
+            Cookies.remove("token");
+            Cookies.remove("user");
+            Cookies.remove("role");
+            localStorage.removeItem("PROFILE_DATA");
+            window.location.href = "/";
+          }}
+        >
           <div className="flex items-center justify-between w-full gap-3">
             <div className="flex items-center gap-3  ">
               <LogoutOutlinedIcon />

@@ -25,6 +25,7 @@ import EditUser from "./admin/editUser.jsx";
 import NewUser from "./admin/NewUser.jsx";
 import { BrowserView } from "react-device-detect";
 import Card from "./pages/Card.jsx";
+import Terms from "./pages/Terms.jsx";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
   },
-  
+
   {
     path: "/auth/register",
     element: <Register></Register>,
@@ -103,7 +104,10 @@ const router = createBrowserRouter([
     path: "/settings",
     element: <Setting></Setting>,
   },
-
+  {
+    path: "/terms",
+    element: <Terms />,
+  },
   {
     path: "/file/test",
     element: <Fileupload></Fileupload>,

@@ -162,7 +162,7 @@ export default function OnBoarding() {
 
   return (
     <section className="max-w-4xl p-10 mx-auto rounded-md shadow-md  mt-5 ">
-      <h1 className="text-xl font-bold text-black  capitalize dark:text-black ">
+      <h1 className="text-xl font-bold text-white  capitalize dark:text-white ">
         Complete Profile
       </h1>
       <p className="p-4 text-red-500 text-1xl">{errorMsg}</p>
@@ -173,12 +173,12 @@ export default function OnBoarding() {
       >
         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               Title
             </label>
             <select
               name=""
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               id=""
               onChange={(e) => {
                 setTitle(e.target.value);
@@ -191,7 +191,7 @@ export default function OnBoarding() {
             </select>
           </div>
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               First Name
             </label>
             <input
@@ -200,11 +200,12 @@ export default function OnBoarding() {
                 console.log(e.target.value);
               }}
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
+
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               Middle Name
             </label>
             <input
@@ -213,11 +214,11 @@ export default function OnBoarding() {
                 console.log(e.target.value);
               }}
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               Last Name
             </label>
             <input
@@ -226,11 +227,11 @@ export default function OnBoarding() {
                 console.log(e.target.value);
               }}
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               Date of Birth{" "}
               <span
                 style={{
@@ -247,11 +248,11 @@ export default function OnBoarding() {
                 console.log(e.target.value);
               }}
               type="date"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               CitizenShip{" "}
               <span
                 style={{
@@ -265,11 +266,11 @@ export default function OnBoarding() {
             <input
               type="text"
               onChange={(e) => setCitizenship(e.target.value)}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="username">
+            <label className="text-white  " htmlFor="username">
               Country of birth{" "}
               <span
                 style={{
@@ -283,7 +284,7 @@ export default function OnBoarding() {
 
             <select
               name=""
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               id=""
               onChange={(e) => {
                 setCountrofbirth(e.target.value);
@@ -295,11 +296,11 @@ export default function OnBoarding() {
               <option value="USA">USA</option>
             </select>
           </div>
-          <h1 className="text-xl font-bold text-black  capitalize dark:text-black ">
+          <h1 className="text-xl font-bold text-white  capitalize dark:text-white ">
             Account Holder: Contact Details
           </h1>
           <div>
-            <label className="text-black  " htmlFor="emailAddress">
+            <label className="text-white  " htmlFor="emailAddress">
               Alternative Phone{" "}
               <span
                 style={{
@@ -314,14 +315,14 @@ export default function OnBoarding() {
               value={phone}
               id="emailAddress"
               type="phone"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setPhone(e.target.value);
               }}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               Father Name{" "}
               <span
                 style={{
@@ -335,14 +336,14 @@ export default function OnBoarding() {
             <input
               id="passwordConfirmation"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setFathername(e.target.value);
               }}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               Nominee Name{" "}
               <span
                 style={{
@@ -356,7 +357,7 @@ export default function OnBoarding() {
             <input
               id="passwordConfirmation"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setNominee(e.target.value);
                 <span
@@ -371,7 +372,7 @@ export default function OnBoarding() {
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="emailAddress">
+            <label className="text-white  " htmlFor="emailAddress">
               Residence address: Street / Nr.{" "}
               <span
                 style={{
@@ -386,7 +387,7 @@ export default function OnBoarding() {
               value={address}
               id="emailAddress"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setAddress(e.target.value);
                 console.log(address);
@@ -394,7 +395,7 @@ export default function OnBoarding() {
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="emailAddress">
+            <label className="text-white  " htmlFor="emailAddress">
               Residence address: Postal Code{" "}
               <span
                 style={{
@@ -409,7 +410,7 @@ export default function OnBoarding() {
               value={zip}
               id="emailAddress"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setZip(e.target.value);
                 console.log(zip);
@@ -417,7 +418,7 @@ export default function OnBoarding() {
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="emailAddress">
+            <label className="text-white  " htmlFor="emailAddress">
               Residence address: City{" "}
               <span
                 style={{
@@ -432,14 +433,14 @@ export default function OnBoarding() {
               value={city}
               id="emailAddress"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setCity(e.target.value);
               }}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="emailAddress">
+            <label className="text-white  " htmlFor="emailAddress">
               Country{" "}
               <span
                 style={{
@@ -451,7 +452,7 @@ export default function OnBoarding() {
               </span>
             </label>
             <select
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               name=""
               id=""
               onChange={(e) => {
@@ -466,7 +467,7 @@ export default function OnBoarding() {
             </select>
           </div>
           <div>
-            <label className="text-black  " htmlFor="emailAddress">
+            <label className="text-white  " htmlFor="emailAddress">
               Email{" "}
               <span
                 style={{
@@ -479,12 +480,12 @@ export default function OnBoarding() {
             </label>
             <input
               type="email"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="password">
+            <label className="text-white  " htmlFor="password">
               Bank Account Number{" "}
               <span
                 style={{
@@ -499,14 +500,14 @@ export default function OnBoarding() {
               id="text"
               type="text"
               value={bankaccount}
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setBankaccount(e.target.value);
               }}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               BANK NAME{" "}
               <span
                 style={{
@@ -520,14 +521,14 @@ export default function OnBoarding() {
             <input
               id="passwordConfirmation"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setBankname(e.target.value);
               }}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               IFSC CODE{" "}
               <span
                 style={{
@@ -541,14 +542,14 @@ export default function OnBoarding() {
             <input
               id="passwordConfirmation"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setIfsc(e.target.value);
               }}
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               Aadhaar Number{" "}
               <span
                 style={{
@@ -562,7 +563,7 @@ export default function OnBoarding() {
             <input
               id="passwordConfirmation"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setAadhaar(e.target.value);
                 console.log(e.target.value);
@@ -571,7 +572,7 @@ export default function OnBoarding() {
           </div>
 
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               Pan No{" "}
               <span
                 style={{
@@ -585,7 +586,7 @@ export default function OnBoarding() {
             <input
               id="passwordConfirmation"
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
               onChange={(e) => {
                 setPanno(e.target.value);
                 console.log(e.target.value);
@@ -593,7 +594,7 @@ export default function OnBoarding() {
             />
           </div>
           <div>
-            <label className="text-black  " htmlFor="passwordConfirmation">
+            <label className="text-white  " htmlFor="passwordConfirmation">
               Aadhar Card/ Driving License/ Voter ID / Passport (Any One){" "}
               <span
                 style={{
@@ -611,7 +612,7 @@ export default function OnBoarding() {
                 setFile(e.target.files[0]);
               }}
               accept=".jpg,.png,.jpeg ,.pdf"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md   dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
             />
           </div>
         </div>

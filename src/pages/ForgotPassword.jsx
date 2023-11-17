@@ -139,7 +139,7 @@ function ForgotPasswordPage() {
       {/* <Topbar title="Forgot Password" hideicon={"hidden"} /> */}
 
       <div className="w-screen min-h-screen p-5 flex justify-center items-center">
-        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden bg-white h-[95vh]">
+        <div className="w-full md:w-[400px] p-5 border rounded-xl shadow-xl flex items-center flex-col relative overflow-hidden  h-[95vh]">
           <img src={logo} className="w-[250px] mx-auto" alt="" />
           <form onSubmit={handleSubmit} className="pt-24 w-full">
             <div className="text-center">
@@ -153,7 +153,8 @@ function ForgotPasswordPage() {
                 }}
                 value={phone}
                 type="number"
-                className="w-full focus:bg-[#fff] border px-4 py-2 rounded-xl shadow-md  bg-[#f1f1f1] outline-none"
+                className="w-full  focus:bg-slate-700 text-white px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
+
                 placeholder="phone number"
                 required
               />

@@ -5,8 +5,10 @@ import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRig
 import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
 import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 
 import axios from "../api/axios";
+import { Link } from "@mui/material";
 
 export default function Setting() {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -46,7 +48,6 @@ export default function Setting() {
   };
 
   const handlePassChange = (e) => {
-
     console.log(e.target.value);
     const newPin = e.target.value;
     setPass(newPin);
@@ -54,7 +55,7 @@ export default function Setting() {
 
   return (
     <div className="overflow-hidden">
-      <h1 className="text-black text-center py-2 text-xl border-b-2">
+      <h1 className="text-white text-center py-2 text-xl border-b-2">
         Setting{" "}
       </h1>
       <div className="">
@@ -68,7 +69,11 @@ export default function Setting() {
               onClick={togglePopup}
             >
               <div className="flex items-center gap-3">
-                <LockResetOutlinedIcon />
+                <LockResetOutlinedIcon
+                  style={{
+                    color: "white",
+                  }}
+                />
                 <div className="flex flex-col">
                   <h1 className="text-base font-normal">Change Password</h1>
                 </div>
@@ -88,6 +93,7 @@ export default function Setting() {
                           borderWidth: 1,
                           borderRadius: 10,
                           borderColor: "black",
+                          color: "black",
                         }}
                       />
                     </div>
@@ -119,7 +125,11 @@ export default function Setting() {
             <div className="mt-5 flex gap-3 items-center w-full py-2">
               <div className="flex items-center justify-between w-full gap-3">
                 <div className="flex items-center gap-3">
-                  <PasswordOutlinedIcon />
+                  <PasswordOutlinedIcon
+                    style={{
+                      color: "white",
+                    }}
+                  />
                   <div className="flex flex-col">
                     <h1 className="text-base font-normal">Change Pin</h1>
                   </div>
@@ -129,6 +139,25 @@ export default function Setting() {
                 </div>
               </div>
             </div>
+            <a href="/terms">
+              <div className="mt-5 flex gap-3 items-center w-full py-2">
+                <div className="flex items-center justify-between w-full gap-3">
+                  <div className="flex items-center gap-3">
+                    <ArticleOutlinedIcon
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                    <div className="flex flex-col">
+                      <h1 className="text-base font-normal">
+                        Terms & Conditions
+                      </h1>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
