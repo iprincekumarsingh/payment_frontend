@@ -9,7 +9,7 @@ import axios from "../api/axios";
 import Cookie from "js-cookie";
 import Topbar from "../components/Topbar";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 
 import toast, { Toaster } from "react-hot-toast";
 export default function Admin() {
@@ -105,7 +105,7 @@ export default function Admin() {
 
   const notificationListMap = sortedResults.map((item, index) => {
     return (
-      <div className="border w-[90%] mx-auto rounded-md bg-white p-3 mb-5">
+      <div className="border w-[90%] mx-auto rounded-md bg-[#121212] p-3 mb-5">
         <Toaster></Toaster>
         <div className="w-full flex justify-between items-center">
           <p className="text-base font-bold">
@@ -154,35 +154,38 @@ export default function Admin() {
   });
 
   return (
-    <div className="overflow-hidden">
-      <Topbar title="Admin Panel" hideicon={"hidden"}></Topbar>
+    <div className="overflow-hidden bg-[#121212] h-screen">
+      {/* <Topbar title="Admin Panel" hideicon={"hidden"} ></Topbar> */}
 
       <div class="flex flex-col w-full p-4 m-1">
         <div className="flex  md:flex-row justify-center items-center gap-4 p-4">
-          <div className="flex-1 bg-white border rounded-md shadow-xl">
+          <div className="flex-1 bg-[#121212] border rounded-md shadow-xl">
             <Link
               to="../users"
               className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
             >
               {/* <img className="mb-2  w-12 h-12" src={user} alt="" /> */}
-              <PeopleAltOutlinedIcon style={{
-                fontSize:44
-              }}/>
+              <PeopleAltOutlinedIcon
+                style={{
+                  fontSize: 44,
+                }}
+              />
               <p className="text-sm md:text-base text-whe flex items-center justify-center h-full">
                 Users
               </p>
             </Link>
           </div>
-         
-          <div className="flex-1 bg-white border rounded-md shadow-xl">
+
+          <div className="flex-1 bg-[#121212] border rounded-md shadow-xl">
             <Link
               to="../newUser"
               className="flex flex-col items-center justify-center  p-4   cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 h-full"
             >
-             <PersonAddAltOutlinedIcon style={{
-           
-            fontSize: 44,
-          }}  />
+              <PersonAddAltOutlinedIcon
+                style={{
+                  fontSize: 44,
+                }}
+              />
               <p className="text-sm md:text-base text-whe flex items-center justify-center h-full">
                 Add User
               </p>
@@ -194,7 +197,7 @@ export default function Admin() {
         <div className="text-2xl text-start">Latest Money Request</div>
       </div>
 
-      <div className="w-full overflow-x-hidden h-[55vh] overflow-y-auto mb-14">
+      <div className="w-full overflow-x-hidden h-[80vh] overflow-y-auto mb-14">
         {loading ? (
           <p className="text-center pt-10">Loading...</p>
         ) : (

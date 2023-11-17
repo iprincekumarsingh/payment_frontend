@@ -186,7 +186,7 @@ export default function TransferMoney() {
   const notificationListMap = transferHistory.map((item, index) => {
     return (
       <tr className=" border-b text-center text-xs" key={index}>
-        <td className="whitespace-nowrap px-4 py-2 text-start font-medium text-gray-900">
+        <td className="whitespace-nowrap px-4 py-2 text-start font-medium text-white">
           Transferred to : {item.receiver.phone}
           <tr>
             <td>Receiver Name : {item.receiver.name}</td>
@@ -203,9 +203,8 @@ export default function TransferMoney() {
   });
 
   return (
-    <div className="overflow-hidden">
-      
-      <h1 className=" text-black text-center py-2 text-xl border-b-2">
+    <div className="overflow-hidden bg-[#121212] text-white border-b-[1px] border-blue-100">
+      <h1 className=" text-white text-center py-2 text-xl border-b-2">
         Transfer Money{" "}
       </h1>
 
@@ -237,7 +236,7 @@ export default function TransferMoney() {
                   marginBottom: "10px",
                   borderRadius: "10px",
                 }}
-                class=" appearance-none border-solid    w-full py-5 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                class=" appearance-none border-solid    w-full py-5 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="number"
                 placeholder="Enter Amount to Transfer"
@@ -348,21 +347,21 @@ export default function TransferMoney() {
       </Modal>
 
       <h2 className="text-2xl p-2">Recent Transactions</h2>
-      <table className="min-w-full divide-y-2 text-center divide-gray-200 bg-white text-sm border-b">
+      <table className="min-w-full hf divide-y-2 text-center divide-gray-200 text-white text-sm border-b">
         <thead className="ltr:text-left rtl:text-right">
           <tr>
-            <th class="whitespace-nowrap text-start px-4 py-2 font-medium text-gray-900">
+            <th class="whitespace-nowrap text-start px-4 py-2 font-medium bg-[#121212] text-white ">
               Transaction Details
             </th>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            <th class="whitespace-nowrap px-4 py-2 font-medium bg-[#121212] text-white ">
               Amount
             </th>
           </tr>
         </thead>
       </table>
-      <div className="w-full h-[55vh] overflow-x-hidden overflow-y-auto">
+      <div className="w-full h-[55vh] overflow-x-hidden overflow-y-auto ">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y-2 text-center mt-2 flex justify-center items-center divide-gray-200 bg-white text-sm">
+          <table className="min-w-full bg-b divide-y-2 text-center mt-2 flex justify-center items-center divide-gray-200 text-white text-sm">
             <tbody class="divide-y divide-gray-200">
               {load
                 ? "Loading..."
@@ -377,12 +376,12 @@ export default function TransferMoney() {
         onSubmit={(e) => {
           onhandleClick(e);
         }}
-        className="bg-white fixed bottom-2 left-0 w-full"
+        className="bg-[#121212] fixed bottom-2 left-0 w-full"
       >
         {/* input form with border 1px */}
         <div class="flex flex-wrap justify-between shadow-lg mt-5 p-2">
           <input
-            class="appearance-none w-full md:w-2/3 bg-gray-100 rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            class="appearance-none w-full md:w-2/3 placeholder:text-white  bg-[#121212]  border-b-[1px] border-blue-100  rounded-md py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="username"
             type="text"
             onChange={(e) => setPhone(e.target.value)}

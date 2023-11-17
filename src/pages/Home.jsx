@@ -18,6 +18,11 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import toast, { Toaster } from "react-hot-toast";
 import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import ChargingStationOutlinedIcon from "@mui/icons-material/ChargingStationOutlined";
+import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import numberToWords from "number-to-words";
 export default function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [requestMoney, setRequestMoney] = useState(false);
@@ -173,7 +178,7 @@ export default function Home() {
         <AddCardOutlinedIcon
           style={{
             color: "white",
-            fontSize: 28,
+            fontSize: 20,
           }}
         />
       ),
@@ -185,19 +190,31 @@ export default function Home() {
         <AttachMoneyIcon
           style={{
             color: "white",
-            fontSize: 28,
+            fontSize: 20,
           }}
         />
       ),
       func: requestMoneyModal,
     },
     {
-      name: "Transfer",
+      name: "Transfer Money",
       icon: (
-        <AttachMoneyIcon
+        <CurrencyExchangeOutlinedIcon
           style={{
             color: "white",
-            fontSize: 28,
+            fontSize: 20,
+          }}
+        />
+      ),
+      func: transferMOney,
+    },
+    {
+      name: "Mobile Recharge",
+      icon: (
+        <ChargingStationOutlinedIcon
+          style={{
+            color: "white",
+            fontSize: 20,
           }}
         />
       ),
@@ -244,40 +261,95 @@ export default function Home() {
 
     // You can perform additional actions on form submission if needed
   };
+  const formatCurrency = (value) => {
+    // Format currency with commas
+    return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  };
+  // Function to convert number to words
+  const handleCheckBalance = () => {
+    // Show the popup
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    // Close the popup
+    setShowPopup(false);
+  };
+  const [showPopup, setShowPopup] = useState(false);
   return (
     <>
       <Topbar name={name} title="SXBank 🚀" />
 
       <Toaster></Toaster>
 
-      <div className="overflow-x-auto overflow-y-auto  h-screen">
+      <div className="overflow-x-auto overflow-y-auto  h-screen bg-[#121212] text-white">
         {localStorage.getItem("pin") ? (
           <div className="overflow-x-auto p- ">
             <div>
               <section className="container ">
-                <div className="text-center flex flex-col  gap-2 font-[600] text-black ">
-                  <div className="text-3xl">₹{wallet_balance}</div>
-                  <div className="text-center text-xl font-[600] text-black ">
-                    Balance
-                  </div>
-                </div>
-                <div className="w-full mt-5 flex justify-around placeholder-slate-100 pt-2 pb-5">
-                  {cards?.map((card, index) => (
-                    <div>
-                      <div
-                        key={index}
-                        onClick={card?.func}
-                        className={
-                          "bg-[#2c2c3c] w-[80px] h-[80px] rounded-full border border-[#17173b] px-1 overflow-hidden flex flex-col justify-center items-center"
-                        }
-                      >
-                        {card.icon}
+                <div className="text-start flex px-1 flex-col gap-2 font-[600] text-white">
+                  {showPopup && (
+                    <div className="fixed top-0 left-0  w-full h-full bg-black bg-opacity-10 flex items-center justify-center z-20 ">
+                      <div className="bg-slate-400 p-4 rounded-md">
+                        <div className="flex  items-center justify-between">
+                          <div className="text-start text-xl font-[600] text-white">
+                            Balance
+                          </div>
+                          <button
+                            className=" rounded-md text-black"
+                            onClick={handleClosePopup}
+                          >
+                            <CancelOutlinedIcon />
+                          </button>
+                        </div>
+                        <div className="text-xl mt-10">
+                          ₹{formatCurrency(wallet_balance)}
+                        </div>
+                        <div className="text-md text-white">
+                          {numberToWords
+                            .toWords(wallet_balance)
+                            .split(" ")
+                            .map(
+                              (word) =>
+                                word.charAt(0).toUpperCase() + word.slice(1)
+                            )
+                            .join(" ")}{" "}
+                          Rupees Only
+                        </div>
                       </div>
-                      <p className="font-medium text-black pt-2 text-center  capitalize text-[13px]">
-                        {card.name}
+                    </div>
+                  )}
+                </div>
+                <div className="w-full mt-5 px-2 flex justify-between items-center placeholder-slate-100 pt-2 pb-5">
+                  <div className="grid grid-cols-3 gap-4 items-center justify-center">
+                    {cards.map((card, index) => (
+                      <div className="flex  flex-col items-center justify-between px-1">
+                        <div
+                          key={index}
+                          onClick={card?.func}
+                          className={
+                            "bg-[#2c2c3c] w-[60px] h-[60px] rounded-full border border-[#17173b] px-1 overflow-hidden flex flex-col justify-center items-center"
+                          }
+                        >
+                          {card.icon}
+                        </div>
+                        <p className="font-medium text-white pt-2 text-center capitalize text-[13px]">
+                          {card.name}
+                        </p>
+                      </div>
+                    ))}
+                    <div
+                      className="flex  flex-col items-center justify-between px-1 "
+                      onClick={handleCheckBalance}
+                    >
+                      <div className="bg-[#2c2c3c] w-[60px] h-[60px] rounded-full border border-[#17173b] px-1 overflow-hidden flex flex-col justify-center items-center">
+                        <AccountBalanceWalletOutlinedIcon/>
+                      </div>
+                      <p className="font-medium text-white pt-2 text-center capitalize text-[13px]">
+                        Check Balance
                       </p>
                     </div>
-                  ))}
+                  </div>
                 </div>
 
                 {/* <Widget_card card_text={"Wallet ID: " + wallet} /> */}
@@ -303,7 +375,7 @@ export default function Home() {
                         on WhatsApp.
                       </p>
                       <button
-                        className="bg-blue-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         onClick={closeModal}
                       >
                         Close
@@ -374,7 +446,7 @@ export default function Home() {
                         </p>
                       </div>
                       <button
-                        className="bg-[#1c1c64] w-full hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                        className="bg-[#1c1c64] w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                         type="submit"
                         // disabled={isLoading}
                       >
@@ -387,12 +459,12 @@ export default function Home() {
               </section>
             </div>
             {/* debit card */}
-            <div className="border w-auto  border-black text-black p-5 rounded-lg shadow-2xl mx-2">
+            <div className="border w-auto  border-black text-white p-5 rounded-lg shadow-2xl mx-2">
               <div className="flex justify-between items-center mb-4">
                 <p className="text-xl font-bold">Debit Card</p>
                 <img className=" h-12" src={logo} alt="Logo" />
               </div>
-              <p className="text-base">Prince Kumar Singh</p>
+              <p className="text-base">{name}</p>
               <p className="text-xl font-bold mb-2">{walletno}</p>
               <div className="flex justify-between mb-2 mt-6">
                 <div>
@@ -400,8 +472,8 @@ export default function Home() {
                   <p className="text-lg font-bold">06/28</p>
                 </div>
                 <div>
-                  <p className="text-base text-black">CVV</p>
-                  <p className="text-lg font-bold text-black">668</p>
+                  <p className="text-base text-white">CVV</p>
+                  <p className="text-lg font-bold text-white">668</p>
                 </div>
               </div>
             </div>
@@ -439,7 +511,7 @@ export default function Home() {
               <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-10">
                 <div className="bg-white w-[250px]  rounded-md ">
                   <div className="flex justify-between px-1 items-center">
-                    <h2 className="text-base px-2 py-2 text-black font-semi  text-start ">
+                    <h2 className="text-base px-2 py-2 text-white font-semi  text-start ">
                       Set Your Pin
                     </h2>
                     <CloseOutlinedIcon
@@ -539,7 +611,7 @@ export default function Home() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-black rounded-lg"
+                    className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded-lg"
                   >
                     {isSubmitting ? "Submitting..." : "Submit"}
                     {""}

@@ -185,50 +185,50 @@ export default function Profile() {
   };
 
   return (
-    <div className="w-full h-screen bg-[#ffff]">
+    <div className="w-full h-screen bg-[#121212] text-white">
       <Toaster />
-      <h1 className=" text-black text-center py-2 text-xl border-b-2">
+      <h1 className=" text-white text-center py-2 text-xl border-b-2">
         Profile{" "}
       </h1>
 
       {/* header div profile name */}
       <div className="-1 pt-5 pb-2 px-3">
-        <h1 className="text-black text-3xl font-bold">{fullname}</h1>
+        <h1 className="text-white text-3xl font-bold">{fullname}</h1>
         <h1 className="text-gray-500 text-base font-bold">{phone}</h1>
       </div>
       <hr />
 
       <div className="-1 px-3 mt-2">
-        <h1 className="text-black text-[16px]">Sx bank Savings Account</h1>
+        <h1 className="text-white text-[16px]">Sx bank Savings Account</h1>
         <div>
           <div className="mt-2 flex gap-2 flex-shrink w-full text-start">
-            <h1 className="text-black border w-[230px] py-1 -1 text-start px-1 rounded-lg">
+            <h1 className="text-white border w-[230px] py-1 -1 text-start px-1 rounded-lg">
               Account no: <span>{accountnumber}</span>
             </h1>
           </div>
           <div className="mt-2 flex gap-2 flex-shrink w-full">
-            <h1 className="text-black border w-[220px] text-start px-1 rounded-lg">
+            <h1 className="text-white border w-[220px] text-start px-1 rounded-lg">
               Wallet no: <span>{wallet}</span>
             </h1>
           </div>
           <div className="mt-2 flex gap-2 flex-shrink w-full">
-            <h1 className="text-black border w-[220px] text-start px-1 rounded-lg">
+            <h1 className="text-white border w-[220px] text-start px-1 rounded-lg">
               Aadhar no: <span>*********{addhar.slice(8, 12)}</span>
             </h1>
           </div>
         </div>
         <hr className="mt-3" />
         <div className="mt-2">
-          <h1 className="text-black text-[16px]">Bank Information</h1>
+          <h1 className="text-white text-[16px]">Bank Information</h1>
           <div>
             <div className="mt-2 flex gap-2 flex-shrink w-full text-start">
-              <h1 className="text-black border w-[230px] py-1 -1 text-start px-1 rounded-lg">
+              <h1 className="text-white border w-[230px] py-1 -1 text-start px-1 rounded-lg">
                 Bank name : <span>{bankname}</span>
               </h1>
             </div>
 
             <div className="mt-2 flex gap-2 flex-shrink w-full">
-              <h1 className="text-black border w-[220px] text-start px-1 rounded-lg">
+              <h1 className="text-white border w-[220px] text-start px-1 rounded-lg">
                 IFSC code: <span>{ifsc}</span>
               </h1>
             </div>

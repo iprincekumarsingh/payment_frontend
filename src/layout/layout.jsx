@@ -18,7 +18,7 @@ const styles = {
     bottom: 0,
     width: '100%',
     margin: '0 auto',
-    // backgroundColor: '#0a2351',
+    backgroundColor: '#5e5c5c',
     borderTopWidth: '1px',
     borderColor: '#fff'
 
