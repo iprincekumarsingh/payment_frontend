@@ -459,7 +459,7 @@ export default function Home() {
               </section>
             </div>
             {/* debit card */}
-            <div className="border w-auto  border-black text-white p-5 rounded-lg shadow-2xl mx-2">
+            <div className="border w-auto  border-teal-50 text-white p-5 rounded-lg shadow-2xl mx-2">
               <div className="flex justify-between items-center mb-4">
                 <p className="text-xl font-bold">Debit Card</p>
                 <img className=" h-12" src={logo} alt="Logo" />

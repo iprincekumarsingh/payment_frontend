@@ -145,7 +145,7 @@ export default function Alluser() {
     return (
       <div
         key={index}
-        className="border w-[90%] mx-auto rounded-md bg-white p-3 mb-5"
+        className="border w-[90%] mx-auto rounded-md  p-3 mb-5"
       >
         <div className="w-full flex justify-between items-center">
           <p className="text-base font-bold">

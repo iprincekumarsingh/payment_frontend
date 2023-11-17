@@ -280,7 +280,14 @@ export default function Profile() {
             </div>
           </div>
         </Link>
-        <div className="mt-5 flex gap-3 items-center w-full  ">
+        <div className="mt-5 flex gap-3 items-center w-full   " onClick={()=>{
+          // clear all the cookies
+          Cookies.remove("token");
+          Cookies.remove("user");
+          Cookies.remove("role");
+          localStorage.removeItem("PROFILE_DATA");
+          window.location.href="/";
+        }}>
           <div className="flex items-center justify-between w-full gap-3">
             <div className="flex items-center gap-3  ">
               <LogoutOutlinedIcon />

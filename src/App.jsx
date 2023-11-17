@@ -69,21 +69,21 @@ function App() {
     <>
       <Toaster />
       <div className="w-screen min-h-screen p-3 flex  justify-center items-center">
-        <div className="w-full md:w-[450px] p-5 border rounded-xl  flex items-start flex-col relative overflow-hidden bg-[#ecf0f1] ">
+        <div className="w-full md:w-[450px] p-5 border rounded-xl  flex items-start flex-col relative overflow-hidden  ">
           <img src={logo} className="w-[140px]" alt="" />
           <form onSubmit={handleSubmit} className="w-full space-y-4 ">
             <div className="pb-3">
-              <p className="text-xl capitalize text-gray-500 font-[200]">
+              <p className="text-xl capitalize text-teal-50 font-[200]">
                 welcome back,
               </p>
-              <h1 className="text-3xl font-[700]">Login Here</h1>
+              <h1 className="text-3xl font-[700] text-teal-50">Login Here</h1>
             </div>
             <div className="relative w-full">
               <input
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
                 type="number"
-                className="w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-sm bg-[#ffffff] outline-none"
+                className="w-full  px-4 py-4 border bg-gray-800 placeholder:text-white text-black border-[#f2f2] rounded-md shadow-sm  outline-none"
                 placeholder="Phone Number"
               />
             </div>
@@ -92,7 +92,7 @@ function App() {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 type="password"
-                className="w-full focus:bg-[#fff] px-4 py-4 border border-[#f2f2] rounded-md shadow-sm bg-[#ffffff] outline-none"
+                className="w-full focus:bg-[#fff] px-4 py-4 border bg-gray-800 placeholder:text-white  border-[#f2f2] rounded-md shadow-sm  outline-none"
                 placeholder="PIN"
               />
             </div>
@@ -115,7 +115,7 @@ function App() {
             <div className="relative bottom-2 pt-5">
               <div className="text-center">
                 <p className="flex justify-center items-center text-center space-x-1">
-                  <span className="font-light">Don't have an account?</span>
+                  <span className="font-light text-teal-50">Don't have an account?</span>
                   <Link
                     to="/auth/register"
                     className="text-[#3498db] text-center font-[600]"

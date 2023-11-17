@@ -9,7 +9,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 body{
-  color: #ffff;
+  color: #121212;
 }
 a{
   color: #ffff;
@@ -24,7 +24,7 @@ h3{
   color: #ffff;
 }
 div{
-  color: #ffff;
+  
 }
 /* Firefox */
 input[type="number"] {
