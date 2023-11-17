@@ -77,17 +77,17 @@ export default function NewUser() {
         return (
           <div
             key={index}
-            className="border w-[90%] mx-auto rounded-md bg-white p-3 mb-5"
+            className="border w-[90%] mx-auto rounded-md  text-white p-3 mb-5"
           >
             <div className="w-full flex justify-between items-center">
               <p className="text-base font-bold">
                 {item?.first_name + " " + item?.last_name}
               </p>
-              <p className="text-base font-bold">{item?.phone}</p>
+              <p className="text-base font-bold text-white">{item?.phone}</p>
             </div>
             <div className="w-full flex justify-between items-center">
-              <p className="text-base font-bold">{item?.account_number}</p>
-              <p className="text-base font-bold">
+              <p className="text-base font-bold text-white">{item?.account_number}</p>
+              <p className="text-base font-bol text-white">
                 {item?.createdAt?.split("T")?.[0]}
               </p>
             </div>

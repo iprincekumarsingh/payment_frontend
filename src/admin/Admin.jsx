@@ -108,20 +108,20 @@ export default function Admin() {
       <div className="border w-[90%] mx-auto rounded-md bg-[#121212] p-3 mb-5">
         <Toaster></Toaster>
         <div className="w-full flex justify-between items-center">
-          <p className="text-base font-bold">
+          <p className="text-base font-bold text-white">
             {item?.user?.first_name + " " + item?.user?.last_name}
           </p>
-          <p className="text-base font-bold">{item?.user?.phone}</p>
+          <p className="text-base font-bold text-white">{item?.user?.phone}</p>
         </div>
         <div className="w-full flex justify-between items-center">
-          <p className="text-base font-bold">{item?.user?.phone}</p>
-          <p className="text-base font-bold">₹{item?.amount}</p>
+          <p className="text-base font-bold text-white">{item?.user?.phone}</p>
+          <p className="text-base font-bold text-white">₹{item?.amount}</p>
         </div>
         <div className="w-full flex justify-between items-center">
-          <p className="text-base font-bold">
+          <p className="text-base font-bold text-white">
             {item?.createdAt?.split("T")?.[0]}
           </p>
-          <p className="text-base font-bold">
+          <p className="text-base font-bold text-white">
             {item.status === "approved" ? "✅ " : "🕑 "} {item?.status}
           </p>
         </div>
