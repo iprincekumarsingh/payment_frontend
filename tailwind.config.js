@@ -9,6 +9,9 @@ export default {
 
         // Add more custom colors as needed
       },
+      fontFamily: {
+         body: ["Montserrat"],
+      },
     },
   },
   plugins: [],
