@@ -21,27 +21,39 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import ChargingStationOutlinedIcon from "@mui/icons-material/ChargingStationOutlined";
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import numberToWords from "number-to-words";
 export default function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [requestMoney, setRequestMoney] = useState(false);
-
-  const [amount, setAmount] = useState("");
+  const [money, setMoney] = useState([]);
+  const [amount, setAmount] = useState(0);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [localData, setLocalData] = useState({});
+  const [split_wallet, setSplit_wallet] = useState();
+  const [fullname, setfullname] = useState("");
   const [name, setName] = useState("");
-  const [walletno, setWalletno] = useState("");
-
+  const [alertnativephone, setalertnativephone] = useState("");
+  const [accountnumber, setaccountnumber] = useState("");
+  const [ifsc, setifsc] = useState("");
+  const [bankname, setbankname] = useState("");
+  const [addhar, setaddhar] = useState("");
+  const [phone, setPhone] = useState("");
+  const [wallet, setWallet] = useState("");
+  const [counter, setCounter] = useState(0);
+  const [letterFormat, setLetterFormat] = useState("");
   const [wallet_balance, setWallet_balance] = useState(0);
+  const [walletno, setWalletno] = useState("");
+  const [otpModal, setOtpModal] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
-
-  const [otpModal, setOtpModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [wallet, setWallet] = useState("");
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
+
+
+// Note: Ensure that the states you are keeping are used appropriately throughout your component.
 
   const togglePopup = () => {
     setPopupOpen(!isPopupOpen);
@@ -71,12 +83,64 @@ export default function Home() {
     if (localStorage.getItem("PROFILE_DATA") != null) {
       const data = JSON.parse(localStorage.getItem("PROFILE_DATA"));
 
+   
+
+      setalertnativephone(data.alt_phone);
+      setaccountnumber(data.account_number);
+      setifsc(data.ifsc_code);
+      setbankname(data.bank_name);
+      setPhone(data.phone);
+      setaddhar(data.aadhaar_number);
       setWallet(data.wallet_no);
       setName(data.first_name);
       setWallet_balance(data.wallet_balance);
-      console.log(data.wallet_balance);
-      setWalletno(data.wallet_no);
     }
+
+    axios
+      .get("user/profile", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + Cookie.get("token"),
+        },
+      })
+
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data.wallet_no == null) {
+          window.location.href = "/auth/onboarding";
+        }
+        localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.data));
+
+        setfullname(
+          res.data.data.first_name +
+            " " +
+            res.data.data.middle_name +
+            " " +
+            res.data.data.last_name
+        );
+        setalertnativephone(res.data.data.alt_phone);
+        setaccountnumber(res.data.data.account_number);
+        setifsc(res.data.data.ifsc_code);
+        setbankname(res.data.data.bank_name);
+        setPhone(res.data.data.phone);
+        setaddhar(res.data.data.aadhaar_number);
+        setWallet(res.data.data.wallet_no);
+
+        setSplit_wallet(res.data.data.wallet_no.match(/.{1,4}/g).join(" "));
+
+        setName(
+          res.data.data.first_name +
+            " " +
+            res.data.data.middle_name +
+            " " +
+            res.data.data.last_name
+        );
+        setWallet_balance(res.data.data.wallet_balance);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong");
+      });
   }, []);
   let subtitle;
 
@@ -104,6 +168,29 @@ export default function Home() {
     setRequestMoney(false);
   }
 
+  useEffect(() => {
+    document.title = "Home";
+    async function fetchData() {
+      axios
+        .get("money/user/transcations", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        })
+        .then((res) => {
+          setMoney(res.data);
+          if (localStorage.getItem("PROFILE_DATA") == null) {
+            localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    fetchData();
+  }, []);
+
   //  render all the transcations
   const requesMoneyFunction = (e) => {
     e.preventDefault();
@@ -112,10 +199,36 @@ export default function Home() {
       setMessage("Please enter the amount");
       return;
     }
-    // change after got payment to false
+
     setRequestMoney(false);
 
     // sending a otp to the registered phone number
+
+    axios
+      .post(
+        "money/user/send/Otp",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        // setMessage(res.data.error)
+        console.log(res.data);
+        setSuccess(res.data.message);
+
+        setTimeout(() => {
+          setSuccess("");
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setSuccess(err.response.data.message);
+      });
 
     setOtpModal(true);
   };
@@ -123,24 +236,12 @@ export default function Home() {
   const verifyOtp = (e) => {
     e.preventDefault();
 
-    // verify pin from local storage
-    const pin = localStorage.getItem("pin");
-
-    if (!pin) {
-      toast.error("Please set your pin first");
-      return;
-    }
-
-    if (pin !== otp) {
-      setOtpError("Invalid Pin");
-      return;
-    }
-
+    // checking the otp is valid or not
     axios
       .post(
-        "money/",
+        "money/user/verify/Otp",
         {
-          amount,
+          otp,
         },
         {
           headers: {
@@ -150,19 +251,39 @@ export default function Home() {
         }
       )
       .then((res) => {
-        setSuccess(res.data.message);
-        console.log(res.data.message);
-        setIsSubmitting(false);
-        setTimeout(() => {
-          // setSuccess("");
-          setAmount("");
-          setSuccess("");
+        axios
+          .post(
+            "money/",
+            {
+              amount,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${Cookie.get("token")}`,
+              },
+            }
+          )
+          .then((res) => {
+            setSuccess(res.data.message);
+            console.log(res.data.message);
+            setIsSubmitting(false);
+            setTimeout(() => {
+              // setSuccess("");
+              setAmount("");
+              setSuccess("");
+              setOtp("");
 
-          setOtpModal(false);
-        }, 2000);
+              setOtpModal(false);
+
+            }, 2000);
+          })
+          .catch((err) => {
+            console.log(err.response.data.error);
+            setOtpError(err.response.data.error);
+          });
       })
       .catch((err) => {
-        console.log(err.response.data.error);
         setOtpError(err.response.data.error);
       });
   };
@@ -233,11 +354,8 @@ export default function Home() {
 
   const [pin, setPin] = useState("");
 
-  const handlePinChange = (e) => {
-    const newPin = e.target.value;
-    setPin(newPin);
-  };
-
+  
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -343,7 +461,7 @@ export default function Home() {
                       onClick={handleCheckBalance}
                     >
                       <div className="bg-[#2c2c3c] w-[60px] h-[60px] rounded-full border border-[#17173b] px-1 overflow-hidden flex flex-col justify-center items-center">
-                        <AccountBalanceWalletOutlinedIcon/>
+                        <AccountBalanceWalletOutlinedIcon />
                       </div>
                       <p className="font-medium text-white pt-2 text-center capitalize text-[13px]">
                         Check Balance
@@ -392,7 +510,7 @@ export default function Home() {
                 >
                   <section className="">
                     <form onSubmit={requesMoneyFunction}>
-                      <h1 className="pb-2 font-black text-center">
+                      <h1 className="pb-2 font-black text-center text-black">
                         Withdraw Amount
                       </h1>
                       <div className="mb-1 mt-4">
@@ -459,7 +577,7 @@ export default function Home() {
               </section>
             </div>
             {/* debit card */}
-            <div className="border w-auto  border-teal-50 text-white p-5 rounded-lg shadow-2xl mx-2 debit-card-bg1" >
+            <div className="border w-auto  border-teal-50 text-white p-5 rounded-lg shadow-2xl mx-2 debit-card-bg1">
               <div className="flex justify-between items-center mb-4">
                 <p className="text-xl font-bold">Debit Card</p>
                 <img className=" h-12" src={logo} alt="Logo" />
@@ -527,6 +645,9 @@ export default function Home() {
                   {/* set pin pop-up */}
                   <div className="w-full flex  items-center justify-center ">
                     <form onSubmit={handleSubmit}>
+
+
+
                       <input
                         type="number"
                         minLength={4}
@@ -591,15 +712,15 @@ export default function Home() {
               X
             </div>
             <div className="p-4">
-              <h2 className="text-[14px] font-bold mb-4 text-center">
-                Enter your PIN
+              <h2 className="text-[14px] font-bold mb-4 text-center text-black">
+                Enter your OTP
               </h2>
               <form onSubmit={verifyOtp}>
                 <div className="flex flex-col items-center justify-center mb-6">
                   <input
                     type="number"
                     className="h-12 w-full sm:w-72 rounded-lg border-gray-300 border-2 text-center mb-2 focus:outline-none focus:border-blue-500"
-                    placeholder="Enter Pin"
+                    placeholder="Enter OTP"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                   />
