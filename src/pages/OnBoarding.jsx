@@ -142,7 +142,7 @@ export default function OnBoarding() {
         }
 
         localStorage.setItem("PROFILE_DATA", JSON.stringify(res.data.user));
-        window.location.href = "/home/home/user";
+        window.location.href = "/home/user";
       })
       .catch((err) => {
         setBtn("Update");

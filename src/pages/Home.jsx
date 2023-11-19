@@ -393,6 +393,11 @@ export default function Home() {
     // Close the popup
     setShowPopup(false);
   };
+  const handlePinChange = (e) => {
+    // Set the pin
+    setPin(e.target.value);
+    
+  }
   const [showPopup, setShowPopup] = useState(false);
   return (
     <>
@@ -583,7 +588,7 @@ export default function Home() {
                 <img className=" h-12" src={logo} alt="Logo" />
               </div>
               <p className="text-base">{name}</p>
-              <p className="text-xl font-bold mb-2">{walletno}</p>
+              <p className="text-xl font-bold mb-2">{wallet}</p>
               <div className="flex justify-between mb-2 mt-6">
                 <div>
                   <p className="text-[10px]">Expires</p>
